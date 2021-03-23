@@ -1,0 +1,7 @@
+results/
+raw_data/
+json_data/
+token_data/
+bert_data/
+models/
+logs/
