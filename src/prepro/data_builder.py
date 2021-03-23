@@ -401,7 +401,7 @@ def _format_to_bert(params):
 def format_to_lines(args):
     corpora = sorted([os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
                       if not f.startswith('.') and not f.endswith('.abs.txt.json')])
-    train_files, valid_files, test_files = [], [], []
+    #train_files, valid_files, test_files = [], [], []
 
     args_list = []
     for f_main in corpora:

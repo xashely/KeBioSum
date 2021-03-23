@@ -13,9 +13,6 @@ Results on the CORD-19 dataset (June 27, 2020):
     <th class="tg-0pky">ROUGE-L</th>
   </tr>
   <tr>
-    <td class="tg-c1ow" colspan="4">Extractive</td>
-  </tr>
-  <tr>
     <td class="tg-0pky">covid-bert</td>
     <td class="tg-0pky">30.11</td>
     <td class="tg-0pky">9.96</td>
@@ -28,7 +25,7 @@ Results on the CORD-19 dataset (June 27, 2020):
 **Package Requirements**: torch==1.1.0 pytorch_transformers tensorboardX multiprocess pyrouge
 
 
-Some codes are borrowed from PreSumm(https://github.com/nlpyang/PreSumm)
+Some codes are borrowed from PreSumm (https://github.com/nlpyang/PreSumm)
 
 #### Step 1 Download CORD-19 dataset
 Download and unzip the `CORD-19` directories from [here](https://allenai.org/data/cord-19). Put all files in the directory `./raw_data`
@@ -40,7 +37,24 @@ export CLASSPATH=/path/to/stanford-corenlp-4.2.0/stanford-corenlp-4.2.0.jar
 ```
 replacing `/path/to/` with the path to where you saved the `stanford-corenlp-4.2.0` directory. 
 
-####  Step 3. Sentence Splitting and Tokenization
+####  Step 3. PICO Prediction
+
+Using scibert (https://github.com/allenai/scibert) trained on the EBM-NLP dataset (https://github.com/bepnye/EBM-NLP):
+
+1. Preprocess the tokenized data into the pico input data on the trained scibert:
+```
+python src/preprocess_pico.py
+```
+2. Training pico extraction model
+```
+bash scripts/train_allennlp_local.sh wotune_model/
+```
+3. Predicting pico for cord-19
+```
+python -m allennlp.run predict --output-file=out.txt --include-package=scibert --predictor=sentence-tagger --use-dataset-reader ./wotune_model/model.tar.gz  ./data/pico/ebmnlp/cord.txt
+```
+
+####  Step 4. Sentence Splitting and Tokenization
 
 ```
 python src/preprocess.py -mode tokenize -raw_path ./raw_data/ -save_path ./token_data/
@@ -49,7 +63,7 @@ python src/preprocess.py -mode tokenize -raw_path ./raw_data/ -save_path ./token
 * `RAW_PATH` is the directory containing story files, `JSON_PATH` is the target directory to save the generated json files
 
 
-####  Step 4. Format to Simpler Json Files
+####  Step 5. Format to Simpler Json Files
  
 ```
 python src/preprocess.py -mode format_to_lines -raw_path ./token_data/ -save_path ./json_data
@@ -57,7 +71,7 @@ python src/preprocess.py -mode format_to_lines -raw_path ./token_data/ -save_pat
 
 * `RAW_PATH` is the directory containing tokenized files, `JSON_PATH` is the target directory to save the generated json files
 
-####  Step 5. Format to PyTorch Files
+####  Step 6. Format to PyTorch Files
 ```
 python src/preprocess.py -mode format_to_bert -raw_path ./json_data/ -save_path ./bert_data/  -lower -n_cpus 1 -log_file ./logs/preprocess.log
 ```
