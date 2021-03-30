@@ -33,7 +33,7 @@ Download and unzip the `CORD-19` directories from [here](https://allenai.org/dat
 ####  Step 2. Download Stanford CoreNLP
 We will need Stanford CoreNLP to tokenize the data. Download it [here](https://stanfordnlp.github.io/CoreNLP/) and unzip it. Then add the following command to your bash_profile:
 ```
-export CLASSPATH=/path/to/stanford-corenlp-4.2.0/stanford-corenlp-4.2.0.jar
+export CLASSPATH=/home/qianqian/stanford-corenlp-4.2.0/stanford-corenlp-4.2.0.jar
 ```
 replacing `/path/to/` with the path to where you saved the `stanford-corenlp-4.2.0` directory. 
 
@@ -51,7 +51,7 @@ bash scripts/train_allennlp_local.sh wotune_model/
 ```
 3. Predicting pico for cord-19
 ```
-python -m allennlp.run predict --output-file=out.txt --include-package=scibert --predictor=sentence-tagger --use-dataset-reader ./wotune_model/model.tar.gz  ./data/pico/ebmnlp/cord.txt
+python -m allennlp.run predict --output-file=out.txt --include-package=scibert --predictor=sentence-tagger --use-dataset-reader --cuda-device=0 --batch-size=256 --silent ./wotune_model/model.tar.gz  ./data/pico/ebmnlp/cord.txt
 ```
 
 ####  Step 4. Sentence Splitting and Tokenization
