@@ -62,8 +62,8 @@ def load_json(f_main, f_abs, f_tag):
     src_sent_tokens = [
         list(t['word'].lower() for t in sent['tokens'])
         for sent in json_main['sentences']]
-    if src_sent_tokens:
-        return False
+    if not src_sent_tokens:
+        return None, None, None
     else:
         tgt_sent_tokens = [
         list(t['word'].lower() for t in sent['tokens'])
@@ -489,7 +489,10 @@ def format_to_lines(args):
 def _format_to_lines(params):
     f_main, f_abs, f_tags, args = params
     source, tgt, tag = load_json(f_main, f_abs, f_tags)
-    return {'src': source, 'tgt': tgt, "tag":tag}
+    if not source:
+        return None
+    else:
+        return {'src': source, 'tgt': tgt, "tag":tag}
 
 def format_xsum_to_lines(args):
     if (args.dataset != ''):
