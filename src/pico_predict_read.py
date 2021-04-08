@@ -62,6 +62,9 @@ with open(raw_path, "r") as data_file:
                     print (word, pred_word)
                 temp_tags.append((tags[count],pred_word))
                 count += 1
+    tpath = os.path.join(save_path, '{}.tag.json'.format(doc_id))
+    with open(tpath, 'w') as f:
+        f.write(json.dumps(temp_tags))
 
 
 
