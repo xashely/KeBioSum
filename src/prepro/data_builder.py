@@ -53,15 +53,13 @@ def clean_json(json_dict):
 
     return {'title': title, 'text': text}
 
-def load_json(f_main, f_abs):
-    source = []
-    tgt = []
-    flag = False
-
+def load_json(f_main, f_abs, f_tag):
     with open(f_main, 'r') as f:
         json_main = json.load(f)
     with open(f_abs, 'r') as f:
         json_abs = json.load(f)
+    with open(f_tag, 'r') as f:
+        json_tag = json.load(f)
 
     src_sent_tokens = [
         list(t['word'].lower() for t in sent['tokens'])
@@ -70,9 +68,26 @@ def load_json(f_main, f_abs):
         list(t['word'].lower() for t in sent['tokens'])
         for sent in json_abs['sentences']]
 
+    tag_tokens = []
+    tag_tags = []
+    sent_lengths = [len(val) for  val in src_sent_tokens]
+    offset = 0
+    temp_doc_len = len(json_tag)
+    while offset < temp_doc_len:
+        present_sent_len = sent_lengths[offset]
+        sent_tokens = json_tag[offset:offset + present_sent_len]
+        offset += present_sent_len
+        assert offset <= temp_doc_len
+        tag_tokens.append([val.lower() for _, val in sent_tokens])
+        tag_tags.append([val for val, _ in sent_tokens])
+
+    assert tag_tokens == src_sent_tokens
+
+    tags = tag_tags
+
     src = [clean(' '.join(tokens)).split() for tokens in src_sent_tokens]
     tgt = [clean(' '.join(tokens)).split() for tokens in tgt_sent_tokens]
-    return src, tgt
+    return src, tgt, tags
 
 def load_xml(p):
     tree = ET.parse(p)
@@ -287,7 +302,7 @@ class BertData():
         self.cls_vid = self.tokenizer.vocab[self.cls_token]
         self.pad_vid = self.tokenizer.vocab[self.pad_token]
 
-    def preprocess(self, src, tgt, sent_labels, use_bert_basic_tokenizer=False, is_test=False):
+    def preprocess(self, src, tgt, tag, sent_labels, use_bert_basic_tokenizer=False, is_test=False):
 
         if ((not is_test) and len(src) == 0):
             return None
@@ -301,8 +316,10 @@ class BertData():
             _sent_labels[l] = 1
 
         src = [src[i][:self.args.max_src_ntokens_per_sent] for i in idxs]
+        tag = [tag[i][:self.args.max_src_ntokens_per_sent] for i in idxs]
         sent_labels = [_sent_labels[i] for i in idxs]
         src = src[:self.args.max_src_nsents]
+        tag = tag[:self.args.max_src_nsents]
         sent_labels = sent_labels[:self.args.max_src_nsents]
 
         if ((not is_test) and len(src) < self.args.min_src_nsents):
@@ -374,13 +391,13 @@ def _format_to_bert(params):
     jobs = json.load(open(json_file))
     datasets = []
     for d in jobs:
-        source, tgt = d['src'], d['tgt']
+        source, tgt, tag = d['src'], d['tgt'], d['tag']
 
         sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
-        b_data = bert.preprocess(source, tgt, sent_labels, use_bert_basic_tokenizer=args.use_bert_basic_tokenizer,
+        b_data = bert.preprocess(source, tgt, tag, sent_labels, use_bert_basic_tokenizer=args.use_bert_basic_tokenizer,
                                  is_test=is_test)
         # b_data = bert.preprocess(source, tgt, sent_labels, use_bert_basic_tokenizer=args.use_bert_basic_tokenizer)
 
@@ -407,7 +424,9 @@ def format_to_lines(args):
     for f_main in corpora:
         f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
         f_abs = os.path.join(args.raw_path, f_abs_name)
-        args_list.append((f_main, f_abs, args))
+        f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
+        f_tag = os.path.join(args.raw_path, f_tag_name)
+        args_list.append((f_main, f_abs, f_tag, args))
     index_list = list(range(len(args_list)))
     random.shuffle(index_list) 
     train_list_id = index_list[:int(len(args_list)*0.75)] 
@@ -458,9 +477,9 @@ def format_to_lines(args):
     print('... Ending (4), time elapsed {}'.format(end - start))
 
 def _format_to_lines(params):
-    f_main, f_abs, args = params
-    source, tgt = load_json(f_main, f_abs)
-    return {'src': source, 'tgt': tgt}
+    f_main, f_abs, f_tags, args = params
+    source, tgt, tag = load_json(f_main, f_abs, f_tags)
+    return {'src': source, 'tgt': tgt, "tag":tag}
 
 def format_xsum_to_lines(args):
     if (args.dataset != ''):
