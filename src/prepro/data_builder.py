@@ -70,16 +70,18 @@ def load_json(f_main, f_abs, f_tag):
 
     tag_tokens = []
     tag_tags = []
-    sent_lengths = [len(val) for  val in src_sent_tokens]
+    sent_lengths = [len(val) for val in src_sent_tokens]
+    count = 0
     offset = 0
     temp_doc_len = len(json_tag)
     while offset < temp_doc_len:
-        present_sent_len = sent_lengths[offset]
+        present_sent_len = sent_lengths[count]
         sent_tokens = json_tag[offset:offset + present_sent_len]
         offset += present_sent_len
         assert offset <= temp_doc_len
         tag_tokens.append([val.lower() for _, val in sent_tokens])
         tag_tags.append([val for val, _ in sent_tokens])
+        count += 1
 
     assert tag_tokens == src_sent_tokens
 
