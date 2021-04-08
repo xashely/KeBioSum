@@ -68,8 +68,11 @@ def load_json(f_main, f_abs, f_tag):
         tgt_sent_tokens = [
         list(t['word'].lower() for t in sent['tokens'])
         for sent in json_abs['sentences']]
-        with open(f_tag, 'r') as f:
-            json_tag = json.load(f)
+        try:
+            with open(f_tag, 'r') as f:
+                json_tag = json.load(f)
+        except Exception:
+            return None, None, None
         tag_tokens = []
         tag_tags = []
         sent_lengths = [len(val) for val in src_sent_tokens]
