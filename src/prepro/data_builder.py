@@ -77,13 +77,18 @@ def load_json(f_main, f_abs, f_tag):
     while offset < temp_doc_len:
         present_sent_len = sent_lengths[count]
         sent_tokens = json_tag[offset:offset + present_sent_len]
+        try:
+            assert [val.lower() for _, val in sent_tokens] == src_sent_tokens[count]
+        except AssertionError as e:
+            print(src_sent_tokens[count])
+            print([val.lower() for _, val in sent_tokens])
+        #assert [val.lower() for _, val in sent_tokens] == src_sent_tokens[count]
         offset += present_sent_len
         assert offset <= temp_doc_len
-        tag_tokens.append([val.lower() for _, val in sent_tokens])
+        #tag_tokens.append([val.lower() for _, val in sent_tokens])
         tag_tags.append([val for val, _ in sent_tokens])
         count += 1
-
-    assert tag_tokens == src_sent_tokens
+    #assert tag_tokens == src_sent_tokens
 
     tags = tag_tags
 
