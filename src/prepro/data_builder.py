@@ -58,43 +58,45 @@ def load_json(f_main, f_abs, f_tag):
         json_main = json.load(f)
     with open(f_abs, 'r') as f:
         json_abs = json.load(f)
-    with open(f_tag, 'r') as f:
-        json_tag = json.load(f)
 
     src_sent_tokens = [
         list(t['word'].lower() for t in sent['tokens'])
         for sent in json_main['sentences']]
-    tgt_sent_tokens = [
+    if src_sent_tokens:
+        return False
+    else:
+        tgt_sent_tokens = [
         list(t['word'].lower() for t in sent['tokens'])
         for sent in json_abs['sentences']]
-
-    tag_tokens = []
-    tag_tags = []
-    sent_lengths = [len(val) for val in src_sent_tokens]
-    count = 0
-    offset = 0
-    temp_doc_len = len(json_tag)
-    while offset < temp_doc_len:
-        present_sent_len = sent_lengths[count]
-        sent_tokens = json_tag[offset:offset + present_sent_len]
-        try:
-            assert [val.lower() for _, val in sent_tokens] == src_sent_tokens[count]
-        except AssertionError as e:
-            print(src_sent_tokens[count])
-            print([val.lower() for _, val in sent_tokens])
+        with open(f_tag, 'r') as f:
+            json_tag = json.load(f)
+        tag_tokens = []
+        tag_tags = []
+        sent_lengths = [len(val) for val in src_sent_tokens]
+        count = 0
+        offset = 0
+        temp_doc_len = len(json_tag)
+        while offset < temp_doc_len:
+            present_sent_len = sent_lengths[count]
+            sent_tokens = json_tag[offset:offset + present_sent_len]
+            try:
+                assert [val.lower() for _, val in sent_tokens] == src_sent_tokens[count]
+            except AssertionError as e:
+                print(src_sent_tokens[count])
+                print([val.lower() for _, val in sent_tokens])
         #assert [val.lower() for _, val in sent_tokens] == src_sent_tokens[count]
-        offset += present_sent_len
-        assert offset <= temp_doc_len
+            offset += present_sent_len
+            assert offset <= temp_doc_len
         #tag_tokens.append([val.lower() for _, val in sent_tokens])
-        tag_tags.append([val for val, _ in sent_tokens])
-        count += 1
+            tag_tags.append([val for val, _ in sent_tokens])
+            count += 1
     #assert tag_tokens == src_sent_tokens
 
-    tags = tag_tags
+        tags = tag_tags
 
-    src = [clean(' '.join(tokens)).split() for tokens in src_sent_tokens]
-    tgt = [clean(' '.join(tokens)).split() for tokens in tgt_sent_tokens]
-    return src, tgt, tags
+        src = [clean(' '.join(tokens)).split() for tokens in src_sent_tokens]
+        tgt = [clean(' '.join(tokens)).split() for tokens in tgt_sent_tokens]
+        return src, tgt, tags
 
 def load_xml(p):
     tree = ET.parse(p)
@@ -458,7 +460,8 @@ def format_to_lines(args):
         with tqdm(total=len(a_lst)) as pbar:
             with tqdm(total=args.shard_size) as spbar:
                 for i, data in enumerate(pool.imap(_format_to_lines, a_lst)):
-                    dataset.append(data)
+                    if data:
+                        dataset.append(data)
                     spbar.update()
                     if (len(dataset) > args.shard_size):
                         fpath = "{:s}/{:s}.{:d}.json".format(args.save_path, corpus_type, shard_count)
