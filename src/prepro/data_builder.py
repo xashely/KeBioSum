@@ -536,7 +536,7 @@ def _format_to_pico_adapter(params):
         #sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
-            tgt = [' '.join(s).lower().split() for s in tgt]
+            #tgt = [' '.join(s).lower().split() for s in tgt]
         b_data = pico_adapter.preprocess(source, tgt,is_test=is_test)
         # b_data = bert.preprocess(source, tgt, sent_labels, use_bert_basic_tokenizer=args.use_bert_basic_tokenizer)
 
