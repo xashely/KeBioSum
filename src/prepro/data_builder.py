@@ -450,14 +450,15 @@ class PicoAdapterData():
 
         src_subtokens = self.tokenizer.tokenize(text)
         aligned_labels = ["o"] * len(src_subtokens)
-        count = 0
+        head = 0
         for anno in annotations:
             ano_text = anno['text']
             token_ix = self.tokenizer.tokenize(ano_text)
-            for i in range(len(token_ix)):
-                aligned_labels[count] = anno['label']
-                count += 1
-        assert len(aligned_labels)==count-1
+
+            for token in token_ix:
+                assert head < len(aligned_labels), (token_ix, head, src_subtokens[head-10:head-1])
+                aligned_labels[head] = anno['label']
+                head += 1
         src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_labels = []
         src_labels.append('o')
