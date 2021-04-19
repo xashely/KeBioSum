@@ -457,11 +457,12 @@ class PicoAdapterData():
             for i in range(len(token_ix)):
                 aligned_labels[count] = anno['label']
                 count += 1
+        assert len(aligned_labels)==count-1
         src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_labels = []
-        src_labels[0] = 'o'
+        src_labels.append('o')
         src_labels += aligned_labels
-        src_labels[0] += 'o'
+        src_labels += ['o']
         src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
         tag_dict = {'o':0, "I-INT":1, "I-PAR": 2, "I-OUT": 3}
         src_tag_idx = [tag_dict[tag] for tag in src_labels]
