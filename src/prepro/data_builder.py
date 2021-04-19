@@ -393,13 +393,13 @@ class PicoAdapterData():
         self.tgt_eos = '</s>'
         self.tgt_sent_split = '<s>'
         self.mask_token = '<mask>'
-        self.sep_vid = self.tokenizer.vocab[self.sep_token]
-        self.cls_vid = self.tokenizer.vocab[self.cls_token]
-        self.pad_vid = self.tokenizer.vocab[self.pad_token]
-        self.tgt_bos_vid = self.tokenizer.vocab[self.tgt_bos]
-        self.tgt_eos_vid = self.tokenizer.vocab[self.tgt_eos]
-        self.tgt_sent_split_vid = self.tokenizer.vocab[self.tgt_sent_split]
-        self.mask_vid = self.tokenizer.vocab[self.mask_token]
+        self.sep_vid = self.tokenizer.convert_tokens_to_ids[self.sep_token]
+        self.cls_vid = self.tokenizer.convert_tokens_to_ids[self.cls_token]
+        self.pad_vid = self.tokenizer.convert_tokens_to_ids[self.pad_token]
+        self.tgt_bos_vid = self.tokenizer.convert_tokens_to_ids[self.tgt_bos]
+        self.tgt_eos_vid = self.tokenizer.convert_tokens_to_ids[self.tgt_eos]
+        self.tgt_sent_split_vid = self.tokenizer.convert_tokens_to_ids[self.tgt_sent_split]
+        self.mask_vid = self.tokenizer.convert_tokens_to_ids[self.mask_token]
 
     def preprocess(self, src, tag, is_test=False):
 
@@ -444,7 +444,7 @@ class PicoAdapterData():
                 start = temp_dict[end]+2
                 temp_dict = {}
                 temp_str = ''
-                count += 0
+                count += 1
         temp_dict[text] = temp_str
         temp_dict[start] = start
         temp_dict[end] = start + len(temp_str)

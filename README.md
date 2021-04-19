@@ -53,7 +53,10 @@ bash scripts/train_allennlp_local.sh wotune_model/
 ```
 python -m allennlp.run predict --output-file=out.txt --include-package=scibert --predictor=sentence-tagger --use-dataset-reader --cuda-device=0 --batch-size=256 --silent ./wotune_model/model.tar.gz  ./data/pico/ebmnlp/cord.txt
 ```
-
+4. Format the predicted pico to Json Files
+```
+python src/pico_predict_read.py
+```
 ####  Step 4. Sentence Splitting and Tokenization
 
 ```
