@@ -430,32 +430,35 @@ class PicoAdapterData():
         count = 0
         annotations = []
         temp_dict = {}
+        temp_str = ''
         start = 0
         end = 0
         for str in text:
             if str != ' ':
                 temp_str += str
             else:
-                temp_dict[text] = temp_str
-                temp_dict[start] = start
-                temp_dict[end] = start+len(temp_str)
-                temp_dict[label] = tags[count]
+                temp_dict['text'] = temp_str
+                temp_dict['start'] = start
+                temp_dict['end'] = start+len(temp_str)
+                temp_dict['label'] = tags[count]
                 annotations.append(temp_dict)
-                start = temp_dict[end]+2
+                start = temp_dict['end']+2
                 temp_dict = {}
                 temp_str = ''
                 count += 1
-        temp_dict[text] = temp_str
-        temp_dict[start] = start
-        temp_dict[end] = start + len(temp_str)
-        temp_dict[label] = tags[count]
+        temp_dict['text'] = temp_str
+        temp_dict['start'] = start
+        temp_dict['end'] = start + len(temp_str)
+        temp_dict['label'] = tags[count]
         annotations.append(temp_dict)
 
         src_subtokens = self.tokenizer.tokenize(text)
+        offset_mappings = self.tokenizer(text).pop("offset_mapping")
+        print(offset_mappings)
         aligned_labels = ["o"] * len(src_subtokens)
         for anno in (annotations):
             for char_ix in range(anno['start'], anno['end']):
-                token_ix = tokenized_text.char_to_token(char_ix)
+                token_ix = self.tokenizer.char_to_token(char_ix)
                 if token_ix is not None:
                     aligned_labels[token_ix] = anno['label']
         src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
@@ -537,7 +540,7 @@ def _format_to_pico_adapter(params):
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             #tgt = [' '.join(s).lower().split() for s in tgt]
-        b_data = pico_adapter.preprocess(source, tgt,is_test=is_test)
+        b_data = pico_adapter.preprocess(source, tag, is_test=is_test)
         # b_data = bert.preprocess(source, tgt, sent_labels, use_bert_basic_tokenizer=args.use_bert_basic_tokenizer)
 
         if (b_data is None):
