@@ -5,3 +5,4 @@ token_data/
 bert_data/
 models/
 logs/
+.idea/
