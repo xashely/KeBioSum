@@ -431,36 +431,32 @@ class PicoAdapterData():
         annotations = []
         temp_dict = {}
         temp_str = ''
-        start = 0
-        end = 0
         for str in text:
             if str != ' ':
                 temp_str += str
             else:
                 temp_dict['text'] = temp_str
-                temp_dict['start'] = start
-                temp_dict['end'] = start+len(temp_str)
+        #        temp_dict['start'] = start
+        #        temp_dict['end'] = start+len(temp_str)
                 temp_dict['label'] = tags[count]
-                annotations.append(temp_dict)
-                start = temp_dict['end']+2
+        #        annotations.append(temp_dict)
+        #         start = temp_dict['end']+2
                 temp_dict = {}
                 temp_str = ''
                 count += 1
         temp_dict['text'] = temp_str
-        temp_dict['start'] = start
-        temp_dict['end'] = start + len(temp_str)
         temp_dict['label'] = tags[count]
         annotations.append(temp_dict)
 
         src_subtokens = self.tokenizer.tokenize(text)
-        offset_mappings = self.tokenizer(text).pop("offset_mapping")
-        print(offset_mappings)
         aligned_labels = ["o"] * len(src_subtokens)
-        for anno in (annotations):
-            for char_ix in range(anno['start'], anno['end']):
-                token_ix = self.tokenizer.char_to_token(char_ix)
-                if token_ix is not None:
-                    aligned_labels[token_ix] = anno['label']
+        count = 0
+        for anno in annotations:
+            ano_text = anno['text']
+            token_ix = self.tokenizer.tokenize(ano_text)
+            for i in range(len(token_ix)):
+                aligned_labels[count] = anno['label']
+                count += 1
         src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_labels = []
         src_labels[0] = 'o'
