@@ -427,17 +427,21 @@ class PicoAdapterData():
                 tags.append(t)
             tags.append('o')
             tags.append('o')
+        tags = tags[:-2]
         assert len(text_split)==len(tags)
         src_subtokens = self.tokenizer.tokenize(text)
         aligned_labels = ["o"] * len(src_subtokens)
         head = 0
-        for each_str in text_split:
-            token_ix = self.tokenizer.tokenize(each_str)
-            for token in token_ix:
-                assert head < len(aligned_labels), (token_ix, head, src_subtokens[head-10:head-1])
-                aligned_labels[head] = anno['label']
+        count = 0
+        for each_str in src_subtokens:
+            if "Ġ" in each_str:
+                aligned_labels[head] = tags[count]
+                count += 1
                 head += 1
-        assert len(src_subtokens) == head
+            else:
+                aligned_labels[head] = tags[count-1]
+                head += 1
+        print(head, len(src_subtokens))
         src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_labels = []
         src_labels.append('o')
