@@ -81,6 +81,14 @@ python src/preprocess.py -mode format_to_bert -raw_path ./json_data/ -save_path 
 
 * `JSON_PATH` is the directory containing json files, `BERT_DATA_PATH` is the target directory to save the generated binary files
 
+#### step 7. Format pico json to input files
+```
+python src/preprocess.py -mode format_to_pico_adapter -raw_path ./json_data/ -save_path ./pico_adapter_data/
+```
+
+## Pico Adapter
+
+
 ## Model Training
 
 **First run: For the first time, you should use single-GPU, so the code can download the BERT model. Use ``-visible_gpus -1``, after downloading, you could kill the process and rerun the code with multi-GPUs.**

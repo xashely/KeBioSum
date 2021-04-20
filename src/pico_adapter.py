@@ -29,7 +29,7 @@ from transformers.trainer_utils import is_main_process
 
 logger = logging.getLogger(__name__)
 pico_adapter_data_path = "./pico_adapter_data"
-label_list = ['o', "I-INT", "I-PAR", "I-OUT"]
+label_list = ['O', "I-INT", "I-PAR", "I-OUT"]
 batch_size = 16
 
 def compute_metrics(p):
@@ -38,11 +38,11 @@ def compute_metrics(p):
 
     # Remove ignored index (special tokens)
     true_predictions = [
-        [label_list[p] for (p, l) in zip(prediction, label) if l != -100]
+        [label_list[p] for (p, l) in zip(prediction, label) if l != 0]
         for prediction, label in zip(predictions, labels)
     ]
     true_labels = [
-        [label_list[l] for (p, l) in zip(prediction, label) if l != -100]
+        [label_list[l] for (p, l) in zip(prediction, label) if l != 0]
         for prediction, label in zip(predictions, labels)
     ]
 
