@@ -421,44 +421,23 @@ class PicoAdapterData():
         src_txt = [' '.join(sent) for sent in src]
         text = ' {} {} '.format(self.sep_token, self.cls_token).join(src_txt)
         tags = []
+        text_split = text.split()
         for tag_list in tag:
             for t in tag_list:
                 tags.append(t)
             tags.append('o')
             tags.append('o')
-
-        count = 0
-        annotations = []
-        temp_dict = {}
-        temp_str = ''
-        for str in text:
-            if str != ' ':
-                temp_str += str
-            else:
-                temp_dict['text'] = temp_str
-        #        temp_dict['start'] = start
-        #        temp_dict['end'] = start+len(temp_str)
-                temp_dict['label'] = tags[count]
-        #        annotations.append(temp_dict)
-        #         start = temp_dict['end']+2
-                temp_dict = {}
-                temp_str = ''
-                count += 1
-        temp_dict['text'] = temp_str
-        temp_dict['label'] = tags[count]
-        annotations.append(temp_dict)
-
+        assert len(text_split)==len(tags)
         src_subtokens = self.tokenizer.tokenize(text)
         aligned_labels = ["o"] * len(src_subtokens)
         head = 0
-        for anno in annotations:
-            ano_text = anno['text']
-            token_ix = self.tokenizer.tokenize(ano_text)
-
+        for each_str in text_split:
+            token_ix = self.tokenizer.tokenize(each_str)
             for token in token_ix:
                 assert head < len(aligned_labels), (token_ix, head, src_subtokens[head-10:head-1])
                 aligned_labels[head] = anno['label']
                 head += 1
+        assert len(src_subtokens) == head
         src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_labels = []
         src_labels.append('o')
