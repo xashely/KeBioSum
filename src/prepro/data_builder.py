@@ -425,12 +425,12 @@ class PicoAdapterData():
         for tag_list in tag:
             for t in tag_list:
                 tags.append(t)
-            tags.append('o')
-            tags.append('o')
+            tags.append('O')
+            tags.append('O')
         tags = tags[:-2]
         assert len(text_split)==len(tags)
         src_subtokens = self.tokenizer.tokenize(text)
-        aligned_labels = ["o"] * len(src_subtokens)
+        aligned_labels = ["ao"] * len(src_subtokens)
         head = 0
         count = 0
         for each_str in src_subtokens:
@@ -441,18 +441,18 @@ class PicoAdapterData():
             else:
                 aligned_labels[head] = tags[count-1]
                 head += 1
-        print(head, len(src_subtokens))
+        #print(head, len(src_subtokens), count, len(tags))
         src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_labels = []
-        src_labels.append('o')
+        src_labels.append('O')
         src_labels += aligned_labels
-        src_labels += ['o']
+        src_labels += ['O']
         src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
-        tag_dict = {'o':0, "I-INT":1, "I-PAR": 2, "I-OUT": 3}
+        tag_dict = {'O':0, "I-INT":1, "I-PAR": 2, "I-OUT": 3}
         src_tag_idx = [tag_dict[tag] for tag in src_labels]
         mask_label = []
         for i, tag in enumerate(src_labels):
-            if tag == "o":
+            if tag == "O":
                 mask_label.append(0.0)
             else:
                 src_subtoken_idxs[i] = self.mask_vid
