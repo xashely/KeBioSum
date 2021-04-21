@@ -382,7 +382,7 @@ class BertData():
 class PicoAdapterData():
     def __init__(self, args):
         self.args = args
-        self.tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
+        self.tokenizer = RobertaTokenizer.from_pretrained("roberta-base",truncation=True,padding=True)
 
         #BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 
@@ -430,7 +430,7 @@ class PicoAdapterData():
         tags = tags[:-2]
         assert len(text_split)==len(tags)
         src_subtokens = self.tokenizer.tokenize(text)
-        aligned_labels = ["ao"] * len(src_subtokens)
+        aligned_labels = ["O"] * len(src_subtokens)
         head = 0
         count = 0
         for each_str in src_subtokens:

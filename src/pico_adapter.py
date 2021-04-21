@@ -10,6 +10,7 @@ from seqeval.metrics import accuracy_score, f1_score, precision_score, recall_sc
 import numpy as np
 import glob
 import transformers
+import random
 
 from transformers import (
     AdapterConfig,
@@ -28,10 +29,10 @@ from transformers.trainer_utils import is_main_process
 
 
 logger = logging.getLogger(__name__)
-pico_adapter_data_path = "./pico_adapter_data"
+pico_adapter_data_path = "/home/qianqian/covid-bert/pico_adapter_data"
 label_list = ['O', "I-INT", "I-PAR", "I-OUT"]
 batch_size = 16
-
+task = 'ner'
 def compute_metrics(p):
     predictions, labels = p
     predictions = np.argmax(predictions, axis=2)
@@ -70,28 +71,39 @@ def load_dataset(corpus_type, shuffle):
         dataset = torch.load(pt_file)
         logger.info('Loading %s dataset from %s, number of examples: %d' %
                     (corpus_type, pt_file, len(dataset)))
+        #print(len(dataset))
         return dataset
 
     # Sort the glob output by file name (by increasing indexes).
-    pts = sorted(glob.glob(pico_adapter_data_path + '/' + corpus_type + '.[0-9]*.bert.pt'))
+    pts = sorted(glob.glob(pico_adapter_data_path + '/' + corpus_type + '.[0-9]*.padpter.pt'))
+    #print(pico_adapter_data_path)
+    #print(pico_adapter_data_path + '/' + corpus_type + '.[0-9]*.padapter.pt')
     if pts:
         if (shuffle):
             random.shuffle(pts)
-
+        src, label, mask = [], [], []
         for pt in pts:
-            yield _lazy_dataset_loader(pt, corpus_type)
-    else:
-        # Only one inputters.*Dataset, simple!
-        pt = pico_adapter_data_path + '.' + corpus_type + '.pt'
-        yield _lazy_dataset_loader(pt, corpus_type)
+            dataset = _lazy_dataset_loader(pt, corpus_type)
+            for data in dataset:
+                src.append(data['src'])
+                label.append(data['tag'])
+                mask.append(data['mask'])
+        return src, label, mask
 
 class PicoDataset(torch.utils.data.Dataset):
     def __init__(self, src_idx, labels, mask):
         self.input_ids = src_idx
         self.token_type_ids = [0] * len(self.input_ids)
         self.labels = labels
-        self.attention_mask = mask
-
+        self.attention_mask = mask #[1]* len(self.input_ids)
+    def __getitem__(self, idx):
+        #item = {key: torch.tensor(val[idx]) for key, val in self.input_ids.items()}
+        item = {}
+        item['labels'] = torch.tensor(self.labels[idx])
+        item['input_ids'] = torch.tensor(self.input_ids[idx])
+        item['attention_mask'] = torch.tensor(self.attention_mask[idx])
+        print (item, item['labels'].shape, item['input_ids'].shape, item['attention_mask'].shape)
+        return item
     def __len__(self):
         return len(self.labels)
 
@@ -110,15 +122,15 @@ def main():
     model.train_adapter([task])
     model.set_active_adapters([task])
     args = TrainingArguments(
-        f"test-{task}",
-        output_dir='./results',
+        #f"test-{task}",
+        output_dir='./results/',
         evaluation_strategy="epoch",
         learning_rate=2e-5,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
         num_train_epochs=1,
         weight_decay=0.01,
-        logging_dir='./logs',
+        logging_dir='./logs/',
     )
     data_collator = DataCollatorForTokenClassification(tokenizer)
     trainer = Trainer(
@@ -129,8 +141,8 @@ def main():
         tokenizer=tokenizer,
         data_collator=data_collator,
         compute_metrics=compute_metrics,
-        do_save_full_model=not adapter_args.train_adapter,
-        do_save_adapters=adapter_args.train_adapter,
+        do_save_full_model=False,
+        do_save_adapters=True,
     )
 
     trainer.train()
