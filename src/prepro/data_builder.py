@@ -477,7 +477,7 @@ class PicoAdapterData():
         for tag_list in tag_align:
             temp = []
             for tag in tag_list:
-                temp.append(tag_dict[tag])
+                temp.append(int(tag_dict[tag]))
             tag_id.append(temp)
         mask_label = []
         for tag_list in enumerate(tag_align):
@@ -491,7 +491,7 @@ class PicoAdapterData():
             mask_label.append(temp)
         data = []
         for i in range(len(mask_label)):
-            data.append({"src": src_subtoken_idxs[i], "tag": tag_align[i], "mask": mask_label[i]})
+            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i]})
         return data
 
 def format_to_bert(args):
