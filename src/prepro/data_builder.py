@@ -403,26 +403,38 @@ class PicoAdapterData():
 
     def preprocess(self, src, tag, is_test=False):
 
-        #if ((not is_test) and len(src) == 0):
-        #    return None
-        #idxs = [i for i, s in enumerate(src) if (len(s) > self.args.min_src_ntokens_per_sent)]
         idxs = []
+        new_src = []
+        new_tag = []
         for i, d in enumerate(src):
-            for j, s in enumerate(src):
+            new_src.append([])
+            new_tag.append([])
+            for j, s in enumerate(d):
+                #assert len(s)==len(tag[i][j]),(len(s),len(tag[i][j]))
                 if len(s) > self.args.min_src_ntokens_per_sent:
-                    idxs.append([i,j])
+                    new_src[-1].append(s[:self.args.max_src_ntokens_per_sent])
+                    new_tag[-1].append(tag[i][j][:self.args.max_src_ntokens_per_sent])
+        #print(len(new_tag))
+    
+        src_filt = [d[:self.args.max_src_nsents][:] for d in new_src if self.args.min_src_nsents < len(d)]
+        tag_filt = [d_tag[:self.args.max_src_nsents][:] for d_tag in new_tag if self.args.min_src_nsents < len(d_tag)]
+        print(len(src_filt), len(src_filt[0]), src_filt[0][0])
+        src_txt = []
+        for d in src_filt:
+            temp = []
+            for sent in d:
+                temp.append(' '.join(sent))
+            src_txt.append(temp)
 
-        src = [src[v[0]][v[1]][:self.args.max_src_ntokens_per_sent] for v in idxs]
-        tag = [tag[v[0]][v[1]][:self.args.max_src_ntokens_per_sent] for i in idxs]
+        #src_txt = [' '.join(sent) for d in src for sent in d]
+        #print(len(src_txt))
 
-        src = [d[:self.args.max_src_nsents] for d in src]
-        tag = [d_tag[:self.args.max_src_nsents] for d_tag in tag]
-
-        src_txt = [' '.join(sent) for d in src for sent in d]
         text = [' {} {} '.format(self.sep_token, self.cls_token).join(d) for d in src_txt]
+        #print(len(text))
         text = ['{} '.format(self.cls_token) + d + ' {}'.format(self.sep_token) for d in text]
+        #print(len(text))
         tags = []
-        for i, t in enumerate(tag):
+        for i, t in enumerate(tag_filt):
             temp = []
             temp.append('O')
             for tag_list in t:
@@ -433,24 +445,27 @@ class PicoAdapterData():
             temp = temp[:-2]
             temp.append('O')
             tags.append(temp)
-            assert len(text[i].split())==len(temp)
+            assert len(text[i].split())==len(temp), (i, text[i].split(), len(text[i].split()),len(temp))
 
         src_encoding = self.tokenizer(text,truncation=True,padding=True)
-        src_subtoken_idxs =  src_encoding['input_ids']
+        src_subtoken_idxs = src_encoding['input_ids']
+        print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
         src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
         tag_align = []
-        for subtoken in src_subtokens:
+        for i, subtoken in enumerate(src_subtokens):
             aligned_labels = ["O"] * len(subtoken)
             head = 0
             count = 0
-            for i, each_str in enumerate(src_subtokens):
-                if each_str != "PAD":
+            #print(len(subtoken))
+            for j, each_str in enumerate(subtoken):
+                #print(i, each_str, head, count)
+                if each_str != "<pad>":
                     if "Ġ" in each_str:
-                        aligned_labels[head] = tags[count]
+                        aligned_labels[head] = tags[i][count]
                         count += 1
                         head += 1
                     else:
-                        aligned_labels[head] = tags[count-1]
+                        aligned_labels[head] = tags[i][count-1]
                         head += 1
                 else:
                     break
@@ -522,15 +537,20 @@ def format_to_pico_adapter(args):
         pico_adapter = PicoAdapterData(args)
         logger.info('Processing %s' % json_file)
         data = []
-        for json in json_file:
-            jobs = json.load(open(json))
+        source = []
+        tag = []
+        #json_file = [json_file[0]]
+        for j in json_file:
+            jobs = json.load(open(j))
             for d in jobs:
                 source.append(d['src'])
                 tag.append(d['tag'])
+        #source = source[:100]
+        #tag = tag[:100]
         data = pico_adapter.preprocess(source, tag, is_test=is_test)
-        logger.info('Processed instances %d' % len(b_data))
-        logger.info('Saving to %s' % save_file)
-        torch.save(b_data, save_file)
+        logger.info('Processed instances %d' % len(data))
+        logger.info('Saving to %s' % save_path)
+        torch.save(data, save_path)
 
 def _format_to_bert(params):
     corpus_type, json_file, args, save_file = params
