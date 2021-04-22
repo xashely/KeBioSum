@@ -68,6 +68,7 @@ def load_dataset(corpus_type, shuffle):
     assert corpus_type in ["train", "valid", "test"]
 
     def _lazy_dataset_loader(pt_file, corpus_type):
+        print(pt_file)
         dataset = torch.load(pt_file)
         logger.info('Loading %s dataset from %s, number of examples: %d' %
                     (corpus_type, pt_file, len(dataset)))
@@ -75,15 +76,13 @@ def load_dataset(corpus_type, shuffle):
         return dataset
 
     # Sort the glob output by file name (by increasing indexes).
-    pts = sorted(glob.glob(pico_adapter_data_path + '/' + corpus_type + '.[0-9]*.padpter.pt'))
+    pts = glob.glob(pico_adapter_data_path + '/' + corpus_type + '.padpter.pt')
     #print(pico_adapter_data_path)
     #print(pico_adapter_data_path + '/' + corpus_type + '.[0-9]*.padapter.pt')
     if pts:
-        if (shuffle):
-            random.shuffle(pts)
         src, label, mask = [], [], []
 
-        dataset = _lazy_dataset_loader(pt, corpus_type)
+        dataset = _lazy_dataset_loader(pts[0], corpus_type)
         for data in dataset:
             src.append(data['src'])
             label.append(data['tag'])
@@ -99,6 +98,7 @@ class PicoDataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         #item = {key: torch.tensor(val[idx]) for key, val in self.input_ids.items()}
         item = {}
+        print(self.labels[idx],type(self.labels[idx]))
         item['labels'] = torch.tensor(self.labels[idx])
         item['input_ids'] = torch.tensor(self.input_ids[idx])
         item['attention_mask'] = torch.tensor(self.attention_mask[idx])
