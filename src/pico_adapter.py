@@ -82,12 +82,12 @@ def load_dataset(corpus_type, shuffle):
         if (shuffle):
             random.shuffle(pts)
         src, label, mask = [], [], []
-        for pt in pts:
-            dataset = _lazy_dataset_loader(pt, corpus_type)
-            for data in dataset:
-                src.append(data['src'])
-                label.append(data['tag'])
-                mask.append(data['mask'])
+
+        dataset = _lazy_dataset_loader(pt, corpus_type)
+        for data in dataset:
+            src.append(data['src'])
+            label.append(data['tag'])
+            mask.append(data['mask'])
         return src, label, mask
 
 class PicoDataset(torch.utils.data.Dataset):
