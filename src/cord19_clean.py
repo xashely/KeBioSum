@@ -59,35 +59,35 @@ if __name__ == '__main__':
     df_len = 10
     abstract_null_counter = 0
 
-    # if not os.path.isdir(post_path):
-    #     raise ValueError('{} is not a directory'.format(post_path))
+    if not os.path.isdir(post_path):
+        raise ValueError('{} is not a directory'.format(post_path))
 
-    # ppath = os.path.join(post_path, 'PMC.csv')
-    # write_head = False
-    # with open(ppath, 'w') as f:
-    #     w = csv.writer(f)
+    ppath = os.path.join(post_path, 'PMC.csv')
+    write_head = False
+    with open(ppath, 'w') as f:
+        w = csv.writer(f)
 
-    #     with tqdm(total=df_len) as pbar:
-    #         for i, row in df.iterrows():
-    #             if i >= df_len:
-    #                 break
-    #             pbar.update(1)
+        with tqdm(total=df_len) as pbar:
+            for i, row in df.iterrows():
+                if i >= df_len:
+                    break
+                pbar.update(1)
 
-    #             fpath = os.path.join(pmc_path, '{}.xml.json'.format(row['pmcid']))
-    #             if not os.path.isfile(fpath):
-    #                 continue
-    #             with open(fpath, 'r') as fi:
-    #                 json_dict = json.load(fi)
-    #                 dict = clean_json(json_dict)
-    #                 dict['abstract'] = row['abstract']
-    #                 if pd.isnull(row['abstract']):
-    #                     abstract_null_counter +=1
+                fpath = os.path.join(pmc_path, '{}.xml.json'.format(row['pmcid']))
+                if not os.path.isfile(fpath):
+                    continue
+                with open(fpath, 'r') as fi:
+                    json_dict = json.load(fi)
+                    dict = clean_json(json_dict)
+                    dict['abstract'] = row['abstract']
+                    if pd.isnull(row['abstract']):
+                        abstract_null_counter +=1
 
 
-    #                 if not write_head:
-    #                     w.writerow(dict.keys())
-    #                     write_head = True
-    #                 w.writerow(dict.values())
+                    if not write_head:
+                        w.writerow(dict.keys())
+                        write_head = True
+                    w.writerow(dict.values())
 
 
     print('Total null abtracts: \t{}'.format(abstract_null_counter))
