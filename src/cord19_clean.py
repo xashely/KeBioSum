@@ -49,10 +49,10 @@ if __name__ == '__main__':
 
     with open(meta_path, 'r') as f:
         df = pd.read_csv(meta_path, sep=',', error_bad_lines=False, index_col=False, dtype='unicode')
-        print(len(df))
+        print('Length of csv before removing papers without abstract'.format(df.shape[0]))
         # skip papers without abstract
-        df = df[df.abstract.astype(bool)]
-        print(len(df))
+        df = df[df.abstract.astype(bool)]   # I don't think this line works - you need to do df = df[~pd.isnull(df.abstract)]
+        print('Length of csv after removing papers without abstract'.format(df.shape[0]))
 
     # pandas with tqdm requires manual update for now
     df_len = df.shape[0]
@@ -89,9 +89,16 @@ if __name__ == '__main__':
                     if not write_head:
                         w.writerow(dict.keys())
                         write_head = True
+                        pmc_files+=1
                     w.writerow(dict.values())
+                    
+    print('Total no path: \t{}'.format(no_path_counter)) # 106798
+    print('Total null abtracts: \t{}'.format(abstract_null_counter)) # 10353
+    print('Total completed: \t{}'.format(len(pmc_files))) # 57037 
 
-
-    print('Total no path: \t{}'.format(no_path_counter))
-    print('Total null abtracts: \t{}'.format(abstract_null_counter))
-    print('Total completed: \t{}'.format(len(pmc_files))) # 50818 for Jun 10
+    # drop duplicate entries
+    df = pd.read_csv(ppath)
+    df['title_lower'] = df.title.str.lower()
+    df_deduplicated = df.drop_duplicates(subset='title_lower').drop(columns='title_lower')
+    df_deduplicated.to_csv(ppath,index=False)
+    print('Total once articles deduplicated: \t{}'.format(df_deduplicated.shape[0])) # 56341 
