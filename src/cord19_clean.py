@@ -55,9 +55,10 @@ if __name__ == '__main__':
         print(len(df))
 
     # pandas with tqdm requires manual update for now
-    # df_len = df.shape[0]
-    df_len = 10
+    df_len = df.shape[0]
+    # df_len = 10
     abstract_null_counter = 0
+    no_path_counter = 0
 
     if not os.path.isdir(post_path):
         raise ValueError('{} is not a directory'.format(post_path))
@@ -75,6 +76,7 @@ if __name__ == '__main__':
 
                 fpath = os.path.join(pmc_path, '{}.xml.json'.format(row['pmcid']))
                 if not os.path.isfile(fpath):
+                    no_path_counter +=1
                     continue
                 with open(fpath, 'r') as fi:
                     json_dict = json.load(fi)
@@ -90,5 +92,6 @@ if __name__ == '__main__':
                     w.writerow(dict.values())
 
 
+    print('Total no path: \t{}'.format(no_path_counter))
     print('Total null abtracts: \t{}'.format(abstract_null_counter))
     print('Total completed: \t{}'.format(len(pmc_files))) # 50818 for Jun 10
