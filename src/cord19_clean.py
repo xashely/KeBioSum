@@ -91,7 +91,7 @@ if __name__ == '__main__':
                     
     print('Total no path: \t{}'.format(no_path_counter)) # 106798
     print('Total null abtracts: \t{}'.format(abstract_null_counter)) # 10353
-    print('Total completed: \t{}'.format(len(pmc_files))) # 57037 
+    print('Total completed: \t{}'.format(pmc_files)) # 57037 
 
     # drop duplicate entries
     df = pd.read_csv(ppath)
