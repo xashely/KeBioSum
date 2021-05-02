@@ -43,44 +43,52 @@ if __name__ == '__main__':
     pmc_path = os.path.join(root_dir, 'document_parses', 'pmc_json')
     post_path = os.path.join(root_dir, 'document_parses', 'post_json')
 
+    print(root_dir)
+
     pmc_files = []
 
     with open(meta_path, 'r') as f:
         df = pd.read_csv(meta_path, sep=',', error_bad_lines=False, index_col=False, dtype='unicode')
+        print(len(df))
         # skip papers without abstract
         df = df[df.abstract.astype(bool)]
+        print(len(df))
 
     # pandas with tqdm requires manual update for now
-    df_len = df.shape[0]
-    # df_len = 10
+    # df_len = df.shape[0]
+    df_len = 10
+    abstract_null_counter = 0
 
-    if not os.path.isdir(post_path):
-        raise ValueError('{} is not a directory'.format(post_path))
+    # if not os.path.isdir(post_path):
+    #     raise ValueError('{} is not a directory'.format(post_path))
 
-    ppath = os.path.join(post_path, 'PMC.csv')
-    write_head = False
-    with open(ppath, 'w') as f:
-        w = csv.writer(f)
+    # ppath = os.path.join(post_path, 'PMC.csv')
+    # write_head = False
+    # with open(ppath, 'w') as f:
+    #     w = csv.writer(f)
 
-        with tqdm(total=df_len) as pbar:
-            for i, row in df.iterrows():
-                if i >= df_len:
-                    break
-                pbar.update(1)
+    #     with tqdm(total=df_len) as pbar:
+    #         for i, row in df.iterrows():
+    #             if i >= df_len:
+    #                 break
+    #             pbar.update(1)
 
-                fpath = os.path.join(pmc_path, '{}.xml.json'.format(row['pmcid']))
-                if not os.path.isfile(fpath):
-                    continue
-                with open(fpath, 'r') as fi:
-                    json_dict = json.load(fi)
-                    dict = clean_json(json_dict)
-                    dict['abstract'] = row['abstract']
-
-                    if not write_head:
-                        w.writerow(dict.keys())
-                        write_head = True
-                    w.writerow(dict.values())
+    #             fpath = os.path.join(pmc_path, '{}.xml.json'.format(row['pmcid']))
+    #             if not os.path.isfile(fpath):
+    #                 continue
+    #             with open(fpath, 'r') as fi:
+    #                 json_dict = json.load(fi)
+    #                 dict = clean_json(json_dict)
+    #                 dict['abstract'] = row['abstract']
+    #                 if pd.isnull(row['abstract']):
+    #                     abstract_null_counter +=1
 
 
+    #                 if not write_head:
+    #                     w.writerow(dict.keys())
+    #                     write_head = True
+    #                 w.writerow(dict.values())
 
+
+    print('Total null abtracts: \t{}'.format(abstract_null_counter))
     print('Total completed: \t{}'.format(len(pmc_files))) # 50818 for Jun 10
