@@ -86,8 +86,8 @@ if __name__ == '__main__':
                     if not write_head:
                         w.writerow(dict.keys())
                         write_head = True
-                        pmc_files+=1
                     w.writerow(dict.values())
+                    pmc_files+=1
                     
     print('Total no path: \t{}'.format(no_path_counter)) # 106798
     print('Total null abtracts: \t{}'.format(abstract_null_counter)) # 10353
