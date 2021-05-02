@@ -43,10 +43,6 @@ if __name__ == '__main__':
     pmc_path = os.path.join(root_dir, 'document_parses', 'pmc_json')
     post_path = os.path.join(root_dir, 'document_parses', 'post_json')
 
-    print(root_dir)
-
-    pmc_files = []
-
     with open(meta_path, 'r') as f:
         df = pd.read_csv(meta_path, sep=',', error_bad_lines=False, index_col=False, dtype='unicode')
         print('Length of csv before removing papers without abstract'.format(df.shape[0]))
@@ -59,6 +55,7 @@ if __name__ == '__main__':
     # df_len = 10
     abstract_null_counter = 0
     no_path_counter = 0
+    pmc_files = 0
 
     if not os.path.isdir(post_path):
         raise ValueError('{} is not a directory'.format(post_path))
