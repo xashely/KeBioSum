@@ -26,9 +26,9 @@ def clean_json(json_dict):
         if p['section'] == 'Pre-publication history':
             continue
         p_text = p['text'].strip()
-        p_text = re.sub('\[[\d\s,]+?\]', '', p_text)
-        p_text = re.sub('\(Table \d+?\)', '', p_text)
-        p_text = re.sub('\(Fig. \d+?\)', '', p_text)
+        p_text = re.sub('\[[\d\s,]+?\]', '', p_text) # matches references e.g. [12]
+        p_text = re.sub('\(Table \d+?\)', '', p_text) # matches table references e.g. (Table 1)
+        p_text = re.sub('\(Fig. \d+?\)', '', p_text) # matches fig references e.g. (Fig. 1)
         text.append(p_text)
 
     return {'title': title, 'text': text}
@@ -45,10 +45,10 @@ if __name__ == '__main__':
 
     with open(meta_path, 'r') as f:
         df = pd.read_csv(meta_path, sep=',', error_bad_lines=False, index_col=False, dtype='unicode')
-        print('Length of csv before removing papers without abstract'.format(df.shape[0]))
+        print('Length of csv before removing papers without abstract: {}'.format(df.shape[0]))
         # skip papers without abstract
         df = df[df.abstract.astype(bool)]   # I don't think this line works - you need to do df = df[~pd.isnull(df.abstract)]
-        print('Length of csv after removing papers without abstract'.format(df.shape[0]))
+        print('Length of csv after removing papers without abstract: {}'.format(df.shape[0]))
 
     # pandas with tqdm requires manual update for now
     df_len = df.shape[0]
@@ -71,7 +71,8 @@ if __name__ == '__main__':
                     break
                 pbar.update(1)
 
-                fpath = os.path.join(pmc_path, '{}.xml.json'.format(row['pmcid']))
+                # is there a reason we only want pubmed articles rather than other articles?
+                fpath = os.path.join(pmc_path, '{}.xml.json'.format(row['pmcid'])) 
                 if not os.path.isfile(fpath):
                     no_path_counter +=1
                     continue
