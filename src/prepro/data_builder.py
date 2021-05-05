@@ -169,7 +169,6 @@ def tokenize(args):
     meta_path = os.path.join(stories_dir, 'metadata.csv')
     pmc_dir = os.path.join(stories_dir, 'document_parses', 'pmc_json')
     txt_dir = os.path.join(stories_dir, 'document_parses', 'txt_json')
-    filelistpath = os.path.join(stories_dir,'mapping_for_corenlp.txt')
     print('... Loading PMC data from {}'.format(pmc_dir))
 
     with open(meta_path, 'r') as f:
@@ -219,14 +218,13 @@ def tokenize(args):
     stories = os.listdir(stories_dir)
     # make IO list file
     print("Making list of files to tokenize...")
-    print(os.listdir(txt_dir))
-    with open(filelistpath, 'w') as fi:
+    with open('mapping_for_corenlp.txt', 'w') as fi:
         for fname in os.listdir(txt_dir):
             fpath = os.path.join(txt_dir, fname)
             fi.write('{}\n'.format(fpath))
 
     command = ['java', 'edu.stanford.nlp.pipeline.StanfordCoreNLP', '-annotators', 'tokenize,ssplit',
-               '-ssplit.newlineIsSentenceBreak', 'always', '-filelist', filelistpath, '-outputFormat',
+               '-ssplit.newlineIsSentenceBreak', 'always', '-filelist', 'mapping_for_corenlp.txt', '-outputFormat',
                'json', '-outputDirectory', tokenized_stories_dir]
 
     print("Tokenizing %i files in %s and saving in %s..." % (len(stories), stories_dir, tokenized_stories_dir))
