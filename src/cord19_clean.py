@@ -47,7 +47,7 @@ if __name__ == '__main__':
         df = pd.read_csv(meta_path, sep=',', error_bad_lines=False, index_col=False, dtype='unicode')
         print('Length of csv before removing papers without abstract: {}'.format(df.shape[0]))
         # skip papers without abstract
-        df = df[df.abstract.astype(bool)]   # I don't think this line works - you need to do df = df[~pd.isnull(df.abstract)]
+        df = df[df.abstract.astype(bool)]   # JB: I don't think this line works - you need to do df = df[~pd.isnull(df.abstract)]
         print('Length of csv after removing papers without abstract: {}'.format(df.shape[0]))
 
     # pandas with tqdm requires manual update for now
@@ -71,7 +71,7 @@ if __name__ == '__main__':
                     break
                 pbar.update(1)
 
-                # is there a reason we only want pubmed articles rather than other articles?
+                # JB: is there a reason we only want pubmed articles rather than other articles?
                 fpath = os.path.join(pmc_path, '{}.xml.json'.format(row['pmcid'])) 
                 if not os.path.isfile(fpath):
                     no_path_counter +=1
@@ -94,7 +94,7 @@ if __name__ == '__main__':
     print('Total null abtracts: \t{}'.format(abstract_null_counter)) # 10353
     print('Total completed: \t{}'.format(pmc_files)) # 57037 
 
-    # drop duplicate entries
+    # JB: drop duplicate entries
     df = pd.read_csv(ppath)
     df['title_lower'] = df.title.str.lower()
     df_deduplicated = df.drop_duplicates(subset='title_lower').drop(columns='title_lower')
