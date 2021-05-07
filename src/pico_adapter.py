@@ -32,7 +32,7 @@ from transformers.trainer_utils import is_main_process
 logger = logging.getLogger(__name__)
 pico_adapter_data_path = "/home/qianqian/covid-bert/pico_adapter_data"
 label_list = ['O', "I-INT", "I-PAR", "I-OUT"]
-batch_size = 32
+batch_size = 24
 task = 'ner'
 def compute_metrics(p):
     predictions, labels = p
@@ -88,6 +88,7 @@ def load_dataset(corpus_type, shuffle):
             src.append(data['src'])
             label.append(data['tag'])
             mask.append(data['mask'])
+            #print(data['mask'])
         return src, label, mask
 
 class PicoDataset(torch.utils.data.Dataset):
@@ -103,7 +104,8 @@ class PicoDataset(torch.utils.data.Dataset):
         item['labels'] = self.labels[idx]
         item['input_ids'] = self.input_ids[idx]
         item['attention_mask'] = self.attention_mask[idx]
-        print(item['attention_mask'])
+        #print(item['input_ids'])
+        #print(len(item['input_ids']))
         return item
     def __len__(self):
         return len(self.labels)
