@@ -6,6 +6,7 @@ from transformers import AutoModelForTokenClassification, TrainingArguments, Tra
 from transformers import DataCollatorForTokenClassification
 from transformers import AutoTokenizer
 from transformers import AdapterType
+from datasets import ClassLabel, load_dataset, load_metric
 from seqeval.metrics import accuracy_score, f1_score, precision_score, recall_score
 import numpy as np
 import glob
@@ -34,6 +35,8 @@ pico_adapter_data_path = "/home/qianqian/covid-bert/pico_adapter_data"
 label_list = ['O', "I-INT", "I-PAR", "I-OUT"]
 batch_size = 24
 task = 'ner'
+
+metric = load_metric("seqeval")
 def compute_metrics(p):
     predictions, labels = p
     predictions = np.argmax(predictions, axis=2)
@@ -128,14 +131,15 @@ def main():
         #f"test-{task}",
         output_dir='./results/',
         evaluation_strategy="epoch",
-        learning_rate=2e-5,
+        learning_rate=5e-5,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
-        num_train_epochs=1,
-        weight_decay=0.01,
+        num_train_epochs=15,
+        weight_decay=0.005,
         logging_dir='./logs/',
     )
     data_collator = DataCollatorForTokenClassification(tokenizer)
+    #metric = load_metric("seqeval")
     trainer = Trainer(
         model=model,
         args=args,
@@ -154,7 +158,7 @@ def main():
 
     results = trainer.evaluate()
 
-    output_eval_file = os.path.join(training_args.output_dir, "eval_results_ner.txt")
+    output_eval_file = os.path.join('./results/', "eval_results_ner.txt")
     if trainer.is_world_process_zero():
         with open(output_eval_file, "w") as writer:
             logger.info("***** Eval results *****")
@@ -170,18 +174,18 @@ def main():
 
     # Remove ignored index (special tokens)
     true_predictions = [
-        [label_list[p] for (p, l) in zip(prediction, label) if l != -100]
+        [label_list[p] for (p, l) in zip(prediction, label) if l != 0]
         for prediction, label in zip(predictions, labels)
     ]
 
-    output_test_results_file = os.path.join(training_args.output_dir, "test_results.txt")
-    if trainer.is_world_master():
+    output_test_results_file = os.path.join('./results/', "test_results.txt")
+    if trainer.is_world_process_zero():
         with open(output_test_results_file, "w") as writer:
             for key, value in metrics.items():
                 logger.info(f"  {key} = {value}")
                 writer.write(f"{key} = {value}\n")
 
-    model.save_adapter("./final_adapter", "pico_adapter")
+    model.save_adapter("./final_adapter", "ner")
 
 if __name__ == "__main__":
     main()
