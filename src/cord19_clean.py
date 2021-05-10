@@ -70,7 +70,7 @@ if __name__ == '__main__':
     with open(ppath, 'w') as f:
         w = csv.writer(f)
 
-        print('Cleaning aving off only pubmed files to {}...'.format(post_path))
+        print('Cleaning & saving off only pubmed files to {}...'.format(post_path))
         with tqdm(total=df_len) as pbar:
             for i, row in df.iterrows():
                 if i >= df_len:
@@ -82,16 +82,26 @@ if __name__ == '__main__':
                 if not os.path.isfile(fpath):
                     no_path_counter +=1
                     continue
-                with open(fpath, 'r') as fi: # before the script was only reading and wasn't writing out files (only 'r' param)
+
+                # before the script was only reading and wasn't writing out files (only 'r' param)
+                with open(fpath, 'r') as fi: 
                     json_dict = json.load(fi)
-                    # clean data
-                    cleaned_dict = clean_json(json_dict)
-                    # include abstract from paper for gold summary
-                    cleaned_dict['abstract'] = row['abstract']
+
+                # clean data
+                cleaned_dict = clean_json(json_dict)
+
+                # include abstract from paper for gold summary
+                cleaned_dict['abstract'] = row['abstract']
+
+                # writing out cleaned version
+                outpath = os.path.join(post_path, '{}.xml.json'.format(row['pmcid'])) 
+                with open(outpath,'w') as fi:
+                    json.dump(cleaned_dict,fi)
 
                 if not write_head:
                     w.writerow(cleaned_dict.keys())
                     write_head = True
+                
                 w.writerow(cleaned_dict.values())
                 pmc_files+=1
                    
