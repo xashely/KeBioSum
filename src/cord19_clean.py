@@ -45,15 +45,21 @@ if __name__ == '__main__':
 
     with open(meta_path, 'r') as f:
         df = pd.read_csv(meta_path, sep=',', error_bad_lines=False, index_col=False, dtype='unicode')
-        print('Length of csv before removing papers without abstract: {}'.format(df.shape[0]))
-        # skip papers without abstract
-        df = df[df.abstract.astype(bool)]   # JB: I don't think this line works - you need to do df = df[~pd.isnull(df.abstract)]
-        print('Length of csv after removing papers without abstract: {}'.format(df.shape[0]))
+    
+    print('Length of csv before removing papers without abstract: {}'.format(df.shape[0]))
+    # skip papers without abstract
+    df = df[~pd.isnull(df.abstract)]
+    print('Length of csv after removing papers without abstract: {}'.format(df.shape[0]))
+    # drop duplicates
+    df['title_lower'] = df.title.str.lower()
+    df_deduplicated = df.drop_duplicates(subset='title_lower').drop(columns='title_lower')
+    df_deduplicated.to_csv(ppath,index=False)
+    print('Length of csv once articles deduplicated: \t{}'.format(df_deduplicated.shape[0])) # 56341 
+
 
     # pandas with tqdm requires manual update for now
     df_len = df.shape[0]
-    # df_len = 10
-    abstract_null_counter = 0
+    df_len = 10
     no_path_counter = 0
     pmc_files = 0
 
@@ -72,31 +78,25 @@ if __name__ == '__main__':
                 pbar.update(1)
 
                 # JB: is there a reason we only want pubmed articles rather than other articles?
+                print('Saving off only pubmed files...')
                 fpath = os.path.join(pmc_path, '{}.xml.json'.format(row['pmcid'])) 
                 if not os.path.isfile(fpath):
                     no_path_counter +=1
                     continue
-                with open(fpath, 'r') as fi:
+                with open(fpath, 'r') as fi: # before the script was only reading and wasn't writing out files (only 'r' param)
                     json_dict = json.load(fi)
-                    dict = clean_json(json_dict)
-                    dict['abstract'] = row['abstract']
-                    if pd.isnull(row['abstract']):
-                        abstract_null_counter +=1
+                # clean data
+                cleaned_dict = clean_json(json_dict)
+                print(cleaned_dict['abstract'])
+                # overwrite cleaned asbtract with original abstract
+                cleaned_dict['abstract'] = row['abstract']
 
-
-                    if not write_head:
-                        w.writerow(dict.keys())
-                        write_head = True
-                    w.writerow(dict.values())
-                    pmc_files+=1
+                if not write_head:
+                    w.writerow(dict.keys())
+                    write_head = True
+                w.writerow(dict.values())
+                pmc_files+=1
                     
-    print('Total no path: \t{}'.format(no_path_counter)) # 106798
-    print('Total null abtracts: \t{}'.format(abstract_null_counter)) # 10353
-    print('Total completed: \t{}'.format(pmc_files)) # 57037 
+    print('After preprocessing - total with no path: \t{}'.format(no_path_counter))
+    print('After preprocessing - total saved: \t{}'.format(pmc_files)) 
 
-    # JB: drop duplicate entries
-    df = pd.read_csv(ppath)
-    df['title_lower'] = df.title.str.lower()
-    df_deduplicated = df.drop_duplicates(subset='title_lower').drop(columns='title_lower')
-    df_deduplicated.to_csv(ppath,index=False)
-    print('Total once articles deduplicated: \t{}'.format(df_deduplicated.shape[0])) # 56341 
