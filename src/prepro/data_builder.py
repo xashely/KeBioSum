@@ -482,11 +482,11 @@ class PicoAdapterData():
         mask_label = []
         for i, tag_list in enumerate(tag_align):
             temp = []
-            for tag in tag_list:
+            for i,tag in enumerate(tag_list):
                 if tag == "O":
                     temp.append(0.0)
                 else:
-                    src_subtoken_idxs[i] = self.mask_vid
+                    src_subtoken_idxs[i][j] = self.mask_vid
                     temp.append(1.0)
             print(len(temp))
             mask_label.append(temp)
