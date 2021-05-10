@@ -354,14 +354,15 @@ class BertData():
 
         src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
-        _segs = [-1] + [i for i, t in enumerate(src_subtoken_idxs) if t == self.sep_vid]
-        segs = [_segs[i] - _segs[i - 1] for i in range(1, len(_segs))]
-        segments_ids = []
-        for i, s in enumerate(segs):
-            if (i % 2 == 0):
-                segments_ids += s * [0]
-            else:
-                segments_ids += s * [1]
+        #_segs = [-1] + [i for i, t in enumerate(src_subtoken_idxs) if t == self.sep_vid]
+        #segs = [_segs[i] - _segs[i - 1] for i in range(1, len(_segs))]
+        #segments_ids = []
+        #for i, s in enumerate(segs):
+        #    if (i % 2 == 0):
+        #        segments_ids += s * [0]
+        #    else:
+        #        segments_ids += s * [1]
+        segments_ids = [0]*len(src_subtoken_idxs)
         cls_ids = [i for i, t in enumerate(src_subtoken_idxs) if t == self.cls_vid]
         sent_labels = sent_labels[:len(cls_ids)]
 
