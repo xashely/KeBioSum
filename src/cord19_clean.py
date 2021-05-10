@@ -86,16 +86,20 @@ if __name__ == '__main__':
                     json_dict = json.load(fi)
                 # clean data
                 cleaned_dict = clean_json(json_dict)
-                print(cleaned_dict['abstract'])
-                # overwrite cleaned asbtract with original abstract
+                # include abstract from paper for gold summary
                 cleaned_dict['abstract'] = row['abstract']
 
                 if not write_head:
-                    w.writerow(dict.keys())
+                    w.writerow(cleaned_dict.keys())
                     write_head = True
-                w.writerow(dict.values())
+                w.writerow(cleaned_dict.values())
                 pmc_files+=1
-                    
+                   
     print('After preprocessing - total with no path: \t{}'.format(no_path_counter))
     print('After preprocessing - total saved: \t{}'.format(pmc_files)) 
+
+    # Check length of dataframe written out is same as number of paths written out
+    new_metadata_df = pd.read_csv(ppath)
+    if not len(new_metadata_df)==pmc_files:
+        print('Length of csv ({}) different to number of files written out ({})'.format(len(new_metadata_df),pmc_files))
 
