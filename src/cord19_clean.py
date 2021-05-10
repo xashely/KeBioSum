@@ -101,8 +101,8 @@ if __name__ == '__main__':
             w.writerow(cleaned_dict.values())
             pmc_files+=1
                    
-    print('After preprocessing - total with no path: \t{}'.format(no_path_counter))
-    print('After preprocessing - total saved: \t{}'.format(pmc_files)) 
+    print('After preprocessing - total with no path: \t{}'.format(no_path_counter)) # 70963
+    print('After preprocessing - total saved: \t{}'.format(pmc_files)) # 42021
 
     # Check length of dataframe written out is same as number of paths written out
     new_metadata_df = pd.read_csv(new_meta_path)
