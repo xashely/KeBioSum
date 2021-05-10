@@ -53,8 +53,8 @@ if __name__ == '__main__':
     print('Length of csv after removing papers without abstract: {}'.format(df.shape[0]))
     # drop duplicates
     df['title_lower'] = df.title.str.lower()
-    df_deduplicated = df.drop_duplicates(subset='title_lower').drop(columns='title_lower')
-    print('Length of csv once articles deduplicated: \t{}'.format(df_deduplicated.shape[0])) # 56341 
+    df= df.drop_duplicates(subset='title_lower').drop(columns='title_lower')
+    print('Length of csv once articles deduplicated: \t{}'.format(df.shape[0])) # 56341 
 
 
     # pandas with tqdm requires manual update for now
