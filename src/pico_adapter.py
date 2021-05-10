@@ -27,11 +27,12 @@ from transformers import (
 )
 from transformers.trainer_utils import is_main_process
 
-
+#device = torch.cuda.is_available()
+#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 logger = logging.getLogger(__name__)
 pico_adapter_data_path = "/home/qianqian/covid-bert/pico_adapter_data"
 label_list = ['O', "I-INT", "I-PAR", "I-OUT"]
-batch_size = 16
+batch_size = 24
 task = 'ner'
 def compute_metrics(p):
     predictions, labels = p
@@ -87,6 +88,7 @@ def load_dataset(corpus_type, shuffle):
             src.append(data['src'])
             label.append(data['tag'])
             mask.append(data['mask'])
+            #print(data['mask'])
         return src, label, mask
 
 class PicoDataset(torch.utils.data.Dataset):
@@ -98,11 +100,12 @@ class PicoDataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         #item = {key: torch.tensor(val[idx]) for key, val in self.input_ids.items()}
         item = {}
-        print(self.labels[idx],type(self.labels[idx]))
-        item['labels'] = torch.tensor(self.labels[idx])
-        item['input_ids'] = torch.tensor(self.input_ids[idx])
-        item['attention_mask'] = torch.tensor(self.attention_mask[idx])
-        print (item, item['labels'].shape, item['input_ids'].shape, item['attention_mask'].shape)
+        #print(self.labels[idx],type(self.labels[idx]))
+        item['labels'] = self.labels[idx]
+        item['input_ids'] = self.input_ids[idx]
+        item['attention_mask'] = self.attention_mask[idx]
+        #print(item['input_ids'])
+        #print(len(item['input_ids']))
         return item
     def __len__(self):
         return len(self.labels)
@@ -118,9 +121,9 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained('roberta-base')
 
     model = AutoModelForTokenClassification.from_pretrained('roberta-base', num_labels=len(label_list))
-    model.add_adapter("pico_adapter", AdapterType.text_task)
-    model.train_adapter([task])
-    model.set_active_adapters([task])
+    model.add_adapter(task)
+    model.train_adapter(task)
+    model.set_active_adapters(task)
     args = TrainingArguments(
         #f"test-{task}",
         output_dir='./results/',
