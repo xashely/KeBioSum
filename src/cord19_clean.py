@@ -40,6 +40,7 @@ if __name__ == '__main__':
     # dirname = os.path.dirname(os.path.abspath(__file__))
     root_dir = os.path.abspath(args.root_dir)
     meta_path = os.path.join(root_dir, 'metadata.csv')
+    new_meta_path = os.path.join(root_dir, 'PMC.csv')
     pmc_path = os.path.join(root_dir, 'document_parses', 'pmc_json')
     post_path = os.path.join(root_dir, 'document_parses', 'post_json')
 
@@ -65,9 +66,8 @@ if __name__ == '__main__':
     if not os.path.isdir(post_path):
         raise ValueError('{} is not a directory'.format(post_path))
 
-    ppath = os.path.join(post_path, 'PMC.csv')
     write_head = False
-    with open(ppath, 'w') as f:
+    with open(new_meta_path, 'w') as f:
         w = csv.writer(f)
 
         print('Cleaning & saving off only pubmed files to {}...'.format(post_path))
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     print('After preprocessing - total saved: \t{}'.format(pmc_files)) 
 
     # Check length of dataframe written out is same as number of paths written out
-    new_metadata_df = pd.read_csv(ppath)
+    new_metadata_df = pd.read_csv(new_meta_path)
     if not len(new_metadata_df)==pmc_files:
         print('Length of csv ({}) different to number of files written out ({})'.format(len(new_metadata_df),pmc_files))
 
