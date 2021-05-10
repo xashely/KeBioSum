@@ -73,6 +73,7 @@ if __name__ == '__main__':
         print('Cleaning & saving off only pubmed files to {}...'.format(post_path))
         with tqdm(total=df_len) as pbar:
             for i, row in df.iterrows():
+                print(i)
                 if i >= df_len:
                     break
                 pbar.update(1)
