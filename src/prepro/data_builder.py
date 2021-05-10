@@ -314,19 +314,18 @@ class BertData():
         self.tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
 
         #BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
-
         self.sep_token = '<s>'
         self.cls_token = '</s>'
         self.pad_token = '<pad>'
         self.tgt_bos = '<s>'
         self.tgt_eos = '</s>'
         self.tgt_sent_split = '<s>'
-        self.sep_vid = self.tokenizer.vocab[self.sep_token]
-        self.cls_vid = self.tokenizer.vocab[self.cls_token]
-        self.pad_vid = self.tokenizer.vocab[self.pad_token]
-        self.tgt_bos_vid = self.tokenizer.vocab[self.tgt_bos]
-        self.tgt_eos_vid = self.tokenizer.vocab[self.tgt_eos]
-        self.tgt_sent_split_vid = self.tokenizer.vocab[self.tgt_sent_split]
+        self.sep_vid = self.tokenizer.convert_tokens_to_ids(self.sep_token)
+        self.cls_vid = self.tokenizer.convert_tokens_to_ids(self.cls_token)
+        self.pad_vid = self.tokenizer.convert_tokens_to_ids(self.pad_token)
+        self.tgt_bos_vid = self.tokenizer.convert_tokens_to_ids(self.tgt_bos)
+        self.tgt_eos_vid = self.tokenizer.convert_tokens_to_ids(self.tgt_eos)
+        self.tgt_sent_split_vid = self.tokenizer.convert_tokens_to_ids(self.tgt_sent_split)
 
     def preprocess(self, src, tgt, sent_labels, use_bert_basic_tokenizer=False, is_test=False):
 
@@ -367,7 +366,7 @@ class BertData():
         sent_labels = sent_labels[:len(cls_ids)]
 
         tgt_subtokens_str = '<s>' + ' </s>'.join(
-            [' '.join(self.tokenizer.tokenize(' '.join(tt), use_bert_basic_tokenizer=use_bert_basic_tokenizer)) for tt in tgt]) + ' </s>'
+            [' '.join(self.tokenizer.tokenize(' '.join(tt))) for tt in tgt]) + ' </s>'
         tgt_subtoken = tgt_subtokens_str.split()[:self.args.max_tgt_ntokens]
         if ((not is_test) and len(tgt_subtoken) < self.args.min_tgt_ntokens):
             return None
