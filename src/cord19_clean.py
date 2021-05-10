@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
 
     # pandas with tqdm requires manual update for now
-    df_len = df.shape[0]
+    # df_len = df.shape[0]
     # df_len = 10
     no_path_counter = 0
     pmc_files = 0
@@ -71,41 +71,35 @@ if __name__ == '__main__':
         w = csv.writer(f)
 
         print('Cleaning & saving off only pubmed files to {}...'.format(post_path))
-        with tqdm(total=df_len) as pbar:
-            for i, row in df.iterrows():
-                if i >= df_len:
-                    print(i)
-                    print(df_len)
-                    break
-                pbar.update(1)
+        for i, row in tqdm(df.iterrows(),total=df.shape[0]):
 
-                # JB: is there a reason we only want pubmed articles rather than other articles?
-                fpath = os.path.join(pmc_path, '{}.xml.json'.format(row['pmcid'])) 
-                if not os.path.isfile(fpath):
-                    no_path_counter +=1
-                    continue
+            # JB: is there a reason we only want pubmed articles rather than other articles?
+            fpath = os.path.join(pmc_path, '{}.xml.json'.format(row['pmcid'])) 
+            if not os.path.isfile(fpath):
+                no_path_counter +=1
+                continue
 
-                # before the script was only reading and wasn't writing out files (only 'r' param)
-                with open(fpath, 'r') as fi: 
-                    json_dict = json.load(fi)
+            # before the script was only reading and wasn't writing out files (only 'r' param)
+            with open(fpath, 'r') as fi: 
+                json_dict = json.load(fi)
 
-                # clean data
-                cleaned_dict = clean_json(json_dict)
+            # clean data
+            cleaned_dict = clean_json(json_dict)
 
-                # include abstract from paper for gold summary
-                cleaned_dict['abstract'] = row['abstract']
+            # include abstract from paper for gold summary
+            cleaned_dict['abstract'] = row['abstract']
 
-                # writing out cleaned version
-                outpath = os.path.join(post_path, '{}.xml.json'.format(row['pmcid'])) 
-                with open(outpath,'w') as fi:
-                    json.dump(cleaned_dict,fi)
+            # writing out cleaned version
+            outpath = os.path.join(post_path, '{}.xml.json'.format(row['pmcid'])) 
+            with open(outpath,'w') as fi:
+                json.dump(cleaned_dict,fi)
 
-                if not write_head:
-                    w.writerow(cleaned_dict.keys())
-                    write_head = True
-                
-                w.writerow(cleaned_dict.values())
-                pmc_files+=1
+            if not write_head:
+                w.writerow(cleaned_dict.keys())
+                write_head = True
+            
+            w.writerow(cleaned_dict.values())
+            pmc_files+=1
                    
     print('After preprocessing - total with no path: \t{}'.format(no_path_counter))
     print('After preprocessing - total saved: \t{}'.format(pmc_files)) 
