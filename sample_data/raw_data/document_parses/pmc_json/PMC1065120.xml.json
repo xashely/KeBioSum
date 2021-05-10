@@ -1,0 +1,1265 @@
+{
+    "paper_id": "PMC1065120",
+    "metadata": {
+        "title": "Scanning the horizon: emerging hospital-wide technologies and their impact on critical care",
+        "authors": [
+            {
+                "first": "Ganesh",
+                "middle": [],
+                "last": "Suntharalingam",
+                "suffix": "",
+                "email": "ganesh.suntharalingam@nwlh.nhs.uk",
+                "affiliation": {}
+            },
+            {
+                "first": "Jonathan",
+                "middle": [],
+                "last": "Cousins",
+                "suffix": "",
+                "email": null,
+                "affiliation": {}
+            },
+            {
+                "first": "David",
+                "middle": [],
+                "last": "Gattas",
+                "suffix": "",
+                "email": null,
+                "affiliation": {}
+            },
+            {
+                "first": "Martin",
+                "middle": [],
+                "last": "Chapman",
+                "suffix": "",
+                "email": null,
+                "affiliation": {}
+            }
+        ]
+    },
+    "body_text": [
+        {
+            "text": "This series of articles provides regular surveillance of new technologies which may impact on critical care. Several countries have developed national horizon scanning systems to identify and monitor new health technologies. There is variation in how these centres gather information, but a consistent set of high priority sources has been identified [1]. For the purposes of this article, the outputs of major health technology assessment centres, national regulatory authorities, and recognized scientific news sources (Table 1) were systematically searched for developments relevant to acute and critical care. This was combined with a manual medical literature search, along key editorial themes subjectively selected for this issue.",
+            "cite_spans": [
+                {
+                    "start": 352,
+                    "end": 353,
+                    "mention": "1",
+                    "ref_id": "BIBREF0"
+                }
+            ],
+            "section": "Introduction",
+            "ref_spans": [
+                {
+                    "start": 528,
+                    "end": 529,
+                    "mention": "1",
+                    "ref_id": "TABREF0"
+                }
+            ]
+        },
+        {
+            "text": "Point-of-care testing is a major emerging theme throughout the health sector, encompassing both new diagnoses and monitoring of known diseases and their treatment. Areas of research range from the potentially lucrative markets for outpatient, 'office'-based and patient self-testing, through to in-hospital diagnostics, which include both rapid access analysis of traditionally laboratory bound diagnostics and direct patient imaging. Both aspects are particularly relevant to critical care clinicians, who rely on time sensitive diagnosis and treatment in a hyper-acute setting. An example of bedside imaging in cardiac assessment has already been cited in the first article of the present series [2]. Sample analysis, meanwhile, is rapidly developing to encompass bedside biochemical markers, physiological homeostasis monitoring, and novel ultra-rapid forms of infectious disease diagnosis.",
+            "cite_spans": [
+                {
+                    "start": 699,
+                    "end": 700,
+                    "mention": "2",
+                    "ref_id": "BIBREF11"
+                }
+            ],
+            "section": "Point-of-care diagnostics and ultra-rapid laboratory testing",
+            "ref_spans": []
+        },
+        {
+            "text": "B-type natriuretic peptide can be a rapid and effective marker of ventricular strain and heart failure [3], and can now be measured using a point-of-care diagnostic panel (Triage BNP Test; Biosite Inc., San Diego, CA, USA). Similar current and forthcoming technologies include rapid access D-dimer assays for diagnosis of pulmonary embolism as part of a structured point-of-care algorithm [4] and unpublished early developments in stroke diagnostics. Validation and clinical trials of these technologies have taken place primarily in the emergency department setting, but heart failure, cerebrovascular accident and pulmonary embolism are all of added significance in the intensive care unit (ICU) as both primary and acquired conditions. Rapid bedside diagnosis of such conditions with minimal need for intrahospital transport may be of great potential benefit to intensivists.",
+            "cite_spans": [
+                {
+                    "start": 104,
+                    "end": 105,
+                    "mention": "3",
+                    "ref_id": "BIBREF15"
+                },
+                {
+                    "start": 390,
+                    "end": 391,
+                    "mention": "4",
+                    "ref_id": "BIBREF16"
+                }
+            ],
+            "section": "Point-of-care diagnostics and ultra-rapid laboratory testing",
+            "ref_spans": []
+        },
+        {
+            "text": "The importance of tight glucose control in sepsis is becoming well established [5], although work continues on refining the target range, with a study of 4,000 patients now in progress (Normoglycaemia in Intensive CarE study, ANZICS, commencing 2004). The first major prospective study of tight glucose control in sepsis introduced a novel algorithm requiring frequent measurements [6], which raised concerns over patient safety and resource utilization in general ICUs. Point-of-care 'stick' glucose testing is already prevalent, but technology now exists for continuous in vivo glucose monitoring, which, although intended for ambulatory use, could improve accuracy in the acute setting. A subcutaneous interstitial glucose sensor system (Continuous Glucose Monitoring System; Medtronic MiniMed, Inc., Northridge, CA, USA) was tested against clamp controlled hypoglycaemic and hyperglycaemic excursions in volunteers [7]; it was shown to be closely correlated with reference analyzer results (r2 = 0.91; P < 0.001) and highly responsive (half-time 4.0 \u00b1 1.0 min). Similarly, another device (Glucoday; A. Menarini Diagnostics, Florence, Italy), utilizing a 15\u2013100 \u03bcl micropump and a biosensor coupled with microdialysis to give a claimed response time of 2 min, will reach European markets this year. Such devices may be incorporated into manual algorithms, or they may potentially open the way to automated closed-loop glucose control.",
+            "cite_spans": [
+                {
+                    "start": 80,
+                    "end": 81,
+                    "mention": "5",
+                    "ref_id": "BIBREF17"
+                },
+                {
+                    "start": 383,
+                    "end": 384,
+                    "mention": "6",
+                    "ref_id": "BIBREF18"
+                },
+                {
+                    "start": 920,
+                    "end": 921,
+                    "mention": "7",
+                    "ref_id": "BIBREF19"
+                }
+            ],
+            "section": "Point-of-care diagnostics and ultra-rapid laboratory testing",
+            "ref_spans": []
+        },
+        {
+            "text": "Microbiological diagnosis within clinical laboratories has been advancing apace [8]. Polymerase chain reaction technology is well established, but progressive refinements have made possible the rapid and near real-time diagnosis of current, novel, or newly relevant pathogens, including HIV and SARS (severe acute respiratory syndrome). Techniques initially aimed at viruses because of their manageable size can now also be applied to bacteria and can be used for broad, simultaneous screening of multiple pathogens (Pneumoplex, Prodesse, Milwaukee, WI, USA). Further refinements in microarrays and microfluidics are anticipated to bring handhand and point-of-care systems into use in the near future.",
+            "cite_spans": [
+                {
+                    "start": 81,
+                    "end": 82,
+                    "mention": "8",
+                    "ref_id": "BIBREF20"
+                }
+            ],
+            "section": "Point-of-care diagnostics and ultra-rapid laboratory testing",
+            "ref_spans": []
+        },
+        {
+            "text": "Point-of-care and rapid laboratory based technologies will soon be able to elicit not only pathogen identity but also patterns of drug resistance. Developments include the use of adenylate kinase assay for accelerated laboratory based identification of drug-resistant bacteria, including methicillin-resistant Staphylococcus aureus and vancomycin-resistant enterococci (BacLite, Acolyte Biomedica, Salisbury, UK; ).",
+            "cite_spans": [],
+            "section": "Point-of-care diagnostics and ultra-rapid laboratory testing",
+            "ref_spans": []
+        },
+        {
+            "text": "Point-of-care testing within emergency and critical care areas is likely to develop rapidly in the next 5 years, but it will bring complications relating to quality control, medicolegal liability, certificated training for ICU and other nonlaboratory staff, increased cost, and territoriality issues.",
+            "cite_spans": [],
+            "section": "Point-of-care diagnostics and ultra-rapid laboratory testing",
+            "ref_spans": []
+        },
+        {
+            "text": "Finally, other bedside technologies that have recently been assessed include the use of handheld ultrasound devices to detect occult pneumothoraces, which have been shown to have a higher sensitivity than chest radiography (48.8% versus 20.9%) against a computed tomography standard [9]. Preliminary investigations suggest that handheld infrared pupillometry may be of clinical use in detecting midline cerebral shift in head injury patients [10].",
+            "cite_spans": [
+                {
+                    "start": 284,
+                    "end": 285,
+                    "mention": "9",
+                    "ref_id": "BIBREF21"
+                },
+                {
+                    "start": 443,
+                    "end": 445,
+                    "mention": "10",
+                    "ref_id": "BIBREF1"
+                }
+            ],
+            "section": "Point-of-care diagnostics and ultra-rapid laboratory testing",
+            "ref_spans": []
+        },
+        {
+            "text": "More procedure orientated assistance may become available from near-infrared technology, which has been piloted in a computerized bedside visualization device to aid venous cannulation [11]. Applicability to central venous cannulation has not been explored.",
+            "cite_spans": [
+                {
+                    "start": 186,
+                    "end": 188,
+                    "mention": "11",
+                    "ref_id": "BIBREF2"
+                }
+            ],
+            "section": "Point-of-care diagnostics and ultra-rapid laboratory testing",
+            "ref_spans": []
+        },
+        {
+            "text": "Acquired bloodstream infection (BSI) in the ICU is a serious complication. A study of ICU patients in Calgary [12] demonstrated crude death rates of 45% among patients with ICU-acquired BSI, as compared with 21% in those without (P < 0.0001).",
+            "cite_spans": [
+                {
+                    "start": 111,
+                    "end": 113,
+                    "mention": "12",
+                    "ref_id": "BIBREF3"
+                }
+            ],
+            "section": "Infection and sepsis",
+            "ref_spans": []
+        },
+        {
+            "text": "S aureus was isolated in 18% of cases in the study cited above. In this context, the development of an antistaphylococcal vaccine (StaphVAX; Nabi Pharmaceuticals, Boca Raton, FL, USA) represents a promising new health technology [13]. StaphVAX is currently in phase III trials for end-stage renal disease, but phase II trials are under way in postoperative and long hospital stay patients.",
+            "cite_spans": [
+                {
+                    "start": 230,
+                    "end": 232,
+                    "mention": "13",
+                    "ref_id": "BIBREF4"
+                }
+            ],
+            "section": "Infection and sepsis",
+            "ref_spans": []
+        },
+        {
+            "text": "Health technology assessment encompasses the best use of current health care devices as well as emerging technologies. Medical devices represent a prime infection hazard, and US Centers for Disease Control and Prevention guidelines [14] cover the safe use of intravascular devices to minimize acquired BSI. However more recent work demonstrates that the incidence of catheter-related BSI may be significantly reduced by adding a further device \u2013 needle-free, disinfectable connectors instead of three-way stopcocks \u2013 to the existing recommendations (0.7 infections/1000 days versus 5.0 infections/1000 days of catheter use; P < 0.03) [15].",
+            "cite_spans": [
+                {
+                    "start": 233,
+                    "end": 235,
+                    "mention": "14",
+                    "ref_id": "BIBREF5"
+                },
+                {
+                    "start": 635,
+                    "end": 637,
+                    "mention": "15",
+                    "ref_id": "BIBREF6"
+                }
+            ],
+            "section": "Infection and sepsis",
+            "ref_spans": []
+        },
+        {
+            "text": "Clinical management of sepsis is normally outside the remit of this section of the journal. However, it is noteworthy that new mechanical technology has been applied to the direct treatment of sepsis rather than to cardiovascular or tissue perfusion monitoring. A recent European multicentre open randomized phase II trial [16] investigated the use of the Endotoxin Adsorber system EN500 (Fresenius, Bad Homburg, Germany) in 145 patients with severe sepsis or septic shock due to suspected Gram-negative infection. The study demonstrated a trend toward reduced ICU stay and more rapid reduction in lipopolysaccharide levels, but it failed to show any difference in outcome.",
+            "cite_spans": [
+                {
+                    "start": 324,
+                    "end": 326,
+                    "mention": "16",
+                    "ref_id": "BIBREF7"
+                }
+            ],
+            "section": "Infection and sepsis",
+            "ref_spans": []
+        },
+        {
+            "text": "Certain developments in this sector are pertinent to critical care. ISABEL is a web-based, diagnostic decision support tool intended to provide diagnosis reminders and minimize missed diagnosis of critical disease processes. It is currently in use in several UK and overseas hospitals, with development supported by UK Department of Health funding followed by a commercial launch [17].",
+            "cite_spans": [
+                {
+                    "start": 381,
+                    "end": 383,
+                    "mention": "17",
+                    "ref_id": "BIBREF8"
+                }
+            ],
+            "section": "Information technology",
+            "ref_spans": []
+        },
+        {
+            "text": "The methodology is novel; a commercial artificial intelligence inference engine (Autonomy, Cambridge, UK) is used to extract and structure information from standard paediatric textbooks, and to generate diagnostic reminders from this knowledge base in response to unstructured free text clinical information. The software has been under development for some time and was reviewed in this journal in 2002 [18], but it is now being modified to encompass adult critical illness. A review of decision support systems by the UK National Institute of Clinical Excellence is pending.",
+            "cite_spans": [
+                {
+                    "start": 405,
+                    "end": 407,
+                    "mention": "18",
+                    "ref_id": "BIBREF9"
+                }
+            ],
+            "section": "Information technology",
+            "ref_spans": []
+        },
+        {
+            "text": "There are political and medicolegal implications. The ISABEL project was initially set up on a charitable basis by the parents of a child who survived a prolonged stay in paediatric intensive care after a missed diagnosis of necrotizing fasciitis. Although the system is as yet little known among adult intensivists, its technology is innovative and its proposed status as an 'online second opinion' may give it, together with similar expert systems, a powerful consumerist resonance with patients, carers and managers. The UK National Institute of Clinical Excellence findings should be monitored with interest by critical care providers.",
+            "cite_spans": [],
+            "section": "Information technology",
+            "ref_spans": []
+        },
+        {
+            "text": "More broadly, the UK health service is currently in the grip of a globally unprecedented large-scale National Project for IT (NPfIT) [19]. Structured as a series of private finance initiatives, this ambitious programme will ultimately see in a host of regionally standardized patient information systems, image storage, and networked monitoring and audit systems, linked to a national electronic patient record 'spine'. There are already concerns about timescale, feasibility and funding. Broader concern is growing about catastrophic and unpredictable 'emergent behaviour' in massively interconnected information technology (IT) systems, which are rapidly becoming too complex to test or accurately model [20]. Emergent behaviour in complex systems has already been explored in popular fictional media, in which predicted outcomes are spectacular but somewhat discouraging [21]; however, even without quite such an apocalyptic scenario, we may well see a rising incidence of total system failures due to unpredictable nonlinear behaviour \u2013 that is, major collapses triggered by small unforeseen causes. In the light of recent North American power outages and destructive computer failures in the UK social service and tax systems, emergent behavour must now be considered a clear and present threat to our increasingly networked health services and their supporting infrastructure. Levels of concern are such that the UK Government is funding a \u00a310 million research programme into IT complexity and catastrophic failures.",
+            "cite_spans": [
+                {
+                    "start": 134,
+                    "end": 136,
+                    "mention": "19",
+                    "ref_id": "BIBREF10"
+                },
+                {
+                    "start": 707,
+                    "end": 709,
+                    "mention": "20",
+                    "ref_id": "BIBREF12"
+                },
+                {
+                    "start": 875,
+                    "end": 877,
+                    "mention": "21",
+                    "ref_id": "BIBREF13"
+                }
+            ],
+            "section": "Information technology",
+            "ref_spans": []
+        },
+        {
+            "text": "How much of this is relevant to critical care or to other countries? First, ICUs provide complex, time-sensitive care to highly dependent patients. They therefore require the successful convergence of multiple hospital systems, which makes them uniquely vulnerable to the consequences of system failures, whether in diagnostics, supplies, information flow, or indeed electrical power. Second, the currently stated UK NPfIT vision is that all ICU subsystems, including networked monitoring, telemetry and audit systems, will eventually be integrated into NPfIT, with control over equipment selection and data collection handed to the regional private sector consortia and to national audit bodies. Clinician engagement and choice may not feature highly on the agenda, and there are clear concerns over the future of independent research and audit. Finally, clinicians from other countries would be well advised to follow such developments because the UK is not unique in its desire to radically modernize and standardize health IT, starting with a drive toward electronic patient records. In April 2004, President Bush issued an executive order calling for US national implementation of electronic medical records within 10 years, from a current baseline of 19% implementation. In a series of presidential speeches he went on to further define health care objectives substantially similar to the UK NPfIT agenda [22].",
+            "cite_spans": [
+                {
+                    "start": 1412,
+                    "end": 1414,
+                    "mention": "22",
+                    "ref_id": "BIBREF14"
+                }
+            ],
+            "section": "Information technology",
+            "ref_spans": []
+        },
+        {
+            "text": "Therefore, this represents another area in which political and technological developments outside the ICU may have a direct impact on clinical practice and patient safety, and intensivists are strongly recommended to consult early and engage with those driving their local and national health economy.",
+            "cite_spans": [],
+            "section": "Information technology",
+            "ref_spans": []
+        },
+        {
+            "text": "A variety of emerging technologies are examined here. Very few of these are designed or marketed to be specific to intensive care, and few are traditional 'devices' that can be physically handled or attached to a patient. However, critical care is a distillation of acute hospital practice, and any health care technology that has an impact on diagnosis, monitoring, and management of acute conditions will be of heightened importance in the clinical pressure cooker of intensive care. Point-of-care testing, accelerated microbiological diagnostics, decision support systems and networked IT systems are all key developments that will exert an impact on future critical care practice.",
+            "cite_spans": [],
+            "section": "Conclusion",
+            "ref_spans": []
+        },
+        {
+            "text": "BSI = bloodstream infection; ICU = intensive care unit; IT = information technology.",
+            "cite_spans": [],
+            "section": "Abbreviations",
+            "ref_spans": []
+        },
+        {
+            "text": "The author(s) declare that they have no competing interests.",
+            "cite_spans": [],
+            "section": "Competing interests",
+            "ref_spans": []
+        }
+    ],
+    "ref_entries": {
+        "TABREF0": {
+            "text": "Table 1: Agencies and information scources scanned for health technology assessment related data (2004)\n",
+            "type": "table"
+        }
+    },
+    "back_matter": [],
+    "bib_entries": {
+        "BIBREF0": {
+            "title": "Use of the Internet in scanning the horizon for new and emerging health technologies: a survey of agencies involved in horizon scanning",
+            "authors": [
+                {
+                    "first": "K",
+                    "middle": [],
+                    "last": "Douw",
+                    "suffix": ""
+                },
+                {
+                    "first": "H",
+                    "middle": [],
+                    "last": "Vondeling",
+                    "suffix": ""
+                },
+                {
+                    "first": "D",
+                    "middle": [],
+                    "last": "Eskildsen",
+                    "suffix": ""
+                },
+                {
+                    "first": "S",
+                    "middle": [],
+                    "last": "Simpson",
+                    "suffix": ""
+                }
+            ],
+            "year": 2003,
+            "venue": "J Med Internet Res",
+            "volume": "5",
+            "issn": "",
+            "pages": null,
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF1": {
+            "title": "Quantitative pupillometry, a new technology: normative data and preliminary observations in patients with acute head injury.Technical note",
+            "authors": [
+                {
+                    "first": "WR",
+                    "middle": [],
+                    "last": "Taylor",
+                    "suffix": ""
+                },
+                {
+                    "first": "JW",
+                    "middle": [],
+                    "last": "Chen",
+                    "suffix": ""
+                },
+                {
+                    "first": "H",
+                    "middle": [],
+                    "last": "Meltzer",
+                    "suffix": ""
+                },
+                {
+                    "first": "TA",
+                    "middle": [],
+                    "last": "Gennarelli",
+                    "suffix": ""
+                },
+                {
+                    "first": "C",
+                    "middle": [],
+                    "last": "Kelbch",
+                    "suffix": ""
+                },
+                {
+                    "first": "S",
+                    "middle": [],
+                    "last": "Knowlton",
+                    "suffix": ""
+                },
+                {
+                    "first": "J",
+                    "middle": [],
+                    "last": "Richardson",
+                    "suffix": ""
+                },
+                {
+                    "first": "MJ",
+                    "middle": [],
+                    "last": "Lutch",
+                    "suffix": ""
+                },
+                {
+                    "first": "A",
+                    "middle": [],
+                    "last": "Farin",
+                    "suffix": ""
+                },
+                {
+                    "first": "KN",
+                    "middle": [],
+                    "last": "Hults",
+                    "suffix": ""
+                }
+            ],
+            "year": 2003,
+            "venue": "J Neurosurg",
+            "volume": "98",
+            "issn": "",
+            "pages": "205-213",
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF2": {
+            "title": "Vein camera keeps injections on target",
+            "authors": [
+                {
+                    "first": "C",
+                    "middle": [],
+                    "last": "Biever",
+                    "suffix": ""
+                }
+            ],
+            "year": null,
+            "venue": "New Scientist",
+            "volume": "",
+            "issn": "",
+            "pages": null,
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF3": {
+            "title": "Intensive-care-unit-acquired bloodstream infections in a regional critically ill population",
+            "authors": [
+                {
+                    "first": "KB",
+                    "middle": [],
+                    "last": "Laupland",
+                    "suffix": ""
+                },
+                {
+                    "first": "AW",
+                    "middle": [],
+                    "last": "Kirkpatrick",
+                    "suffix": ""
+                },
+                {
+                    "first": "DL",
+                    "middle": [],
+                    "last": "Church",
+                    "suffix": ""
+                },
+                {
+                    "first": "T",
+                    "middle": [],
+                    "last": "Ross",
+                    "suffix": ""
+                },
+                {
+                    "first": "DB",
+                    "middle": [],
+                    "last": "Gregson",
+                    "suffix": ""
+                }
+            ],
+            "year": 2004,
+            "venue": "J Hosp Infect",
+            "volume": "58",
+            "issn": "",
+            "pages": "137-145",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.jhin.2004.06.007"
+                ]
+            }
+        },
+        "BIBREF4": {
+            "title": "",
+            "authors": [],
+            "year": 2004,
+            "venue": "New and Emerging Technology Briefing: StaphVAX for the Prevention of Staphylococcus aureus Infections in End Stage Renal Disease",
+            "volume": "",
+            "issn": "",
+            "pages": null,
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF5": {
+            "title": "Guidelines for the prevention of intravascular catheter-related infections",
+            "authors": [
+                {
+                    "first": "NP",
+                    "middle": [],
+                    "last": "O'Grady",
+                    "suffix": ""
+                },
+                {
+                    "first": "M",
+                    "middle": [],
+                    "last": "Alexander",
+                    "suffix": ""
+                },
+                {
+                    "first": "EP",
+                    "middle": [],
+                    "last": "Dellinger",
+                    "suffix": ""
+                },
+                {
+                    "first": "JL",
+                    "middle": [],
+                    "last": "Gerberding",
+                    "suffix": ""
+                },
+                {
+                    "first": "SO",
+                    "middle": [],
+                    "last": "Heard",
+                    "suffix": ""
+                },
+                {
+                    "first": "DG",
+                    "middle": [],
+                    "last": "Maki",
+                    "suffix": ""
+                },
+                {
+                    "first": "H",
+                    "middle": [],
+                    "last": "Masur",
+                    "suffix": ""
+                },
+                {
+                    "first": "RD",
+                    "middle": [],
+                    "last": "McCormick",
+                    "suffix": ""
+                },
+                {
+                    "first": "LA",
+                    "middle": [],
+                    "last": "Mermel",
+                    "suffix": ""
+                },
+                {
+                    "first": "ML",
+                    "middle": [],
+                    "last": "Pearson",
+                    "suffix": ""
+                }
+            ],
+            "year": 2002,
+            "venue": "MMWR Recomm Rep",
+            "volume": "51",
+            "issn": "",
+            "pages": "1-26",
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF6": {
+            "title": "Prevention of catheter-related bloodstream infection in critically ill patients using a disinfectable, needle-free connector: a randomized controlled trial",
+            "authors": [
+                {
+                    "first": "JC",
+                    "middle": [],
+                    "last": "Yebenes",
+                    "suffix": ""
+                },
+                {
+                    "first": "L",
+                    "middle": [],
+                    "last": "Vidaur",
+                    "suffix": ""
+                },
+                {
+                    "first": "M",
+                    "middle": [],
+                    "last": "Serra-Prat",
+                    "suffix": ""
+                },
+                {
+                    "first": "JM",
+                    "middle": [],
+                    "last": "Sirvent",
+                    "suffix": ""
+                },
+                {
+                    "first": "J",
+                    "middle": [],
+                    "last": "Batlle",
+                    "suffix": ""
+                },
+                {
+                    "first": "M",
+                    "middle": [],
+                    "last": "Motje",
+                    "suffix": ""
+                },
+                {
+                    "first": "A",
+                    "middle": [],
+                    "last": "Bonet",
+                    "suffix": ""
+                },
+                {
+                    "first": "M",
+                    "middle": [],
+                    "last": "Palomar",
+                    "suffix": ""
+                }
+            ],
+            "year": 2004,
+            "venue": "Am J Infect Control",
+            "volume": "32",
+            "issn": "",
+            "pages": "291-295",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.ajic.2003.12.004"
+                ]
+            }
+        },
+        "BIBREF7": {
+            "title": "Open randomized phase II trial of an extracorporeal endotoxin adsorber in suspected Gram-negative sepsis",
+            "authors": [
+                {
+                    "first": "K",
+                    "middle": [],
+                    "last": "Reinhart",
+                    "suffix": ""
+                },
+                {
+                    "first": "A",
+                    "middle": [],
+                    "last": "Meier-Hellmann",
+                    "suffix": ""
+                },
+                {
+                    "first": "R",
+                    "middle": [],
+                    "last": "Beale",
+                    "suffix": ""
+                },
+                {
+                    "first": "H",
+                    "middle": [],
+                    "last": "Forst",
+                    "suffix": ""
+                },
+                {
+                    "first": "D",
+                    "middle": [],
+                    "last": "Boehm",
+                    "suffix": ""
+                },
+                {
+                    "first": "S",
+                    "middle": [],
+                    "last": "Willatts",
+                    "suffix": ""
+                },
+                {
+                    "first": "KF",
+                    "middle": [],
+                    "last": "Rothe",
+                    "suffix": ""
+                },
+                {
+                    "first": "M",
+                    "middle": [],
+                    "last": "Adolph",
+                    "suffix": ""
+                },
+                {
+                    "first": "JE",
+                    "middle": [],
+                    "last": "Hoffmann",
+                    "suffix": ""
+                },
+                {
+                    "first": "M",
+                    "middle": [],
+                    "last": "Boehme",
+                    "suffix": ""
+                }
+            ],
+            "year": 2004,
+            "venue": "Crit Care Med",
+            "volume": "32",
+            "issn": "",
+            "pages": "1662-1668",
+            "other_ids": {
+                "DOI": [
+                    "10.1097/01.CCM.0000132902.54925.B5"
+                ]
+            }
+        },
+        "BIBREF8": {
+            "title": "Isabel homepage",
+            "authors": [],
+            "year": null,
+            "venue": "",
+            "volume": "",
+            "issn": "",
+            "pages": null,
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF9": {
+            "title": "Isabel",
+            "authors": [
+                {
+                    "first": "NJ",
+                    "middle": [],
+                    "last": "Thomas",
+                    "suffix": ""
+                }
+            ],
+            "year": 2002,
+            "venue": "Crit Care",
+            "volume": "7",
+            "issn": "",
+            "pages": "99-100",
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF10": {
+            "title": "National Programme for IT (NPfIT) in the NHS homepage",
+            "authors": [],
+            "year": null,
+            "venue": "",
+            "volume": "",
+            "issn": "",
+            "pages": null,
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF11": {
+            "title": "Innovations in technology for critical care medicine",
+            "authors": [
+                {
+                    "first": "M",
+                    "middle": [],
+                    "last": "Chapman",
+                    "suffix": ""
+                },
+                {
+                    "first": "D",
+                    "middle": [],
+                    "last": "Gattas",
+                    "suffix": ""
+                },
+                {
+                    "first": "G",
+                    "middle": [],
+                    "last": "Suntharalingam",
+                    "suffix": ""
+                }
+            ],
+            "year": 2004,
+            "venue": "Crit Care",
+            "volume": "8",
+            "issn": "",
+            "pages": "74-76",
+            "other_ids": {
+                "DOI": [
+                    "10.1186/cc2843"
+                ]
+            }
+        },
+        "BIBREF12": {
+            "title": "Sprawling systems teeter on IT chaos",
+            "authors": [
+                {
+                    "first": "D",
+                    "middle": [],
+                    "last": "Graham-Rowe",
+                    "suffix": ""
+                }
+            ],
+            "year": null,
+            "venue": "New Scientist",
+            "volume": "",
+            "issn": "",
+            "pages": null,
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF13": {
+            "title": "",
+            "authors": [
+                {
+                    "first": "J",
+                    "middle": [],
+                    "last": "Mostow",
+                    "suffix": ""
+                }
+            ],
+            "year": 2003,
+            "venue": "Terminator 3: Rise of the Machines",
+            "volume": "",
+            "issn": "",
+            "pages": null,
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF14": {
+            "title": "",
+            "authors": [],
+            "year": null,
+            "venue": "President Bush Touts Benefits of Health Care Information Technology",
+            "volume": "",
+            "issn": "",
+            "pages": null,
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF15": {
+            "title": "Utility of B-type natriuretic peptide in the diagnosis of congestive heart failure in an urgent-care setting",
+            "authors": [
+                {
+                    "first": "Q",
+                    "middle": [],
+                    "last": "Dao",
+                    "suffix": ""
+                },
+                {
+                    "first": "P",
+                    "middle": [],
+                    "last": "Krishnaswamy",
+                    "suffix": ""
+                },
+                {
+                    "first": "R",
+                    "middle": [],
+                    "last": "Kazanegra",
+                    "suffix": ""
+                },
+                {
+                    "first": "A",
+                    "middle": [],
+                    "last": "Harrison",
+                    "suffix": ""
+                },
+                {
+                    "first": "R",
+                    "middle": [],
+                    "last": "Amirnovin",
+                    "suffix": ""
+                },
+                {
+                    "first": "L",
+                    "middle": [],
+                    "last": "Lenert",
+                    "suffix": ""
+                },
+                {
+                    "first": "P",
+                    "middle": [],
+                    "last": "Clopton",
+                    "suffix": ""
+                },
+                {
+                    "first": "J",
+                    "middle": [],
+                    "last": "Alberto",
+                    "suffix": ""
+                },
+                {
+                    "first": "P",
+                    "middle": [],
+                    "last": "Hlavin",
+                    "suffix": ""
+                },
+                {
+                    "first": "AS",
+                    "middle": [],
+                    "last": "Maisel",
+                    "suffix": ""
+                }
+            ],
+            "year": 2001,
+            "venue": "J Am Coll Cardiol",
+            "volume": "37",
+            "issn": "",
+            "pages": "379-385",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/S0735-1097(00)01156-6"
+                ]
+            }
+        },
+        "BIBREF16": {
+            "title": "Impact of a rapid rule-out protocol for pulmonary embolism on the rate of screening, missed cases, and pulmonary vascular imaging in an urban US emergency department",
+            "authors": [
+                {
+                    "first": "JA",
+                    "middle": [],
+                    "last": "Kline",
+                    "suffix": ""
+                },
+                {
+                    "first": "WB",
+                    "middle": [],
+                    "last": "Webb",
+                    "suffix": ""
+                },
+                {
+                    "first": "AE",
+                    "middle": [],
+                    "last": "Jones",
+                    "suffix": ""
+                },
+                {
+                    "first": "J",
+                    "middle": [],
+                    "last": "Hernandez-Nino",
+                    "suffix": ""
+                }
+            ],
+            "year": 2004,
+            "venue": "Ann Emerg Med",
+            "volume": "44",
+            "issn": "",
+            "pages": "490-502",
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF17": {
+            "title": "Surviving sepsis campaign guidelines for management of severe sepsis and septic shock",
+            "authors": [
+                {
+                    "first": "RP",
+                    "middle": [],
+                    "last": "Dellinger",
+                    "suffix": ""
+                },
+                {
+                    "first": "JM",
+                    "middle": [],
+                    "last": "Carlet",
+                    "suffix": ""
+                },
+                {
+                    "first": "H",
+                    "middle": [],
+                    "last": "Masur",
+                    "suffix": ""
+                },
+                {
+                    "first": "H",
+                    "middle": [],
+                    "last": "Gerlach",
+                    "suffix": ""
+                },
+                {
+                    "first": "T",
+                    "middle": [],
+                    "last": "Calandra",
+                    "suffix": ""
+                },
+                {
+                    "first": "J",
+                    "middle": [],
+                    "last": "Cohen",
+                    "suffix": ""
+                },
+                {
+                    "first": "J",
+                    "middle": [],
+                    "last": "Gea-Banacloche",
+                    "suffix": ""
+                },
+                {
+                    "first": "D",
+                    "middle": [],
+                    "last": "Keh",
+                    "suffix": ""
+                },
+                {
+                    "first": "JC",
+                    "middle": [],
+                    "last": "Marshall",
+                    "suffix": ""
+                },
+                {
+                    "first": "MM",
+                    "middle": [],
+                    "last": "Parker",
+                    "suffix": ""
+                }
+            ],
+            "year": 2004,
+            "venue": "Crit Care Med",
+            "volume": "32",
+            "issn": "",
+            "pages": "858-873",
+            "other_ids": {
+                "DOI": [
+                    "10.1097/01.CCM.0000117317.18092.E4"
+                ]
+            }
+        },
+        "BIBREF18": {
+            "title": "Intensive insulin therapy in critically ill patients",
+            "authors": [
+                {
+                    "first": "G",
+                    "middle": [],
+                    "last": "van den Berghe",
+                    "suffix": ""
+                },
+                {
+                    "first": "P",
+                    "middle": [],
+                    "last": "Wouters",
+                    "suffix": ""
+                },
+                {
+                    "first": "F",
+                    "middle": [],
+                    "last": "Weekers",
+                    "suffix": ""
+                },
+                {
+                    "first": "C",
+                    "middle": [],
+                    "last": "Verwaest",
+                    "suffix": ""
+                },
+                {
+                    "first": "F",
+                    "middle": [],
+                    "last": "Bruyninckx",
+                    "suffix": ""
+                },
+                {
+                    "first": "M",
+                    "middle": [],
+                    "last": "Schetz",
+                    "suffix": ""
+                },
+                {
+                    "first": "D",
+                    "middle": [],
+                    "last": "Vlasselaers",
+                    "suffix": ""
+                },
+                {
+                    "first": "P",
+                    "middle": [],
+                    "last": "Ferdinande",
+                    "suffix": ""
+                },
+                {
+                    "first": "P",
+                    "middle": [],
+                    "last": "Lauwers",
+                    "suffix": ""
+                },
+                {
+                    "first": "R",
+                    "middle": [],
+                    "last": "Bouillon",
+                    "suffix": ""
+                }
+            ],
+            "year": 2001,
+            "venue": "N Engl J Med",
+            "volume": "345",
+            "issn": "",
+            "pages": "1359-1367",
+            "other_ids": {
+                "DOI": [
+                    "10.1056/NEJMoa011300"
+                ]
+            }
+        },
+        "BIBREF19": {
+            "title": "Determination of plasma glucose during rapid glucose excursions with a subcutaneous glucose sensor",
+            "authors": [
+                {
+                    "first": "GM",
+                    "middle": [],
+                    "last": "Steil",
+                    "suffix": ""
+                },
+                {
+                    "first": "K",
+                    "middle": [],
+                    "last": "Rebrin",
+                    "suffix": ""
+                },
+                {
+                    "first": "J",
+                    "middle": [],
+                    "last": "Mastrototaro",
+                    "suffix": ""
+                },
+                {
+                    "first": "B",
+                    "middle": [],
+                    "last": "Bernaba",
+                    "suffix": ""
+                },
+                {
+                    "first": "MF",
+                    "middle": [],
+                    "last": "Saad",
+                    "suffix": ""
+                }
+            ],
+            "year": 2003,
+            "venue": "Diabetes Technol Ther",
+            "volume": "5",
+            "issn": "",
+            "pages": "27-31",
+            "other_ids": {
+                "DOI": [
+                    "10.1089/152091503763816436"
+                ]
+            }
+        },
+        "BIBREF20": {
+            "title": "New microbiology tools for public health and their implications",
+            "authors": [
+                {
+                    "first": "BH",
+                    "middle": [],
+                    "last": "Robertson",
+                    "suffix": ""
+                },
+                {
+                    "first": "JK",
+                    "middle": [],
+                    "last": "Nicholson",
+                    "suffix": ""
+                }
+            ],
+            "year": 2005,
+            "venue": "Annu Rev Public Health",
+            "volume": "26",
+            "issn": "",
+            "pages": "07.1-07.22",
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF21": {
+            "title": "Hand-held thoracic sonography for detecting post-traumatic pneumothoraces: the Extended Focused Assessment with Sonography for Trauma (EFAST)",
+            "authors": [
+                {
+                    "first": "AW",
+                    "middle": [],
+                    "last": "Kirkpatrick",
+                    "suffix": ""
+                },
+                {
+                    "first": "M",
+                    "middle": [],
+                    "last": "Sirois",
+                    "suffix": ""
+                },
+                {
+                    "first": "KB",
+                    "middle": [],
+                    "last": "Laupland",
+                    "suffix": ""
+                },
+                {
+                    "first": "D",
+                    "middle": [],
+                    "last": "Liu",
+                    "suffix": ""
+                },
+                {
+                    "first": "K",
+                    "middle": [],
+                    "last": "Rowan",
+                    "suffix": ""
+                },
+                {
+                    "first": "CG",
+                    "middle": [],
+                    "last": "Ball",
+                    "suffix": ""
+                },
+                {
+                    "first": "SM",
+                    "middle": [],
+                    "last": "Hameed",
+                    "suffix": ""
+                },
+                {
+                    "first": "R",
+                    "middle": [],
+                    "last": "Brown",
+                    "suffix": ""
+                },
+                {
+                    "first": "R",
+                    "middle": [],
+                    "last": "Simons",
+                    "suffix": ""
+                },
+                {
+                    "first": "SA",
+                    "middle": [],
+                    "last": "Dulchavsky",
+                    "suffix": ""
+                }
+            ],
+            "year": 2004,
+            "venue": "J Trauma",
+            "volume": "57",
+            "issn": "",
+            "pages": "288-295",
+            "other_ids": {
+                "DOI": []
+            }
+        }
+    }
+}

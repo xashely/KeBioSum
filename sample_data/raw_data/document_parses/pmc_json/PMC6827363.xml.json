@@ -1,0 +1,3338 @@
+{
+    "paper_id": "PMC6827363",
+    "metadata": {
+        "title": "Using Non-Invasive Monitoring Technologies to Capture Behavioural, Physiological and Health Responses of Dairy Calves to Different Nutritional Regimes during the First Ten Weeks of Life",
+        "authors": [
+            {
+                "first": "Gillian",
+                "middle": [],
+                "last": "Scoley",
+                "suffix": "",
+                "email": null,
+                "affiliation": {}
+            },
+            {
+                "first": "Alan",
+                "middle": [],
+                "last": "Gordon",
+                "suffix": "",
+                "email": null,
+                "affiliation": {}
+            },
+            {
+                "first": "Steven",
+                "middle": [],
+                "last": "Morrison",
+                "suffix": "",
+                "email": null,
+                "affiliation": {}
+            }
+        ]
+    },
+    "body_text": [
+        {
+            "text": "Traditional calf feeding programs have involved providing calves with restricted levels of milk or milk replacer (MR) as a means of encouraging starter intake and thus facilitating earlier weaning and rumen development [1]. However, restricted milk feeding programs have also been linked with low live weight gains [2] and increased abnormal non-nutritive feeding behaviours suggestive of a decrease in calf welfare [3]. In recent years there has been growing interest in providing calves with higher levels of MR, which has been positively associated with improved growth rates in early life [4], reduced age at first calving [5] and increased first lactation milk yield [1]. However, providing greater volumes of milk or MR can result in reduced starter feed intake prior to weaning, [6] which may impede rumen development [7]. Gradual weaning programs have previously been suggested as a means of encouraging starter intake in calves offered high levels of milk [8]. However, as reported by de Passille, et al. [9], calves fed higher milk levels may still display lower total DMI than those fed conventional levels of milk following complete milk withdrawal despite the adoption of a gradual weaning program, which could impact on overall calf performance and welfare in the post-weaning period. Recently, Imani, et al. [10] reviewed the varying effects of forage provision on calf intake and performance during the transition from a liquid to a solid feed diet. Although results of previous research have been inconclusive, both Castells, et al. [11] and Khan, et al. [12] reported that forage provision improved feed intake and was beneficial for rumen development in calves offered conventional and increased levels of milk, respectively. Provision of forage has been shown to affect lying and feeding behaviour in calves offered high levels of MR [13]. However, little is known about the interactive effects of milk replacer level and forage inclusion on calf activity, which could have a potential effect on calf welfare.",
+            "cite_spans": [
+                {
+                    "start": 220,
+                    "end": 221,
+                    "mention": "1",
+                    "ref_id": "BIBREF0"
+                },
+                {
+                    "start": 316,
+                    "end": 317,
+                    "mention": "2",
+                    "ref_id": "BIBREF11"
+                },
+                {
+                    "start": 417,
+                    "end": 418,
+                    "mention": "3",
+                    "ref_id": "BIBREF22"
+                },
+                {
+                    "start": 594,
+                    "end": 595,
+                    "mention": "4",
+                    "ref_id": "BIBREF33"
+                },
+                {
+                    "start": 628,
+                    "end": 629,
+                    "mention": "5",
+                    "ref_id": "BIBREF44"
+                },
+                {
+                    "start": 673,
+                    "end": 674,
+                    "mention": "1",
+                    "ref_id": "BIBREF0"
+                },
+                {
+                    "start": 787,
+                    "end": 788,
+                    "mention": "6",
+                    "ref_id": "BIBREF53"
+                },
+                {
+                    "start": 826,
+                    "end": 827,
+                    "mention": "7",
+                    "ref_id": "BIBREF54"
+                },
+                {
+                    "start": 966,
+                    "end": 967,
+                    "mention": "8",
+                    "ref_id": "BIBREF55"
+                },
+                {
+                    "start": 1015,
+                    "end": 1016,
+                    "mention": "9",
+                    "ref_id": "BIBREF56"
+                },
+                {
+                    "start": 1324,
+                    "end": 1326,
+                    "mention": "10",
+                    "ref_id": "BIBREF1"
+                },
+                {
+                    "start": 1551,
+                    "end": 1553,
+                    "mention": "11",
+                    "ref_id": "BIBREF2"
+                },
+                {
+                    "start": 1573,
+                    "end": 1575,
+                    "mention": "12",
+                    "ref_id": "BIBREF3"
+                },
+                {
+                    "start": 1855,
+                    "end": 1857,
+                    "mention": "13",
+                    "ref_id": "BIBREF4"
+                }
+            ],
+            "section": "1. Introduction",
+            "ref_spans": []
+        },
+        {
+            "text": "Insufficient nutrition in the pre-wean period can impact negatively on immune function and increase the potential for susceptibility to infectious disease [14], it could be expected that providing increased levels of MR would result in fewer incidences of ill-health. However, results of previous research have been varied. Several authors have reported either improvements or no differences in health scores of calves offered increased levels of MR [4,15,16], whereas Quigley, et al. [17] reported increased incidence of diarrhoea and number of veterinary treatments in calves fed greater volumes of MR. Previous research has suggested that ill-health in early calf-hood can impact negatively on future performance [18] and that morbidity and mortality from disease is increased in the presence of physical and psychological stressors [19]. As indicated by Khan, et al. [20], neonatal calf feeding regime can have an extensive impact on performance, behaviour, health and welfare. Previous research has also provided evidence of long-term consistencies in individual differences of behavioural and physiological response to acute stressors [21], this suggesting that experiences in early calfhood could impact development of future coping strategies. As such, there is a need to examine if nutritional regime can impact on behavioural and physiological responses to management strategies commonly encountered in the first months of life.",
+            "cite_spans": [
+                {
+                    "start": 156,
+                    "end": 158,
+                    "mention": "14",
+                    "ref_id": "BIBREF5"
+                },
+                {
+                    "start": 451,
+                    "end": 452,
+                    "mention": "4",
+                    "ref_id": "BIBREF33"
+                },
+                {
+                    "start": 453,
+                    "end": 455,
+                    "mention": "15",
+                    "ref_id": "BIBREF6"
+                },
+                {
+                    "start": 456,
+                    "end": 458,
+                    "mention": "16",
+                    "ref_id": "BIBREF7"
+                },
+                {
+                    "start": 486,
+                    "end": 488,
+                    "mention": "17",
+                    "ref_id": "BIBREF8"
+                },
+                {
+                    "start": 717,
+                    "end": 719,
+                    "mention": "18",
+                    "ref_id": "BIBREF9"
+                },
+                {
+                    "start": 837,
+                    "end": 839,
+                    "mention": "19",
+                    "ref_id": "BIBREF10"
+                },
+                {
+                    "start": 872,
+                    "end": 874,
+                    "mention": "20",
+                    "ref_id": "BIBREF12"
+                },
+                {
+                    "start": 1142,
+                    "end": 1144,
+                    "mention": "21",
+                    "ref_id": "BIBREF13"
+                }
+            ],
+            "section": "1. Introduction",
+            "ref_spans": []
+        },
+        {
+            "text": "Recently, Peli et al [22] reported on the neurochemical effects of stress related to intake of different diets in veal calves. The study described an increase in oxytocin production in veal calves offered either a MR only or MR plus concentrate diet (Control diet) when compared to calves offered a diet of MR, concentrate and hay. These results suggest that stress related to different diets can impact on measureable immunoreactive parameters and highlights the need for further examination of how nutritional regimes can impact on calf health and welfare. However, traditional methods of monitoring calf behaviour and reaction to stressors can be labour intensive (e.g., visual observations) and invasive (e.g., blood sampling, immunohistochemical methods). Recently there has been increasing interest in employing the use of remote-sensing technologies such as activity and heart rate monitors which could allow the non-invasive measurement of behavioural and physiological responses to stressors on an individual basis and provide a more comprehensive indicator of calf wellbeing [23,24]. Within this study the primary objective was to examine behavioural and physiological responses of calves to milk feeding level using remote monitoring technologies applicable to on-farm use. It was hypothesized that reduction in MR feeding frequency and weaning would likely be considered a stressor, particularly in those calves offered higher levels of milk replacer, and would provoke a measureable behavioural and physiological response. A further objective was to examine the impact of forage inclusion at different ages on calf activity and if there was an interactive effect with MR feeding level. ",
+            "cite_spans": [
+                {
+                    "start": 22,
+                    "end": 24,
+                    "mention": "22",
+                    "ref_id": "BIBREF14"
+                },
+                {
+                    "start": 1086,
+                    "end": 1088,
+                    "mention": "23",
+                    "ref_id": "BIBREF15"
+                },
+                {
+                    "start": 1089,
+                    "end": 1091,
+                    "mention": "24",
+                    "ref_id": "BIBREF16"
+                }
+            ],
+            "section": "1. Introduction",
+            "ref_spans": []
+        },
+        {
+            "text": "Seventy-four Holstein Friesian calves (39 females and 35 males) born between 16th February and 11th April 2016 were allocated to the study following weighing at \u226412 h of age which was used as the birth weight (40.8 \u00b1 5.9 kg). All calves received 3 L colostrum via oesophageal feeding tube or teated bottle before transfer to the calf-rearing unit. Single point blood samples were taken via jugular venipuncture using 10 mL clot activated serum separation vacutainer tubes (BD, Plymouth, UK) at 24\u201336 h old to allow determination of calf immune status using the zinc sulphate turbidity (ZST) technique, as described by McEwan et al. [25]. All calves allocated to the study were determined to have a ZST value of >20 units, which is indicative of successful passive transfer of immunity [25]. ",
+            "cite_spans": [
+                {
+                    "start": 633,
+                    "end": 635,
+                    "mention": "25",
+                    "ref_id": "BIBREF17"
+                },
+                {
+                    "start": 786,
+                    "end": 788,
+                    "mention": "25",
+                    "ref_id": "BIBREF17"
+                }
+            ],
+            "section": "2.1. Animals ::: 2. Materials and Methods ",
+            "ref_spans": []
+        },
+        {
+            "text": "Calves were individually penned in order of birth and allocated to treatment in a 2 (milk replacer feeding level) \u00d7 4 (forage provision) factorial design (Table 1). Milk replacer levels provided were either high (HML) or conventional (CML) (Table 2). Forage sources were provided at four different stages over the experimental period, with treatments designated as: (i) chopped straw (~4 cm in length) offered between 14 and 70 days of age (CS14), (ii) chopped straw offered between 56 and 70 days of age (CS56), (iii) grass silage offered between from 56 days of age (GS56), and (iv) no forage provided in the pre-wean period (NF). No forage source was provided prior to the commencement of treatments. Calves from all treatments were provided with grass silage as the sole forage source from 71 days of age until the end of experiment at day 84. ",
+            "cite_spans": [],
+            "section": "2.2. Treatments and Experimental Design ::: 2. Materials and Methods ",
+            "ref_spans": [
+                {
+                    "start": 155,
+                    "end": 162,
+                    "mention": "Table 1",
+                    "ref_id": "TABREF0"
+                },
+                {
+                    "start": 241,
+                    "end": 248,
+                    "mention": "Table 2",
+                    "ref_id": "TABREF1"
+                }
+            ]
+        },
+        {
+            "text": "Individual pens (1m \u00d7 1.8m) were constructed using hurdles within two open ended concrete walled and floored housing blocks. A base layer of woodchip was added to the floor of each pen with sawdust bedding material added on top and replenished on a daily basis. Within these pens, calves had visual contact with all other calves within the housing block and nose-to-nose contact with calves from neighboring individual pens. Upon arrival to the calf rearing accommodation at \u226412 h of age all calves were fitted with jackets which remained on until calves reached 29 days of age. Calves remained in individual pens until the end of study at day 84.",
+            "cite_spans": [],
+            "section": "2.3. Housing, Feeding and Management  ::: 2. Materials and Methods ",
+            "ref_spans": []
+        },
+        {
+            "text": "Liquid diets were offered via a teated bucket twice a day on days 1 to 4. On days 1 to 3 each feed consisted of 2 L colostrum/transition milk, and on day 4 each 2L feed consisted of a mixture of half transition milk/half whey-based milk replacer. From 5 to 70 days of age, calves were offered milk replacer at a rate of 150g/L. Further details of milk replacer feeding regimes are provided in Table 2. Where calves were offered milk replacer 3 times daily, feedings occurred at 7:00\u20139:00 h a.m., 12:00\u201314:00 h p.m. and 16:00\u201318:00 h p.m. Where offered milk replacer twice or once daily the second or second and third feeds were removed respectively. Concentrate solid feed and fresh water were provided on an ad libitum basis from 5 days of age. Details of the chemical composition of feedstuffs offered throughout the study are reported in Table 3. Calves were vaccinated with Bovilis Bovipast RSP (MSD Animal Health, Milton Keynes, UK) at 2 weeks of age with a secondary dose given 4 weeks later at which point calves were also vaccinated with Bovilis IBR Marker Live (MSD Animal Health, Milton Keynes, UK). ",
+            "cite_spans": [],
+            "section": "2.3. Housing, Feeding and Management  ::: 2. Materials and Methods ",
+            "ref_spans": [
+                {
+                    "start": 393,
+                    "end": 400,
+                    "mention": "Table 2",
+                    "ref_id": "TABREF1"
+                },
+                {
+                    "start": 841,
+                    "end": 848,
+                    "mention": "Table 3",
+                    "ref_id": "TABREF2"
+                }
+            ]
+        },
+        {
+            "text": "Individual daily milk replacer and concentrate intakes were recorded on a daily basis from 5 days of age. Individual water intake was recorded 5 days/week from 5 days of age. Forage intake was recorded on a daily basis where applicable. Live weight was recorded at birth as well as weekly according to individual calf age between days 7 and 84 (Tru-Test Eziweigh 5, Auckland, New Zealand). These results will be reported elsewhere.",
+            "cite_spans": [],
+            "section": "2.4.1. Intakes and live weight ::: 2.4. Data Collection ::: 2. Materials and Methods ",
+            "ref_spans": []
+        },
+        {
+            "text": "Faecal consistency was qualitatively scored on a daily basis following morning feeding time using the scale of 1 = normal ",
+            "cite_spans": [],
+            "section": "2.4.2. Calf Health ::: 2.4. Data Collection ::: 2. Materials and Methods ",
+            "ref_spans": []
+        },
+        {
+            "text": "Consistency, 2 = slightly liquid consistency, 3 = moderately liquid and 4 = primarily liquid consistency [17]. A calf was recorded as having scour when the score was greater than two. Respiratory disease scoring was carried out on a daily basis using the University of Wisconsin-Madison method [26]. This involved scoring calves on three visual aspects including; eyes, ears, and nasal discharge, the presence or absence of a cough and rectal temperature. Core body temperature was taken using a digital rectal thermometer (Model FT09, Beurer UK Ltd., Golborne, UK) on a daily basis between 5 and 77 days of age. Each aspect received a score from 0 to 3, with 0 representing normal and 3 the most severely affected with the overall respiratory score derived from the cumulative score of each aspect. A cumulative respiratory score of \u22655 was considered to indicate a bovine respiratory disease complex event. Faecal and respiratory scoring was carried out by a trained technician on an individual basis. Cases of calf ill health were recorded and treated according to predefined protocols produced in consultation with a veterinarian. ",
+            "cite_spans": [
+                {
+                    "start": 106,
+                    "end": 108,
+                    "mention": "17",
+                    "ref_id": "BIBREF8"
+                },
+                {
+                    "start": 295,
+                    "end": 297,
+                    "mention": "26",
+                    "ref_id": "BIBREF18"
+                }
+            ],
+            "section": "2.4.2. Calf Health ::: 2.4. Data Collection ::: 2. Materials and Methods ",
+            "ref_spans": []
+        },
+        {
+            "text": "Thermal images of each calf were taken 2 h post AM feed 5 days/week between days 7 and 77. Images were taken by the same trained operator using a calibrated FLIR E8 camera (FLIR Systems UK, Kent, U.K.) and were of the right eye (plus a 1 cm area surrounding the eye) and the anus (plus a 1cm area surrounding the anus). Images were taken at a consistent distance (~0.5 m) and angle (~90\u00b0) whilst the calf was standing. For purposes of standardisation, images were taken within the individual pens prior to introduction of any potential stressors such as weighing or blood sampling. As calves quickly became habituated to the process, very limited handling from the camera operator was required. Images were processed using FLIR\u00ae software (FLIR Systems UK, Kent, U.K) with maximum, average and minimum temperature of images recorded. Ambient temperature and relative humidity (RH) within the rearing accommodation were recorded using a calibrated EBI 20-TH data logger (ebro Electronic, Ingolstadt) throughout the experimental period. Average temperature and RH values obtained during the time period when images were taken were entered into the software program during image processing to allow for atmospheric changes during the sampling period. Analysis of eye images focused on the medial, posterior, palpebral border of the lower eyelid and the lacrimal caruncle as these have been found to be the area of most consistent temperature [27].",
+            "cite_spans": [
+                {
+                    "start": 1439,
+                    "end": 1441,
+                    "mention": "27",
+                    "ref_id": "BIBREF19"
+                }
+            ],
+            "section": "2.4.3. Thermal Imaging ::: 2.4. Data Collection ::: 2. Materials and Methods ",
+            "ref_spans": []
+        },
+        {
+            "text": "A total of 28 calves, balanced across milk replacer and forage treatments were fitted with IceRobotics\u00ae IceQube\u00ae automatic activity sensors (IceRobotics Ltd., Edinburgh, Scotland, UK) at 5 days of age and remained on calves throughout the experimental period. Sensors were affixed to the lateral side of the right rear leg in accordance with current best practice [28,29,30] with sampling rate kept at the default (1 s) interval. Once removed, sensors were downloaded and an optimal correction filter [30] which removed sensor recordings lasting \u2264 8 s was applied to data prior to analysis. ",
+            "cite_spans": [
+                {
+                    "start": 365,
+                    "end": 367,
+                    "mention": "28",
+                    "ref_id": "BIBREF20"
+                },
+                {
+                    "start": 368,
+                    "end": 370,
+                    "mention": "29",
+                    "ref_id": "BIBREF21"
+                },
+                {
+                    "start": 371,
+                    "end": 373,
+                    "mention": "30",
+                    "ref_id": "BIBREF23"
+                },
+                {
+                    "start": 502,
+                    "end": 504,
+                    "mention": "30",
+                    "ref_id": "BIBREF23"
+                }
+            ],
+            "section": "2.4.4. Lying Behaviour  ::: 2.4. Data Collection ::: 2. Materials and Methods ",
+            "ref_spans": []
+        },
+        {
+            "text": "A total of 36 calves, balanced across milk replacer and forage treatments, were fitted with a Polar Equine RS800CX Science (Polar Electro UK Ltd, Heathcote Way, Warwick, UK) heart monitor on days \u22122, \u22121, 0, +1 and +2 where day 0 = day of 1st vaccination, day of 2nd vaccination and days 29, 43, 57, 68 and 71 of age. These ages represented calf jacket removal (d29), changes in milk feeding frequency and quantity (d43, 57 and 68) and weaning (d71). Monitors were fitted 1\u20132 h post AM feed and remained on calves for 1\u20132 h to allow data capture during the period when calves were undisturbed and most likely to be resting. Sampling was conducted at the same time each day to help decrease any effects of circadian rhythms. Electrode gel (Spectra 360 Electrode Gel, Parker Laboratories Inc., New Jersey, USA) was applied to ensure contact between the calf and monitor [31]. The time period from which data for analysis was selected was between 5\u201310 min [32]. Following data selection, recordings were processed using both the Artiifact and Polar software [33]. Preliminary error correction of the data set was conducted using the Polar software settings as described by Clapp, et al. [31], with any data set requiring over 5% error correction rejected [34]. Following error correction, the data set was further processed using Artiifact software with resultant root mean squares of successive differences (RMSSD) in inter heart beat intervals (IBI) and heart rate (HR) used in the analysis [35].",
+            "cite_spans": [
+                {
+                    "start": 868,
+                    "end": 870,
+                    "mention": "31",
+                    "ref_id": "BIBREF24"
+                },
+                {
+                    "start": 953,
+                    "end": 955,
+                    "mention": "32",
+                    "ref_id": "BIBREF25"
+                },
+                {
+                    "start": 1055,
+                    "end": 1057,
+                    "mention": "33",
+                    "ref_id": "BIBREF26"
+                },
+                {
+                    "start": 1184,
+                    "end": 1186,
+                    "mention": "31",
+                    "ref_id": "BIBREF24"
+                },
+                {
+                    "start": 1252,
+                    "end": 1254,
+                    "mention": "34",
+                    "ref_id": "BIBREF27"
+                },
+                {
+                    "start": 1490,
+                    "end": 1492,
+                    "mention": "35",
+                    "ref_id": "BIBREF28"
+                }
+            ],
+            "section": "2.4.5. Heart Rate Monitors  ::: 2.4. Data Collection ::: 2. Materials and Methods ",
+            "ref_spans": []
+        },
+        {
+            "text": "All data were analysed using GenStat\u00ae (version 16.2, VSN International Ltd.). All statistical models included sex as a fixed effect and birth weight as a covariate unless otherwise stated. A probability of p < 0.05 was selected as the level of significance, and where data was significant it was subjected to Fisher\u2019s protected least significant difference (PLSD) test. ",
+            "cite_spans": [],
+            "section": "2.5. Statistical Analysis ::: 2. Materials and Methods ",
+            "ref_spans": []
+        },
+        {
+            "text": "As variation in daily faecal and total respiratory scores was low, they were averaged on a weekly basis for the first four and complete ten weeks of the experimental period, respectively. Mean weekly scores were then fitted to a repeated measures residual maximum likelihood estimation (REML) mixed effects model with fixed effects and associated interactions of milk replacer level and forage treatment. Likelihood of an animal receiving treatment for scour, pneumonia or a high temperature with signs of respiratory illness was analyzed by modelling of binomial proportions using logistic regression. Fixed effects of sex, milk level, forage treatment and interactions of milk level and forage treatment were fitted individually to the model and back transformed means are reported.",
+            "cite_spans": [],
+            "section": "2.5. Statistical Analysis ::: 2. Materials and Methods ",
+            "ref_spans": []
+        },
+        {
+            "text": "Thermal imaging and rectal temperature data were assigned to four age bands; d7\u201321 to represent the period over which first vaccination occurred, d22\u201342 to represent the period following first vaccination and prior to first milk step-down of accelerated calves, d43\u201356 to represent the period following first milk step-down and the time during which second vaccination occurred and d57\u201377 to represent the period over which milk step downs and weaning occurred. Data were fitted to a repeated measures REML model with fixed effects and associated interactions of milk replacer level, forage treatment and time. Ambient temperature was included as a covariate. These data were also fitted to a repeated measures REML model with fixed effects and associated interactions of milk replacer level, forage treatment, time and method of temperature assessment. Correlation coefficients between each of the three temperature methods were determined by linear regression using the predicted means obtained through the repeated measures analysis.",
+            "cite_spans": [],
+            "section": "2.5. Statistical Analysis ::: 2. Materials and Methods ",
+            "ref_spans": []
+        },
+        {
+            "text": "Daily and hourly lying time along with number and duration of lying bouts and heart rate and heart rate variability data were fitted to the same repeated measures REML model as described above. Results pertaining to hourly lying behaviour are presented in Supplementary data Figure S1. Within the lying behaviour and heart rate analysis, where results refer to the period of time following a management event (e.g., MR step-down), a baseline covariate derived from averaging data from the 5 (activity sensors) or 2 (heart rate monitors) days prior to the event was included within the model.",
+            "cite_spans": [],
+            "section": "2.5. Statistical Analysis ::: 2. Materials and Methods ",
+            "ref_spans": []
+        },
+        {
+            "text": "Calves offered high (HML) levels of milk replacer had an increased average faecal score between days 14\u201320 when compared to calves offered conventional (CML) levels of milk replacer (Table 4; p = 0.010). There was no effect of milk replacer level or forage treatment on average faecal score between days 5\u201313, 21\u201327 or 28\u201334, or of forage treatment between d14\u201320 (Table 4; p > 0.1). No faecal scores above 1 were recorded after 34 days of age. CML calves had an increased average respiratory score between days 49\u201355 when compared to HML calves (Table 4; p = 0.022), however, despite the observed increase, average respiratory scores across both treatments remained below the threshold deemed indicative of bovine respiratory disease. There was no effect of forage treatment on respiratory score (Table 4; p > 0.1). There was no effect of milk level offered on the probability of receiving treatment for pneumonia (p = 0.189) or pyrexia plus respiratory type symptoms (p = 0.599). Calves offered chopped straw at 56 days of age (CS56) had an increased likelihood of receiving treatment for pneumonia (p = 0.008), however, no interactive effects of MR level and forage treatment were observed (p = 0.831). An increased likelihood of receiving treatment for scour was observed in HML calves (p = 0.059) with values of 0.47 and 0.26 for HML and CML calves respectively. There was no significant effect of forage treatment (p = 0.130) or MR level \u00d7 forage treatment (p = 0.196) on likelihood of receiving treatment for scour.",
+            "cite_spans": [],
+            "section": "3.1. Calf Health ::: 3. Results",
+            "ref_spans": [
+                {
+                    "start": 183,
+                    "end": 190,
+                    "mention": "Table 4",
+                    "ref_id": "TABREF3"
+                },
+                {
+                    "start": 365,
+                    "end": 372,
+                    "mention": "Table 4",
+                    "ref_id": "TABREF3"
+                },
+                {
+                    "start": 547,
+                    "end": 554,
+                    "mention": "Table 4",
+                    "ref_id": "TABREF3"
+                },
+                {
+                    "start": 798,
+                    "end": 805,
+                    "mention": "Table 4",
+                    "ref_id": "TABREF3"
+                }
+            ]
+        },
+        {
+            "text": "There were no effects of MR feeding level or forage treatment on core body, infrared (IR) eye or IR rectal temperature between days 7\u201321, 22\u201342, or 43\u201356 (Table 5; p > 0.1). Average core body, IR eye and IR rectal temperatures recorded between d7\u201377 are presented in Figure 1. Core body temperature was 38.80 and 38.87 in HML and CML calves respectively between days 57\u201377 (Table 5; p = 0.057), however, there were no differences in IR eye or IR rectal temperature. There were no differences between MR or forage treatments in core body, IR eye or IR rectal temperature when data were analysed over the 7 days prior to and following calf jacket removal, step down in MR feeding frequency or quantity or weaning. Although unaffected by MR feeding level, there was an effect of day with an increase in all temperature parameters in the 2 days following 1st and 2nd vaccination (Figure 2; p < 0.001).",
+            "cite_spans": [],
+            "section": "3.2. Calf Temperature Assessment ::: 3. Results",
+            "ref_spans": [
+                {
+                    "start": 267,
+                    "end": 275,
+                    "mention": "Figure 1",
+                    "ref_id": "FIGREF0"
+                },
+                {
+                    "start": 876,
+                    "end": 884,
+                    "mention": "Figure 2",
+                    "ref_id": "FIGREF1"
+                },
+                {
+                    "start": 155,
+                    "end": 162,
+                    "mention": "Table 5",
+                    "ref_id": "TABREF4"
+                },
+                {
+                    "start": 374,
+                    "end": 381,
+                    "mention": "Table 5",
+                    "ref_id": "TABREF4"
+                }
+            ]
+        },
+        {
+            "text": "Calf temperature was affected by method of temperature assessment across all time periods. Positive correlations were found between core body and IR eye temperature when data were analysed between 7\u201321, 22\u201342, 43\u201356 and 57\u201377 days of age (Table 6). Positive correlations were also found between core body and IR rectal temperature between days 7\u201321, 22\u201342 and 57\u201377 and between IR eye and IR rectal temperature during days 22\u201342, 43\u201356 and 57\u201377 (Table 6). Correlations of 0.4, 0.6 and 0.39 were found between core body and IR eye, core body and IR rectal and IR eye and IR rectal temperatures respectively when analysed over the 7 days prior to and following removal of calf jackets (Table 6). Strong positive correlations were also found between methods of temperature assessment during the 7 days prior to and following 2nd vaccination (Table 6).",
+            "cite_spans": [],
+            "section": "3.2. Calf Temperature Assessment ::: 3. Results",
+            "ref_spans": [
+                {
+                    "start": 239,
+                    "end": 246,
+                    "mention": "Table 6",
+                    "ref_id": "TABREF5"
+                },
+                {
+                    "start": 447,
+                    "end": 454,
+                    "mention": "Table 6",
+                    "ref_id": "TABREF5"
+                },
+                {
+                    "start": 685,
+                    "end": 692,
+                    "mention": "Table 6",
+                    "ref_id": "TABREF5"
+                },
+                {
+                    "start": 840,
+                    "end": 847,
+                    "mention": "Table 6",
+                    "ref_id": "TABREF5"
+                }
+            ]
+        },
+        {
+            "text": "Daily lying time was increased in HML calves between days 36\u201342 (p = 0.017), and was characterized by an increased number (p < 0.001) of shorter (p = 0.002) lying bouts when compared with CML calves. During this period, calves offered chopped straw from 14 days of age (CS14) displayed an increased number (20.0 vs 15.4) of shorter (56.2 vs 71.6 min) lying bouts than those offered chopped straw at 56 days of age (CS56). However, despite this variation, there no was no significant impact of forage treatment on total daily lying time (Table 7; p = 0.306). Daily lying time was 40 min/d lower in HML calves in the period following their step down from three to two MR feeds at 43 days of age when compared with CML calves (Table 7; p = 0.021). There was no significant effect of MR feeding level on daily lying behaviour between d57\u201362 (Table 7; p > 0.05), however, there was an effect of forage treatment whereby CS56 calves had fewer lying bouts (Table 7; p = 0.028) than CS14 and GS56 calves (19.3 vs 22.0 vs 22.7). Lying behaviour was not significantly impacted by MR feeding level in the period following reduction of MR to 2L/day at 68 days of age (Table 7; p > 0.1), however, there was an effect of forage treatment whereby total daily lying time was higher (Table 7; p = 0.022) in CS14 calves when compared with GS56 and NF calves (1112 vs 976 vs 986 min/d). Daily lying time was higher in CML calves in the period following weaning at 71 days of age (Table 7; p = 0.026), lying bouts also tended to be in longer in these calves when compared to HML calves (Table 7; p = 0.098). There was no effect of forage treatment on lying behaviour during the post weaning period, however, there was an effect of MR level \u00d7 forage treatment on lying bout duration (Table 7; p = 0.014), with bouts approximately 10.8 min shorter in HML calves receiving chopped straw at 56 days of age. Diurnal lying behaviour over periods of milk step-down and weaning is presented in Supplementary data Figure S1.",
+            "cite_spans": [],
+            "section": "3.3. Activity Monitors ::: 3. Results",
+            "ref_spans": [
+                {
+                    "start": 537,
+                    "end": 544,
+                    "mention": "Table 7",
+                    "ref_id": "TABREF6"
+                },
+                {
+                    "start": 724,
+                    "end": 731,
+                    "mention": "Table 7",
+                    "ref_id": "TABREF6"
+                },
+                {
+                    "start": 838,
+                    "end": 845,
+                    "mention": "Table 7",
+                    "ref_id": "TABREF6"
+                },
+                {
+                    "start": 950,
+                    "end": 957,
+                    "mention": "Table 7",
+                    "ref_id": "TABREF6"
+                },
+                {
+                    "start": 1156,
+                    "end": 1163,
+                    "mention": "Table 7",
+                    "ref_id": "TABREF6"
+                },
+                {
+                    "start": 1267,
+                    "end": 1274,
+                    "mention": "Table 7",
+                    "ref_id": "TABREF6"
+                },
+                {
+                    "start": 1461,
+                    "end": 1468,
+                    "mention": "Table 7",
+                    "ref_id": "TABREF6"
+                },
+                {
+                    "start": 1567,
+                    "end": 1574,
+                    "mention": "Table 7",
+                    "ref_id": "TABREF6"
+                },
+                {
+                    "start": 1763,
+                    "end": 1770,
+                    "mention": "Table 7",
+                    "ref_id": "TABREF6"
+                }
+            ]
+        },
+        {
+            "text": "There was no effect of MR feeding level on heart rate (HR) or heart rate variability (HRV) as measured by root mean square of successive differences (RMSSD) during the period following calf jacket removal at 29 days of age. This was also true in the periods following step down of HML calves from three to two and two to one MR meals/d at 43 and 57 days of age, respectively, and following reduction of MR level to 2L/day across treatments at 68 days of age. Both heart rate and RMSSD values were unaffected by MR treatment in the period following weaning at 71 days of age, however, there was an interactive effect of MR treatment and day, with HML calves displaying increased heart rate (Table 8; p < 0.001) and lower RMSSD (Table 8; p = 0.058) at 72 days of age. There was no significant effect of forage treatment on HR or RMSSD throughout the experimental period (Table 8).",
+            "cite_spans": [],
+            "section": "3.4. Heart Rate Monitors ::: 3. Results",
+            "ref_spans": [
+                {
+                    "start": 690,
+                    "end": 697,
+                    "mention": "Table 8",
+                    "ref_id": "TABREF7"
+                },
+                {
+                    "start": 727,
+                    "end": 734,
+                    "mention": "Table 8",
+                    "ref_id": "TABREF7"
+                },
+                {
+                    "start": 869,
+                    "end": 876,
+                    "mention": "Table 8",
+                    "ref_id": "TABREF7"
+                }
+            ]
+        },
+        {
+            "text": "Responses to common management practices such as restricted feeding and weaning have previously been assessed using measures of calf activity, with technological developments meaning that standing and lying behaviour can now be recorded automatically [36]. De Paula Vieira, et al. [37] reported a decrease in lying time observed in limit-fed calves, and suggested that this was due to hunger. In the present study, daily lying time was reduced by 31 min/d in CML calves, and was characterized by a reduced number of shorter lying bouts between d36\u201342, the period prior to reduction in MR feeding frequency and volume for HML calves. As reported by Terr\u00e9, et al. [7], calves offered lower levels of MR consume more concentrate. In the present study, and as will be reported elsewhere, average daily concentrate consumption between d5\u201342 was 190 g DM and 330 g DM for HML and CML calves, respectively (p < 0.001). As such it is likely that CML calves in the present study were spending more time standing to consume concentrate that HML calves. Calves offered chopped straw at 14 days of age (CS14) also displayed an increased number of shorter lying bouts during this period. Castells, et al. [11] reported differences in calf activity between calves offered alfalfa hay and those not provided with forage, it could be therefore that changes in behaviour observed in the present study were due to CS14 calves consuming the chopped straw. At 43 days of age, MR volume and feeding frequency was reduced in HML calves. During this period, lying time was reduced in these calves both in comparison to the pre-step down period and to that recorded in CML calves. A reduction in lying time was also observed in HML calves in the period following complete milk withdrawal. The decrease in lying time in HML calves is similar to that reported by Budzynska and Weary [28] and likely a sign of increased hunger following reduction in or withdrawal of MR. As indicated by de Passille, et al. [9], a decrease in overall DMI due to reduced solid feed intake has been observed in calves offered high levels of MR in the pre-wean period even when managed in a gradual weaning program. The decrease in lying time in HML calves during this period of milk step down and complete weaning could therefore be due to HML calves spending longer standing to consume solid feed as a means of addressing the reduction in available feed energy. During d68\u201370, CS14 calves displayed increased lying time when compared to GS56 and NF calves. Calves spend more time ruminating whilst lying down [11], as such it could be considered that rumen development was potentially more advanced at in calves offered forage at an earlier age and the increase in lying time was due to increased rumination. The lack of direct observations to distinguish specific behaviours such as feeding and rumination could be considered a limitation to the present study, future research could implement the use of calf appropriate rumination halters to allow feeding behaviours to be distinguished. However, the results do highlight how activity monitors could be used on-farm by producers to distinguish changes in behaviour as a result of changes in nutritional regime. Application of activity meters in group housed situations could also provide further information regarding the impact of feeding regime on diurnal behaviour of dairy calves.",
+            "cite_spans": [
+                {
+                    "start": 252,
+                    "end": 254,
+                    "mention": "36",
+                    "ref_id": "BIBREF29"
+                },
+                {
+                    "start": 282,
+                    "end": 284,
+                    "mention": "37",
+                    "ref_id": "BIBREF30"
+                },
+                {
+                    "start": 663,
+                    "end": 664,
+                    "mention": "7",
+                    "ref_id": "BIBREF54"
+                },
+                {
+                    "start": 1193,
+                    "end": 1195,
+                    "mention": "11",
+                    "ref_id": "BIBREF2"
+                },
+                {
+                    "start": 1858,
+                    "end": 1860,
+                    "mention": "28",
+                    "ref_id": "BIBREF20"
+                },
+                {
+                    "start": 1981,
+                    "end": 1982,
+                    "mention": "9",
+                    "ref_id": "BIBREF56"
+                },
+                {
+                    "start": 2565,
+                    "end": 2567,
+                    "mention": "11",
+                    "ref_id": "BIBREF2"
+                }
+            ],
+            "section": "4. Discussion",
+            "ref_spans": []
+        },
+        {
+            "text": "Heart rate monitors have previously been shown to provide increased opportunities for non-invasive monitoring of physiological responses to stress [38]. An increase in heart rate (HR) and decrease the root mean square of successive differences (RMSSD), a time domain measure of heart rate variability (HRV), have been linked to increased stress load [39]. In the present study measures of HR and HRV were comparable across the pre-wean period, however there was a reduction in RMSSD in HML calves following weaning. As HR and HRV measurements were collected when the calves were at rest [39], this could indicate a potential increase in stress response and corresponds with the changes in lying behaviour observed in HML during this period. This again highlights that calves high levels of MR in the first weeks of life could display an increased stress response to withdrawal of MR when compared with calves previously fed a conventional level of MR. Adopting a more prolonged weaning approach whereby MR volume is reduced on a daily basis, such as that described by Sweeney, et al. [8], may improve concentrate intake in calves fed high levels of MR and thus reduce stress associated with MR withdrawal.",
+            "cite_spans": [
+                {
+                    "start": 148,
+                    "end": 150,
+                    "mention": "38",
+                    "ref_id": "BIBREF31"
+                },
+                {
+                    "start": 351,
+                    "end": 353,
+                    "mention": "39",
+                    "ref_id": "BIBREF32"
+                },
+                {
+                    "start": 588,
+                    "end": 590,
+                    "mention": "39",
+                    "ref_id": "BIBREF32"
+                },
+                {
+                    "start": 1085,
+                    "end": 1086,
+                    "mention": "8",
+                    "ref_id": "BIBREF55"
+                }
+            ],
+            "section": "4. Discussion",
+            "ref_spans": []
+        },
+        {
+            "text": "Ill-health in early calfhood can have a significant impact on animal behaviour, welfare and productivity, all of which can affect the economic efficiency of dairy operations [40,41]. Enteric and respiratory diseases are the most common causes of morbidity and mortality in the first weeks of life, prevalence and severity of which can be affected by housing conditions, colostrum intake and feeding management [42]. Providing calves with milk or milk replacer at a level equivalent to 10% of calf birth weight per day in two portions is an accepted industry standard and is designed to encourage earlier intake of solid feed [17]. However, it has been suggested that restricted feeding can impact negatively on growth rates and immune function in calves and thus may potentially increase susceptibility to disease [43].",
+            "cite_spans": [
+                {
+                    "start": 175,
+                    "end": 177,
+                    "mention": "40",
+                    "ref_id": "BIBREF34"
+                },
+                {
+                    "start": 178,
+                    "end": 180,
+                    "mention": "41",
+                    "ref_id": "BIBREF35"
+                },
+                {
+                    "start": 411,
+                    "end": 413,
+                    "mention": "42",
+                    "ref_id": "BIBREF36"
+                },
+                {
+                    "start": 626,
+                    "end": 628,
+                    "mention": "17",
+                    "ref_id": "BIBREF8"
+                },
+                {
+                    "start": 815,
+                    "end": 817,
+                    "mention": "43",
+                    "ref_id": "BIBREF37"
+                }
+            ],
+            "section": "4. Discussion",
+            "ref_spans": []
+        },
+        {
+            "text": "In the present study, it could have been considered that calves offered high (HML) levels of MR would have been less likely to suffer from ill-health when compared to those offered conventional (CML) levels of MR. However, comparable to that reported by Quigley, et al. [17], HML calves in the present study had increased faecal scores between d14\u201320 and were more likely to receive treatment for diarrhoea than CML calves. In the study by Quigley, et al. [17], calves fed either conventional or increased levels of MR were subject to transport stress and then housed in hutches where the bedding material had been contaminated with coronavirus. As increased incidence of morbidity and mortality was observed in calves provided with increased levels of MR in the study, this was directly apportioned to the feeding level, leading the authors to advise a cautionary approach if providing increased MR levels to calves under stress. Diaz, et al. [44] also reported increased faecal scores in calves offered increased levels of MR, however, this was considered to be as a result of the differences in total volume of feed and water consumed as opposed to disease. In the present study although faecal score was elevated in HML calves, it was below that considered indicative of neo-natal calf diarrhoea (NCD), suggesting that the increased scores were, as with Diaz, et al. [44], likely as a result of the fact that HML calves were receiving 5l/day more MR than the CML calves. Additionally, anecdotal evidence within the present study indicated that scour was milky in colour, reinforcing the consideration that the higher faecal scores in HML calves was due to the higher initial MR volume as opposed to infection. Further research could aim to examine if scour scoring systems could be modified or improved to take into account the presence of milky scour. The average respiratory score observed in CML calves between days 56\u201362, although increased in comparison to HML calves, was again below the threshold score considered to be indicative of BRD. These results indicate that under the management conditions described, calves can be fed either increased or conventional levels of milk replacer without severe impact on health throughout the pre-wean period. This may have been influenced by the fact that calves were individually housed which has been shown to reduce health problems [45]. However, the increased faecal scores in the first 3 weeks of life in HML calves could suggest that it may be advisable to delay increasing MR levels until after this period when calves are less susceptible to enteric disease [46]. ",
+            "cite_spans": [
+                {
+                    "start": 271,
+                    "end": 273,
+                    "mention": "17",
+                    "ref_id": "BIBREF8"
+                },
+                {
+                    "start": 457,
+                    "end": 459,
+                    "mention": "17",
+                    "ref_id": "BIBREF8"
+                },
+                {
+                    "start": 945,
+                    "end": 947,
+                    "mention": "44",
+                    "ref_id": "BIBREF38"
+                },
+                {
+                    "start": 1372,
+                    "end": 1374,
+                    "mention": "44",
+                    "ref_id": "BIBREF38"
+                },
+                {
+                    "start": 2387,
+                    "end": 2389,
+                    "mention": "45",
+                    "ref_id": "BIBREF39"
+                },
+                {
+                    "start": 2618,
+                    "end": 2620,
+                    "mention": "46",
+                    "ref_id": "BIBREF40"
+                }
+            ],
+            "section": "4. Discussion",
+            "ref_spans": []
+        },
+        {
+            "text": "One of the primary detectable physiological responses to infection and inflammation is a change in core body temperature, and as such it is often used as an indicator of ill-health [47]. In addition to illness, stress, a result of common management practices in early calfhood, can also result in changes in blood flow and thus heat production as a result of increased hypothalamic pituitary adrenal (HPA) axis activity [48]. Infrared thermography (IRT) has been indicated as a non-invasive and viable method of detecting these small changes in radiated temperature [49] and has been highlighted as a potential method for the early detection of ill-health [50]. In the present study, there was no difference in radiated temperature of the eye or rectal area, this suggesting that calves were able to maintain thermoregulation throughout the experimental period despite differences in MR feeding levels. This was particularly evident in the period following calf jacket removal, as it could have been anticipated that CML calves may have struggled to maintain thermoregulation when faced with the combined factors of reduced energy intake and lower ambient temperatures, however, no difference in temperature measurements were found. This could have been due to the fact that calves were 4 weeks of age at the time of calf jacket removal and, as such, were better able to withstand lower ambient temperatures [51]. At this age CML calves were also likely to be consuming greater amounts of solid feed [52] and thus nutritional energy was potentially sufficient to cope with increased heat production demands [53] as a result of exposure to lower ambient temperatures following calf jacket removal.",
+            "cite_spans": [
+                {
+                    "start": 182,
+                    "end": 184,
+                    "mention": "47",
+                    "ref_id": "BIBREF41"
+                },
+                {
+                    "start": 421,
+                    "end": 423,
+                    "mention": "48",
+                    "ref_id": "BIBREF42"
+                },
+                {
+                    "start": 567,
+                    "end": 569,
+                    "mention": "49",
+                    "ref_id": "BIBREF43"
+                },
+                {
+                    "start": 657,
+                    "end": 659,
+                    "mention": "50",
+                    "ref_id": "BIBREF45"
+                },
+                {
+                    "start": 1409,
+                    "end": 1411,
+                    "mention": "51",
+                    "ref_id": "BIBREF46"
+                },
+                {
+                    "start": 1501,
+                    "end": 1503,
+                    "mention": "52",
+                    "ref_id": "BIBREF47"
+                },
+                {
+                    "start": 1608,
+                    "end": 1610,
+                    "mention": "53",
+                    "ref_id": "BIBREF48"
+                }
+            ],
+            "section": "4. Discussion",
+            "ref_spans": []
+        },
+        {
+            "text": "There is limited published research addressing the correlation between infrared (IR) temperature and core body temperature in very young calves. Although variable in the present study, correlation between IR eye temperature and core body temperature was within the range to that found in Jersey heifers by Salles, et al. [54] and comparable to the correlation between core body temperature and indwelling rumen bolus temperature reported by Knauer, et al. [55]. The reason for the variability in correlation is unknown and requires further investigation. However, it could be that IR temperature should be used as a standalone measure, wherein individual calves are used as their own control, particularly in situations when incidence of ill-health/pyrexia is low. The results of the present study suggest that IR temperatures were not affected by the MR feeding level. However, it may also be that the number of calves used in the experimental design was not sufficient to detect any differences as a result of feeding level. Additionally, there is limited information regarding the effects of feeding level on body temperature, an area requiring further investigation. Comparable to previous research [56], in the present study, IRT was able to detect the febrile response linked to vaccination. Again, this response did not differ between MR treatments, however, it does highlight the potential for IRT to be used in the detection of pyrexia associated with symptoms of disease and, if automated as per Schaefer, et al. [57], it could offer a less invasive option of continuous temperature assessment in young calves. ",
+            "cite_spans": [
+                {
+                    "start": 322,
+                    "end": 324,
+                    "mention": "54",
+                    "ref_id": "BIBREF49"
+                },
+                {
+                    "start": 457,
+                    "end": 459,
+                    "mention": "55",
+                    "ref_id": "BIBREF50"
+                },
+                {
+                    "start": 1204,
+                    "end": 1206,
+                    "mention": "56",
+                    "ref_id": "BIBREF51"
+                },
+                {
+                    "start": 1524,
+                    "end": 1526,
+                    "mention": "57",
+                    "ref_id": "BIBREF52"
+                }
+            ],
+            "section": "4. Discussion",
+            "ref_spans": []
+        },
+        {
+            "text": "Under the management conditions described in the present study, MR feeding level had limited effects on calf health and physiological responses to common management practices. However, changes in activity which could be linked with hunger as a result of conventional feeding levels and following reduction in MR volume in calves offered high levels of MR in early life were detectable using automatic activity sensors. Additionally, the higher lying time observed in CS14 calves between 68\u201370 days of age could point to increased rumination as a result of earlier forage introduction. This suggests that providing calves with a forage source in addition to concentrate feed could be beneficial to rumen development. In the present study, calves were individually housed which perhaps contributed to the low level of ill-health amongst calves. Calves were also monitored on a daily basis with a combination of traditional and novel indicators, this potentially resulting in earlier detection and treatment of ill-health, as such, future research should incorporate techniques described here into group housing systems. Results of the present study also provide evidence for the role of remote-sensing technologies within calf rearing systems. Using a range of traditional and novel methods increases the possibilities for collection of behavioural and physiological data. This will allow producers to obtain an overall indicator of calf well-being and responses to common management practices encountered in early life. Further research which aims to compare and correlate these technologies with hormonal, biochemical and immunological parameters could help in the development of early warning systems for calf health and welfare issues.",
+            "cite_spans": [],
+            "section": "5. Conclusions",
+            "ref_spans": []
+        }
+    ],
+    "ref_entries": {
+        "TABREF0": {
+            "text": "Table 1: Number of calves allocated to each treatment.\n",
+            "type": "table"
+        },
+        "TABREF1": {
+            "text": "Table 2: Milk replacer feeding regime for calves in the first ten weeks of life.\n",
+            "type": "table"
+        },
+        "TABREF2": {
+            "text": "Table 3: Chemical composition of milk replacer, concentrate, chopped straw and grass silage offered to calves throughout the experimental period.\n",
+            "type": "table"
+        },
+        "TABREF3": {
+            "text": "Table 4: Mean weekly faecal and respiratory scores of calves offered high or conventional levels of milk replacer.\n",
+            "type": "table"
+        },
+        "TABREF4": {
+            "text": "Table 5: Average core body, infrared (IR) eye and IR rectal temperature of calves managed under different nutritional regimes throughout the experimental period.\n",
+            "type": "table"
+        },
+        "TABREF5": {
+            "text": "Table 6: Pearson correlation coefficients between methods of temperature assessment over specific age ranges and during the 7 days pre- and post-management events.\n",
+            "type": "table"
+        },
+        "TABREF6": {
+            "text": "Table 7: Daily lying behaviour of calves managed under different nutritional regimes throughout the experimental period.\n",
+            "type": "table"
+        },
+        "TABREF7": {
+            "text": "Table 8: Heart rate (bpm) and heart rate variability (RMSSD) of calves managed under different nutritional regimes in the first ten weeks of life.\n",
+            "type": "table"
+        },
+        "FIGREF0": {
+            "text": "Figure 1: Core body temperature as measured via digital rectal thermometer, IR eye and IR rectal temperature of calves between 7 to 77 days of age.",
+            "type": "figure"
+        },
+        "FIGREF1": {
+            "text": "Figure 2: Core body temperature as measured via digital rectal thermometer, IR eye and IR rectal temperature of calves over the periods of 1st and 2nd vaccination.",
+            "type": "figure"
+        }
+    },
+    "back_matter": [],
+    "bib_entries": {
+        "BIBREF0": {
+            "title": "Preweaning milk replacer intake and effects on long-term productivity of dairy calves",
+            "authors": [
+                {
+                    "first": "F.",
+                    "middle": [],
+                    "last": "Soberon",
+                    "suffix": ""
+                },
+                {
+                    "first": "E.",
+                    "middle": [],
+                    "last": "Raffrenato",
+                    "suffix": ""
+                },
+                {
+                    "first": "R.W.",
+                    "middle": [],
+                    "last": "Everett",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.E.",
+                    "middle": [],
+                    "last": "Van Amburgh",
+                    "suffix": ""
+                }
+            ],
+            "year": 2012,
+            "venue": "J. Dairy Sci.",
+            "volume": "95",
+            "issn": "",
+            "pages": "783-793",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2011-4391"
+                ]
+            }
+        },
+        "BIBREF1": {
+            "title": "Effects of forage provision to dairy calves on growth performance and rumen fermentation: A meta-analysis and meta-regression",
+            "authors": [
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Imani",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Mirzaei",
+                    "suffix": ""
+                },
+                {
+                    "first": "B.",
+                    "middle": [],
+                    "last": "Baghbanzadeh-Nobari",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.H.",
+                    "middle": [],
+                    "last": "Ghaffari",
+                    "suffix": ""
+                }
+            ],
+            "year": 2017,
+            "venue": "J. Dairy Sci.",
+            "volume": "100",
+            "issn": "",
+            "pages": "1136-1150",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2016-11561"
+                ]
+            }
+        },
+        "BIBREF2": {
+            "title": "Effect of different forage sources on performance and feeding behavior of Holstein calves",
+            "authors": [
+                {
+                    "first": "L.",
+                    "middle": [],
+                    "last": "Castells",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "Bach",
+                    "suffix": ""
+                },
+                {
+                    "first": "G.",
+                    "middle": [],
+                    "last": "Araujo",
+                    "suffix": ""
+                },
+                {
+                    "first": "C.",
+                    "middle": [],
+                    "last": "Montoro",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Terr\u00e9",
+                    "suffix": ""
+                }
+            ],
+            "year": 2012,
+            "venue": "J. Dairy Sci.",
+            "volume": "95",
+            "issn": "",
+            "pages": "286-293",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2011-4405"
+                ]
+            }
+        },
+        "BIBREF3": {
+            "title": "Hay intake improves performance and rumen development of calves fed higher quantities of milk",
+            "authors": [
+                {
+                    "first": "M.A.",
+                    "middle": [],
+                    "last": "Khan",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.M.",
+                    "middle": [],
+                    "last": "Weary",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.A.",
+                    "middle": [],
+                    "last": "von Keyserlingk",
+                    "suffix": ""
+                }
+            ],
+            "year": 2011,
+            "venue": "J. Dairy Sci.",
+            "volume": "94",
+            "issn": "",
+            "pages": "3547-3553",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2010-3871"
+                ]
+            }
+        },
+        "BIBREF4": {
+            "title": "Effect of feed type and method of presentation on feeding behavior, intake, and growth of dairy calves fed a high level of milk",
+            "authors": [
+                {
+                    "first": "M.A.",
+                    "middle": [],
+                    "last": "Overvest",
+                    "suffix": ""
+                },
+                {
+                    "first": "R.",
+                    "middle": [],
+                    "last": "Bergeron",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.B.",
+                    "middle": [],
+                    "last": "Haley",
+                    "suffix": ""
+                },
+                {
+                    "first": "T.J.",
+                    "middle": [],
+                    "last": "DeVries",
+                    "suffix": ""
+                }
+            ],
+            "year": 2016,
+            "venue": "J. Dairy Sci.",
+            "volume": "99",
+            "issn": "",
+            "pages": "317-327",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2015-9997"
+                ]
+            }
+        },
+        "BIBREF5": {
+            "title": "Composition and Functional Capacity of Blood Mononuclear Leukocyte Populations from Neonatal Calves on Standard and Intensified Milk Replacer Diets",
+            "authors": [
+                {
+                    "first": "B.J.",
+                    "middle": [],
+                    "last": "Nonnecke",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.R.",
+                    "middle": [],
+                    "last": "Foote",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.M.",
+                    "middle": [],
+                    "last": "Smith",
+                    "suffix": ""
+                },
+                {
+                    "first": "B.A.",
+                    "middle": [],
+                    "last": "Pesch",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.E.",
+                    "middle": [],
+                    "last": "Van Amburgh",
+                    "suffix": ""
+                }
+            ],
+            "year": 2003,
+            "venue": "J. Dairy Sci.",
+            "volume": "86",
+            "issn": "",
+            "pages": "3592-3604",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.S0022-0302(03)73965-4"
+                ]
+            }
+        },
+        "BIBREF6": {
+            "title": "Long-term effects on heifer performance of an enhanced-growth feeding programme applied during the preweaning period",
+            "authors": [
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Terre",
+                    "suffix": ""
+                },
+                {
+                    "first": "C.",
+                    "middle": [],
+                    "last": "Tejero",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "Bach",
+                    "suffix": ""
+                }
+            ],
+            "year": 2009,
+            "venue": "J. Dairy Res.",
+            "volume": "76",
+            "issn": "",
+            "pages": "331-339",
+            "other_ids": {
+                "DOI": [
+                    "10.1017/S0022029909004142"
+                ]
+            }
+        },
+        "BIBREF7": {
+            "title": "Pre- and postweaning performance of Holstein female calves fed milk through step-down and conventional methods",
+            "authors": [
+                {
+                    "first": "M.A.",
+                    "middle": [],
+                    "last": "Khan",
+                    "suffix": ""
+                },
+                {
+                    "first": "H.J.",
+                    "middle": [],
+                    "last": "Lee",
+                    "suffix": ""
+                },
+                {
+                    "first": "W.S.",
+                    "middle": [],
+                    "last": "Lee",
+                    "suffix": ""
+                },
+                {
+                    "first": "H.S.",
+                    "middle": [],
+                    "last": "Kim",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.B.",
+                    "middle": [],
+                    "last": "Kim",
+                    "suffix": ""
+                },
+                {
+                    "first": "K.S.",
+                    "middle": [],
+                    "last": "Ki",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.K.",
+                    "middle": [],
+                    "last": "Ha",
+                    "suffix": ""
+                },
+                {
+                    "first": "H.G.",
+                    "middle": [],
+                    "last": "Lee",
+                    "suffix": ""
+                },
+                {
+                    "first": "Y.J.",
+                    "middle": [],
+                    "last": "Choi",
+                    "suffix": ""
+                }
+            ],
+            "year": 2007,
+            "venue": "J. Dairy Sci.",
+            "volume": "90",
+            "issn": "",
+            "pages": "876-885",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.S0022-0302(07)71571-0"
+                ]
+            }
+        },
+        "BIBREF8": {
+            "title": "Effects of additional milk replacer feeding on calf health, growth, and selected blood metabolites in calves",
+            "authors": [
+                {
+                    "first": "J.D.",
+                    "middle": [],
+                    "last": "Quigley",
+                    "suffix": ""
+                },
+                {
+                    "first": "T.A.",
+                    "middle": [],
+                    "last": "Wolfe",
+                    "suffix": ""
+                },
+                {
+                    "first": "T.H.",
+                    "middle": [],
+                    "last": "Elsasser",
+                    "suffix": ""
+                }
+            ],
+            "year": 2006,
+            "venue": "J. Dairy Sci.",
+            "volume": "89",
+            "issn": "",
+            "pages": "207-216",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.S0022-0302(06)72085-9"
+                ]
+            }
+        },
+        "BIBREF9": {
+            "title": "A prospective study of calf factors affecting age, body size, and body condition score at first calving of Holstein dairy heifers",
+            "authors": [
+                {
+                    "first": "A.J.",
+                    "middle": [],
+                    "last": "Heinrichs",
+                    "suffix": ""
+                },
+                {
+                    "first": "B.S.",
+                    "middle": [],
+                    "last": "Heinrichs",
+                    "suffix": ""
+                },
+                {
+                    "first": "O.",
+                    "middle": [],
+                    "last": "Harel",
+                    "suffix": ""
+                },
+                {
+                    "first": "G.W.",
+                    "middle": [],
+                    "last": "Rogers",
+                    "suffix": ""
+                },
+                {
+                    "first": "N.T.",
+                    "middle": [],
+                    "last": "Place",
+                    "suffix": ""
+                }
+            ],
+            "year": 2005,
+            "venue": "J. Dairy Sci.",
+            "volume": "88",
+            "issn": "",
+            "pages": "2828-2835",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.S0022-0302(05)72963-5"
+                ]
+            }
+        },
+        "BIBREF10": {
+            "title": "Newborn calf welfare: A review focusing on mortality rates",
+            "authors": [
+                {
+                    "first": "K.",
+                    "middle": [],
+                    "last": "Uetake",
+                    "suffix": ""
+                }
+            ],
+            "year": 2013,
+            "venue": "Anim. Sci. J.",
+            "volume": "84",
+            "issn": "",
+            "pages": "101-105",
+            "other_ids": {
+                "DOI": [
+                    "10.1111/asj.12019"
+                ]
+            }
+        },
+        "BIBREF11": {
+            "title": "Feed intake patterns, growth performance, and metabolic and endocrine traits in calves fed unlimited amounts of colostrum and milk by automate, starting in the neonatal period",
+            "authors": [
+                {
+                    "first": "H.M.",
+                    "middle": [],
+                    "last": "Hammon",
+                    "suffix": ""
+                },
+                {
+                    "first": "G.",
+                    "middle": [],
+                    "last": "Schiessler",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "Nussbaum",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.W.",
+                    "middle": [],
+                    "last": "Blum",
+                    "suffix": ""
+                }
+            ],
+            "year": 2002,
+            "venue": "J. Dairy Sci.",
+            "volume": "85",
+            "issn": "",
+            "pages": "3352-3362",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.S0022-0302(02)74423-8"
+                ]
+            }
+        },
+        "BIBREF12": {
+            "title": "Structural growth, rumen development, and metabolic and immune responses of Holstein male calves fed milk through step-down and conventional methods",
+            "authors": [
+                {
+                    "first": "M.A.",
+                    "middle": [],
+                    "last": "Khan",
+                    "suffix": ""
+                },
+                {
+                    "first": "H.J.",
+                    "middle": [],
+                    "last": "Lee",
+                    "suffix": ""
+                },
+                {
+                    "first": "W.S.",
+                    "middle": [],
+                    "last": "Lee",
+                    "suffix": ""
+                },
+                {
+                    "first": "H.S.",
+                    "middle": [],
+                    "last": "Kim",
+                    "suffix": ""
+                },
+                {
+                    "first": "K.S.",
+                    "middle": [],
+                    "last": "Ki",
+                    "suffix": ""
+                },
+                {
+                    "first": "T.Y.",
+                    "middle": [],
+                    "last": "Hur",
+                    "suffix": ""
+                },
+                {
+                    "first": "G.H.",
+                    "middle": [],
+                    "last": "Suh",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.J.",
+                    "middle": [],
+                    "last": "Kang",
+                    "suffix": ""
+                },
+                {
+                    "first": "Y.J.",
+                    "middle": [],
+                    "last": "Choi",
+                    "suffix": ""
+                }
+            ],
+            "year": 2007,
+            "venue": "J. Dairy Sci.",
+            "volume": "90",
+            "issn": "",
+            "pages": "3376-3387",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2007-0104"
+                ]
+            }
+        },
+        "BIBREF13": {
+            "title": "Behavioral and physiological responses of heifer calves to acute stressors: Long-term consistency and relationship with adult reactivity to milking",
+            "authors": [
+                {
+                    "first": "C.G.",
+                    "middle": [],
+                    "last": "Van Reenen",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.T.N.",
+                    "middle": [],
+                    "last": "Van der Werf",
+                    "suffix": ""
+                },
+                {
+                    "first": "N.E.",
+                    "middle": [],
+                    "last": "O\u2019Connell",
+                    "suffix": ""
+                },
+                {
+                    "first": "L.F.M.",
+                    "middle": [],
+                    "last": "Heutinck",
+                    "suffix": ""
+                },
+                {
+                    "first": "H.A.M.",
+                    "middle": [],
+                    "last": "Spoolder",
+                    "suffix": ""
+                },
+                {
+                    "first": "R.B.",
+                    "middle": [],
+                    "last": "Jones",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.M.",
+                    "middle": [],
+                    "last": "Koolhaas",
+                    "suffix": ""
+                },
+                {
+                    "first": "H.J.",
+                    "middle": [],
+                    "last": "Blokhuis",
+                    "suffix": ""
+                }
+            ],
+            "year": 2013,
+            "venue": "Appl. Anim. Behav. Sci.",
+            "volume": "147",
+            "issn": "",
+            "pages": "55-68",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.applanim.2013.04.020"
+                ]
+            }
+        },
+        "BIBREF14": {
+            "title": "Environment and Behavior: Neurochemical effects of different diets in the calf brain",
+            "authors": [
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "Peli",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "Grandis",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Tassinari",
+                    "suffix": ""
+                },
+                {
+                    "first": "P.",
+                    "middle": [],
+                    "last": "Famigli Bergamini",
+                    "suffix": ""
+                },
+                {
+                    "first": "C.",
+                    "middle": [],
+                    "last": "Tagliavia",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Roccaro",
+                    "suffix": ""
+                },
+                {
+                    "first": "C.",
+                    "middle": [],
+                    "last": "Bomnardi",
+                    "suffix": ""
+                }
+            ],
+            "year": 2019,
+            "venue": "Animals",
+            "volume": "9",
+            "issn": "",
+            "pages": null,
+            "other_ids": {
+                "DOI": [
+                    "10.3390/ani9060358"
+                ]
+            }
+        },
+        "BIBREF15": {
+            "title": "Remote Noninvasive Assessment of Pain and Health Status in Cattle",
+            "authors": [
+                {
+                    "first": "M.E.",
+                    "middle": [],
+                    "last": "Theurer",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.E.",
+                    "middle": [],
+                    "last": "Amrine",
+                    "suffix": ""
+                },
+                {
+                    "first": "B.J.",
+                    "middle": [],
+                    "last": "White",
+                    "suffix": ""
+                }
+            ],
+            "year": 2013,
+            "venue": "Vet. Clin. N. Am. Food Anim. Pract.",
+            "volume": "29",
+            "issn": "",
+            "pages": "59-74",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.cvfa.2012.11.011"
+                ]
+            }
+        },
+        "BIBREF16": {
+            "title": "Automated monitoring of behavioral-based animal welfare indicators",
+            "authors": [
+                {
+                    "first": "J.",
+                    "middle": [],
+                    "last": "Rushen",
+                    "suffix": ""
+                },
+                {
+                    "first": "N.",
+                    "middle": [],
+                    "last": "Chapinal",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.M.",
+                    "middle": [],
+                    "last": "de Passille",
+                    "suffix": ""
+                }
+            ],
+            "year": 2012,
+            "venue": "Anim. Welf.",
+            "volume": "21",
+            "issn": "",
+            "pages": "339-350",
+            "other_ids": {
+                "DOI": [
+                    "10.7120/09627286.21.3.339"
+                ]
+            }
+        },
+        "BIBREF17": {
+            "title": "A turbidity test for estimation of immune globulin levels in neonatal calf serum",
+            "authors": [
+                {
+                    "first": "A.D.",
+                    "middle": [],
+                    "last": "McEwan",
+                    "suffix": ""
+                },
+                {
+                    "first": "E.W.",
+                    "middle": [],
+                    "last": "Fisher",
+                    "suffix": ""
+                },
+                {
+                    "first": "I.E.",
+                    "middle": [],
+                    "last": "Selman",
+                    "suffix": ""
+                },
+                {
+                    "first": "W.J.",
+                    "middle": [],
+                    "last": "Penhale",
+                    "suffix": ""
+                }
+            ],
+            "year": 1970,
+            "venue": "Clin. Chim. Acta",
+            "volume": "27",
+            "issn": "",
+            "pages": "155-163",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/0009-8981(70)90390-6"
+                ]
+            }
+        },
+        "BIBREF18": {
+            "title": "Timely diagnosis of dairy calf respiratory disease using a standardized scoring system",
+            "authors": [
+                {
+                    "first": "S.M.",
+                    "middle": [],
+                    "last": "McGuirk",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.F.",
+                    "middle": [],
+                    "last": "Peek",
+                    "suffix": ""
+                }
+            ],
+            "year": 2014,
+            "venue": "Anim. Health Res. Rev.",
+            "volume": "15",
+            "issn": "",
+            "pages": "145-147",
+            "other_ids": {
+                "DOI": [
+                    "10.1017/S1466252314000267"
+                ]
+            }
+        },
+        "BIBREF19": {
+            "title": "Eye temperature and heart rate variability of calves disbudded with or without local anaesthetic",
+            "authors": [
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Stewart",
+                    "suffix": ""
+                },
+                {
+                    "first": "K.J.",
+                    "middle": [],
+                    "last": "Stafford",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.K.",
+                    "middle": [],
+                    "last": "Dowling",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.L.",
+                    "middle": [],
+                    "last": "Schaefer",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.R.",
+                    "middle": [],
+                    "last": "Webster",
+                    "suffix": ""
+                }
+            ],
+            "year": 2008,
+            "venue": "Physiol. Behav.",
+            "volume": "93",
+            "issn": "",
+            "pages": "789-797",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.physbeh.2007.11.044"
+                ]
+            }
+        },
+        "BIBREF20": {
+            "title": "Weaning distress in dairy calves: Effects of alternative weaning procedures",
+            "authors": [
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Budzynska",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.M.",
+                    "middle": [],
+                    "last": "Weary",
+                    "suffix": ""
+                }
+            ],
+            "year": 2008,
+            "venue": "Appl. Anim. Behav. Sci.",
+            "volume": "112",
+            "issn": "",
+            "pages": "33-39",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.applanim.2007.08.004"
+                ]
+            }
+        },
+        "BIBREF21": {
+            "title": "Technical note: Evaluation of data loggers for measuring lying behavior in dairy calves",
+            "authors": [
+                {
+                    "first": "S.",
+                    "middle": [],
+                    "last": "Bonk",
+                    "suffix": ""
+                },
+                {
+                    "first": "O.",
+                    "middle": [],
+                    "last": "Burfeind",
+                    "suffix": ""
+                },
+                {
+                    "first": "V.S.",
+                    "middle": [],
+                    "last": "Suthar",
+                    "suffix": ""
+                },
+                {
+                    "first": "W.",
+                    "middle": [],
+                    "last": "Heuwieser",
+                    "suffix": ""
+                }
+            ],
+            "year": 2013,
+            "venue": "J. Dairy Sci.",
+            "volume": "96",
+            "issn": "",
+            "pages": "3265-3271",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2012-6003"
+                ]
+            }
+        },
+        "BIBREF22": {
+            "title": "Invited review: The welfare of dairy cattle--key concepts and the role of science",
+            "authors": [
+                {
+                    "first": "M.A.",
+                    "middle": [],
+                    "last": "Von Keyserlingk",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.",
+                    "middle": [],
+                    "last": "Rushen",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.M.",
+                    "middle": [],
+                    "last": "de Passille",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.M.",
+                    "middle": [],
+                    "last": "Weary",
+                    "suffix": ""
+                }
+            ],
+            "year": 2009,
+            "venue": "J. Dairy Sci.",
+            "volume": "92",
+            "issn": "",
+            "pages": "4101-4111",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2009-2326"
+                ]
+            }
+        },
+        "BIBREF23": {
+            "title": "Validating the IceRobotics IceQube tri-axial accelerometer for measuring daily lying duration in dairy calves",
+            "authors": [
+                {
+                    "first": "G.",
+                    "middle": [],
+                    "last": "Finney",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "Gordon",
+                    "suffix": ""
+                },
+                {
+                    "first": "G.",
+                    "middle": [],
+                    "last": "Scoley",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.J.",
+                    "middle": [],
+                    "last": "Morrison",
+                    "suffix": ""
+                }
+            ],
+            "year": 2018,
+            "venue": "Livest. Sci.",
+            "volume": "214",
+            "issn": "",
+            "pages": "83-87",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.livsci.2018.05.014"
+                ]
+            }
+        },
+        "BIBREF24": {
+            "title": "Heart rate variability: A biomarker of dairy calf welfare",
+            "authors": [
+                {
+                    "first": "J.B.",
+                    "middle": [],
+                    "last": "Clapp",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.",
+                    "middle": [],
+                    "last": "Croarkin",
+                    "suffix": ""
+                },
+                {
+                    "first": "C.",
+                    "middle": [],
+                    "last": "Dolphin",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.K.",
+                    "middle": [],
+                    "last": "Lyons",
+                    "suffix": ""
+                }
+            ],
+            "year": 2014,
+            "venue": "Anim. Prod. Sci.",
+            "volume": "55",
+            "issn": "",
+            "pages": "1289-1294",
+            "other_ids": {
+                "DOI": [
+                    "10.1071/AN14093"
+                ]
+            }
+        },
+        "BIBREF25": {
+            "title": "Heart rate variability: Standards of measurement, physiological interpretation and clinical use. Task Force of the European Society of Cardiology and the North American Society of Pacing and Electrophysiology",
+            "authors": [],
+            "year": 1996,
+            "venue": "Circulation",
+            "volume": "93",
+            "issn": "",
+            "pages": "1043-1065",
+            "other_ids": {
+                "DOI": [
+                    "10.1161/01.CIR.93.5.1043"
+                ]
+            }
+        },
+        "BIBREF26": {
+            "title": "ARTiiFACT: A tool for heart rate artifact processing and heart rate variability analysis",
+            "authors": [
+                {
+                    "first": "T.",
+                    "middle": [],
+                    "last": "Kaufmann",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.",
+                    "middle": [],
+                    "last": "S\u00fctterlin",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.M.",
+                    "middle": [],
+                    "last": "Schulz",
+                    "suffix": ""
+                },
+                {
+                    "first": "C.",
+                    "middle": [],
+                    "last": "V\u00f6gele",
+                    "suffix": ""
+                }
+            ],
+            "year": 2011,
+            "venue": "Behav. Res. Methods",
+            "volume": "43",
+            "issn": "",
+            "pages": "1161-1170",
+            "other_ids": {
+                "DOI": [
+                    "10.3758/s13428-011-0107-7"
+                ]
+            }
+        },
+        "BIBREF27": {
+            "title": "Effects of local anesthetic and a nonsteroidal antiinflammatory drug on pain responses of dairy calves to hot-iron dehorning",
+            "authors": [
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Stewart",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.M.",
+                    "middle": [],
+                    "last": "Stookey",
+                    "suffix": ""
+                },
+                {
+                    "first": "K.J.",
+                    "middle": [],
+                    "last": "Stafford",
+                    "suffix": ""
+                },
+                {
+                    "first": "C.B.",
+                    "middle": [],
+                    "last": "Tucker",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.R.",
+                    "middle": [],
+                    "last": "Rogers",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.K.",
+                    "middle": [],
+                    "last": "Dowling",
+                    "suffix": ""
+                },
+                {
+                    "first": "G.A.",
+                    "middle": [],
+                    "last": "Verkerk",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.L.",
+                    "middle": [],
+                    "last": "Schaefer",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.R.",
+                    "middle": [],
+                    "last": "Webster",
+                    "suffix": ""
+                }
+            ],
+            "year": 2009,
+            "venue": "J. Dairy Sci.",
+            "volume": "92",
+            "issn": "",
+            "pages": "1512-1519",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2008-1578"
+                ]
+            }
+        },
+        "BIBREF28": {
+            "title": "Heart rate variability as a measure of autonomic regulation of cardiac activity for assessing stress and welfare in farm animals\u2014A review",
+            "authors": [
+                {
+                    "first": "E.",
+                    "middle": [],
+                    "last": "Von Borell",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.",
+                    "middle": [],
+                    "last": "Langbein",
+                    "suffix": ""
+                },
+                {
+                    "first": "G.",
+                    "middle": [],
+                    "last": "Despres",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.",
+                    "middle": [],
+                    "last": "Hansen",
+                    "suffix": ""
+                },
+                {
+                    "first": "C.",
+                    "middle": [],
+                    "last": "Leterrier",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.",
+                    "middle": [],
+                    "last": "Marchant-Forde",
+                    "suffix": ""
+                },
+                {
+                    "first": "R.",
+                    "middle": [],
+                    "last": "Marchant-Forde",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Minero",
+                    "suffix": ""
+                },
+                {
+                    "first": "E.",
+                    "middle": [],
+                    "last": "Mohr",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "Prunier",
+                    "suffix": ""
+                }
+            ],
+            "year": 2007,
+            "venue": "Physiol. Behav.",
+            "volume": "92",
+            "issn": "",
+            "pages": "293-316",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.physbeh.2007.01.007"
+                ]
+            }
+        },
+        "BIBREF29": {
+            "title": "Associations between milk intake and activity in the first days of a calf\u2019s life and later growth and health",
+            "authors": [
+                {
+                    "first": "A.M.",
+                    "middle": [],
+                    "last": "De Passille",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Rabeyrin",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.",
+                    "middle": [],
+                    "last": "Rushen",
+                    "suffix": ""
+                }
+            ],
+            "year": 2016,
+            "venue": "Appl. Anim. Behav. Sci.",
+            "volume": "175",
+            "issn": "",
+            "pages": "2-7",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.applanim.2014.10.002"
+                ]
+            }
+        },
+        "BIBREF30": {
+            "title": "Behavioral indicators of hunger in dairy calves",
+            "authors": [
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "De Paula Vieira",
+                    "suffix": ""
+                },
+                {
+                    "first": "V.",
+                    "middle": [],
+                    "last": "Guesdon",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.M.",
+                    "middle": [],
+                    "last": "de Passill\u00e9",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.A.G.",
+                    "middle": [],
+                    "last": "von Keyserlingk",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.M.",
+                    "middle": [],
+                    "last": "Weary",
+                    "suffix": ""
+                }
+            ],
+            "year": 2008,
+            "venue": "Appl. Anim. Behav. Sci.",
+            "volume": "109",
+            "issn": "",
+            "pages": "180-189",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.applanim.2007.03.006"
+                ]
+            }
+        },
+        "BIBREF31": {
+            "title": "Welfare implication of measuring heart rate and heart rate variability in dairy cattle: Literature review and conclusions for future research",
+            "authors": [
+                {
+                    "first": "L.",
+                    "middle": [],
+                    "last": "Kovacs",
+                    "suffix": ""
+                },
+                {
+                    "first": "V.",
+                    "middle": [],
+                    "last": "Jurkovich",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Bakony",
+                    "suffix": ""
+                },
+                {
+                    "first": "O.",
+                    "middle": [],
+                    "last": "Szenci",
+                    "suffix": ""
+                },
+                {
+                    "first": "P.",
+                    "middle": [],
+                    "last": "Poti",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.",
+                    "middle": [],
+                    "last": "Tozser",
+                    "suffix": ""
+                }
+            ],
+            "year": 2014,
+            "venue": "Animal",
+            "volume": "8",
+            "issn": "",
+            "pages": "316-330",
+            "other_ids": {
+                "DOI": [
+                    "10.1017/S1751731113002140"
+                ]
+            }
+        },
+        "BIBREF32": {
+            "title": "Heart rate variability\u2014A noninvasive approach to measure stress in calves and cows",
+            "authors": [
+                {
+                    "first": "E.",
+                    "middle": [],
+                    "last": "Mohr",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.",
+                    "middle": [],
+                    "last": "Langbein",
+                    "suffix": ""
+                },
+                {
+                    "first": "G.",
+                    "middle": [],
+                    "last": "Nurnberg",
+                    "suffix": ""
+                }
+            ],
+            "year": 2002,
+            "venue": "Physiol. Behav.",
+            "volume": "75",
+            "issn": "",
+            "pages": "251-259",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/S0031-9384(01)00651-5"
+                ]
+            }
+        },
+        "BIBREF33": {
+            "title": "Effects of milk feeding volume and frequency on body weight and health of dairy heifer calves",
+            "authors": [
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Conneely",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.P.",
+                    "middle": [],
+                    "last": "Berry",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.P.",
+                    "middle": [],
+                    "last": "Murphy",
+                    "suffix": ""
+                },
+                {
+                    "first": "I.",
+                    "middle": [],
+                    "last": "Lorenz",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.L.",
+                    "middle": [],
+                    "last": "Doherty",
+                    "suffix": ""
+                },
+                {
+                    "first": "E.",
+                    "middle": [],
+                    "last": "Kennedy",
+                    "suffix": ""
+                }
+            ],
+            "year": 2014,
+            "venue": "Livest. Sci.",
+            "volume": "161",
+            "issn": "",
+            "pages": "90-94",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.livsci.2013.12.022"
+                ]
+            }
+        },
+        "BIBREF34": {
+            "title": "Factors associated with morbidity, mortality, and growth of dairy heifer calves up to 3 months of age",
+            "authors": [
+                {
+                    "first": "M.C.",
+                    "middle": [],
+                    "last": "Windeyer",
+                    "suffix": ""
+                },
+                {
+                    "first": "K.E.",
+                    "middle": [],
+                    "last": "Leslie",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.M.",
+                    "middle": [],
+                    "last": "Godden",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.C.",
+                    "middle": [],
+                    "last": "Hodgins",
+                    "suffix": ""
+                },
+                {
+                    "first": "K.D.",
+                    "middle": [],
+                    "last": "Lissemore",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.J.",
+                    "middle": [],
+                    "last": "LeBlanc",
+                    "suffix": ""
+                }
+            ],
+            "year": 2014,
+            "venue": "Prev. Vet. Med.",
+            "volume": "113",
+            "issn": "",
+            "pages": "231-240",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.prevetmed.2013.10.019"
+                ]
+            }
+        },
+        "BIBREF35": {
+            "title": "Calf health from birth to weaning. I. General aspects of disease prevention",
+            "authors": [
+                {
+                    "first": "I.",
+                    "middle": [],
+                    "last": "Lorenz",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.F.",
+                    "middle": [],
+                    "last": "Mee",
+                    "suffix": ""
+                },
+                {
+                    "first": "B.",
+                    "middle": [],
+                    "last": "Earley",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.J.",
+                    "middle": [],
+                    "last": "More",
+                    "suffix": ""
+                }
+            ],
+            "year": 2011,
+            "venue": "Irish Vet. J.",
+            "volume": "64",
+            "issn": "",
+            "pages": "1-8",
+            "other_ids": {
+                "DOI": [
+                    "10.1186/2046-0481-64-10"
+                ]
+            }
+        },
+        "BIBREF36": {
+            "title": "Factors influencing heifer survival and fertility on commercial dairy farms",
+            "authors": [
+                {
+                    "first": "D.C.",
+                    "middle": [],
+                    "last": "Wathes",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.S.",
+                    "middle": [],
+                    "last": "Brickell",
+                    "suffix": ""
+                },
+                {
+                    "first": "N.E.",
+                    "middle": [],
+                    "last": "Bourne",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "Swali",
+                    "suffix": ""
+                },
+                {
+                    "first": "Z.",
+                    "middle": [],
+                    "last": "Cheng",
+                    "suffix": ""
+                }
+            ],
+            "year": 2008,
+            "venue": "Animal",
+            "volume": "2",
+            "issn": "",
+            "pages": "1135-1143",
+            "other_ids": {
+                "DOI": [
+                    "10.1017/S1751731108002322"
+                ]
+            }
+        },
+        "BIBREF37": {
+            "title": "Early growth effects on subsequent health and performance of dairy heifers",
+            "authors": [
+                {
+                    "first": "J.K.",
+                    "middle": [],
+                    "last": "Drackley",
+                    "suffix": ""
+                }
+            ],
+            "year": 2005,
+            "venue": "Calf and Heifer Rearing",
+            "volume": "",
+            "issn": "",
+            "pages": "213-235",
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF38": {
+            "title": "Composition of growth of Holstein calves fed milk replacer from birth to 105-kg body weight",
+            "authors": [
+                {
+                    "first": "M.C.",
+                    "middle": [],
+                    "last": "Diaz",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.E.",
+                    "middle": [],
+                    "last": "Van Amburgh",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.M.",
+                    "middle": [],
+                    "last": "Smith",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.M.",
+                    "middle": [],
+                    "last": "Kelsey",
+                    "suffix": ""
+                },
+                {
+                    "first": "E.L.",
+                    "middle": [],
+                    "last": "Hutten",
+                    "suffix": ""
+                }
+            ],
+            "year": 2001,
+            "venue": "J. Dairy Sci.",
+            "volume": "84",
+            "issn": "",
+            "pages": "830-842",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.S0022-0302(01)74541-9"
+                ]
+            }
+        },
+        "BIBREF39": {
+            "title": "Morbidity in Swedish dairy calves from birth to 90 days of age and individual calf-level risk factors for infectious diseases",
+            "authors": [
+                {
+                    "first": "C.",
+                    "middle": [],
+                    "last": "Svensson",
+                    "suffix": ""
+                },
+                {
+                    "first": "K.",
+                    "middle": [],
+                    "last": "Lundborg",
+                    "suffix": ""
+                },
+                {
+                    "first": "U.",
+                    "middle": [],
+                    "last": "Emanuelson",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.-O.",
+                    "middle": [],
+                    "last": "Olsson",
+                    "suffix": ""
+                }
+            ],
+            "year": 2003,
+            "venue": "Prev. Vet. Med.",
+            "volume": "58",
+            "issn": "",
+            "pages": "179-197",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/S0167-5877(03)00046-1"
+                ]
+            }
+        },
+        "BIBREF40": {
+            "title": "Stress, immunity, and the management of calves",
+            "authors": [
+                {
+                    "first": "L.E.",
+                    "middle": [],
+                    "last": "Hulbert",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.J.",
+                    "middle": [],
+                    "last": "Moisa",
+                    "suffix": ""
+                }
+            ],
+            "year": 2016,
+            "venue": "J. Dairy Sci.",
+            "volume": "99",
+            "issn": "",
+            "pages": "3199-3216",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2015-10198"
+                ]
+            }
+        },
+        "BIBREF41": {
+            "title": "Assessing the effects of weekly preweaning health scores on dairy calf mortality and productivity parameters: Cohort study",
+            "authors": [
+                {
+                    "first": "S.A.",
+                    "middle": [],
+                    "last": "Mahendran",
+                    "suffix": ""
+                },
+                {
+                    "first": "R.",
+                    "middle": [],
+                    "last": "Booth",
+                    "suffix": ""
+                },
+                {
+                    "first": "L.",
+                    "middle": [],
+                    "last": "Beekhuis",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "Manning",
+                    "suffix": ""
+                },
+                {
+                    "first": "T.",
+                    "middle": [],
+                    "last": "Blackmore",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "Vanhoudt",
+                    "suffix": ""
+                },
+                {
+                    "first": "N.",
+                    "middle": [],
+                    "last": "Bell",
+                    "suffix": ""
+                }
+            ],
+            "year": 2017,
+            "venue": "Vet. Rec.",
+            "volume": "181",
+            "issn": "",
+            "pages": "1-7",
+            "other_ids": {
+                "DOI": [
+                    "10.1136/vr.104197"
+                ]
+            }
+        },
+        "BIBREF42": {
+            "title": "Infrared thermography in animal production: An overview",
+            "authors": [
+                {
+                    "first": "C.",
+                    "middle": [],
+                    "last": "McManus",
+                    "suffix": ""
+                },
+                {
+                    "first": "C.B.",
+                    "middle": [],
+                    "last": "Tanure",
+                    "suffix": ""
+                },
+                {
+                    "first": "V.",
+                    "middle": [],
+                    "last": "Peripolli",
+                    "suffix": ""
+                },
+                {
+                    "first": "L.",
+                    "middle": [],
+                    "last": "Seixas",
+                    "suffix": ""
+                },
+                {
+                    "first": "V.",
+                    "middle": [],
+                    "last": "Fischer",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.M.",
+                    "middle": [],
+                    "last": "Gabbi",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.R.O.",
+                    "middle": [],
+                    "last": "Menegassi",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.T.",
+                    "middle": [],
+                    "last": "Stumpf",
+                    "suffix": ""
+                },
+                {
+                    "first": "G.J.",
+                    "middle": [],
+                    "last": "Kolling",
+                    "suffix": ""
+                },
+                {
+                    "first": "E.",
+                    "middle": [],
+                    "last": "Dias",
+                    "suffix": ""
+                }
+            ],
+            "year": 2016,
+            "venue": "Comput. Electron. Agric.",
+            "volume": "123",
+            "issn": "",
+            "pages": "10-16",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.compag.2016.01.027"
+                ]
+            }
+        },
+        "BIBREF43": {
+            "title": "Infrared thermography as a non-invasive tool to study animal welfare",
+            "authors": [
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Stewart",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.R.",
+                    "middle": [],
+                    "last": "Webster",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.L.",
+                    "middle": [],
+                    "last": "Schaefer",
+                    "suffix": ""
+                },
+                {
+                    "first": "N.J.",
+                    "middle": [],
+                    "last": "Cook",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.L.",
+                    "middle": [],
+                    "last": "Scott",
+                    "suffix": ""
+                }
+            ],
+            "year": 2005,
+            "venue": "Anim. Welf.",
+            "volume": "14",
+            "issn": "",
+            "pages": "319-325",
+            "other_ids": {
+                "DOI": []
+            }
+        },
+        "BIBREF44": {
+            "title": "Impact of conventional or intensive milk replacer programs on Holstein heifer performance through six months of age and during first lactation",
+            "authors": [
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Raeth-Knight",
+                    "suffix": ""
+                },
+                {
+                    "first": "H.",
+                    "middle": [],
+                    "last": "Chester-Jones",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.",
+                    "middle": [],
+                    "last": "Hayes",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.",
+                    "middle": [],
+                    "last": "Linn",
+                    "suffix": ""
+                },
+                {
+                    "first": "R.",
+                    "middle": [],
+                    "last": "Larson",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.",
+                    "middle": [],
+                    "last": "Ziegler",
+                    "suffix": ""
+                },
+                {
+                    "first": "B.",
+                    "middle": [],
+                    "last": "Ziegler",
+                    "suffix": ""
+                },
+                {
+                    "first": "N.",
+                    "middle": [],
+                    "last": "Broadwater",
+                    "suffix": ""
+                }
+            ],
+            "year": 2009,
+            "venue": "J. Dairy Sci.",
+            "volume": "92",
+            "issn": "",
+            "pages": "799-809",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2008-1470"
+                ]
+            }
+        },
+        "BIBREF45": {
+            "title": "Early detection and prediction of infection using infrared thermography",
+            "authors": [
+                {
+                    "first": "A.L.",
+                    "middle": [],
+                    "last": "Schaefer",
+                    "suffix": ""
+                },
+                {
+                    "first": "N.",
+                    "middle": [],
+                    "last": "Cook",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.V.",
+                    "middle": [],
+                    "last": "Tessaro",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.",
+                    "middle": [],
+                    "last": "Deregt",
+                    "suffix": ""
+                },
+                {
+                    "first": "G.",
+                    "middle": [],
+                    "last": "Desroches",
+                    "suffix": ""
+                },
+                {
+                    "first": "P.L.",
+                    "middle": [],
+                    "last": "Dubeski",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.K.W.",
+                    "middle": [],
+                    "last": "Tong",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.L.",
+                    "middle": [],
+                    "last": "Godson",
+                    "suffix": ""
+                }
+            ],
+            "year": 2004,
+            "venue": "Can. J. Anim. Sci.",
+            "volume": "84",
+            "issn": "",
+            "pages": "73-80",
+            "other_ids": {
+                "DOI": [
+                    "10.4141/A02-104"
+                ]
+            }
+        },
+        "BIBREF46": {
+            "title": "The metabolism and thermal regulation of calves in the first month of life",
+            "authors": [
+                {
+                    "first": "E.",
+                    "middle": [],
+                    "last": "Gonzalez-Jimenez",
+                    "suffix": ""
+                },
+                {
+                    "first": "K.L.",
+                    "middle": [],
+                    "last": "Blaxter",
+                    "suffix": ""
+                }
+            ],
+            "year": 1962,
+            "venue": "Br. J. Nutr.",
+            "volume": "16",
+            "issn": "",
+            "pages": "199-212",
+            "other_ids": {
+                "DOI": [
+                    "10.1079/BJN19620021"
+                ]
+            }
+        },
+        "BIBREF47": {
+            "title": "Invited review: Transitioning from milk to solid feed in dairy heifers",
+            "authors": [
+                {
+                    "first": "M.A.",
+                    "middle": [],
+                    "last": "Khan",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "Bach",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.M.",
+                    "middle": [],
+                    "last": "Weary",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.A.G.",
+                    "middle": [],
+                    "last": "von Keyserlingk",
+                    "suffix": ""
+                }
+            ],
+            "year": 2016,
+            "venue": "J. Dairy Sci.",
+            "volume": "99",
+            "issn": "",
+            "pages": "885-902",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2015-9975"
+                ]
+            }
+        },
+        "BIBREF48": {
+            "title": "Invited review: Influence of climatic conditions on the development, performance, and health of calves",
+            "authors": [
+                {
+                    "first": "L.",
+                    "middle": [],
+                    "last": "Roland",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Drillich",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.",
+                    "middle": [],
+                    "last": "Klein-Jobstl",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Iwersen",
+                    "suffix": ""
+                }
+            ],
+            "year": 2016,
+            "venue": "J. Dairy Sci.",
+            "volume": "99",
+            "issn": "",
+            "pages": "2438-2452",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2015-9901"
+                ]
+            }
+        },
+        "BIBREF49": {
+            "title": "Mapping the body surface temperature of cattle by infrared thermography",
+            "authors": [
+                {
+                    "first": "M.S.V.",
+                    "middle": [],
+                    "last": "Salles",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.C.",
+                    "middle": [],
+                    "last": "da Silva",
+                    "suffix": ""
+                },
+                {
+                    "first": "F.A.",
+                    "middle": [],
+                    "last": "Salles",
+                    "suffix": ""
+                },
+                {
+                    "first": "L.C.",
+                    "middle": [],
+                    "last": "Roma",
+                    "suffix": ""
+                },
+                {
+                    "first": "L.",
+                    "middle": [],
+                    "last": "El Faro",
+                    "suffix": ""
+                },
+                {
+                    "first": "P.A.",
+                    "middle": [],
+                    "last": "Bustos Mac Lean",
+                    "suffix": ""
+                },
+                {
+                    "first": "C.E.",
+                    "middle": [],
+                    "last": "Lins de Oliveira",
+                    "suffix": ""
+                },
+                {
+                    "first": "L.S.",
+                    "middle": [],
+                    "last": "Martello",
+                    "suffix": ""
+                }
+            ],
+            "year": 2016,
+            "venue": "J. Biol.",
+            "volume": "62",
+            "issn": "",
+            "pages": "63-69",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.jtherbio.2016.10.003"
+                ]
+            }
+        },
+        "BIBREF50": {
+            "title": "Technical note: Preliminary evaluation of an automated indwelling rumen temperature bolus measurement system to detect pyrexia in preweaned dairy calves",
+            "authors": [
+                {
+                    "first": "W.A.",
+                    "middle": [],
+                    "last": "Knauer",
+                    "suffix": ""
+                },
+                {
+                    "first": "S.M.",
+                    "middle": [],
+                    "last": "Godden",
+                    "suffix": ""
+                },
+                {
+                    "first": "N.",
+                    "middle": [],
+                    "last": "McDonald",
+                    "suffix": ""
+                }
+            ],
+            "year": 2016,
+            "venue": "J. Dairy Sci.",
+            "volume": "99",
+            "issn": "",
+            "pages": "9925-9930",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2015-10770"
+                ]
+            }
+        },
+        "BIBREF51": {
+            "title": "Infrared thermography detects febrile and behavioral responses to vaccination of weaned piglets",
+            "authors": [
+                {
+                    "first": "N.J.",
+                    "middle": [],
+                    "last": "Cook",
+                    "suffix": ""
+                },
+                {
+                    "first": "B.",
+                    "middle": [],
+                    "last": "Chabot",
+                    "suffix": ""
+                },
+                {
+                    "first": "T.",
+                    "middle": [],
+                    "last": "Lui",
+                    "suffix": ""
+                },
+                {
+                    "first": "C.J.",
+                    "middle": [],
+                    "last": "Bench",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.L.",
+                    "middle": [],
+                    "last": "Schaefer",
+                    "suffix": ""
+                }
+            ],
+            "year": 2015,
+            "venue": "Animal",
+            "volume": "9",
+            "issn": "",
+            "pages": "339-346",
+            "other_ids": {
+                "DOI": [
+                    "10.1017/S1751731114002481"
+                ]
+            }
+        },
+        "BIBREF52": {
+            "title": "The non-invasive and automated detection of bovine respiratory disease onset in receiver calves using infrared thermography",
+            "authors": [
+                {
+                    "first": "A.L.",
+                    "middle": [],
+                    "last": "Schaefer",
+                    "suffix": ""
+                },
+                {
+                    "first": "N.J.",
+                    "middle": [],
+                    "last": "Cook",
+                    "suffix": ""
+                },
+                {
+                    "first": "C.",
+                    "middle": [],
+                    "last": "Bench",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.B.",
+                    "middle": [],
+                    "last": "Chabot",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.",
+                    "middle": [],
+                    "last": "Colyn",
+                    "suffix": ""
+                },
+                {
+                    "first": "T.",
+                    "middle": [],
+                    "last": "Liu",
+                    "suffix": ""
+                },
+                {
+                    "first": "E.K.",
+                    "middle": [],
+                    "last": "Okine",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Stewart",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.R.",
+                    "middle": [],
+                    "last": "Webster",
+                    "suffix": ""
+                }
+            ],
+            "year": 2012,
+            "venue": "Res. Vet. Sci.",
+            "volume": "93",
+            "issn": "",
+            "pages": "928-935",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.rvsc.2011.09.021"
+                ]
+            }
+        },
+        "BIBREF53": {
+            "title": "Effects of ad libitum milk intake on dairy calves",
+            "authors": [
+                {
+                    "first": "J.",
+                    "middle": [],
+                    "last": "Jasper",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.M.",
+                    "middle": [],
+                    "last": "Weary",
+                    "suffix": ""
+                }
+            ],
+            "year": 2002,
+            "venue": "J. Dairy Sci.",
+            "volume": "85",
+            "issn": "",
+            "pages": "3054-3058",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.S0022-0302(02)74391-9"
+                ]
+            }
+        },
+        "BIBREF54": {
+            "title": "Effect of level of milk replacer fed to Holstein calves on performance during the preweaning period and starter digestibility at weaning",
+            "authors": [
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Terr\u00e9",
+                    "suffix": ""
+                },
+                {
+                    "first": "M.",
+                    "middle": [],
+                    "last": "Devant",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.",
+                    "middle": [],
+                    "last": "Bach",
+                    "suffix": ""
+                }
+            ],
+            "year": 2007,
+            "venue": "Livest. Sci.",
+            "volume": "110",
+            "issn": "",
+            "pages": "82-88",
+            "other_ids": {
+                "DOI": [
+                    "10.1016/j.livsci.2006.10.001"
+                ]
+            }
+        },
+        "BIBREF55": {
+            "title": "Duration of weaning, starter intake, and weight gain of dairy calves fed large amounts of milk",
+            "authors": [
+                {
+                    "first": "B.C.",
+                    "middle": [],
+                    "last": "Sweeney",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.",
+                    "middle": [],
+                    "last": "Rushen",
+                    "suffix": ""
+                },
+                {
+                    "first": "D.M.",
+                    "middle": [],
+                    "last": "Weary",
+                    "suffix": ""
+                },
+                {
+                    "first": "A.M.",
+                    "middle": [],
+                    "last": "de Passille",
+                    "suffix": ""
+                }
+            ],
+            "year": 2010,
+            "venue": "J. Dairy Sci.",
+            "volume": "93",
+            "issn": "",
+            "pages": "148-152",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2009-2427"
+                ]
+            }
+        },
+        "BIBREF56": {
+            "title": "Weaning age of calves fed a high milk allowance by automated feeders: Effects on feed, water, and energy intake, behavioral signs of hunger, and weight gains",
+            "authors": [
+                {
+                    "first": "A.M.",
+                    "middle": [],
+                    "last": "De Passille",
+                    "suffix": ""
+                },
+                {
+                    "first": "T.F.",
+                    "middle": [],
+                    "last": "Borderas",
+                    "suffix": ""
+                },
+                {
+                    "first": "J.",
+                    "middle": [],
+                    "last": "Rushen",
+                    "suffix": ""
+                }
+            ],
+            "year": 2011,
+            "venue": "J. Dairy Sci.",
+            "volume": "94",
+            "issn": "",
+            "pages": "1401-1408",
+            "other_ids": {
+                "DOI": [
+                    "10.3168/jds.2010-3441"
+                ]
+            }
+        }
+    }
+}
