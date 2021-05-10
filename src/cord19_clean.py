@@ -53,7 +53,6 @@ if __name__ == '__main__':
     # drop duplicates
     df['title_lower'] = df.title.str.lower()
     df_deduplicated = df.drop_duplicates(subset='title_lower').drop(columns='title_lower')
-    df_deduplicated.to_csv(ppath,index=False)
     print('Length of csv once articles deduplicated: \t{}'.format(df_deduplicated.shape[0])) # 56341 
 
 
