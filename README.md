@@ -39,7 +39,7 @@ replacing `/path/to/` with the path to where you saved the `stanford-corenlp-4.2
 
 ####  Step 3. Clean the Data
 ```
-python src/cord19_clean.py
+python src/cord19_clean.py --root ./raw_data/
 ```
 
 ####  Step 4. Sentence Splitting and Tokenization

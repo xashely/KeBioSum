@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
     # pandas with tqdm requires manual update for now
     df_len = df.shape[0]
-    df_len = 10
+    # df_len = 10
     no_path_counter = 0
     pmc_files = 0
 
@@ -70,6 +70,7 @@ if __name__ == '__main__':
     with open(ppath, 'w') as f:
         w = csv.writer(f)
 
+        print('Cleaning aving off only pubmed files to {}...'.format(post_path))
         with tqdm(total=df_len) as pbar:
             for i, row in df.iterrows():
                 if i >= df_len:
@@ -77,17 +78,16 @@ if __name__ == '__main__':
                 pbar.update(1)
 
                 # JB: is there a reason we only want pubmed articles rather than other articles?
-                print('Saving off only pubmed files...')
                 fpath = os.path.join(pmc_path, '{}.xml.json'.format(row['pmcid'])) 
                 if not os.path.isfile(fpath):
                     no_path_counter +=1
                     continue
                 with open(fpath, 'r') as fi: # before the script was only reading and wasn't writing out files (only 'r' param)
                     json_dict = json.load(fi)
-                # clean data
-                cleaned_dict = clean_json(json_dict)
-                # include abstract from paper for gold summary
-                cleaned_dict['abstract'] = row['abstract']
+                    # clean data
+                    cleaned_dict = clean_json(json_dict)
+                    # include abstract from paper for gold summary
+                    cleaned_dict['abstract'] = row['abstract']
 
                 if not write_head:
                     w.writerow(cleaned_dict.keys())
