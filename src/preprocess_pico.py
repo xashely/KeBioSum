@@ -17,6 +17,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-raw_path", default="./token_data/", type=str)
 parser.add_argument("-save_path", default="/home/qianqian/scibert/data/pico/ebmnlp/", type=str)
 
+args = parser.parse_args()
 raw_path = os.path.abspath(args.raw_path)
 save_path = os.path.abspath(args.save_path)
 
