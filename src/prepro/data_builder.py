@@ -198,7 +198,7 @@ def tokenize(args):
     # write out new csv containing files we use in our dataset
     with open(new_meta_path, 'w') as f:
         w = csv.writer(f)
-        for i,row in tqdm(df.iterrows(),total=df.shape[0])
+        for i,row in tqdm(df.iterrows(),total=df.shape[0]):
                 
             # read in pubmed file if available
             pid = row['pmcid']
