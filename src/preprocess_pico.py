@@ -60,13 +60,13 @@ with tqdm(total=len(corpora)) as pbar:
                         if not newline:
                             f_new.write('\n')
               
-            f_new.write('\n\n')
-            if count != 0:
-                print("id, count:", i, count)
-            i += 1
-            #if i == 60:
-            #    break
-            pbar.update()
+                f_new.write('\n\n')
+                if count != 0:
+                    print("id, count:", i, count)
+                i += 1
+                #if i == 60:
+                #    break
+                pbar.update()
     pbar.close()
 
 
