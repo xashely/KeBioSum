@@ -164,58 +164,78 @@ def load_xml(p):
 
 
 def tokenize(args):
-    stories_dir = os.path.abspath(args.raw_path)
-    tokenized_stories_dir = os.path.abspath(args.save_path)
-    meta_path = os.path.join(stories_dir, 'metadata.csv')
-    pmc_dir = os.path.join(stories_dir, 'document_parses', 'pmc_json')
-    txt_dir = os.path.join(stories_dir, 'document_parses', 'txt_json')
+    root_data_dir = os.path.abspath(args.raw_path)
+    tokenized_data_dir = os.path.abspath(args.save_path)
+    meta_path = os.path.join(root_data_dir, 'metadata.csv')
+    new_meta_path = os.path.join(root_data_dir, 'PMC.csv')
+    pmc_dir = os.path.join(root_data_dir, 'document_parses', 'pmc_json')
+    txt_dir = os.path.join(root_data_dir, 'document_parses', 'txt_json')
+    
+    files_count_real = 0
+    no_path_counter = 0
+    
     print('... Loading PMC data from {}'.format(pmc_dir))
 
-    with open(meta_path, 'r') as f:
-        df = pd.read_csv(meta_path, sep=',', error_bad_lines=False, index_col=False, dtype='unicode')
-        len_before = len(df)
-        # skip papers without abstract (more later)
-        df = df[df.abstract.astype(bool)]
+    # read in csv containing metadata about files
+    df = pd.read_csv(meta_path, sep=',', error_bad_lines=False, index_col=False, dtype='unicode')
+    print('Number of files before removing papers without abstract: {}'.format(df.shape[0]))
+    
+    # skip papers without abstract
+    df = df[~pd.isnull(df.abstract)]
+    print('Number of files after removing papers without abstract: {}'.format(df.shape[0]))
+    
+    # drop duplicates
+    df['title_lower'] = df.title.str.lower()
+    df= df.drop_duplicates(subset='title_lower').drop(columns='title_lower')
+    len_before = df.shape[0]
+    print('Number of files once articles deduplicated: \t{}'.format(len_before)) # 56341 
+    
+    start = time.time()
+    print('... (1) Processing pubmed files into readable .txt format for tokenizer into path: {}...'.format(txt_dir))
+    
+    write_head = False
 
-        files_count = len(df)
-        files_count_real = 0
+    # write out new csv containing files we use in our dataset
+    with open(new_meta_path, 'w') as f:
+        w = csv.writer(f)
+        for i,row in tqdm(df.iterrows(),total=df.shape[0])
+                
+            # read in pubmed file if available
+            pid = row['pmcid']
+            pubtime = row['publish_time']
+            # pubtime = datetime.strptime(row['publish_time'], '%Y-%m-%d').timestamp()
+            ppath = os.path.join(pmc_dir, '{}.xml.json'.format(pid))
+            if not os.path.isfile(fpath):
+                no_path_counter +=1
+                continue
+            with open(ppath, 'r') as fi:
+                json_dict = json.load(fi)
+            
+            # preprocess / clean file
+            cleaned_dict = clean_json(json_dict)
+            tpath = os.path.join(txt_dir, '{}-{}.txt'.format(pubtime, pid))
+            tpath_abs = os.path.join(txt_dir, '{}-{}.abs.txt'.format(pubtime, pid))
+            
+            # write out main text and abstract 
+            with open(tpath, 'w') as fil:
+                fil.write(dict['text'])
+            with open(tpath_abs, 'w') as fil:
+                fil.write(row['abstract'])
+            files_count_real += 1
+            
+            # write csv row
+            cleaned_dict['abstract'] = row['abstract']
+            if not write_head:
+                w.writerow(cleaned_dict.keys())
+                write_head = True       
+            w.writerow(cleaned_dict.values())
 
-        print('Total files: {}'.format(len_before))
-        print('Total files with abstract: {}'.format(files_count))
-        print('Abstract files: {}/{}, ({}%)'.format(files_count, len_before, files_count / len_before * 100))
+    end = time.time()
+    print('Real count for files with abstract: {} ({}%)'.format(files_count_real,files_count_real / len_before * 100))
+    print('... Ending (1), time elapsed {}'.format(end - start))
 
-        start = time.time()
-        print('... (1) Processing file into readable format for tokenizer...')
-
-        with tqdm(total=files_count) as pbar:
-            for i, row in df.iterrows():
-                pbar.update(1)
-                if not isinstance(row['abstract'], str):
-                    continue
-                pid = row['pmcid']
-                pubtime = row['publish_time']
-                # pubtime = datetime.strptime(row['publish_time'], '%Y-%m-%d').timestamp()
-                ppath = os.path.join(pmc_dir, '{}.xml.json'.format(pid))
-                if not os.path.isfile(ppath):
-                    continue
-                with open(ppath, 'r') as fi:
-                    json_dict = json.load(fi)
-                    dict = clean_json(json_dict)
-                    tpath = os.path.join(txt_dir, '{}-{}.txt'.format(pubtime, pid))
-                    tpath_abs = os.path.join(txt_dir, '{}-{}.abs.txt'.format(pubtime, pid))
-                    with open(tpath, 'w') as fil:
-                        fil.write(dict['text'])
-                    with open(tpath_abs, 'w') as fil:
-                        fil.write(row['abstract'])
-                files_count_real += 1
-            pbar.close()
-
-        end = time.time()
-        print('Real count for files with abstract: {} ({}%)'.format(files_count_real,files_count_real / len_before * 100))
-        print('... Ending (1), time elapsed {}'.format(end - start))
-
-    print("Preparing to tokenize %s to %s..." % (stories_dir, tokenized_stories_dir))
-    stories = os.listdir(stories_dir)
+    print("Preparing to tokenize %s to %s..." % (root_data_dir, tokenized_data_dir))
+    files = os.listdir(root_data_dir)
     # make IO list file
     print("Making list of files to tokenize...")
     with open('mapping_for_corenlp.txt', 'w') as fi:
@@ -225,21 +245,21 @@ def tokenize(args):
 
     command = ['java', 'edu.stanford.nlp.pipeline.StanfordCoreNLP', '-annotators', 'tokenize,ssplit',
                '-ssplit.newlineIsSentenceBreak', 'always', '-filelist', 'mapping_for_corenlp.txt', '-outputFormat',
-               'json', '-outputDirectory', tokenized_stories_dir]
+               'json', '-outputDirectory', tokenized_data_dir]
 
-    print("Tokenizing %i files in %s and saving in %s..." % (len(stories), stories_dir, tokenized_stories_dir))
+    print("Tokenizing %i files in %s and saving in %s..." % (len(files), root_data_dir, tokenized_data_dir))
     subprocess.call(command)
     print("Stanford CoreNLP Tokenizer has finished.")
     os.remove("mapping_for_corenlp.txt")
 
-    # Check that the tokenized stories directory contains the same number of files as the original directory
+    # Check that the tokenized data directory contains the same number of files as the original directory
     num_orig = len(os.listdir(txt_dir))
-    num_tokenized = len(os.listdir(tokenized_stories_dir))
+    num_tokenized = len(os.listdir(tokenized_data_dir))
     if num_orig != num_tokenized:
         raise Exception(
-            "The tokenized stories directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
-                tokenized_stories_dir, num_tokenized, stories_dir, num_orig))
-    print("Successfully finished tokenizing %s to %s.\n" % (stories_dir, tokenized_stories_dir))
+            "The tokenized data directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
+                tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
+    print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
 
 def cal_rouge(evaluated_ngrams, reference_ngrams):
     reference_count = len(reference_ngrams)
