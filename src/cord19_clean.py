@@ -54,7 +54,7 @@ if __name__ == '__main__':
     # drop duplicates
     df['title_lower'] = df.title.str.lower()
     df= df.drop_duplicates(subset='title_lower').drop(columns='title_lower')
-    print('Length of csv once articles deduplicated: \t{}'.format(df.shape[0])) # 56341 
+    print('Length of csv once articles deduplicated: \t{}'.format(df.shape[0]))
 
 
     # pandas with tqdm requires manual update for now

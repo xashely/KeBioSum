@@ -31,9 +31,9 @@ Some codes are borrowed from PreSumm (https://github.com/nlpyang/PreSumm)
 Download and unzip the `CORD-19` directories from [here](https://allenai.org/data/cord-19). Put all files in the directory `./raw_data`
 
 ####  Step 2. Download Stanford CoreNLP
-We will need Stanford CoreNLP to tokenize the data. Download it [here](https://stanfordnlp.github.io/CoreNLP/) and unzip it. Then add the following command to your bash_profile:
+We will need Stanford CoreNLP to tokenize the data. Download it [here](https://stanfordnlp.github.io/CoreNLP/) and unzip it. Then add the following command to your bash_profile (`/.bashrc` file):
 ```
-export CLASSPATH=/home/qianqian/stanford-corenlp-4.2.0/stanford-corenlp-4.2.0.jar
+ for file in `find /home/qianqian/stanford-corenlp-4.2.1  -name "*.jar"`; do export CLASSPATH="$CLASSPATH:`realpath $file`"; done
 ```
 replacing `/path/to/` with the path to where you saved the `stanford-corenlp-4.2.0` directory. 
 
