@@ -51,7 +51,7 @@ Using scibert (https://github.com/allenai/scibert) trained on the EBM-NLP datase
 
 1. Preprocess the tokenized data into the pico input data on the trained scibert:
 ```
-python src/preprocess_pico.py
+python src/preprocess_pico.py -raw_path .=/token_data/ -save_path ..output_data/pico_preprocess/
 ```
 2. Training pico extraction model
 ```

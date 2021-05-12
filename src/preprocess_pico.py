@@ -30,43 +30,42 @@ with tqdm(total=len(corpora)) as pbar:
         i=0
         for f_main in corpora:
             paper_id = os.path.basename(f_main).split('.')[0]
-            if paper_id == '2016-07-11-PMC5053133':
-                if i==0:
-                    print(f_main, paper_id)
-                count = 0
-                f_new.write(f'-DOCSTART- ({paper_id})')
-                f_new.write('\n\n')
-                with open(f_main, 'r') as f:
-                    json_main = json.load(f)
-                    for sent in json_main['sentences']:
-                        j = 0
+            if i==0:
+                print(f_main, paper_id)
+            count = 0
+            f_new.write(f'-DOCSTART- ({paper_id})')
+            f_new.write('\n\n')
+            with open(f_main, 'r') as f:
+                json_main = json.load(f)
+                for sent in json_main['sentences']:
+                    j = 0
+                    newline = False
+                    for token in sent['tokens']:
                         newline = False
-                        for token in sent['tokens']:
-                            newline = False
-                            #print("word:", token['word'])
-                            f_new.write(' '.join([token['word'], 'NN', 'O', 'O']))
-                            f_new.write('\n')
-                            j += 1
-                            overlong_sequence = j >= 250
-                            end_token = token['word'] == '.'
-                            newline = overlong_sequence or end_token
+                        #print("word:", token['word'])
+                        f_new.write(' '.join([token['word'], 'NN', 'O', 'O']))
+                        f_new.write('\n')
+                        j += 1
+                        overlong_sequence = j >= 250
+                        end_token = token['word'] == '.'
+                        newline = overlong_sequence or end_token
 
-                            if overlong_sequence:
-                                count += 1
-                                print("too long sentences:")
-                            if newline:
-                                f_new.write('\n')
-                                j = 0
-                        if not newline:
+                        if overlong_sequence:
+                            count += 1
+                            print("too long sentences:")
+                        if newline:
                             f_new.write('\n')
+                            j = 0
+                    if not newline:
+                        f_new.write('\n')
               
-                f_new.write('\n\n')
-                if count != 0:
-                    print("id, count:", i, count)
-                i += 1
-                #if i == 60:
-                #    break
-                pbar.update()
+            f_new.write('\n\n')
+            if count != 0:
+                print("id, count:", i, count)
+            i += 1
+            #if i == 60:
+            #    break
+            pbar.update()
     pbar.close()
 
 
