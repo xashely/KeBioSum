@@ -31,10 +31,10 @@ with tqdm(total=len(corpora)) as pbar:
         for f_main in corpora:
             paper_id = os.path.basename(f_main).split('.')[0]
             if paper_id == '2016-07-11-PMC5053133':
-            if i==0:
-                print(f_main, paper_id)
-            count = 0
-            f_new.write(f'-DOCSTART- ({paper_id})')
+                if i==0:
+                    print(f_main, paper_id)
+                count = 0
+                f_new.write(f'-DOCSTART- ({paper_id})')
                 f_new.write('\n\n')
                 with open(f_main, 'r') as f:
                     json_main = json.load(f)
