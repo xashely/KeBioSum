@@ -219,7 +219,7 @@ def tokenize(args):
             
             # write out main text and abstract 
             with open(tpath, 'w') as fil:
-                fil.write(dict['text'])
+                fil.write(cleaned_dict['text'])
             with open(tpath_abs, 'w') as fil:
                 fil.write(row['abstract'])
             files_count_real += 1
