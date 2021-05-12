@@ -8,6 +8,7 @@ from torch.nn.init import xavier_uniform_
 from models.decoder import TransformerDecoder
 from models.encoder import Classifier, ExtTransformerEncoder
 from models.optimizers import Optimizer
+from transformers.adapters.composition import Fuse
 
 def build_optim(args, model, checkpoint):
     """ Build optimizer """
@@ -117,8 +118,28 @@ class RoBerta(nn.Module):
         super(RoBerta, self).__init__()
         if(large):
             self.model = RobertaModel.from_pretrained('roberta-large', cache_dir=temp_dir)
+            self.model.add_adapter("finetune")
+            self.model.train_adapter("finetune")
+            #self.model.set_active_adapters("finetune")
+            self.model.load_adapter("./final_adapter/ner", with_head=False)
+            self.model.add_fusion(Fuse("finetune", "ner"))
+            self.model.set_active_adapters(Fuse("finetune", "ner"))
+            adapter_setup = Fuse("finetune", "ner")
+            self.model.train_fusion(adapter_setup)
+            self.model.encoder.enable_adapters("finetune", True, True)
+            self.model.encoder.enable_adapters("ner", True, True)
         else:
             self.model = RobertaModel.from_pretrained('roberta-base', cache_dir=temp_dir)
+            self.model.add_adapter("finetune")
+            self.model.train_adapter("finetune")
+            self.model.set_active_adapters("finetune")
+            self.model.load_adapter("./final_adapter/ner", with_head=False)
+            self.model.add_fusion(Fuse("finetune", "ner"))
+            self.model.set_active_adapters(Fuse("finetune", "ner"))
+            adapter_setup = Fuse("finetune", "ner")
+            self.model.train_fusion(adapter_setup)
+            self.model.encoder.enable_adapters("finetune", True, True)
+            self.model.encoder.enable_adapters("ner", True, True)
 
         self.finetune = finetune
 
@@ -140,7 +161,6 @@ class ExtSummarizer(nn.Module):
         self.args = args
         self.device = device
         self.RoBerta = RoBerta(args.large, args.temp_dir, args.finetune_bert)
-
         self.ext_layer = ExtTransformerEncoder(self.RoBerta.model.config.hidden_size, args.ext_ff_size, args.ext_heads,
                                                args.ext_dropout, args.ext_layers)
         if (args.encoder == 'baseline'):
@@ -154,7 +174,6 @@ class ExtSummarizer(nn.Module):
             my_pos_embeddings.weight.data[:512] = self.RoBerta.model.embeddings.position_embeddings.weight.data
             my_pos_embeddings.weight.data[512:] = self.RoBerta.model.embeddings.position_embeddings.weight.data[-1][None,:].repeat(args.max_pos-512,1)
             self.RoBerta.model.embeddings.position_embeddings = my_pos_embeddings
-
 
         if checkpoint is not None:
             self.load_state_dict(checkpoint['model'], strict=True)
