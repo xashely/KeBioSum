@@ -17,6 +17,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-raw_path", default="./token_data/", type=str)
 parser.add_argument("-save_path", default="/home/qianqian/scibert/data/pico/ebmnlp/", type=str)
 
+raw_path = os.path.abspath(args.raw_path)
+save_path = os.path.abspath(args.save_path)
+
 corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(raw_path)
                       if not f.startswith('.') and not f.endswith('.abs.txt.json')])
 print('... Packing tokenized data into pico txt...')
