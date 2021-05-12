@@ -8,6 +8,7 @@ import random
 import re
 import math
 import subprocess
+import csv
 from collections import Counter
 from os.path import join as pjoin
 
