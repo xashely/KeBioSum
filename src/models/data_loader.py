@@ -26,6 +26,8 @@ class Batch(object):
             pre_clss = [x[3] for x in data]
             pre_src_sent_labels = [x[4] for x in data]
 
+            #print("data 0:", data[0])
+            #print ("labels:", pre_src_sent_labels)
             src = torch.tensor(self._pad(pre_src, 0))
             tgt = torch.tensor(self._pad(pre_tgt, 0))
 
@@ -218,7 +220,8 @@ class DataIterator(object):
             if(len(ex['src'])==0):
                 continue
             ex = self.preprocess(ex, self.is_test)
-            if(ex is None):
+            #print(ex)
+            if(ex is None or any([not val for val in ex])):
                 continue
             minibatch.append(ex)
             size_so_far = self.batch_size_fn(ex, len(minibatch))
@@ -277,6 +280,7 @@ class DataIterator(object):
                     continue
                 self.iterations += 1
                 self._iterations_this_epoch += 1
+                #print(minibatch)
                 batch = Batch(minibatch, self.device, self.is_test)
 
                 yield batch

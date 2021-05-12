@@ -252,6 +252,7 @@ class Trainer(object):
                             if len(list(sent_scores.shape)) == 1:
                                 sent_scores = sent_scores.unsqueeze(1)
                             print("input_shape:", sent_scores.shape, labels.float().shape)
+                            assert sent_scores.shape==labels.float().shape,(labels,src)
                             loss = self.loss(sent_scores, labels.float())
                             loss = (loss * mask.float()).sum()
                             batch_stats = Statistics(float(loss.cpu().data.numpy()), len(labels))
@@ -312,7 +313,7 @@ class Trainer(object):
             mask = batch.mask_src
             mask_cls = batch.mask_cls
 
-            sent_score, mask= self.model(src, segs, clss, mask, mask_cls)
+            sent_scores, mask= self.model(src, segs, clss, mask, mask_cls)
 
             loss = self.loss(sent_scores, labels.float())
             loss = (loss * mask.float()).sum()
