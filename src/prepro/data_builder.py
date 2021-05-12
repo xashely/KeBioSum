@@ -206,7 +206,7 @@ def tokenize(args):
             pubtime = row['publish_time']
             # pubtime = datetime.strptime(row['publish_time'], '%Y-%m-%d').timestamp()
             ppath = os.path.join(pmc_dir, '{}.xml.json'.format(pid))
-            if not os.path.isfile(fpath):
+            if not os.path.isfile(ppath):
                 no_path_counter +=1
                 continue
             with open(ppath, 'r') as fi:
