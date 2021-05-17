@@ -59,9 +59,32 @@ Using scibert (https://github.com/allenai/scibert) trained on the EBM-NLP datase
 python src/preprocess_pico.py
 ```
 2. Training pico extraction model
+
+Install the allennlp: 
+```
+git clone https://github.com/ibeltagy/allennlp.git
+```
+```
+git check out branch fp_16_and_others
+```
+```
+pip install --editable .
+```
+
+Download scibert model with the link (https://s3-us-west-2.amazonaws.com/ai2-s2-research/scibert/pytorch_models/scibert_scivocab_uncased.tar)
+
+Export scibert in the bash script:
+```
+export BERT_VOCAB=/home/qianqian/scibert/model/vocab.txt
+```
+```
+export BERT_WEIGHTS=/home/qianqian/scibert/model/weights.tar.gz
+```
+
 ```
 bash scripts/train_allennlp_local.sh wotune_model/
 ```
+
 3. Predicting pico for cord-19
 ```
 python -m allennlp.run predict --output-file=out.txt --include-package=scibert --predictor=sentence-tagger --use-dataset-reader --cuda-device=0 --batch-size=256 --silent ./wotune_model/model.tar.gz  ./data/pico/ebmnlp/cord.txt
