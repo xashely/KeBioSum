@@ -20,7 +20,7 @@ def _is_divider(line: str) -> bool:
             return False
 
 
-file_path = os.path.abspath(args.raw_path)
+file_path = os.path.abspath(args.data_file)
 with open(file_path, "r") as data_file:
 
     # Group into alternative divider / sentence chunks.
