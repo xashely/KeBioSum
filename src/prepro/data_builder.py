@@ -263,21 +263,6 @@ def tokenize(args):
                 tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
     print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
 
-    # # check that words don't include blank space
-    # tokenized_paths = [os.path.join(tokenized_data_dir,file) for file in os.listdir(tokenized_data_dir)]
-    # count = 0
-    # for tokenized_path in tokenized_paths:
-    #     with open(tokenized_path,'r') as f:
-    #         tokenized_data = json.load(f)
-    #     sentences = tokenized_data['sentences']
-    #     for sentence in sentences:
-    #         tokens = sentence['tokens']
-    #         for token in tokens:
-    #             if len(token['word'].split(" "))>0:
-    #                 count+=1
-    #                 print(tokenized_path,sentence['index'],token['index'],token['word'])
-    # print(f"number of spaces in tokenized words = {count}")
-
 def cal_rouge(evaluated_ngrams, reference_ngrams):
     reference_count = len(reference_ngrams)
     evaluated_count = len(evaluated_ngrams)
