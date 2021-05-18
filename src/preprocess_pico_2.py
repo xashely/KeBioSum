@@ -2,6 +2,7 @@
 import argparse
 import os
 import itertools
+from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-data_file", type=str)
@@ -24,10 +25,10 @@ file_path = os.path.abspath(args.data_file)
 with open(file_path, "r") as data_file:
 
     # Group into alternative divider / sentence chunks.
-    for idx,line in enumerate(data_file):
+    for idx,line in tqdm(enumerate(data_file),len(data_file)):
         if not _is_divider(line):
             line_split = line.split(' ')
-            if len(line_split) > 4:
+            if len(line_split) > 3:
                 print(idx, line_split)
     # for is_divider, lines in itertools.groupby(data_file, _is_divider):
     #     # Ignore the divider chunks, so that `lines` corresponds to the words
