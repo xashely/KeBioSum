@@ -57,9 +57,10 @@ class EBMNLPDatasetReader(DatasetReader):
                     logger.info('\n')
                     for val in fields:
                         if len(val) != 4:
-                            print('\nTOO LONG')
+                            print('\n\n\n\n\n\n\nTOO LONG')
                             print(val)
                             print(file_path)
+                            print('\n\n\n\n\n\n')
                     fields = [
                         val if len(val) == 4 else [" ".join(val[:-3]), val[-3], val[-2], val[-1]]
                         for val in fields
