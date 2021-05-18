@@ -172,6 +172,12 @@ def tokenize(args):
     new_meta_path = os.path.join(root_data_dir, 'PMC.csv')
     pmc_dir = os.path.join(root_data_dir, 'document_parses', 'pmc_json')
     txt_dir = os.path.join(root_data_dir, 'document_parses', 'txt_json')
+
+    # make directories for saving data if they don't already exist
+    if not os.path.exists(txt_dir):
+        os.makedirs(txt_dir)
+    if not os.path.exists(tokenized_data_dir):
+        os.makedirs(tokenized_data_dir)
     
     files_count_real = 0
     no_path_counter = 0
