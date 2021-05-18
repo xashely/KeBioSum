@@ -6,7 +6,7 @@ bert_data/
 logs/
 .idea/
 */wotune_model/*
-**/__pycache__
+**/__pycache__/*
 data/
 *.egg-info/
 .installed.cfg
