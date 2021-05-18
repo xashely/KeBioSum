@@ -43,6 +43,8 @@ with tqdm(total=len(corpora)) as pbar:
                     for token in sent['tokens']:
                         newline = False
                         #print("word:", token['word'])
+                        if len(token['word'].split(" "))>1:
+                            print(f_main,token['word'])
                         f_new.write(' '.join([token['word'], 'NN', 'O', 'O']))
                         f_new.write('\n')
                         j += 1
