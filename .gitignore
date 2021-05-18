@@ -12,3 +12,4 @@ data/
 .installed.cfg
 *.egg
 **.pyc
+/pycache/*
