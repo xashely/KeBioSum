@@ -7,3 +7,4 @@ models/
 logs/
 .idea/
 */wotune_model/*
+*__pycache__*
