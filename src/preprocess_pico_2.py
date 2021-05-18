@@ -25,7 +25,7 @@ file_path = os.path.abspath(args.data_file)
 with open(file_path, "r") as data_file:
 
     # Group into alternative divider / sentence chunks.
-    for idx,line in tqdm(enumerate(data_file),len(data_file)):
+    for idx,line in tqdm(enumerate(data_file)):
         if not _is_divider(line):
             line_split = line.split(' ')
             if len(line_split) > 3:
