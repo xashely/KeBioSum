@@ -12,7 +12,7 @@ from overrides import overrides
 from scibert.models.text_classifier import TextClassifier
 
 
-@Model.register("bert_text_classifier")
+@Model.register("bert_text_classifier_2")
 class BertTextClassifier(TextClassifier):
     """
     Implements a basic text classifier:

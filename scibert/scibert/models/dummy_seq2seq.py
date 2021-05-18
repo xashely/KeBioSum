@@ -3,7 +3,7 @@ import torch
 
 from allennlp.modules.seq2seq_encoders.seq2seq_encoder import Seq2SeqEncoder
 
-@Seq2SeqEncoder.register("dummy")
+@Seq2SeqEncoder.register("dummy_2")
 class DummyEncoder(Seq2SeqEncoder):
     # pylint: disable=line-too-long
     """

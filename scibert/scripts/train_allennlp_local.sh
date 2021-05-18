@@ -26,9 +26,9 @@ export TRAIN_PATH=data/$TASK/$DATASET/train.txt
 export DEV_PATH=data/$TASK/$DATASET/dev.txt
 export TEST_PATH=data/$TASK/$DATASET/test.txt
 
-export CUDA_DEVICE=0
+export CUDA_DEVICE=1
 
-export GRAD_ACCUM_BATCH_SIZE=32
+export GRAD_ACCUM_BATCH_SIZE=16
 export NUM_EPOCHS=75
 export LEARNING_RATE=0.001
 export BERT_VOCAB=/home/qianqian/scibert/model/vocab.txt
