@@ -51,6 +51,7 @@ def clean_json(json_dict):
         p_text = re.sub('\[[\d\s,]+?\]', '', p_text)
         p_text = re.sub('\(Table \d+?\)', '', p_text)
         p_text = re.sub('\(Fig. \d+?\)', '', p_text)
+        p_text = re.sub(r'[^\x00-\x7f]',r' ', p_text)
         text += '{:s}\n'.format(p_text)
 
     return {'title': title, 'text': text}
