@@ -17,6 +17,8 @@ from allennlp.data.tokenizers import Token
 from allennlp.data.token_indexers import TokenIndexer, SingleIdTokenIndexer
 
 logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
+import logging
+logging.basicConfig(filename='test_logs.log', encoding='utf-8', level=logging.DEBUG)
 
 def _is_divider(line: str) -> bool:
     empty_line = line.strip() == ''
@@ -52,12 +54,12 @@ class EBMNLPDatasetReader(DatasetReader):
                 # of a single sentence.
                 if not is_divider:
                     fields = [line.strip().split() for line in lines]
-                    print(fields)
                     logger.info('\n')
                     for val in fields:
                         if len(val) != 4:
-                            logger.info(val)
-                            logger.info(file_path)
+                            print('\nTOO LONG')
+                            print(val)
+                            print(file_path)
                     fields = [
                         val if len(val) == 4 else [" ".join(val[:-3]), val[-3], val[-2], val[-1]]
                         for val in fields
