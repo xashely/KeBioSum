@@ -52,6 +52,7 @@ class EBMNLPDatasetReader(DatasetReader):
                 # of a single sentence.
                 if not is_divider:
                     fields = [line.strip().split() for line in lines]
+                    print(fields)
                     logger.info('\n')
                     for val in fields:
                         if len(val) != 4:
