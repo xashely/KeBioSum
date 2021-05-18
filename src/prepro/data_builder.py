@@ -262,7 +262,6 @@ def tokenize(args):
             "The tokenized data directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
                 tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
     print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
-    
 
 def cal_rouge(evaluated_ngrams, reference_ngrams):
     reference_count = len(reference_ngrams)
