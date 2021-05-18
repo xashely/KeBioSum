@@ -1,0 +1,21 @@
+2021-05-13 14:53:08,060 - INFO - pytorch_pretrained_bert.modeling - Better speed can be achieved with apex installed from https://www.github.com/nvidia/apex .
+2021-05-13 14:53:08,461 - INFO - pytorch_transformers.modeling_bert - Better speed can be achieved with apex installed from https://www.github.com/nvidia/apex .
+2021-05-13 14:53:08,464 - INFO - pytorch_transformers.modeling_xlnet - Better speed can be achieved with apex installed from https://www.github.com/nvidia/apex .
+2021-05-13 14:53:08,679 - INFO - allennlp.common.registrable - instantiating registered subclass relu of <class 'allennlp.nn.activations.Activation'>
+2021-05-13 14:53:08,680 - INFO - allennlp.common.registrable - instantiating registered subclass relu of <class 'allennlp.nn.activations.Activation'>
+2021-05-13 14:53:08,681 - INFO - allennlp.common.registrable - instantiating registered subclass relu of <class 'allennlp.nn.activations.Activation'>
+2021-05-13 14:53:08,681 - INFO - allennlp.common.registrable - instantiating registered subclass relu of <class 'allennlp.nn.activations.Activation'>
+Traceback (most recent call last):
+  File "/home/qianqian/miniconda3/envs/covid/lib/python3.6/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/home/qianqian/miniconda3/envs/covid/lib/python3.6/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/home/qianqian/scibert/src/allennlp/allennlp/run.py", line 21, in <module>
+    run()
+  File "/home/qianqian/scibert/src/allennlp/allennlp/run.py", line 18, in run
+    main(prog="allennlp")
+  File "/home/qianqian/scibert/src/allennlp/allennlp/commands/__init__.py", line 101, in main
+    import_submodules(package_name)
+  File "/home/qianqian/scibert/src/allennlp/allennlp/common/util.py", line 331, in import_submodules
+    if path_string and module_finder.path != path_string:
+AttributeError: 'zipimport.zipimporter' object has no attribute 'path'

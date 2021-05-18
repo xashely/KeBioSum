@@ -31,5 +31,7 @@ export CUDA_DEVICE=0
 export GRAD_ACCUM_BATCH_SIZE=32
 export NUM_EPOCHS=75
 export LEARNING_RATE=0.001
+export BERT_VOCAB=/home/qianqian/scibert/model/vocab.txt
+export BERT_WEIGHTS=/home/qianqian/scibert/model/weights.tar.gz
 
 python -m allennlp.run train $CONFIG_FILE  --include-package scibert -s "$@"

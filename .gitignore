@@ -6,3 +6,4 @@ bert_data/
 models/
 logs/
 .idea/
+*/wotune_model/*
