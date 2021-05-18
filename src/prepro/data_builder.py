@@ -175,93 +175,108 @@ def tokenize(args):
     files_count_real = 0
     no_path_counter = 0
     
-    print('... Loading PMC data from {}'.format(pmc_dir))
+    # print('... Loading PMC data from {}'.format(pmc_dir))
 
-    # read in csv containing metadata about files
-    df = pd.read_csv(meta_path, sep=',', error_bad_lines=False, index_col=False, dtype='unicode')
-    print('Number of files before removing papers without abstract: {}'.format(df.shape[0]))
+    # # read in csv containing metadata about files
+    # df = pd.read_csv(meta_path, sep=',', error_bad_lines=False, index_col=False, dtype='unicode')
+    # print('Number of files before removing papers without abstract: {}'.format(df.shape[0]))
     
-    # skip papers without abstract
-    df = df[~pd.isnull(df.abstract)]
-    print('Number of files after removing papers without abstract: {}'.format(df.shape[0]))
+    # # skip papers without abstract
+    # df = df[~pd.isnull(df.abstract)]
+    # print('Number of files after removing papers without abstract: {}'.format(df.shape[0]))
     
-    # drop duplicates
-    df['title_lower'] = df.title.str.lower()
-    df= df.drop_duplicates(subset='title_lower').drop(columns='title_lower')
-    len_before = df.shape[0]
-    print('Number of files once articles deduplicated: \t{}'.format(len_before)) # 56341 
+    # # drop duplicates
+    # df['title_lower'] = df.title.str.lower()
+    # df= df.drop_duplicates(subset='title_lower').drop(columns='title_lower')
+    # len_before = df.shape[0]
+    # print('Number of files once articles deduplicated: \t{}'.format(len_before)) # 56341 
     
-    start = time.time()
-    print('... (1) Processing pubmed files into readable .txt format for tokenizer into path: {}...'.format(txt_dir))
+    # start = time.time()
+    # print('... (1) Processing pubmed files into readable .txt format for tokenizer into path: {}...'.format(txt_dir))
     
-    write_head = False
+    # write_head = False
 
-    # write out new csv containing files we use in our dataset
-    with open(new_meta_path, 'w') as f:
-        w = csv.writer(f)
-        for i,row in tqdm(df.iterrows(),total=df.shape[0]):
+    # # write out new csv containing files we use in our dataset
+    # with open(new_meta_path, 'w') as f:
+    #     w = csv.writer(f)
+    #     for i,row in tqdm(df.iterrows(),total=df.shape[0]):
                 
-            # read in pubmed file if available
-            pid = row['pmcid']
-            pubtime = row['publish_time']
-            # pubtime = datetime.strptime(row['publish_time'], '%Y-%m-%d').timestamp()
-            ppath = os.path.join(pmc_dir, '{}.xml.json'.format(pid))
-            if not os.path.isfile(ppath):
-                no_path_counter +=1
-                continue
-            with open(ppath, 'r') as fi:
-                json_dict = json.load(fi)
+    #         # read in pubmed file if available
+    #         pid = row['pmcid']
+    #         pubtime = row['publish_time']
+    #         # pubtime = datetime.strptime(row['publish_time'], '%Y-%m-%d').timestamp()
+    #         ppath = os.path.join(pmc_dir, '{}.xml.json'.format(pid))
+    #         if not os.path.isfile(ppath):
+    #             no_path_counter +=1
+    #             continue
+    #         with open(ppath, 'r') as fi:
+    #             json_dict = json.load(fi)
             
-            # preprocess / clean file
-            cleaned_dict = clean_json(json_dict)
-            tpath = os.path.join(txt_dir, '{}-{}.txt'.format(pubtime, pid))
-            tpath_abs = os.path.join(txt_dir, '{}-{}.abs.txt'.format(pubtime, pid))
+    #         # preprocess / clean file
+    #         cleaned_dict = clean_json(json_dict)
+    #         tpath = os.path.join(txt_dir, '{}-{}.txt'.format(pubtime, pid))
+    #         tpath_abs = os.path.join(txt_dir, '{}-{}.abs.txt'.format(pubtime, pid))
             
-            # write out main text and abstract 
-            with open(tpath, 'w') as fil:
-                fil.write(cleaned_dict['text'])
-            with open(tpath_abs, 'w') as fil:
-                fil.write(row['abstract'])
-            files_count_real += 1
+    #         # write out main text and abstract 
+    #         with open(tpath, 'w') as fil:
+    #             fil.write(cleaned_dict['text'])
+    #         with open(tpath_abs, 'w') as fil:
+    #             fil.write(row['abstract'])
+    #         files_count_real += 1
             
-            # write csv row
-            cleaned_dict['abstract'] = row['abstract']
-            if not write_head:
-                w.writerow(cleaned_dict.keys())
-                write_head = True       
-            w.writerow(cleaned_dict.values())
+    #         # write csv row
+    #         cleaned_dict['abstract'] = row['abstract']
+    #         if not write_head:
+    #             w.writerow(cleaned_dict.keys())
+    #             write_head = True       
+    #         w.writerow(cleaned_dict.values())
 
-    end = time.time()
-    print('Real count for files with abstract: {} ({}%)'.format(files_count_real,files_count_real / len_before * 100))
-    print('... Ending (1), time elapsed {}'.format(end - start))
+    # end = time.time()
+    # print('Real count for files with abstract: {} ({}%)'.format(files_count_real,files_count_real / len_before * 100))
+    # print('... Ending (1), time elapsed {}'.format(end - start))
 
-    print("Preparing to tokenize %s to %s..." % (root_data_dir, tokenized_data_dir))
-    num_files_to_tokenize = 0
-    # make IO list file
-    print("Making list of files to tokenize...")
-    with open('mapping_for_corenlp.txt', 'w') as fi:
-        for fname in os.listdir(txt_dir):
-            fpath = os.path.join(txt_dir, fname)
-            fi.write('{}\n'.format(fpath))
-            num_files_to_tokenize+=1
+    # print("Preparing to tokenize %s to %s..." % (root_data_dir, tokenized_data_dir))
+    # num_files_to_tokenize = 0
+    # # make IO list file
+    # print("Making list of files to tokenize...")
+    # with open('mapping_for_corenlp.txt', 'w') as fi:
+    #     for fname in os.listdir(txt_dir):
+    #         fpath = os.path.join(txt_dir, fname)
+    #         fi.write('{}\n'.format(fpath))
+    #         num_files_to_tokenize+=1
 
-    command = ['java', 'edu.stanford.nlp.pipeline.StanfordCoreNLP', '-annotators', 'tokenize,ssplit',
-               '-ssplit.newlineIsSentenceBreak', 'always', '-filelist', 'mapping_for_corenlp.txt', '-outputFormat',
-               'json', '-outputDirectory', tokenized_data_dir]
+    # command = ['java', 'edu.stanford.nlp.pipeline.StanfordCoreNLP', '-annotators', 'tokenize,ssplit',
+    #            '-ssplit.newlineIsSentenceBreak', 'always', '-filelist', 'mapping_for_corenlp.txt', '-outputFormat',
+    #            'json', '-outputDirectory', tokenized_data_dir]
 
-    print("Tokenizing %i files in %s and saving in %s..." % (num_files_to_tokenize, txt_dir, tokenized_data_dir))
-    subprocess.call(command)
-    print("Stanford CoreNLP Tokenizer has finished.")
-    os.remove("mapping_for_corenlp.txt")
+    # print("Tokenizing %i files in %s and saving in %s..." % (num_files_to_tokenize, txt_dir, tokenized_data_dir))
+    # subprocess.call(command)
+    # print("Stanford CoreNLP Tokenizer has finished.")
+    # os.remove("mapping_for_corenlp.txt")
 
-    # Check that the tokenized data directory contains the same number of files as the original directory
-    num_orig = len(os.listdir(txt_dir))
-    num_tokenized = len(os.listdir(tokenized_data_dir))
-    if num_orig != num_tokenized:
-        raise Exception(
-            "The tokenized data directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
-                tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
-    print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
+    # # Check that the tokenized data directory contains the same number of files as the original directory
+    # num_orig = len(os.listdir(txt_dir))
+    # num_tokenized = len(os.listdir(tokenized_data_dir))
+    # if num_orig != num_tokenized:
+    #     raise Exception(
+    #         "The tokenized data directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
+    #             tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
+    # print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
+
+    # check that words don't include blank space
+    tokenized_paths = [os.path.join(tokenized_data_dir,file) for file in os.listdir(tokenized_data_dir)]
+    count = 0
+    for tokenized_path in tokenized_paths:
+        with open(tokenized_path,'r') as f:
+            tokenized_data = json.load(f)
+        sentences = tokenized_data['sentences']
+        for sentence in sentences:
+            tokens = sentence['tokens']
+            for token in tokens:
+                if len(token['word'].split(" "))>0:
+                    count+=1
+                    print(tokenized_path,sentence['index'],token['index'],token['word'])
+    print(f"number of spaces in tokenized words = {count}")
 
 def cal_rouge(evaluated_ngrams, reference_ngrams):
     reference_count = len(reference_ngrams)
