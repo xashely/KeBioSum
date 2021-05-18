@@ -52,6 +52,10 @@ class EBMNLPDatasetReader(DatasetReader):
                 # of a single sentence.
                 if not is_divider:
                     fields = [line.strip().split() for line in lines]
+                    for val in fields:
+                        if len(val) != 4:
+                            print(val)
+                            print(file_path)
                     fields = [
                         val if len(val) == 4 else [" ".join(val[:-3]), val[-3], val[-2], val[-1]]
                         for val in fields
