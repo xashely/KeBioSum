@@ -251,7 +251,7 @@ class Trainer(object):
 
                             if len(list(sent_scores.shape)) == 1:
                                 sent_scores = sent_scores.unsqueeze(1)
-                            print("input_shape:", sent_scores.shape, labels.float().shape)
+                            #print("input_shape:", sent_scores.shape, labels.float().shape)
                             assert sent_scores.shape==labels.float().shape,(labels,src)
                             loss = self.loss(sent_scores, labels.float())
                             loss = (loss * mask.float()).sum()
