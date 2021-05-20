@@ -17,7 +17,7 @@ from multiprocess import Pool
 
 from others.logging import logger
 from others.tokenization import BertTokenizer
-from transformers import RobertaTokenizer
+from transformers import RobertaTokenizer, AutoTokenizer
 from pytorch_transformers import XLNetTokenizer
 
 from others.utils import clean
@@ -330,7 +330,7 @@ def hashhex(s):
     return h.hexdigest()
 
 
-class BertData():
+class RoBertData():
     def __init__(self, args):
         self.args = args
         self.tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
@@ -390,6 +390,142 @@ class BertData():
 
         tgt_subtokens_str = '<s>' + ' </s>'.join(
             [' '.join(self.tokenizer.tokenize(' '.join(tt))) for tt in tgt]) + ' </s>'
+        tgt_subtoken = tgt_subtokens_str.split()[:self.args.max_tgt_ntokens]
+        if ((not is_test) and len(tgt_subtoken) < self.args.min_tgt_ntokens):
+            return None
+
+        tgt_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(tgt_subtoken)
+
+        tgt_txt = '<q>'.join([' '.join(tt) for tt in tgt])
+        src_txt = [original_src_txt[i] for i in idxs]
+
+        return src_subtoken_idxs, sent_labels, tgt_subtoken_idxs, segments_ids, cls_ids, src_txt, tgt_txt
+
+class BertData():
+    def __init__(self, args):
+        self.args = args
+        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
+
+        self.sep_token = '[SEP]'
+        self.cls_token = '[CLS]'
+        self.pad_token = '[PAD]'
+        self.tgt_bos = '[unused0]'
+        self.tgt_eos = '[unused1]'
+        self.tgt_sent_split = '[unused2]'
+        self.sep_vid = self.tokenizer.vocab[self.sep_token]
+        self.cls_vid = self.tokenizer.vocab[self.cls_token]
+        self.pad_vid = self.tokenizer.vocab[self.pad_token]
+
+    def preprocess(self, src, tgt, sent_labels, use_bert_basic_tokenizer=False, is_test=False):
+
+        if ((not is_test) and len(src) == 0):
+            return None
+
+        original_src_txt = [' '.join(s) for s in src]
+
+        idxs = [i for i, s in enumerate(src) if (len(s) > self.args.min_src_ntokens_per_sent)]
+
+        _sent_labels = [0] * len(src)
+        for l in sent_labels:
+            _sent_labels[l] = 1
+
+        src = [src[i][:self.args.max_src_ntokens_per_sent] for i in idxs]
+        sent_labels = [_sent_labels[i] for i in idxs]
+        src = src[:self.args.max_src_nsents]
+        sent_labels = sent_labels[:self.args.max_src_nsents]
+
+        if ((not is_test) and len(src) < self.args.min_src_nsents):
+            return None
+
+        src_txt = [' '.join(sent) for sent in src]
+        text = ' {} {} '.format(self.sep_token, self.cls_token).join(src_txt)
+        src_subtokens = self.tokenizer.tokenize(text)
+
+        src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
+        src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
+        _segs = [-1] + [i for i, t in enumerate(src_subtoken_idxs) if t == self.sep_vid]
+        segs = [_segs[i] - _segs[i - 1] for i in range(1, len(_segs))]
+        segments_ids = []
+        for i, s in enumerate(segs):
+            if (i % 2 == 0):
+                segments_ids += s * [0]
+            else:
+                segments_ids += s * [1]
+        #segments_ids = [0]*len(src_subtoken_idxs)
+        cls_ids = [i for i, t in enumerate(src_subtoken_idxs) if t == self.cls_vid]
+        sent_labels = sent_labels[:len(cls_ids)]
+
+        tgt_subtokens_str = '[unused0] ' + ' [unused2] '.join(
+            [' '.join(self.tokenizer.tokenize(' '.join(tt), use_bert_basic_tokenizer=use_bert_basic_tokenizer)) for tt
+             in tgt]) + ' [unused1]'
+        tgt_subtoken = tgt_subtokens_str.split()[:self.args.max_tgt_ntokens]
+        if ((not is_test) and len(tgt_subtoken) < self.args.min_tgt_ntokens):
+            return None
+
+        tgt_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(tgt_subtoken)
+
+        tgt_txt = '<q>'.join([' '.join(tt) for tt in tgt])
+        src_txt = [original_src_txt[i] for i in idxs]
+
+        return src_subtoken_idxs, sent_labels, tgt_subtoken_idxs, segments_ids, cls_ids, src_txt, tgt_txt
+
+class PubmedData():
+    def __init__(self, args):
+        self.args = args
+        model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.sep_token = '[SEP]'
+        self.cls_token = '[CLS]'
+        self.pad_token = '[PAD]'
+        self.tgt_bos = '[unused0]'
+        self.tgt_eos = '[unused1]'
+        self.tgt_sent_split = '[unused2]'
+        self.sep_vid = self.tokenizer.vocab[self.sep_token]
+        self.cls_vid = self.tokenizer.vocab[self.cls_token]
+        self.pad_vid = self.tokenizer.vocab[self.pad_token]
+
+    def preprocess(self, src, tgt, sent_labels, use_bert_basic_tokenizer=False, is_test=False):
+
+        if ((not is_test) and len(src) == 0):
+            return None
+
+        original_src_txt = [' '.join(s) for s in src]
+
+        idxs = [i for i, s in enumerate(src) if (len(s) > self.args.min_src_ntokens_per_sent)]
+
+        _sent_labels = [0] * len(src)
+        for l in sent_labels:
+            _sent_labels[l] = 1
+
+        src = [src[i][:self.args.max_src_ntokens_per_sent] for i in idxs]
+        sent_labels = [_sent_labels[i] for i in idxs]
+        src = src[:self.args.max_src_nsents]
+        sent_labels = sent_labels[:self.args.max_src_nsents]
+
+        if ((not is_test) and len(src) < self.args.min_src_nsents):
+            return None
+
+        src_txt = [' '.join(sent) for sent in src]
+        text = ' {} {} '.format(self.sep_token, self.cls_token).join(src_txt)
+        src_subtokens = self.tokenizer.tokenize(text)
+
+        src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
+        src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
+        _segs = [-1] + [i for i, t in enumerate(src_subtoken_idxs) if t == self.sep_vid]
+        segs = [_segs[i] - _segs[i - 1] for i in range(1, len(_segs))]
+        segments_ids = []
+        for i, s in enumerate(segs):
+            if (i % 2 == 0):
+                segments_ids += s * [0]
+            else:
+                segments_ids += s * [1]
+        #segments_ids = [0]*len(src_subtoken_idxs)
+        cls_ids = [i for i, t in enumerate(src_subtoken_idxs) if t == self.cls_vid]
+        sent_labels = sent_labels[:len(cls_ids)]
+
+        tgt_subtokens_str = '[unused0] ' + ' [unused2] '.join(
+            [' '.join(self.tokenizer.tokenize(' '.join(tt), use_bert_basic_tokenizer=use_bert_basic_tokenizer)) for tt
+             in tgt]) + ' [unused1]'
         tgt_subtoken = tgt_subtokens_str.split()[:self.args.max_tgt_ntokens]
         if ((not is_test) and len(tgt_subtoken) < self.args.min_tgt_ntokens):
             return None
@@ -517,7 +653,231 @@ class PicoAdapterData():
             data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i]})
         return data
 
-def format_to_bert(args):
+
+class PicoBertAdapterData():
+    def __init__(self, args):
+        self.args = args
+        from transformers import BertTokenizer
+        self.tokenizer = BertTokenizer.from_pretrained("bert-base-uncased",do_lower_case=True)
+
+        # BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
+
+        self.sep_token = '[SEP]'
+        self.cls_token = '[CLS]'
+        self.pad_token = '[PAD]'
+        self.sep_vid = self.tokenizer.vocab[self.sep_token]
+        self.cls_vid = self.tokenizer.vocab[self.cls_token]
+        self.pad_vid = self.tokenizer.vocab[self.pad_token]
+        self.mask_token = '[MASK]'
+        self.mask_vid = self.tokenizer.convert_tokens_to_ids(self.mask_token)
+
+    def preprocess(self, src, tag, is_test=False):
+
+        idxs = []
+        new_src = []
+        new_tag = []
+        for i, d in enumerate(src):
+            new_src.append([])
+            new_tag.append([])
+            for j, s in enumerate(d):
+                # assert len(s)==len(tag[i][j]),(len(s),len(tag[i][j]))
+                if len(s) > self.args.min_src_ntokens_per_sent:
+                    new_src[-1].append(s[:self.args.max_src_ntokens_per_sent])
+                    new_tag[-1].append(tag[i][j][:self.args.max_src_ntokens_per_sent])
+        # print(len(new_tag))
+
+        src_filt = [d[:self.args.max_src_nsents][:] for d in new_src if self.args.min_src_nsents < len(d)]
+        tag_filt = [d_tag[:self.args.max_src_nsents][:] for d_tag in new_tag if self.args.min_src_nsents < len(d_tag)]
+        print(len(src_filt), len(src_filt[0]), src_filt[0][0])
+        src_txt = []
+        for d in src_filt:
+            temp = []
+            for sent in d:
+                temp.append(' '.join(sent))
+            src_txt.append(temp)
+
+        # src_txt = [' '.join(sent) for d in src for sent in d]
+        # print(len(src_txt))
+
+        text = [' {} {} '.format(self.sep_token, self.cls_token).join(d) for d in src_txt]
+        # print(len(text))
+        text = ['{} '.format(self.cls_token) + d + ' {}'.format(self.sep_token) for d in text]
+        # print(len(text))
+        tags = []
+        for i, t in enumerate(tag_filt):
+            temp = []
+            temp.append('O')
+            for tag_list in t:
+                for t in tag_list:
+                    temp.append(t)
+                temp.append('O')
+                temp.append('O')
+            temp = temp[:-2]
+            temp.append('O')
+            tags.append(temp)
+            assert len(text[i].split()) == len(temp), (i, text[i].split(), len(text[i].split()), len(temp))
+
+        src_encoding = self.tokenizer(text, truncation=True, padding=True)
+        src_subtoken_idxs = src_encoding['input_ids']
+        src_token_type_id = src_encoding['token_type_ids']
+        print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
+        src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
+        tag_align = []
+        for i, subtoken in enumerate(src_subtokens):
+            aligned_labels = ["O"] * len(subtoken)
+            head = 0
+            count = 0
+            # print(len(subtoken))
+            for j, each_str in enumerate(subtoken):
+                # print(i, each_str, head, count)
+                if each_str != "[pad]":
+                    if not tokenizer.is_token_part(each_str):
+                        aligned_labels[head] = tags[i][count]
+                        count += 1
+                        head += 1
+                    else:
+                        aligned_labels[head] = tags[i][count - 1]
+                        head += 1
+                else:
+                    break
+            tag_align.append(aligned_labels)
+        # print(head, len(src_subtokens), count, len(tags))
+        # src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
+        tag_dict = {'O': 0, "I-INT": 1, "I-PAR": 2, "I-OUT": 3}
+        tag_id = []
+        for tag_list in tag_align:
+            temp = []
+            for tag in tag_list:
+                temp.append(int(tag_dict[tag]))
+            tag_id.append(temp)
+        mask_label = []
+        for i, tag_list in enumerate(tag_align):
+            temp = []
+            for i, tag in enumerate(tag_list):
+                if tag == "O":
+                    temp.append(0.0)
+                else:
+                    src_subtoken_idxs[i][j] = self.mask_vid
+                    temp.append(1.0)
+            print(len(temp))
+            mask_label.append(temp)
+        data = []
+        for i in range(len(mask_label)):
+            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "token_type_ids":src_token_type_id})
+        return data
+
+class PicoPubmedBertAdapterData():
+    def __init__(self, args):
+        self.args = args
+        model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        # BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
+
+        self.sep_token = '[SEP]'
+        self.cls_token = '[CLS]'
+        self.pad_token = '[PAD]'
+        self.sep_vid = self.tokenizer.vocab[self.sep_token]
+        self.cls_vid = self.tokenizer.vocab[self.cls_token]
+        self.pad_vid = self.tokenizer.vocab[self.pad_token]
+        self.mask_token = '[MASK]'
+        self.mask_vid = self.tokenizer.convert_tokens_to_ids(self.mask_token)
+
+    def preprocess(self, src, tag, is_test=False):
+
+        idxs = []
+        new_src = []
+        new_tag = []
+        for i, d in enumerate(src):
+            new_src.append([])
+            new_tag.append([])
+            for j, s in enumerate(d):
+                # assert len(s)==len(tag[i][j]),(len(s),len(tag[i][j]))
+                if len(s) > self.args.min_src_ntokens_per_sent:
+                    new_src[-1].append(s[:self.args.max_src_ntokens_per_sent])
+                    new_tag[-1].append(tag[i][j][:self.args.max_src_ntokens_per_sent])
+        # print(len(new_tag))
+
+        src_filt = [d[:self.args.max_src_nsents][:] for d in new_src if self.args.min_src_nsents < len(d)]
+        tag_filt = [d_tag[:self.args.max_src_nsents][:] for d_tag in new_tag if self.args.min_src_nsents < len(d_tag)]
+        print(len(src_filt), len(src_filt[0]), src_filt[0][0])
+        src_txt = []
+        for d in src_filt:
+            temp = []
+            for sent in d:
+                temp.append(' '.join(sent))
+            src_txt.append(temp)
+
+        # src_txt = [' '.join(sent) for d in src for sent in d]
+        # print(len(src_txt))
+
+        text = [' {} {} '.format(self.sep_token, self.cls_token).join(d) for d in src_txt]
+        # print(len(text))
+        text = ['{} '.format(self.cls_token) + d + ' {}'.format(self.sep_token) for d in text]
+        # print(len(text))
+        tags = []
+        for i, t in enumerate(tag_filt):
+            temp = []
+            temp.append('O')
+            for tag_list in t:
+                for t in tag_list:
+                    temp.append(t)
+                temp.append('O')
+                temp.append('O')
+            temp = temp[:-2]
+            temp.append('O')
+            tags.append(temp)
+            assert len(text[i].split()) == len(temp), (i, text[i].split(), len(text[i].split()), len(temp))
+
+        src_encoding = self.tokenizer(text, truncation=True, padding=True)
+        src_subtoken_idxs = src_encoding['input_ids']
+        src_token_type_id = src_encoding['token_type_ids']
+        print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
+        src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
+        tag_align = []
+        for i, subtoken in enumerate(src_subtokens):
+            aligned_labels = ["O"] * len(subtoken)
+            head = 0
+            count = 0
+            # print(len(subtoken))
+            for j, each_str in enumerate(subtoken):
+                # print(i, each_str, head, count)
+                if each_str != "[pad]":
+                    if not tokenizer.is_token_part(each_str):
+                        aligned_labels[head] = tags[i][count]
+                        count += 1
+                        head += 1
+                    else:
+                        aligned_labels[head] = tags[i][count - 1]
+                        head += 1
+                else:
+                    break
+            tag_align.append(aligned_labels)
+        # print(head, len(src_subtokens), count, len(tags))
+        # src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
+        tag_dict = {'O': 0, "I-INT": 1, "I-PAR": 2, "I-OUT": 3}
+        tag_id = []
+        for tag_list in tag_align:
+            temp = []
+            for tag in tag_list:
+                temp.append(int(tag_dict[tag]))
+            tag_id.append(temp)
+        mask_label = []
+        for i, tag_list in enumerate(tag_align):
+            temp = []
+            for i, tag in enumerate(tag_list):
+                if tag == "O":
+                    temp.append(0.0)
+                else:
+                    src_subtoken_idxs[i][j] = self.mask_vid
+                    temp.append(1.0)
+            print(len(temp))
+            mask_label.append(temp)
+        data = []
+        for i in range(len(mask_label)):
+            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "token_type_ids":src_token_type_id})
+        return data
+
+def format_to_robert(args):
     print('... (5) Converting data to BERT data... this will take a while')
 
     datasets = ['train', 'valid', 'test']
@@ -533,13 +893,55 @@ def format_to_bert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
         
         pool = Pool(args.n_cpus)
-        for d in pool.imap(_format_to_bert, a_lst):
+        for d in pool.imap(_format_to_robert, a_lst):
             pass
         pool.close()
         pool.join()
 
 
-def format_to_pico_adapter(args):
+def format_to_bert(args):
+    print('... (5) Converting data to BERT data... this will take a while')
+
+    datasets = ['train', 'valid', 'test']
+
+    # corpora = [os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
+    #           if not f.startswith('.') and f.endswith('.json')]
+    print("")
+    for corpus_type in datasets:
+        a_lst = []
+        for json_f in glob.glob(pjoin(args.raw_path, '*' + corpus_type + '.*.json')):
+            real_name = json_f.split('/')[-1]
+            # print("json_f:", json_f, real_name)
+            a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
+
+        pool = Pool(args.n_cpus)
+        for d in pool.imap(_format_to_bert, a_lst):
+            pass
+        pool.close()
+        pool.join()
+
+def format_to_pubmed_bert(args):
+    print('... (5) Converting data to BERT data... this will take a while')
+
+    datasets = ['train', 'valid', 'test']
+
+    # corpora = [os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
+    #           if not f.startswith('.') and f.endswith('.json')]
+    print("")
+    for corpus_type in datasets:
+        a_lst = []
+        for json_f in glob.glob(pjoin(args.raw_path, '*' + corpus_type + '.*.json')):
+            real_name = json_f.split('/')[-1]
+            # print("json_f:", json_f, real_name)
+            a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
+
+        pool = Pool(args.n_cpus)
+        for d in pool.imap(_format_to_pubmed_bert, a_lst):
+            pass
+        pool.close()
+        pool.join()
+
+def format_to_pico_adapter_robert(args):
     print('... (5) Converting data to pico adapter data... this will take a while')
 
     datasets = ['train', 'valid', 'test']
@@ -575,6 +977,112 @@ def format_to_pico_adapter(args):
         logger.info('Saving to %s' % save_path)
         torch.save(data, save_path)
 
+def format_to_pico_adapter_bert(args):
+    print('... (5) Converting data to pico adapter data... this will take a while')
+
+    datasets = ['train', 'valid', 'test']
+
+    # corpora = [os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
+    #           if not f.startswith('.') and f.endswith('.json')]
+    print("")
+    for corpus_type in datasets:
+        json_file = []
+        for json_f in glob.glob(pjoin(args.raw_path, '*' + corpus_type + '.*.json')):
+            json_file.append(json_f)
+            # print("json_f:", json_f, real_name)
+        save_path = pjoin(args.save_path, corpus_type+'.padpter.pt')
+        is_test = corpus_type == 'test'
+        if (os.path.exists(save_path)):
+            logger.info('Ignore %s' % save_path)
+            return
+        pico_adapter = PicoBertAdapterData(args)
+        logger.info('Processing %s' % json_file)
+        data = []
+        source = []
+        tag = []
+        #json_file = [json_file[0]]
+        for j in json_file:
+            jobs = json.load(open(j))
+            for d in jobs:
+                source.append(d['src'])
+                tag.append(d['tag'])
+        #source = source[:100]
+        #tag = tag[:100]
+        data = pico_adapter.preprocess(source, tag, is_test=is_test)
+        logger.info('Processed instances %d' % len(data))
+        logger.info('Saving to %s' % save_path)
+        torch.save(data, save_path)
+
+def format_to_pico_adapter_pubmed_bert(args):
+    print('... (5) Converting data to pico adapter data... this will take a while')
+
+    datasets = ['train', 'valid', 'test']
+
+    # corpora = [os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
+    #           if not f.startswith('.') and f.endswith('.json')]
+    print("")
+    for corpus_type in datasets:
+        json_file = []
+        for json_f in glob.glob(pjoin(args.raw_path, '*' + corpus_type + '.*.json')):
+            json_file.append(json_f)
+            # print("json_f:", json_f, real_name)
+        save_path = pjoin(args.save_path, corpus_type+'.padpter.pt')
+        is_test = corpus_type == 'test'
+        if (os.path.exists(save_path)):
+            logger.info('Ignore %s' % save_path)
+            return
+        pico_adapter = PicoPubmedBertAdapterData(args)
+        logger.info('Processing %s' % json_file)
+        data = []
+        source = []
+        tag = []
+        #json_file = [json_file[0]]
+        for j in json_file:
+            jobs = json.load(open(j))
+            for d in jobs:
+                source.append(d['src'])
+                tag.append(d['tag'])
+        #source = source[:100]
+        #tag = tag[:100]
+        data = pico_adapter.preprocess(source, tag, is_test=is_test)
+        logger.info('Processed instances %d' % len(data))
+        logger.info('Saving to %s' % save_path)
+        torch.save(data, save_path)
+
+def _format_to_robert(params):
+    corpus_type, json_file, args, save_file = params
+    is_test = corpus_type == 'test'
+    if (os.path.exists(save_file)):
+        logger.info('Ignore %s' % save_file)
+        return
+
+    Robert = RoBertData(args)
+
+    logger.info('Processing %s' % json_file)
+    jobs = json.load(open(json_file))
+    datasets = []
+    for d in jobs:
+        source, tgt = d['src'], d['tgt']
+        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
+        if (args.lower):
+            source = [' '.join(s).lower().split() for s in source]
+            tgt = [' '.join(s).lower().split() for s in tgt]
+        b_data = Robert.preprocess(source, tgt, sent_labels, use_bert_basic_tokenizer=args.use_bert_basic_tokenizer,
+                                 is_test=is_test)
+        # b_data = bert.preprocess(source, tgt, sent_labels, use_bert_basic_tokenizer=args.use_bert_basic_tokenizer)
+
+        if (b_data is None):
+            continue
+        src_subtoken_idxs, sent_labels, tgt_subtoken_idxs, segments_ids, cls_ids, src_txt, tgt_txt = b_data
+        b_data_dict = {"src": src_subtoken_idxs, "tgt": tgt_subtoken_idxs,
+                       "src_sent_labels": sent_labels, "segs": segments_ids, 'clss': cls_ids,
+                       'src_txt': src_txt, "tgt_txt": tgt_txt}
+        datasets.append(b_data_dict)
+    logger.info('Processed instances %d' % len(datasets))
+    logger.info('Saving to %s' % save_file)
+    torch.save(datasets, save_file)
+    gc.collect()
+
 def _format_to_bert(params):
     corpus_type, json_file, args, save_file = params
     is_test = corpus_type == 'test'
@@ -607,9 +1115,41 @@ def _format_to_bert(params):
     logger.info('Processed instances %d' % len(datasets))
     logger.info('Saving to %s' % save_file)
     torch.save(datasets, save_file)
-    datasets = []
     gc.collect()
 
+def _format_to_pubmed_bert(params):
+    corpus_type, json_file, args, save_file = params
+    is_test = corpus_type == 'test'
+    if (os.path.exists(save_file)):
+        logger.info('Ignore %s' % save_file)
+        return
+
+    pubmed_bert = PubmedData(args)
+
+    logger.info('Processing %s' % json_file)
+    jobs = json.load(open(json_file))
+    datasets = []
+    for d in jobs:
+        source, tgt = d['src'], d['tgt']
+        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
+        if (args.lower):
+            source = [' '.join(s).lower().split() for s in source]
+            tgt = [' '.join(s).lower().split() for s in tgt]
+        b_data = pubmed_bert.preprocess(source, tgt, sent_labels, use_bert_basic_tokenizer=args.use_bert_basic_tokenizer,
+                                 is_test=is_test)
+        # b_data = bert.preprocess(source, tgt, sent_labels, use_bert_basic_tokenizer=args.use_bert_basic_tokenizer)
+
+        if (b_data is None):
+            continue
+        src_subtoken_idxs, sent_labels, tgt_subtoken_idxs, segments_ids, cls_ids, src_txt, tgt_txt = b_data
+        b_data_dict = {"src": src_subtoken_idxs, "tgt": tgt_subtoken_idxs,
+                       "src_sent_labels": sent_labels, "segs": segments_ids, 'clss': cls_ids,
+                       'src_txt': src_txt, "tgt_txt": tgt_txt}
+        datasets.append(b_data_dict)
+    logger.info('Processed instances %d' % len(datasets))
+    logger.info('Saving to %s' % save_file)
+    torch.save(datasets, save_file)
+    gc.collect()
 
 def format_to_lines(args):
     corpora = sorted([os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)

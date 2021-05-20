@@ -12,6 +12,9 @@ import numpy as np
 import glob
 import transformers
 import random
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("-model", default='robert', type=str)
 
 from transformers import (
     AdapterConfig,
@@ -113,17 +116,48 @@ class PicoDataset(torch.utils.data.Dataset):
     def __len__(self):
         return len(self.labels)
 
+class PicoBertDataset(torch.utils.data.Dataset):
+    def __init__(self, src_idx, labels, mask, type_ids):
+        self.input_ids = src_idx
+        self.token_type_ids = type_ids
+        self.labels = labels
+        self.attention_mask = mask #[1]* len(self.input_ids)
+    def __getitem__(self, idx):
+        #item = {key: torch.tensor(val[idx]) for key, val in self.input_ids.items()}
+        item = {}
+        #print(self.labels[idx],type(self.labels[idx]))
+        item['labels'] = self.labels[idx]
+        item['input_ids'] = self.input_ids[idx]
+        item['attention_mask'] = self.attention_mask[idx]
+        item['token_type_ids'] = self.token_type_ids[idx]
+        #print(item['input_ids'])
+        #print(len(item['input_ids']))
+        return item
+    def __len__(self):
+        return len(self.labels)
+
 def main():
-    train_src, train_labels, train_mask = load_dataset('train', shuffle=True)
-    val_src, val_labels, val_mask = load_dataset('valid', shuffle=False)
-    test_src, test_labels, test_mask = load_dataset('test', shuffle=False)
-
-    train_dataset = PicoDataset(train_src, train_labels, train_mask)
-    val_dataset = PicoDataset(val_src, val_labels, val_mask)
-    test_dataset = PicoDataset(test_src, test_labels, test_mask)
-    tokenizer = AutoTokenizer.from_pretrained('roberta-base')
-
-    model = AutoModelForTokenClassification.from_pretrained('roberta-base', num_labels=len(label_list))
+    args = parser.parse_args()
+    if args.model=="robert":
+        train_src, train_labels, train_mask = load_dataset('train', shuffle=True)
+        val_src, val_labels, val_mask = load_dataset('valid', shuffle=False)
+        test_src, test_labels, test_mask = load_dataset('test', shuffle=False)
+        train_dataset = PicoDataset(train_src, train_labels, train_mask)
+        val_dataset = PicoDataset(val_src, val_labels, val_mask)
+        test_dataset = PicoDataset(test_src, test_labels, test_mask)
+        tokenizer = AutoTokenizer.from_pretrained('roberta-base')
+    else:
+        train_src, train_labels, train_mask, train_type_id = load_dataset('train', shuffle=True)
+        val_src, val_labels, val_mask, val_type_id = load_dataset('valid', shuffle=False)
+        test_src, test_labels, test_mask, test_type_id = load_dataset('test', shuffle=False)
+        train_dataset = PicoBertDataset(train_src, train_labels, train_mask, train_type_id)
+        val_dataset = PicoBertDataset(val_src, val_labels, val_mask, val_type_id)
+        test_dataset = PicoBertDataset(test_src, test_labels, test_mask, test_type_id)
+        tokenizer = AutoTokenizer.from_pretrained('roberta-base')
+    if arg.model=="robert":
+        model = AutoModelForTokenClassification.from_pretrained('roberta-base', num_labels=len(label_list))
+    else:
+        model = AutoModelForTokenClassification.from_pretrained('bert-base-uncased', num_labels=len(label_list))
     model.add_adapter(task)
     model.train_adapter(task)
     model.set_active_adapters(task)

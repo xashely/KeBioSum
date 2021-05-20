@@ -2,7 +2,7 @@ import copy
 
 import torch
 import torch.nn as nn
-from transformers import RobertaConfig, RobertaModel
+from transformers import RobertaConfig, RobertaModel, BertModel, AutoTokenizer, AutoModelForMaskedLM
 from torch.nn.init import xavier_uniform_
 
 from models.decoder import TransformerDecoder
@@ -117,7 +117,13 @@ class RoBerta(nn.Module):
     def __init__(self, large, temp_dir, finetune=False):
         super(RoBerta, self).__init__()
         if(large):
-            self.model = RobertaModel.from_pretrained('roberta-large', cache_dir=temp_dir)
+            if args.model=="robert":
+                self.model = RobertaModel.from_pretrained('roberta-large', cache_dir=temp_dir)
+            if args.model == "bert":
+                self.model = BertModel.from_pretrained('berta-large-uncased', cache_dir=temp_dir)
+            if args.model == "pubmed":
+                model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
+                self.model = AutoModelForMaskedLM.from_pretrained(model_name).to('device')
             self.model.add_adapter("finetune")
             #self.model.train_adapter("finetune")
             #self.model.set_active_adapters("finetune")
@@ -129,7 +135,13 @@ class RoBerta(nn.Module):
             self.model.encoder.enable_adapters(adapter_setup, True, True)
             #self.model.encoder.enable_adapters("ner", True, True)
         else:
-            self.model = RobertaModel.from_pretrained('roberta-base', cache_dir=temp_dir)
+            if args.model == "robert":
+                self.model = RobertaModel.from_pretrained('roberta-base', cache_dir=temp_dir)
+            if args.model == "bert":
+                self.model = BertModel.from_pretrained('berta-uncased', cache_dir=temp_dir)
+            if args.model == "pubmed":
+                model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
+                self.model = AutoModelForMaskedLM.from_pretrained(model_name).to('device')
             self.model.add_adapter("finetune")
             #self.model.train_adapter("finetune")
             #self.model.set_active_adapters("finetune")
@@ -160,7 +172,7 @@ class ExtSummarizer(nn.Module):
         super(ExtSummarizer, self).__init__()
         self.args = args
         self.device = device
-        self.RoBerta = RoBerta(args.large, args.temp_dir, args.finetune_bert)
+        self.RoBerta = RoBerta(args.large, args.temp_dir, args.finetune_bert, args.model, device)
         self.ext_layer = ExtTransformerEncoder(self.RoBerta.model.config.hidden_size, args.ext_ff_size, args.ext_heads,
                                                args.ext_dropout, args.ext_layers)
         if (args.encoder == 'baseline'):
