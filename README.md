@@ -31,18 +31,13 @@ Some codes are borrowed from PreSumm (https://github.com/nlpyang/PreSumm)
 Download and unzip the `CORD-19` directories from [here](https://allenai.org/data/cord-19). Put all files in the directory `./raw_data`
 
 ####  Step 2. Download Stanford CoreNLP
-We will need Stanford CoreNLP to tokenize the data. Download it [here](https://stanfordnlp.github.io/CoreNLP/) and unzip it. Then add the following command to your bash_profile:
+We will need Stanford CoreNLP to tokenize the data. Download it [here](https://stanfordnlp.github.io/CoreNLP/) and unzip it. Then add the following command to your bash_profile (`/.bashrc` file):
 ```
-export CLASSPATH=/home/qianqian/stanford-corenlp-4.2.0/stanford-corenlp-4.2.0.jar
+ for file in `find /home/qianqian/stanford-corenlp-4.2.1  -name "*.jar"`; do export CLASSPATH="$CLASSPATH:`realpath $file`"; done
 ```
 replacing `/path/to/` with the path to where you saved the `stanford-corenlp-4.2.0` directory. 
 
-####  Step 3. Clean the Data
-```
-python src/cord19_clean.py
-```
-
-####  Step 4. Sentence Splitting and Tokenization
+####  Step 3. Cleaning data and and Tokenization
 
 ```
 python src/preprocess.py -mode tokenize -raw_path ./raw_data/ -save_path ./token_data/
@@ -50,13 +45,13 @@ python src/preprocess.py -mode tokenize -raw_path ./raw_data/ -save_path ./token
 
 * `RAW_PATH` is the directory containing story files, `JSON_PATH` is the target directory to save the generated json files
 
-####  Step 5. PICO Prediction
+####  Step 4. PICO Prediction
 
 Using scibert (https://github.com/allenai/scibert) trained on the EBM-NLP dataset (https://github.com/bepnye/EBM-NLP):
 
 1. Preprocess the tokenized data into the pico input data on the trained scibert:
 ```
-python src/preprocess_pico.py
+python src/preprocess_pico.py -raw_path .=/token_data/ -save_path ..output_data/pico_preprocess/
 ```
 2. Training pico extraction model
 
@@ -94,7 +89,7 @@ python -m allennlp.run predict --output-file=out.txt --include-package=scibert -
 python src/pico_predict_read.py
 ```
 
-####  Step 6. Format to Simpler Json Files
+####  Step 5. Format to Simpler Json Files
  
 ```
 python src/preprocess.py -mode format_to_lines -raw_path ./token_data/ -save_path ./json_data
@@ -102,14 +97,14 @@ python src/preprocess.py -mode format_to_lines -raw_path ./token_data/ -save_pat
 
 * `RAW_PATH` is the directory containing tokenized files, `JSON_PATH` is the target directory to save the generated json files
 
-####  Step 7. Format to PyTorch Files
+####  Step 6. Format to PyTorch Files
 ```
 python src/preprocess.py -mode format_to_bert -raw_path ./json_data/ -save_path ./bert_data/  -lower -n_cpus 1 -log_file ./logs/preprocess.log
 ```
 
 * `JSON_PATH` is the directory containing json files, `BERT_DATA_PATH` is the target directory to save the generated binary files
 
-#### step 8. Format pico json to input files
+#### step 7. Format pico json to input files
 ```
 python src/preprocess.py -mode format_to_pico_adapter -raw_path ./json_data/ -save_path ./pico_adapter_data/
 ```

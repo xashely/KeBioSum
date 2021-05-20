@@ -5,6 +5,7 @@ import re
 import math
 from collections import Counter
 from os.path import join as pjoin
+import argparse
 
 from others.logging import logger
 import pandas as pd
@@ -12,8 +13,14 @@ import time
 from datetime import datetime
 from tqdm import tqdm
 
-raw_path = "./token_data/"
-save_path = "/home/qianqian/scibert/data/pico/ebmnlp/"
+parser = argparse.ArgumentParser()
+parser.add_argument("-raw_path", default="./token_data/", type=str)
+parser.add_argument("-save_path", default="/home/qianqian/scibert/data/pico/ebmnlp/", type=str)
+
+args = parser.parse_args()
+raw_path = os.path.abspath(args.raw_path)
+save_path = os.path.abspath(args.save_path)
+
 corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(raw_path)
                       if not f.startswith('.') and not f.endswith('.abs.txt.json')])
 print('... Packing tokenized data into pico txt...')
