@@ -763,7 +763,7 @@ class PicoBertAdapterData():
             mask_label.append(temp)
         data = []
         for i in range(len(mask_label)):
-            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "token_type_ids":src_token_type_id})
+            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "token_type_ids":src_token_type_id[i]})
         return data
 
 class PicoPubmedBertAdapterData():
@@ -874,7 +874,7 @@ class PicoPubmedBertAdapterData():
             mask_label.append(temp)
         data = []
         for i in range(len(mask_label)):
-            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "token_type_ids":src_token_type_id})
+            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "token_type_ids":src_token_type_id[i]})
         return data
 
 def format_to_robert(args):
