@@ -731,7 +731,7 @@ class PicoBertAdapterData():
             for j, each_str in enumerate(subtoken):
                 # print(i, each_str, head, count)
                 if each_str != "[pad]":
-                    if not self.tokenizer.is_token_part(each_str):
+                    if "##" not in each_str:
                         aligned_labels[head] = tags[i][count]
                         count += 1
                         head += 1
@@ -842,7 +842,7 @@ class PicoPubmedBertAdapterData():
             for j, each_str in enumerate(subtoken):
                 # print(i, each_str, head, count)
                 if each_str != "[pad]":
-                    if not self.tokenizer.is_token_part(each_str):
+                    if "##" not in each_str:
                         aligned_labels[head] = tags[i][count]
                         count += 1
                         head += 1
