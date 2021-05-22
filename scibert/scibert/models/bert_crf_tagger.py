@@ -15,7 +15,7 @@ import allennlp.nn.util as util
 from allennlp.training.metrics import CategoricalAccuracy, SpanBasedF1Measure, F1Measure
 
 
-@Model.register("bert_crf_tagger")
+@Model.register("bert_crf_tagger_2")
 class BertCrfTagger(Model):
     """
     The ``BertCrfTagger`` encodes a sequence of text with a ``Seq2SeqEncoder``,
