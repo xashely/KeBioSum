@@ -204,44 +204,44 @@ def tokenize(args):
     
     write_head = False
 
-    # write out new csv containing files we use in our dataset
-    with open(new_meta_path, 'w') as f:
-        w = csv.writer(f)
-        for i,row in tqdm(df.iterrows(),total=df.shape[0]):
+    # # write out new csv containing files we use in our dataset
+    # with open(new_meta_path, 'w') as f:
+    #     w = csv.writer(f)
+    #     for i,row in tqdm(df.iterrows(),total=df.shape[0]):
                 
-            # read in pubmed file if available
-            pid = row['pmcid']
-            pubtime = row['publish_time']
-            # pubtime = datetime.strptime(row['publish_time'], '%Y-%m-%d').timestamp()
-            ppath = os.path.join(pmc_dir, '{}.xml.json'.format(pid))
-            if not os.path.isfile(ppath):
-                no_path_counter +=1
-                continue
-            with open(ppath, 'r') as fi:
-                json_dict = json.load(fi)
+    #         # read in pubmed file if available
+    #         pid = row['pmcid']
+    #         pubtime = row['publish_time']
+    #         # pubtime = datetime.strptime(row['publish_time'], '%Y-%m-%d').timestamp()
+    #         ppath = os.path.join(pmc_dir, '{}.xml.json'.format(pid))
+    #         if not os.path.isfile(ppath):
+    #             no_path_counter +=1
+    #             continue
+    #         with open(ppath, 'r') as fi:
+    #             json_dict = json.load(fi)
             
-            # preprocess / clean file
-            cleaned_dict = clean_json(json_dict)
-            tpath = os.path.join(txt_dir, '{}-{}.txt'.format(pubtime, pid))
-            tpath_abs = os.path.join(txt_dir, '{}-{}.abs.txt'.format(pubtime, pid))
+    #         # preprocess / clean file
+    #         cleaned_dict = clean_json(json_dict)
+    #         tpath = os.path.join(txt_dir, '{}-{}.txt'.format(pubtime, pid))
+    #         tpath_abs = os.path.join(txt_dir, '{}-{}.abs.txt'.format(pubtime, pid))
             
-            # write out main text and abstract 
-            with open(tpath, 'w') as fil:
-                fil.write(cleaned_dict['text'])
-            with open(tpath_abs, 'w') as fil:
-                fil.write(row['abstract'])
-            files_count_real += 1
+    #         # write out main text and abstract 
+    #         with open(tpath, 'w') as fil:
+    #             fil.write(cleaned_dict['text'])
+    #         with open(tpath_abs, 'w') as fil:
+    #             fil.write(row['abstract'])
+    #         files_count_real += 1
             
-            # write csv row
-            cleaned_dict['abstract'] = row['abstract']
-            if not write_head:
-                w.writerow(cleaned_dict.keys())
-                write_head = True       
-            w.writerow(cleaned_dict.values())
+    #         # write csv row
+    #         cleaned_dict['abstract'] = row['abstract']
+    #         if not write_head:
+    #             w.writerow(cleaned_dict.keys())
+    #             write_head = True       
+    #         w.writerow(cleaned_dict.values())
 
-    end = time.time()
-    print('Real count for files with abstract: {} ({}%)'.format(files_count_real,files_count_real / len_before * 100))
-    print('... Ending (1), time elapsed {}'.format(end - start))
+    # end = time.time()
+    # print('Real count for files with abstract: {} ({}%)'.format(files_count_real,files_count_real / len_before * 100))
+    # print('... Ending (1), time elapsed {}'.format(end - start))
 
     print("Preparing to tokenize %s to %s..." % (root_data_dir, tokenized_data_dir))
     num_files_to_tokenize = 0
