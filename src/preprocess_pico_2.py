@@ -31,7 +31,7 @@ with open(file_path, "r") as data_file:
         if not _is_divider(line):
             line_split = line.split(' ')
             if '<bioterrorism' in line_split[0]:
-                print(sep_line, idx, line_split)
+                print(sep_line.strip(' ').strip('\n'), idx, line_split)
             # if len(line_split) > 4:
             #     print(idx, line_split)
     for is_divider, lines in itertools.groupby(data_file, _is_divider):
