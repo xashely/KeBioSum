@@ -15,7 +15,7 @@ from allennlp.training.metrics import CategoricalAccuracy, F1Measure
 
 logger = logging.getLogger(__name__)
 
-@Model.register("pico_crf_tagger_2")
+@Model.register("pico_crf_tagger")
 class PicoCrfTagger(Model):
     """
     Exactly like the CrfTagger in AllenNLP:
