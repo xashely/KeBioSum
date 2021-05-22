@@ -97,8 +97,8 @@ class PicoCrfTagger(Model):
                 for j, tag_id in enumerate(instance_tags):
                     class_probabilities[i, j, tag_id] = 1
 
-            #for metric in self.metrics.values():
-            #    metric(class_probabilities, tags, mask.float())
+            for metric in self.metrics.values():
+               metric(class_probabilities, tags, mask.float())
 
         if metadata is not None:
             output["words"] = [x["words"] for x in metadata]

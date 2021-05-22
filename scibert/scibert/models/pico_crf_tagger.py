@@ -15,7 +15,7 @@ from allennlp.training.metrics import CategoricalAccuracy, F1Measure
 
 logger = logging.getLogger(__name__)
 
-@Model.register("pico_crf_tagger")
+@Model.register("pico_crf_tagger_2")
 class PicoCrfTagger(Model):
     """
     Exactly like the CrfTagger in AllenNLP:
@@ -97,8 +97,8 @@ class PicoCrfTagger(Model):
                 for j, tag_id in enumerate(instance_tags):
                     class_probabilities[i, j, tag_id] = 1
 
-            #for metric in self.metrics.values():
-            #    metric(class_probabilities, tags, mask.float())
+            for metric in self.metrics.values():
+               metric(class_probabilities, tags, mask.float())
 
         if metadata is not None:
             output["words"] = [x["words"] for x in metadata]
