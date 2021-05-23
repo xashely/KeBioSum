@@ -54,5 +54,6 @@ with open(file_path, "r") as data_file:
                 ]
                 fields = [list(field) for field in zip(*fields)]
                 tokens_, _, _, pico_tags = fields
+                print(fields)
             # unzipping trick returns tuples, but our Fields need lists
             
