@@ -52,6 +52,7 @@ with open(file_path, "r") as data_file:
                     val if len(val) == 4 else [" ".join(val[:-3]), val[-3], val[-2], val[-1]]
                     for val in fields
                 ]
+                print(fields)
                 fields = [list(field) for field in zip(*fields)]
                 tokens_, _, _, pico_tags = fields
                 print(fields)
