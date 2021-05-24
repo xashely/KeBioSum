@@ -731,12 +731,12 @@ class PicoBertAdapterData():
             for j, each_str in enumerate(subtoken):
                 # print(i, each_str, head, count)
                 if each_str != "[pad]":
-                    if "##" not in each_str:
-                        aligned_labels[head] = tags[i][count]
-                        count += 1
+                    if each_str.startswith("##"):
+                        aligned_labels[head] = tags[i][count - 1]
                         head += 1
                     else:
-                        aligned_labels[head] = tags[i][count - 1]
+                        aligned_labels[head] = tags[i][count]
+                        count += 1
                         head += 1
                 else:
                     break
@@ -842,12 +842,12 @@ class PicoPubmedBertAdapterData():
             for j, each_str in enumerate(subtoken):
                 # print(i, each_str, head, count)
                 if each_str != "[pad]":
-                    if "##" not in each_str:
-                        aligned_labels[head] = tags[i][count]
-                        count += 1
+                    if each_str.startswith("##"):
+                        aligned_labels[head] = tags[i][count - 1]
                         head += 1
                     else:
-                        aligned_labels[head] = tags[i][count - 1]
+                        aligned_labels[head] = tags[i][count]
+                        count += 1
                         head += 1
                 else:
                     break
