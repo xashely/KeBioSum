@@ -596,8 +596,8 @@ class PicoAdapterData():
             temp = []
             temp.append('O')
             for tag_list in t:
-                for t in tag_list:
-                    temp.append(t)
+                for tag in tag_list:
+                    temp.append(tag)
                 temp.append('O')
                 temp.append('O')
             temp = temp[:-2]
@@ -640,7 +640,7 @@ class PicoAdapterData():
         mask_label = []
         for i, tag_list in enumerate(tag_align):
             temp = []
-            for i,tag in enumerate(tag_list):
+            for j,tag in enumerate(tag_list):
                 if tag == "O":
                     temp.append(0.0)
                 else:
@@ -688,6 +688,7 @@ class PicoBertAdapterData():
 
         src_filt = [d[:self.args.max_src_nsents][:] for d in new_src if self.args.min_src_nsents < len(d)]
         tag_filt = [d_tag[:self.args.max_src_nsents][:] for d_tag in new_tag if self.args.min_src_nsents < len(d_tag)]
+        print (tag_filt[0], len(tag_filt))
         print(len(src_filt), len(src_filt[0]), src_filt[0][0])
         src_txt = []
         for d in src_filt:
@@ -708,8 +709,8 @@ class PicoBertAdapterData():
             temp = []
             temp.append('O')
             for tag_list in t:
-                for t in tag_list:
-                    temp.append(t)
+                for tag in tag_list:
+                    temp.append(tag)
                 temp.append('O')
                 temp.append('O')
             temp = temp[:-2]
@@ -717,12 +718,16 @@ class PicoBertAdapterData():
             tags.append(temp)
             assert len(text[i].split()) == len(temp), (i, text[i].split(), len(text[i].split()), len(temp))
 
-        src_encoding = self.tokenizer(text, truncation=True, padding=True)
+        #print (len(tags[0]), len(text[0].split()))
+        src_encoding = self.tokenizer(text, truncation=False, padding=True)
         src_subtoken_idxs = src_encoding['input_ids']
         src_token_type_id = src_encoding['token_type_ids']
         print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
+        print (len(tags[0]), len(src_subtoken_idxs[0]), len(src_token_type_id[0]))
         src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
         tag_align = []
+        print(src_subtokens[0])
+        #print("debug one:", len(src_subtokens), len(tags))
         for i, subtoken in enumerate(src_subtokens):
             aligned_labels = ["O"] * len(subtoken)
             head = 0
@@ -735,6 +740,7 @@ class PicoBertAdapterData():
                         aligned_labels[head] = tags[i][count - 1]
                         head += 1
                     else:
+                        #print("debug:", i, len(tags[i]), count, len(aligned_labels), head)
                         aligned_labels[head] = tags[i][count]
                         count += 1
                         head += 1
@@ -753,7 +759,7 @@ class PicoBertAdapterData():
         mask_label = []
         for i, tag_list in enumerate(tag_align):
             temp = []
-            for i, tag in enumerate(tag_list):
+            for j, tag in enumerate(tag_list):
                 if tag == "O":
                     temp.append(0.0)
                 else:
@@ -819,8 +825,8 @@ class PicoPubmedBertAdapterData():
             temp = []
             temp.append('O')
             for tag_list in t:
-                for t in tag_list:
-                    temp.append(t)
+                for tag in tag_list:
+                    temp.append(tag)
                 temp.append('O')
                 temp.append('O')
             temp = temp[:-2]
@@ -828,7 +834,7 @@ class PicoPubmedBertAdapterData():
             tags.append(temp)
             assert len(text[i].split()) == len(temp), (i, text[i].split(), len(text[i].split()), len(temp))
 
-        src_encoding = self.tokenizer(text, truncation=True, padding=True)
+        src_encoding = self.tokenizer(text, padding=True)
         src_subtoken_idxs = src_encoding['input_ids']
         src_token_type_id = src_encoding['token_type_ids']
         print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
@@ -864,7 +870,7 @@ class PicoPubmedBertAdapterData():
         mask_label = []
         for i, tag_list in enumerate(tag_align):
             temp = []
-            for i, tag in enumerate(tag_list):
+            for j, tag in enumerate(tag_list):
                 if tag == "O":
                     temp.append(0.0)
                 else:
@@ -1000,14 +1006,14 @@ def format_to_pico_adapter_bert(args):
         data = []
         source = []
         tag = []
-        #json_file = [json_file[0]]
+        json_file = [json_file[0]]
         for j in json_file:
             jobs = json.load(open(j))
             for d in jobs:
                 source.append(d['src'])
                 tag.append(d['tag'])
-        #source = source[:100]
-        #tag = tag[:100]
+        source = source[:100]
+        tag = tag[:100]
         data = pico_adapter.preprocess(source, tag, is_test=is_test)
         logger.info('Processed instances %d' % len(data))
         logger.info('Saving to %s' % save_path)
