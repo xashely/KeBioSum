@@ -732,20 +732,19 @@ class PicoBertAdapterData():
         #print("debug one:", len(src_subtokens), len(tags))
         for i, subtoken in enumerate(src_subtokens):
             aligned_labels = ["O"] * len(subtoken)
-            head = 0
             count = 0
             # print(len(subtoken))
+            print(text[i][:1200], subtoken[:500])
+            print(len(tags[i]), len([val for val in subtoken if not val.startswith("##")]))
             for j, each_str in enumerate(subtoken):
                 # print(i, each_str, head, count)
                 if each_str != "[pad]":
                     if each_str.startswith("##"):
-                        aligned_labels[head] = tags[i][count - 1]
-                        head += 1
+                        aligned_labels[j] = tags[i][count - 1]
                     else:
                         #print("debug:", i, len(tags[i]), count, len(aligned_labels), head)
-                        aligned_labels[head] = tags[i][count]
+                        aligned_labels[j] = tags[i][count]
                         count += 1
-                        head += 1
                 else:
                     break
             tag_align.append(aligned_labels)
