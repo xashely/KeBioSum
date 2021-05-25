@@ -405,7 +405,6 @@ class BertData():
     def __init__(self, args):
         self.args = args
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
-
         self.sep_token = '[SEP]'
         self.cls_token = '[CLS]'
         self.pad_token = '[PAD]'
@@ -440,7 +439,6 @@ class BertData():
         src_txt = [' '.join(sent) for sent in src]
         text = ' {} {} '.format(self.sep_token, self.cls_token).join(src_txt)
         src_subtokens = self.tokenizer.tokenize(text)
-
         src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
         _segs = [-1] + [i for i, t in enumerate(src_subtoken_idxs) if t == self.sep_vid]
@@ -508,8 +506,7 @@ class PubmedData():
         src_txt = [' '.join(sent) for sent in src]
         text = ' {} {} '.format(self.sep_token, self.cls_token).join(src_txt)
         src_subtokens = self.tokenizer.tokenize(text)
-
-        src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
+        #src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
         _segs = [-1] + [i for i, t in enumerate(src_subtoken_idxs) if t == self.sep_vid]
         segs = [_segs[i] - _segs[i - 1] for i in range(1, len(_segs))]
@@ -665,6 +662,7 @@ class PicoBertAdapterData():
         self.sep_token = '[SEP]'
         self.cls_token = '[CLS]'
         self.pad_token = '[PAD]'
+        self.unused_token = '[unused0]'
         self.sep_vid = self.tokenizer.vocab[self.sep_token]
         self.cls_vid = self.tokenizer.vocab[self.cls_token]
         self.pad_vid = self.tokenizer.vocab[self.pad_token]
@@ -694,7 +692,11 @@ class PicoBertAdapterData():
         for d in src_filt:
             temp = []
             for sent in d:
-                temp.append(' '.join(sent))
+                temp_s = sent
+                for index, each_token in enumerate(sent):
+                    if each_token.startswith("http"):
+                        temp_s[index] = "http"
+                temp.append(' '.join(temp_s))
             src_txt.append(temp)
 
         # src_txt = [' '.join(sent) for d in src for sent in d]
@@ -702,7 +704,7 @@ class PicoBertAdapterData():
 
         text = [' {} {} '.format(self.sep_token, self.cls_token).join(d) for d in src_txt]
         # print(len(text))
-        text = ['{} '.format(self.cls_token) + d + ' {}'.format(self.sep_token) for d in text]
+        #text = ['{} '.format(self.cls_token) + d + ' {}'.format(self.sep_token) for d in text]
         # print(len(text))
         tags = []
         for i, t in enumerate(tag_filt):
