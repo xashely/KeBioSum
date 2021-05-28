@@ -60,6 +60,7 @@ def clean_json(json_dict):
         p_text = re.sub('\[[\d\s,]+?\]', '', p_text) # matches references e.g. [12]
         p_text = re.sub('\(Table \d+?\)', '', p_text) # matches table references e.g. (Table 1)
         p_text = re.sub('\(Fig. \d+?\)', '', p_text) # matches fig references e.g. (Fig. 1)
+        p_text = re.sub('(?<=[0-9]),(?=[0-9])', '', p_text) # matches numbers seperated by commas
         p_text = re.sub('[^\x00-\x7f]+',r'', p_text) # strips non ascii
         p_text = re.sub('[\<,\>]',r' ', p_text) # strips  <> tokens which are not compatable StanfordNLPtokenizer
         p_text = re.sub('\n',' ',p_text) # replaces line break with full stop
