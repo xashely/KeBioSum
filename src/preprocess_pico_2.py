@@ -49,7 +49,7 @@ with open(file_path, "r") as data_file:
                 if len(val)!= 4:
                     print('\n\n\n\n\n')
                     print(val)
-                    print(sep_line_test)
+                    print(sep_line)
                     print('\n')
                     print(fields)
 
