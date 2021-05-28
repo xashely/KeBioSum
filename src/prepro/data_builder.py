@@ -45,17 +45,29 @@ def clean_json(json_dict):
     text = ''
 
     for p in json_dict['body_text']:
+        p_text = p['text']
         if p['section'] == 'Pre-publication history':
             continue
-        p_text = p['text'].strip()
-        p_text = re.sub('\[[\d\s,]+?\]', '', p_text)
-        p_text = re.sub('\(Table \d+?\)', '', p_text)
-        p_text = re.sub('\(Fig. \d+?\)', '', p_text)
-        p_text = re.sub(r'[^\x00-\x7f]',r' ', p_text)
-        p_text = re.sub(r'[\<,\>]',r' ', p_text)
+        # remove references and citations from text
+        citations = [*p['cite_spans'],*p['ref_spans']]
+        if len(citations):
+            for citation in citations:
+                cite_span_len = citation['end']-citation['start']
+                cite_span_replace = ' '*cite_span_len
+                p_text  = p_text[:citation['start']] + cite_span_replace  + p_text[citation['end']:]
+        # do other cleaning of text
+        p_text = p_text.strip()
+        p_text = re.sub('\[[\d\s,]+?\]', '', p_text) # matches references e.g. [12]
+        p_text = re.sub('\(Table \d+?\)', '', p_text) # matches table references e.g. (Table 1)
+        p_text = re.sub('\(Fig. \d+?\)', '', p_text) # matches fig references e.g. (Fig. 1)
+        p_text = re.sub('[^\x00-\x7f]+',r'', p_text) # strips non ascii
+        p_text = re.sub('[\<,\>]',r' ', p_text) # strips  <> tokens which are not compatable StanfordNLPtokenizer
+        p_text = re.sub('\n',' ',p_text) # replaces line break with full stop
+        p_text = re.sub('\r',' ',p_text) # replaces line break with full stop
+        p_text = re.sub(' +',' ',p_text) # removes multipe blank spaces. 
         text += '{:s}\n'.format(p_text)
 
-    return {'title': title, 'text': text}
+        return {'title': title, 'text': text}
 
 def load_json(f_main, f_abs, f_tag):
     with open(f_main, 'r') as f:
@@ -204,44 +216,44 @@ def tokenize(args):
     
     write_head = False
 
-    # # write out new csv containing files we use in our dataset
-    # with open(new_meta_path, 'w') as f:
-    #     w = csv.writer(f)
-    #     for i,row in tqdm(df.iterrows(),total=df.shape[0]):
+    # write out new csv containing files we use in our dataset
+    with open(new_meta_path, 'w') as f:
+        w = csv.writer(f)
+        for i,row in tqdm(df.iterrows(),total=df.shape[0]):
                 
-    #         # read in pubmed file if available
-    #         pid = row['pmcid']
-    #         pubtime = row['publish_time']
-    #         # pubtime = datetime.strptime(row['publish_time'], '%Y-%m-%d').timestamp()
-    #         ppath = os.path.join(pmc_dir, '{}.xml.json'.format(pid))
-    #         if not os.path.isfile(ppath):
-    #             no_path_counter +=1
-    #             continue
-    #         with open(ppath, 'r') as fi:
-    #             json_dict = json.load(fi)
+            # read in pubmed file if available
+            pid = row['pmcid']
+            pubtime = row['publish_time']
+            # pubtime = datetime.strptime(row['publish_time'], '%Y-%m-%d').timestamp()
+            ppath = os.path.join(pmc_dir, '{}.xml.json'.format(pid))
+            if not os.path.isfile(ppath):
+                no_path_counter +=1
+                continue
+            with open(ppath, 'r') as fi:
+                json_dict = json.load(fi)
             
-    #         # preprocess / clean file
-    #         cleaned_dict = clean_json(json_dict)
-    #         tpath = os.path.join(txt_dir, '{}-{}.txt'.format(pubtime, pid))
-    #         tpath_abs = os.path.join(txt_dir, '{}-{}.abs.txt'.format(pubtime, pid))
+            # preprocess / clean file
+            cleaned_dict = clean_json(json_dict)
+            tpath = os.path.join(txt_dir, '{}-{}.txt'.format(pubtime, pid))
+            tpath_abs = os.path.join(txt_dir, '{}-{}.abs.txt'.format(pubtime, pid))
             
-    #         # write out main text and abstract 
-    #         with open(tpath, 'w') as fil:
-    #             fil.write(cleaned_dict['text'])
-    #         with open(tpath_abs, 'w') as fil:
-    #             fil.write(row['abstract'])
-    #         files_count_real += 1
+            # write out main text and abstract 
+            with open(tpath, 'w') as fil:
+                fil.write(cleaned_dict['text'])
+            with open(tpath_abs, 'w') as fil:
+                fil.write(row['abstract'])
+            files_count_real += 1
             
-    #         # write csv row
-    #         cleaned_dict['abstract'] = row['abstract']
-    #         if not write_head:
-    #             w.writerow(cleaned_dict.keys())
-    #             write_head = True       
-    #         w.writerow(cleaned_dict.values())
+            # write csv row
+            cleaned_dict['abstract'] = row['abstract']
+            if not write_head:
+                w.writerow(cleaned_dict.keys())
+                write_head = True       
+            w.writerow(cleaned_dict.values())
 
-    # end = time.time()
-    # print('Real count for files with abstract: {} ({}%)'.format(files_count_real,files_count_real / len_before * 100))
-    # print('... Ending (1), time elapsed {}'.format(end - start))
+    end = time.time()
+    print('Real count for files with abstract: {} ({}%)'.format(files_count_real,files_count_real / len_before * 100))
+    print('... Ending (1), time elapsed {}'.format(end - start))
 
     print("Preparing to tokenize %s to %s..." % (root_data_dir, tokenized_data_dir))
     num_files_to_tokenize = 0
@@ -743,3 +755,10 @@ def _format_xsum_to_lines(params):
             tgt.append(sent.split())
         return {'src': source, 'tgt': tgt}
     return None
+
+
+if __name__=='__main__':
+    with open('/Users/User/Documents/test.json','r') as f:
+        json_dict  = json.load()
+    text = clean_json(json_dict)
+    print(text)
