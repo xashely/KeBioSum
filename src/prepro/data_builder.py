@@ -67,6 +67,7 @@ def clean_json(json_dict):
         p_text = re.sub('\r',' ',p_text) # replaces line break with full stop
         p_text = re.sub(' +',' ',p_text) # removes multipe blank spaces. 
         p_text = re.sub('(?<=[0-9])( +)(?=[0-9])', '', p_text) # matches numbers seperated by space and combines
+        p_text = re.sub('(?<=\.)( +)(?=\.)', '', p_text) # matches several full stops with one or more spaces in between and removes spaces
         text += '{:s}\n'.format(p_text)
 
         return {'title': title, 'text': text}
