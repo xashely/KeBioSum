@@ -576,19 +576,37 @@ class PicoAdapterData():
         src_filt = [d[:self.args.max_src_nsents][:] for d in new_src if self.args.min_src_nsents < len(d)]
         tag_filt = [d_tag[:self.args.max_src_nsents][:] for d_tag in new_tag if self.args.min_src_nsents < len(d_tag)]
         print(len(src_filt), len(src_filt[0]), src_filt[0][0])
+
         src_txt = []
+        trans = str.maketrans("", "", string.punctuation + "‘" + "’" + "‐" + '‑' + '”')
+        chin_trans = str.maketrans("", "", punctuation)
+        zhPattern = re.compile(u'[\u4e00-\u9fa5]+')
+        # anotrans = str.maketrans("", "", "’")
         for d in src_filt:
             temp = []
             for sent in d:
-                temp.append(' '.join(sent))
+                temp_s = sent
+                for index, each_token in enumerate(sent):
+                    if each_token.startswith("http"):
+                        temp_s[index] = "http"
+                    elif len(each_token) > 1:
+                        temp_s[index] = each_token.translate(trans)
+                        temp_s[index] = temp_s[index].translate(chin_trans)
+                    if temp_s[index] == "":
+                        temp_s[index] = "."
+                    if each_token.startswith("www"):
+                        temp_s[index] = "www"
+                    if zhPattern.search(each_token):
+                        temp_s[index] = "<unk>"
+                        # temp_s[index] = temp_s[index].translate(anotrans)
+                temp.append(' '.join(temp_s))
             src_txt.append(temp)
-
         #src_txt = [' '.join(sent) for d in src for sent in d]
         #print(len(src_txt))
 
         text = [' {} {} '.format(self.sep_token, self.cls_token).join(d) for d in src_txt]
         #print(len(text))
-        text = ['{} '.format(self.cls_token) + d + ' {}'.format(self.sep_token) for d in text]
+        #text = ['{} '.format(self.cls_token) + d + ' {}'.format(self.sep_token) for d in text]
         #print(len(text))
         tags = []
         for i, t in enumerate(tag_filt):
@@ -604,16 +622,31 @@ class PicoAdapterData():
             tags.append(temp)
             assert len(text[i].split())==len(temp), (i, text[i].split(), len(text[i].split()),len(temp))
 
-        src_encoding = self.tokenizer(text,truncation=True,padding=True)
+        src_encoding = self.tokenizer(text,padding=True)
         src_subtoken_idxs = src_encoding['input_ids']
         print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
         src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
+
         tag_align = []
         for i, subtoken in enumerate(src_subtokens):
             aligned_labels = ["O"] * len(subtoken)
             head = 0
             count = 0
             #print(len(subtoken))
+            temp_src = text[i].split("</s>")
+            temp = " ".join([val for val in subtoken if val != '<pad>'])
+            temp = temp.split("</s>")
+            for j, temp_sent in enumerate(temp):
+                if 0 < j:
+                    temp = temp_sent.split()
+                    temp_sent_filt = [filt for filt in temp if not filt.startswith("Ġ")]
+                    if len(temp_sent_filt)!=len(temp_src[j-1].split()):
+                        print(len(temp_sent_filt),len(temp_src[j-1].split()))
+                        print("sub:", temp_sent_filt)
+                        print("src:", temp_src[j-1].split())
+                        print("\n")
+            print(i, len(tags[i]),len([val for val in subtoken if not val.startswith("Ġ") and val !='<pad>']))
+
             for j, each_str in enumerate(subtoken):
                 #print(i, each_str, head, count)
                 if each_str != "<pad>":
@@ -849,7 +882,7 @@ class PicoPubmedBertAdapterData():
 
         text = [' {} {} '.format(self.sep_token, self.cls_token).join(d) for d in src_txt]
         # print(len(text))
-        text = ['{} '.format(self.cls_token) + d + ' {}'.format(self.sep_token) for d in text]
+        #text = ['{} '.format(self.cls_token) + d + ' {}'.format(self.sep_token) for d in text]
         # print(len(text))
         tags = []
         for i, t in enumerate(tag_filt):
@@ -865,27 +898,44 @@ class PicoPubmedBertAdapterData():
             tags.append(temp)
             assert len(text[i].split()) == len(temp), (i, text[i].split(), len(text[i].split()), len(temp))
 
-        src_encoding = self.tokenizer(text, padding=True)
+        src_encoding = self.tokenizer(text, truncation=False, padding=True)
         src_subtoken_idxs = src_encoding['input_ids']
         src_token_type_id = src_encoding['token_type_ids']
-        print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
+        # print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
+        # print (len(tags[0]), len(src_subtoken_idxs[0]), len(src_token_type_id[0]))
         src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
         tag_align = []
+        # print(src_subtokens[0])
+        # print("debug one:", len(src_subtokens), len(tags))
         for i, subtoken in enumerate(src_subtokens):
             aligned_labels = ["O"] * len(subtoken)
-            head = 0
             count = 0
             # print(len(subtoken))
+            temp_src = text[i].split("[CLS]")
+            temp = " ".join([val for val in subtoken if val != '[PAD]'])
+            temp = temp.split("[CLS]")
+            for j, temp_sent in enumerate(temp):
+                if 0 < j:
+                    temp = temp_sent.split()
+                    temp_sent_filt = [filt for filt in temp if not filt.startswith("##")]
+                    if len(temp_sent_filt) != len(temp_src[j - 1].split()):
+                        print(len(temp_sent_filt), len(temp_src[j - 1].split()))
+                        print("sub:", temp_sent_filt)
+                        print("src:", temp_src[j - 1].split())
+                        print("\n")
+            print(i, len(tags[i]), len([val for val in subtoken if not val.startswith("##") and val != '[PAD]']))
             for j, each_str in enumerate(subtoken):
                 # print(i, each_str, head, count)
-                if each_str != "[pad]":
+                if each_str != "[PAD]":
                     if each_str.startswith("##"):
-                        aligned_labels[head] = tags[i][count - 1]
-                        head += 1
+                        aligned_labels[j] = tags[i][count - 1]
                     else:
-                        aligned_labels[head] = tags[i][count]
+                        # print(each_str, len(tags[i]), count)
+                        # try:
+                        aligned_labels[j] = tags[i][count]
+                        # except Exception:
+                        #    pass
                         count += 1
-                        head += 1
                 else:
                     break
             tag_align.append(aligned_labels)
@@ -907,11 +957,12 @@ class PicoPubmedBertAdapterData():
                 else:
                     src_subtoken_idxs[i][j] = self.mask_vid
                     temp.append(1.0)
-            print(len(temp))
+            # print(len(temp))
             mask_label.append(temp)
         data = []
         for i in range(len(mask_label)):
-            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "token_type_ids":src_token_type_id[i]})
+            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i],
+                         "token_type_ids": src_token_type_id[i]})
         return data
 
 def format_to_robert(args):
