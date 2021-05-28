@@ -2,6 +2,8 @@ import gc
 import glob
 import hashlib
 import itertools
+import string
+import zhon
 import json
 import os
 import random
@@ -11,7 +13,7 @@ import subprocess
 import csv
 from collections import Counter
 from os.path import join as pjoin
-
+from zhon.hanzi import punctuation
 import torch
 from multiprocess import Pool
 
@@ -662,7 +664,7 @@ class PicoBertAdapterData():
         self.sep_token = '[SEP]'
         self.cls_token = '[CLS]'
         self.pad_token = '[PAD]'
-        self.unused_token = '[unused0]'
+        #self.unused_token = '[unused0]'
         self.sep_vid = self.tokenizer.vocab[self.sep_token]
         self.cls_vid = self.tokenizer.vocab[self.cls_token]
         self.pad_vid = self.tokenizer.vocab[self.pad_token]
@@ -686,9 +688,13 @@ class PicoBertAdapterData():
 
         src_filt = [d[:self.args.max_src_nsents][:] for d in new_src if self.args.min_src_nsents < len(d)]
         tag_filt = [d_tag[:self.args.max_src_nsents][:] for d_tag in new_tag if self.args.min_src_nsents < len(d_tag)]
-        print (tag_filt[0], len(tag_filt))
+        #print (tag_filt[0], len(tag_filt))
         print(len(src_filt), len(src_filt[0]), src_filt[0][0])
         src_txt = []
+        trans = str.maketrans("", "", string.punctuation+"‘"+"’"+"‐"+'‑'+'”')
+        chin_trans = str.maketrans("", "", punctuation)
+        zhPattern = re.compile(u'[\u4e00-\u9fa5]+')
+        #anotrans = str.maketrans("", "", "’")
         for d in src_filt:
             temp = []
             for sent in d:
@@ -696,6 +702,16 @@ class PicoBertAdapterData():
                 for index, each_token in enumerate(sent):
                     if each_token.startswith("http"):
                         temp_s[index] = "http"
+                    elif len(each_token) > 1:
+                        temp_s[index] = each_token.translate(trans)
+                        temp_s[index] = temp_s[index].translate(chin_trans)
+                    if temp_s[index] == "":
+                        temp_s[index] = "."
+                    if each_token.startswith("www"):
+                        temp_s[index] = "www"
+                    if zhPattern.search(each_token):
+                        temp_s[index] = "[UNK]"
+                        #temp_s[index] = temp_s[index].translate(anotrans)
                 temp.append(' '.join(temp_s))
             src_txt.append(temp)
 
@@ -718,32 +734,46 @@ class PicoBertAdapterData():
             temp = temp[:-2]
             temp.append('O')
             tags.append(temp)
-            assert len(text[i].split()) == len(temp), (i, text[i].split(), len(text[i].split()), len(temp))
+            #assert len(text[i].split()) == len(temp), (i, text[i].split(), len(text[i].split()), len(temp))
 
-        #print (len(tags[0]), len(text[0].split()))
+        #print("equal:", len(tags[0]), len(text[0].split()))
         src_encoding = self.tokenizer(text, truncation=False, padding=True)
         src_subtoken_idxs = src_encoding['input_ids']
         src_token_type_id = src_encoding['token_type_ids']
-        print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
-        print (len(tags[0]), len(src_subtoken_idxs[0]), len(src_token_type_id[0]))
+        #print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
+        #print (len(tags[0]), len(src_subtoken_idxs[0]), len(src_token_type_id[0]))
         src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
         tag_align = []
-        print(src_subtokens[0])
+        #print(src_subtokens[0])
         #print("debug one:", len(src_subtokens), len(tags))
         for i, subtoken in enumerate(src_subtokens):
             aligned_labels = ["O"] * len(subtoken)
             count = 0
             # print(len(subtoken))
-            print(text[i][:1200], subtoken[:500])
-            print(len(tags[i]), len([val for val in subtoken if not val.startswith("##")]))
+            temp_src = text[i].split("[CLS]")
+            temp = " ".join([val for val in subtoken if val != '[PAD]'])
+            temp = temp.split("[CLS]")
+            for j, temp_sent in enumerate(temp):
+                if 0 < j:
+                    temp = temp_sent.split()
+                    temp_sent_filt = [filt for filt in temp if not filt.startswith("##")]
+                    if len(temp_sent_filt)!=len(temp_src[j-1].split()):
+                        print(len(temp_sent_filt),len(temp_src[j-1].split()))
+                        print("sub:", temp_sent_filt)
+                        print("src:", temp_src[j-1].split())
+                        print("\n")
+            print(i, len(tags[i]),len([val for val in subtoken if not val.startswith("##") and val !='[PAD]']))
             for j, each_str in enumerate(subtoken):
                 # print(i, each_str, head, count)
-                if each_str != "[pad]":
+                if each_str != "[PAD]":
                     if each_str.startswith("##"):
                         aligned_labels[j] = tags[i][count - 1]
                     else:
-                        #print("debug:", i, len(tags[i]), count, len(aligned_labels), head)
+                        #print(each_str, len(tags[i]), count)
+                        #try:
                         aligned_labels[j] = tags[i][count]
+                        #except Exception:
+                        #    pass
                         count += 1
                 else:
                     break
@@ -766,7 +796,7 @@ class PicoBertAdapterData():
                 else:
                     src_subtoken_idxs[i][j] = self.mask_vid
                     temp.append(1.0)
-            print(len(temp))
+            #print(len(temp))
             mask_label.append(temp)
         data = []
         for i in range(len(mask_label)):
@@ -1007,14 +1037,14 @@ def format_to_pico_adapter_bert(args):
         data = []
         source = []
         tag = []
-        json_file = [json_file[0]]
+        #json_file = [json_file[0]]
         for j in json_file:
             jobs = json.load(open(j))
             for d in jobs:
                 source.append(d['src'])
                 tag.append(d['tag'])
-        source = source[:100]
-        tag = tag[:100]
+        #source = source[:100]
+        #tag = tag[:100]
         data = pico_adapter.preprocess(source, tag, is_test=is_test)
         logger.info('Processed instances %d' % len(data))
         logger.info('Saving to %s' % save_path)
