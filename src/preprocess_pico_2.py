@@ -42,26 +42,41 @@ with open(file_path, "r") as data_file:
             sep_line_test = [line.strip().split() for line in lines]
             if len(sep_line_test[0]):
                 sep_line = sep_line_test
+
         if not is_divider:
-            prev_fields = fields
             fields = [line.strip().split() for line in lines]
-            try:
-                fields = [list(field) for field in zip(*fields)]
-                tokens_, _, _, pico_tags = fields
-            except:
-                print('\n\n\n\n\n\n\nTOO LONG')
-                print(fields)
-                print(len(fields))
-                print(sep_line)
-                print('\n\n\n\n\n\n')
-                fields = [
-                    val if len(val) == 4 else [" ".join(val[:-3]), val[-3], val[-2], val[-1]]
-                    for val in fields
-                ]
-                print(prev_fields)
-                print(fields)
-                fields = [list(field) for field in zip(*fields)]
-                tokens_, _, _, pico_tags = fields
-                print(fields)
+            for val in fields:
+                if len(val)!= 4:
+                    print('\n\n\n\n\n')
+                    print(val)
+                    print(sep_line_test)
+                    print('\n')
+                    print(fields)
+
+        # if is_divider:
+        #     sep_line_test = [line.strip().split() for line in lines]
+        #     if len(sep_line_test[0]):
+        #         sep_line = sep_line_test
+        # if not is_divider:
+        #     prev_fields = fields
+        #     fields = [line.strip().split() for line in lines]
+        #     try:
+        #         fields = [list(field) for field in zip(*fields)]
+        #         tokens_, _, _, pico_tags = fields
+        #     except:
+        #         print('\n\n\n\n\n\n\nTOO LONG')
+        #         print(fields)
+        #         print(len(fields))
+        #         print(sep_line)
+        #         print('\n\n\n\n\n\n')
+        #         fields = [
+        #             val if len(val) == 4 else [" ".join(val[:-3]), val[-3], val[-2], val[-1]]
+        #             for val in fields
+        #         ]
+        #         print(prev_fields)
+        #         print(fields)
+        #         fields = [list(field) for field in zip(*fields)]
+        #         tokens_, _, _, pico_tags = fields
+        #         print(fields)
             # unzipping trick returns tuples, but our Fields need lists
             
