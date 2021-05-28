@@ -28,7 +28,7 @@ export TEST_PATH=data/$TASK/$DATASET/test.txt
 
 export CUDA_DEVICE=1
 
-export GRAD_ACCUM_BATCH_SIZE=16
+export GRAD_ACCUM_BATCH_SIZE=8
 export NUM_EPOCHS=75
 export LEARNING_RATE=0.001
 export BERT_VOCAB=/home/qianqian/scibert/model/vocab.txt
