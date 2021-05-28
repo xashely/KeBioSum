@@ -64,7 +64,7 @@ def compute_metrics(p):
         "accuracy": results["overall_accuracy"],
     }
 
-def load_dataset(corpus_type, shuffle):
+def load_dataset(corpus_type, model, shuffle):
     """
     Dataset generator. Don't do extra stuff here, like printing,
     because they will be postponed to the first loading time.
@@ -89,15 +89,19 @@ def load_dataset(corpus_type, shuffle):
     #print(pico_adapter_data_path)
     #print(pico_adapter_data_path + '/' + corpus_type + '.[0-9]*.padapter.pt')
     if pts:
-        src, label, mask = [], [], []
+        src, label, mask, type_id = [], [], [], []
 
         dataset = _lazy_dataset_loader(pts[0], corpus_type)
         for data in dataset:
+
             src.append(data['src'])
             label.append(data['tag'])
             mask.append(data['mask'])
-            #print(data['mask'])
-        return src, label, mask
+            if model == "bert":
+                type_id.append(data['token_type_ids'])
+                return src, label, mask, type_id
+            else:
+                return src, label, mask
 
 class PicoDataset(torch.utils.data.Dataset):
     def __init__(self, src_idx, labels, mask):
@@ -141,17 +145,17 @@ class PicoBertDataset(torch.utils.data.Dataset):
 def main():
     args = parser.parse_args()
     if args.model=="robert":
-        train_src, train_labels, train_mask = load_dataset('train', shuffle=True)
-        val_src, val_labels, val_mask = load_dataset('valid', shuffle=False)
-        test_src, test_labels, test_mask = load_dataset('test', shuffle=False)
+        train_src, train_labels, train_mask = load_dataset('train', args.model, shuffle=True)
+        val_src, val_labels, val_mask = load_dataset('valid', args.model, shuffle=False)
+        test_src, test_labels, test_mask = load_dataset('test', args.model, shuffle=False)
         train_dataset = PicoDataset(train_src, train_labels, train_mask)
         val_dataset = PicoDataset(val_src, val_labels, val_mask)
         test_dataset = PicoDataset(test_src, test_labels, test_mask)
         tokenizer = AutoTokenizer.from_pretrained('roberta-base')
     else:
-        train_src, train_labels, train_mask, train_type_id = load_dataset('train', shuffle=True)
-        val_src, val_labels, val_mask, val_type_id = load_dataset('valid', shuffle=False)
-        test_src, test_labels, test_mask, test_type_id = load_dataset('test', shuffle=False)
+        train_src, train_labels, train_mask, train_type_id = load_dataset('train', args.model, shuffle=True)
+        val_src, val_labels, val_mask, val_type_id = load_dataset('valid', args.model, shuffle=False)
+        test_src, test_labels, test_mask, test_type_id = load_dataset('test', args.model, shuffle=False)
         train_dataset = PicoBertDataset(train_src, train_labels, train_mask, train_type_id)
         val_dataset = PicoBertDataset(val_src, val_labels, val_mask, val_type_id)
         test_dataset = PicoBertDataset(test_src, test_labels, test_mask, test_type_id)
