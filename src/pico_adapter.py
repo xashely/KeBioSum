@@ -15,6 +15,8 @@ import random
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("-model", default='robert', type=str)
+parser.add_argument("-path", default='~/covid-bert/pico_adapter_data', type=str)
+args = parser.parse_args()
 
 from transformers import (
     AdapterConfig,
@@ -34,7 +36,7 @@ from transformers.trainer_utils import is_main_process
 #device = torch.cuda.is_available()
 #device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 logger = logging.getLogger(__name__)
-pico_adapter_data_path = "/home/qianqian/covid-bert/pico_adapter_data"
+pico_adapter_data_path = args.path
 label_list = ['O', "I-INT", "I-PAR", "I-OUT"]
 batch_size = 24
 task = 'ner'
@@ -137,7 +139,6 @@ class PicoBertDataset(torch.utils.data.Dataset):
         return len(self.labels)
 
 def main():
-    args = parser.parse_args()
     if args.model=="robert":
         train_src, train_labels, train_mask = load_dataset('train', shuffle=True)
         val_src, val_labels, val_mask = load_dataset('valid', shuffle=False)
@@ -153,7 +154,7 @@ def main():
         train_dataset = PicoBertDataset(train_src, train_labels, train_mask, train_type_id)
         val_dataset = PicoBertDataset(val_src, val_labels, val_mask, val_type_id)
         test_dataset = PicoBertDataset(test_src, test_labels, test_mask, test_type_id)
-        tokenizer = AutoTokenizer.from_pretrained('roberta-base')
+        tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
     if arg.model=="robert":
         model = AutoModelForTokenClassification.from_pretrained('roberta-base', num_labels=len(label_list))
     else:
