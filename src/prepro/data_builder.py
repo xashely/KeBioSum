@@ -622,7 +622,7 @@ class PicoAdapterData():
             tags.append(temp)
             assert len(text[i].split())==len(temp), (i, text[i].split(), len(text[i].split()),len(temp))
 
-        src_encoding = self.tokenizer(text,padding=True)
+        src_encoding = self.tokenizer(text,truncation=True,padding=True)
         src_subtoken_idxs = src_encoding['input_ids']
         print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
         src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
@@ -739,7 +739,7 @@ class PicoBertAdapterData():
                         temp_s[index] = each_token.translate(trans)
                         temp_s[index] = temp_s[index].translate(chin_trans)
                     if temp_s[index] == "":
-                        temp_s[index] = "."
+                        temp_s[index] = "[UNK]"
                     if each_token.startswith("www"):
                         temp_s[index] = "www"
                     if zhPattern.search(each_token):
@@ -770,7 +770,7 @@ class PicoBertAdapterData():
             #assert len(text[i].split()) == len(temp), (i, text[i].split(), len(text[i].split()), len(temp))
 
         #print("equal:", len(tags[0]), len(text[0].split()))
-        src_encoding = self.tokenizer(text, truncation=False, padding=True)
+        src_encoding = self.tokenizer(text, truncation=True, padding=True)
         src_subtoken_idxs = src_encoding['input_ids']
         src_token_type_id = src_encoding['token_type_ids']
         #print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
@@ -898,7 +898,7 @@ class PicoPubmedBertAdapterData():
             tags.append(temp)
             assert len(text[i].split()) == len(temp), (i, text[i].split(), len(text[i].split()), len(temp))
 
-        src_encoding = self.tokenizer(text, truncation=False, padding=True)
+        src_encoding = self.tokenizer(text, truncation=True, padding=True)
         src_subtoken_idxs = src_encoding['input_ids']
         src_token_type_id = src_encoding['token_type_ids']
         # print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
