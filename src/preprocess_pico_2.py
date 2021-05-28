@@ -1,4 +1,4 @@
-
+from copy import deepcopy
 import argparse
 import os
 import itertools
@@ -34,10 +34,16 @@ with open(file_path, "r") as data_file:
     #         #     print(sep_line.strip(' ').strip('\n'), idx, line_split)
     #         if len(line_split) > 4:
     #             print(sep_line.strip(' ').strip('\n'), idx, line_split)
+    fields = None
     for is_divider, lines in itertools.groupby(data_file, _is_divider):
         # Ignore the divider chunks, so that `lines` corresponds to the words
         # of a single sentence.
+        if is_divider:
+            sep_line_test = [line.strip().split() for line in lines]
+            if len(sep_line_test[0]):
+                sep_line = sep_line_test
         if not is_divider:
+            prev_fields = fields
             fields = [line.strip().split() for line in lines]
             try:
                 fields = [list(field) for field in zip(*fields)]
@@ -46,12 +52,13 @@ with open(file_path, "r") as data_file:
                 print('\n\n\n\n\n\n\nTOO LONG')
                 print(fields)
                 print(len(fields))
-                print(file_path)
+                print(sep_line)
                 print('\n\n\n\n\n\n')
                 fields = [
                     val if len(val) == 4 else [" ".join(val[:-3]), val[-3], val[-2], val[-1]]
                     for val in fields
                 ]
+                print(prev_fields)
                 print(fields)
                 fields = [list(field) for field in zip(*fields)]
                 tokens_, _, _, pico_tags = fields
