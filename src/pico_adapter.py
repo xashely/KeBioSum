@@ -139,6 +139,7 @@ class PicoBertDataset(torch.utils.data.Dataset):
         return len(self.labels)
 
 def main():
+    args = parser.parse_args()
     if args.model=="robert":
         train_src, train_labels, train_mask = load_dataset('train', shuffle=True)
         val_src, val_labels, val_mask = load_dataset('valid', shuffle=False)
