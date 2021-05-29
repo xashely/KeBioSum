@@ -160,7 +160,7 @@ def main():
         val_dataset = PicoBertDataset(val_src, val_labels, val_mask, val_type_id)
         test_dataset = PicoBertDataset(test_src, test_labels, test_mask, test_type_id)
         tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
-    if arg.model=="robert":
+    if args.model=="robert":
         model = AutoModelForTokenClassification.from_pretrained('roberta-base', num_labels=len(label_list))
     else:
         model = AutoModelForTokenClassification.from_pretrained('bert-base-uncased', num_labels=len(label_list))

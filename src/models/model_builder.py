@@ -114,16 +114,16 @@ def get_generator(vocab_size, dec_hidden_size, device):
     return generator
 
 class RoBerta(nn.Module):
-    def __init__(self, large, temp_dir, finetune=False):
+    def __init__(self, large, temp_dir, finetune, model, device):
         super(RoBerta, self).__init__()
         if(large):
-            if args.model=="robert":
+            if model=="robert":
                 self.model = RobertaModel.from_pretrained('roberta-large', cache_dir=temp_dir)
-            if args.model == "bert":
-                self.model = BertModel.from_pretrained('berta-large-uncased', cache_dir=temp_dir)
-            if args.model == "pubmed":
+            if model == "bert":
+                self.model = BertModel.from_pretrained('bert-large-uncased', cache_dir=temp_dir)
+            if model == "pubmed":
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
-                self.model = AutoModelForMaskedLM.from_pretrained(model_name).to('device')
+                self.model = AutoModelForMaskedLM.from_pretrained(model_name).to(device)
             self.model.add_adapter("finetune")
             #self.model.train_adapter("finetune")
             #self.model.set_active_adapters("finetune")
@@ -135,13 +135,13 @@ class RoBerta(nn.Module):
             self.model.encoder.enable_adapters(adapter_setup, True, True)
             #self.model.encoder.enable_adapters("ner", True, True)
         else:
-            if args.model == "robert":
+            if model == "robert":
                 self.model = RobertaModel.from_pretrained('roberta-base', cache_dir=temp_dir)
-            if args.model == "bert":
-                self.model = BertModel.from_pretrained('berta-uncased', cache_dir=temp_dir)
-            if args.model == "pubmed":
+            if model == "bert":
+                self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
+            if model == "pubmed":
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
-                self.model = AutoModelForMaskedLM.from_pretrained(model_name).to('device')
+                self.model = AutoModelForMaskedLM.from_pretrained(model_name).to(device)
             self.model.add_adapter("finetune")
             #self.model.train_adapter("finetune")
             #self.model.set_active_adapters("finetune")
