@@ -11,7 +11,7 @@ from allennlp.training.metrics import CategoricalAccuracy, F1Measure
 from overrides import overrides
 
 
-@Model.register("text_classifier_2")
+@Model.register("text_classifier")
 class TextClassifier(Model):
     """
     Implements a basic text classifier:
