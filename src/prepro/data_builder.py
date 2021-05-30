@@ -64,6 +64,7 @@ def clean_json(json_dict):
         p_text = re.sub('(?<=[0-9]),(?=[0-9])', '', p_text) # matches numbers seperated by commas
         p_text = re.sub('[^\x00-\x7f]+',r'', p_text) # strips non ascii
         p_text = re.sub('[\<\>]',r' ', p_text) # strips  <> tokens which are not compatable StanfordNLPtokenizer
+        p_text = re.sub('(\([0-9]+\))(?= [0-9]+)',' ',p_text) # removes numbers in brackets followed by another number are not compatable StanfordNLPtokenizer
         p_text = re.sub('\n',' ',p_text) # replaces line break with full stop
         p_text = re.sub('\r',' ',p_text) # replaces line break with full stop
         p_text = re.sub(' +',' ',p_text) # removes multipe blank spaces. 
