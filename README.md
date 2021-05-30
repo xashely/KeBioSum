@@ -82,6 +82,7 @@ bash scripts/train_allennlp_local.sh wotune_model/
 
 3. Predicting pico for cord-19
 ```
+cd ./scibert
 python -m allennlp.run predict --output-file=out.txt --include-package=scibert --predictor=sentence-tagger --use-dataset-reader --cuda-device=0 --batch-size=256 --silent ./wotune_model/model.tar.gz  ./data/pico/ebmnlp/cord.txt
 ```
 4. Format the predicted pico to Json Files
@@ -99,7 +100,6 @@ python src/preprocess.py -mode format_to_lines -raw_path ./token_data/ -save_pat
 
 ####  Step 6. Format to PyTorch Files
 ```
-cd ./scibert
 python src/preprocess.py -mode format_to_bert -raw_path ./json_data/ -save_path ./bert_data/  -lower -n_cpus 1 -log_file ./logs/preprocess.log
 ```
 
