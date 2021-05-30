@@ -54,6 +54,7 @@ class EBMNLPDatasetReader(DatasetReader):
                     fields = [line.strip().split() for line in lines]
                     # If tokenizing causes more than 4 tokens on a row, we should 
                     # force first tokens to be combined so length is 4. 
+                    combine_tokens = False
                     for val in fields:
                         if len(val) > 4:
                             combine_tokens = True
