@@ -60,7 +60,7 @@ Install the allennlp:
 git clone https://github.com/ibeltagy/allennlp.git
 ```
 ```
-git check out branch fp_16_and_others
+git checkout fp16_and_others
 ```
 ```
 pip install --editable .
@@ -99,6 +99,7 @@ python src/preprocess.py -mode format_to_lines -raw_path ./token_data/ -save_pat
 
 ####  Step 6. Format to PyTorch Files
 ```
+cd ./scibert
 python src/preprocess.py -mode format_to_bert -raw_path ./json_data/ -save_path ./bert_data/  -lower -n_cpus 1 -log_file ./logs/preprocess.log
 ```
 
