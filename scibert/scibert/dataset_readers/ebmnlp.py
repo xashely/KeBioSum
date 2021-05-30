@@ -52,6 +52,17 @@ class EBMNLPDatasetReader(DatasetReader):
                 # of a single sentence.
                 if not is_divider:
                     fields = [line.strip().split() for line in lines]
+                    # If tokenizing causes more than 4 tokens on a row, we should 
+                    # force first tokens to be combined so length is 4. 
+                    for val in fields:
+                        if len(val) > 4:
+                            combine_tokens = True
+                    if combine_tokens == True:
+                        logger.warn('Too many tokens in row so combining some together')
+                        fields = [val if len(val) == 4 else [" ".join(val[:-3]), val[-3], val[-2], val[-1]]
+                            for val in fields
+                        ]
+                        combine_tokens = False
                     # unzipping trick returns tuples, but our Fields need lists
                     fields = [list(field) for field in zip(*fields)]
                     tokens_, _, _, pico_tags = fields

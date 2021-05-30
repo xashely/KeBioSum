@@ -45,14 +45,30 @@ def clean_json(json_dict):
     #
     title = json_dict['metadata']['title']
     text = ''
-
     for p in json_dict['body_text']:
+        p_text = p['text']
         if p['section'] == 'Pre-publication history':
             continue
-        p_text = p['text'].strip()
-        p_text = re.sub('\[[\d\s,]+?\]', '', p_text)
-        p_text = re.sub('\(Table \d+?\)', '', p_text)
-        p_text = re.sub('\(Fig. \d+?\)', '', p_text)
+        # remove references and citations from text
+        citations = [*p['cite_spans'],*p['ref_spans']]
+        if len(citations):
+            for citation in citations:
+                cite_span_len = citation['end']-citation['start']
+                cite_span_replace = ' '*cite_span_len
+                p_text  = p_text[:citation['start']] + cite_span_replace  + p_text[citation['end']:]
+        # do other cleaning of text 
+        p_text = p_text.strip()
+        p_text = re.sub('\[[\d\s,]+?\]', '', p_text) # matches references e.g. [12]
+        p_text = re.sub('\(Table \d+?\)', '', p_text) # matches table references e.g. (Table 1)
+        p_text = re.sub('\(Fig. \d+?\)', '', p_text) # matches fig references e.g. (Fig. 1)
+        p_text = re.sub('(?<=[0-9]),(?=[0-9])', '', p_text) # matches numbers seperated by commas
+        p_text = re.sub('[^\x00-\x7f]+',r'', p_text) # strips non ascii
+        p_text = re.sub('[\<\>]',r' ', p_text) # strips  <> tokens which are not compatable StanfordNLPtokenizer
+        p_text = re.sub('\n',' ',p_text) # replaces line break with full stop
+        p_text = re.sub('\r',' ',p_text) # replaces line break with full stop
+        p_text = re.sub(' +',' ',p_text) # removes multipe blank spaces. 
+        p_text = re.sub('(?<=[0-9])( +)(?=[0-9])', '', p_text) # matches numbers seperated by space and combines
+        p_text = re.sub('(?<=\.)( +)(?=\.)', '', p_text) # matches several full stops with one or more spaces in between and removes spaces
         text += '{:s}\n'.format(p_text)
 
     return {'title': title, 'text': text}
@@ -176,6 +192,12 @@ def tokenize(args):
     
     files_count_real = 0
     no_path_counter = 0
+
+    # make directories for saving data if they don't already exist
+    if not os.path.exists(txt_dir):
+        os.makedirs(txt_dir)
+    if not os.path.exists(tokenized_data_dir):
+        os.makedirs(tokenized_data_dir)
     
     print('... Loading PMC data from {}'.format(pmc_dir))
 
