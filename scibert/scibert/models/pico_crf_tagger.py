@@ -1,5 +1,6 @@
 from typing import Dict, Optional, List, Any
 import logging
+from os import environ
 
 from overrides import overrides
 import torch
@@ -96,8 +97,10 @@ class PicoCrfTagger(Model):
                 for j, tag_id in enumerate(instance_tags):
                     class_probabilities[i, j, tag_id] = 1
 
-            for metric in self.metrics.values():
-               metric(class_probabilities, tags, mask.float())
+            if environ.get('PICO_MODE') != 'PREDICT':
+                for metric in self.metrics.values():
+                    print('not in predict mode')
+                    metric(class_probabilities, tags, mask.float())
 
         if metadata is not None:
             output["words"] = [x["words"] for x in metadata]

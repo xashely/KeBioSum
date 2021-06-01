@@ -82,8 +82,10 @@ bash scripts/train_allennlp_local.sh wotune_model/
 
 3. Predicting pico for cord-19
 ```
+export PICO_MODE='PREDICT'
+export CUDA_VISIBLE_DEVICES="1"
 cd ./scibert
-python -m allennlp.run predict --output-file=out.txt --include-package=scibert --predictor=sentence-tagger --use-dataset-reader --cuda-device=0 --batch-size=256 --silent ./wotune_model/model.tar.gz  ./data/pico/ebmnlp/cord.txt
+python -m allennlp.run predict --output-file=out.txt --include-package=scibert --predictor=sentence-tagger --use-dataset-reader --cuda-device=$CUDA_VISIBLE_DEVICES --batch-size=256 --silent ./wotune_model/model.tar.gz  ./data/pico/ebmnlp/cord.txt
 ```
 4. Format the predicted pico to Json Files
 ```
