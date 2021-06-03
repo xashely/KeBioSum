@@ -94,15 +94,15 @@ def load_dataset(corpus_type, model, shuffle):
 
         dataset = _lazy_dataset_loader(pts[0], corpus_type)
         for data in dataset:
-
             src.append(data['src'])
             label.append(data['tag'])
             mask.append(data['mask'])
             if model == "bert":
                 type_id.append(data['token_type_ids'])
-                return src, label, mask, type_id
-            else:
-                return src, label, mask
+        if model=="bert":
+            return src, label, mask, type_id
+        else:
+            return src, label, mask
 
 class PicoDataset(torch.utils.data.Dataset):
     def __init__(self, src_idx, labels, mask):
@@ -160,7 +160,7 @@ def main():
         train_src, train_labels, train_mask, train_type_id = load_dataset('train', args.model, shuffle=True)
         val_src, val_labels, val_mask, val_type_id = load_dataset('valid', args.model, shuffle=False)
         test_src, test_labels, test_mask, test_type_id = load_dataset('test', args.model, shuffle=False)
-        print(train_src, val_src, test_src)
+        print(len(train_src), len(val_src), len(test_src))
         train_dataset = PicoBertDataset(train_src, train_labels, train_mask, train_type_id)
         val_dataset = PicoBertDataset(val_src, val_labels, val_mask, val_type_id)
         test_dataset = PicoBertDataset(test_src, test_labels, test_mask, test_type_id)
