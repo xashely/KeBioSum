@@ -48,11 +48,11 @@ def compute_metrics(p):
 
     # Remove ignored index (special tokens)
     true_predictions = [
-        [label_list[p] for (p, l) in zip(prediction, label) if l != 0]
+        [label_list[p] for (p, l) in zip(prediction, label) if l!=0]
         for prediction, label in zip(predictions, labels)
     ]
     true_labels = [
-        [label_list[l] for (p, l) in zip(prediction, label) if l != 0]
+        [label_list[l] for (p, l) in zip(prediction, label) if l!=0]
         for prediction, label in zip(predictions, labels)
     ]
 
@@ -86,6 +86,7 @@ def load_dataset(corpus_type, model, shuffle):
 
     # Sort the glob output by file name (by increasing indexes).
     pts = glob.glob(pico_adapter_data_path + '/' + corpus_type + '.padpter.pt')
+    print(pts)
     #print(pico_adapter_data_path)
     #print(pico_adapter_data_path + '/' + corpus_type + '.[0-9]*.padapter.pt')
     if pts:
@@ -127,7 +128,8 @@ class PicoBertDataset(torch.utils.data.Dataset):
         self.input_ids = src_idx
         self.token_type_ids = type_ids
         self.labels = labels
-        self.attention_mask = mask #[1]* len(self.input_ids)
+        #print(len(mask))
+        self.attention_mask = np.ones((len(mask), len(mask[0])))#mask
     def __getitem__(self, idx):
         #item = {key: torch.tensor(val[idx]) for key, val in self.input_ids.items()}
         item = {}
@@ -136,8 +138,10 @@ class PicoBertDataset(torch.utils.data.Dataset):
         item['input_ids'] = self.input_ids[idx]
         item['attention_mask'] = self.attention_mask[idx]
         item['token_type_ids'] = self.token_type_ids[idx]
+        
         #print(item['input_ids'])
-        #print(len(item['input_ids']))
+        #print(item['labels'])
+        #print(item['attention_mask'])
         return item
     def __len__(self):
         return len(self.labels)
@@ -156,6 +160,7 @@ def main():
         train_src, train_labels, train_mask, train_type_id = load_dataset('train', args.model, shuffle=True)
         val_src, val_labels, val_mask, val_type_id = load_dataset('valid', args.model, shuffle=False)
         test_src, test_labels, test_mask, test_type_id = load_dataset('test', args.model, shuffle=False)
+        print(train_src, val_src, test_src)
         train_dataset = PicoBertDataset(train_src, train_labels, train_mask, train_type_id)
         val_dataset = PicoBertDataset(val_src, val_labels, val_mask, val_type_id)
         test_dataset = PicoBertDataset(test_src, test_labels, test_mask, test_type_id)
@@ -172,14 +177,15 @@ def main():
         output_dir='./results/',
         evaluation_strategy="epoch",
         warmup_steps=1000,  
-        learning_rate=1e-4,
+        learning_rate=5e-5,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
-        num_train_epochs=15,
-        save_steps=1000,
+        num_train_epochs=800,
+        save_strategy= "no",
+        save_total_limit=1,
         load_best_model_at_end=True,
-        weight_decay=0.005,
-        logging_dir='./logs/',
+        weight_decay=0.001,
+        logging_dir= './logs/',
     )
     data_collator = DataCollatorForTokenClassification(tokenizer)
     #metric = load_metric("seqeval")
@@ -192,11 +198,11 @@ def main():
         data_collator=data_collator,
         compute_metrics=compute_metrics,
         do_save_full_model=False,
-        do_save_adapters=True,
+        do_save_adapters=False,
     )
 
     trainer.train()
-
+    
     logger.info("*** Evaluate ***")
 
     results = trainer.evaluate()
@@ -212,15 +218,17 @@ def main():
     logger.info("*** Predict ***")
 
     test_dataset = test_dataset
+    
     predictions, labels, metrics = trainer.predict(test_dataset)
+    
     predictions = np.argmax(predictions, axis=2)
-
+    print(predictions)
     # Remove ignored index (special tokens)
     true_predictions = [
-        [label_list[p] for (p, l) in zip(prediction, label) if l != 0]
+        [label_list[p] for (p, l) in zip(prediction, label) if l!=0]
         for prediction, label in zip(predictions, labels)
     ]
-
+    print(true_predictions)
     output_test_results_file = os.path.join('./results/', "test_results.txt")
     if trainer.is_world_process_zero():
         with open(output_test_results_file, "w") as writer:
