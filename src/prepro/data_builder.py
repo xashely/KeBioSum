@@ -1105,7 +1105,7 @@ def format_to_pico_adapter_bert(args):
         is_test = corpus_type == 'test'
         if (os.path.exists(save_path)):
             logger.info('Ignore %s' % save_path)
-            return
+            continue
         pico_adapter = PicoBertAdapterData(args)
         logger.info('Processing %s' % json_file)
         data = []
