@@ -156,6 +156,7 @@ def main():
         val_dataset = PicoDataset(val_src, val_labels, val_mask)
         test_dataset = PicoDataset(test_src, test_labels, test_mask)
         tokenizer = AutoTokenizer.from_pretrained('roberta-base')
+        tokenizer.save_pretrained('./save_pretrained/')
     else:
         train_src, train_labels, train_mask, train_type_id = load_dataset('train', args.model, shuffle=True)
         val_src, val_labels, val_mask, val_type_id = load_dataset('valid', args.model, shuffle=False)
@@ -165,10 +166,16 @@ def main():
         val_dataset = PicoBertDataset(val_src, val_labels, val_mask, val_type_id)
         test_dataset = PicoBertDataset(test_src, test_labels, test_mask, test_type_id)
         tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
+        tokenizer.save_pretrained('./save_pretrained/')
+
     if args.model=="robert":
         model = AutoModelForTokenClassification.from_pretrained('roberta-base', num_labels=len(label_list))
+        model.save_pretrained('./save_pretrained/')
     else:
         model = AutoModelForTokenClassification.from_pretrained('bert-base-uncased', num_labels=len(label_list))
+        model.save_pretrained('./save_pretrained/')
+    #tokenizer.save_pretrained('./save_pretrained/')
+    #model.save_pretrained('./save_pretrained/')
     model.add_adapter(task)
     model.train_adapter(task)
     model.set_active_adapters(task)
@@ -180,7 +187,7 @@ def main():
         learning_rate=5e-5,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
-        num_train_epochs=800,
+        num_train_epochs=13,
         save_strategy= "no",
         save_total_limit=1,
         load_best_model_at_end=True,
@@ -222,13 +229,13 @@ def main():
     predictions, labels, metrics = trainer.predict(test_dataset)
     
     predictions = np.argmax(predictions, axis=2)
-    print(predictions)
+    #print(predictions)
     # Remove ignored index (special tokens)
     true_predictions = [
         [label_list[p] for (p, l) in zip(prediction, label) if l!=0]
         for prediction, label in zip(predictions, labels)
     ]
-    print(true_predictions)
+    #print(true_predictions)
     output_test_results_file = os.path.join('./results/', "test_results.txt")
     if trainer.is_world_process_zero():
         with open(output_test_results_file, "w") as writer:

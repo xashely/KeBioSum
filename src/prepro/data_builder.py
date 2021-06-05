@@ -831,6 +831,7 @@ class PicoBertAdapterData():
                     temp.append(1.0)
             #print(len(temp))
             mask_label.append(temp)
+        print(len(mask_label))
         data = []
         for i in range(len(mask_label)):
             data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "token_type_ids":src_token_type_id[i]})
@@ -1088,14 +1089,14 @@ def format_to_pico_adapter_bert(args):
         data = []
         source = []
         tag = []
-        #json_file = [json_file[0]]
+        json_file = [json_file[0]]
         for j in json_file:
             jobs = json.load(open(j))
             for d in jobs:
                 source.append(d['src'])
                 tag.append(d['tag'])
-        #source = source[:100]
-        #tag = tag[:100]
+        source = source[:100]
+        tag = tag[:100]
         data = pico_adapter.preprocess(source, tag, is_test=is_test)
         logger.info('Processed instances %d' % len(data))
         logger.info('Saving to %s' % save_path)
