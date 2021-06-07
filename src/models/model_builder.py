@@ -138,7 +138,8 @@ class RoBerta(nn.Module):
             if model == "robert":
                 self.model = RobertaModel.from_pretrained('roberta-base', cache_dir=temp_dir)
             if model == "bert":
-                self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
+                # self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
+                self.model = BertModel.from_pretrained('./pre/', cache_dir=temp_dir)
             if model == "pubmed":
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
                 self.model = AutoModelForMaskedLM.from_pretrained(model_name).to(device)

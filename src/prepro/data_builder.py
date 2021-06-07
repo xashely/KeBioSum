@@ -539,7 +539,7 @@ class PubmedData():
 class PicoAdapterData():
     def __init__(self, args):
         self.args = args
-        self.tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
+        self.tokenizer = RobertaTokenizer.from_pretrained("./pre-roberta/")
 
         #BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 
@@ -575,7 +575,7 @@ class PicoAdapterData():
     
         src_filt = [d[:self.args.max_src_nsents][:] for d in new_src if self.args.min_src_nsents < len(d)]
         tag_filt = [d_tag[:self.args.max_src_nsents][:] for d_tag in new_tag if self.args.min_src_nsents < len(d_tag)]
-        print(len(src_filt), len(src_filt[0]), src_filt[0][0])
+        print(len(src_filt), len(src_filt[0]))
 
         src_txt = []
         trans = str.maketrans("", "", string.punctuation + "‘" + "’" + "‐" + '‑' + '”')
@@ -620,37 +620,36 @@ class PicoAdapterData():
             temp = temp[:-2]
             temp.append('O')
             tags.append(temp)
-            assert len(text[i].split())==len(temp), (i, text[i].split(), len(text[i].split()),len(temp))
+            #assert len(text[i].split())==len(temp), (i, len(text[i].split()),len(temp))
 
         src_encoding = self.tokenizer(text,truncation=True,padding=True)
         src_subtoken_idxs = src_encoding['input_ids']
-        print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
+        #print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
         src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
-
+        #print(text[3].split()[:10])
+        #print(src_subtokens[3][:50])
         tag_align = []
         for i, subtoken in enumerate(src_subtokens):
+            print(len(subtoken))
             aligned_labels = ["O"] * len(subtoken)
             head = 0
             count = 0
-            #print(len(subtoken))
+            subtoken[1] = "Ġ" + subtoken[1] 
             temp_src = text[i].split("</s>")
             temp = " ".join([val for val in subtoken if val != '<pad>'])
             temp = temp.split("</s>")
+            print("last temp:", temp[-1])
             for j, temp_sent in enumerate(temp):
-                if 0 < j:
-                    temp = temp_sent.split()
-                    temp_sent_filt = [filt for filt in temp if not filt.startswith("Ġ")]
-                    if len(temp_sent_filt)!=len(temp_src[j-1].split()):
-                        print(len(temp_sent_filt),len(temp_src[j-1].split()))
-                        print("sub:", temp_sent_filt)
-                        print("src:", temp_src[j-1].split())
-                        print("\n")
-            print(i, len(tags[i]),len([val for val in subtoken if not val.startswith("Ġ") and val !='<pad>']))
-
+                if j < len(temp)-1:
+                    temp_s = temp_sent.split()
+                    temp_sent_filt = [filt for filt in temp_s if filt.startswith("Ġ")]
+                    if len(temp_sent_filt)-1!=len(temp_src[j].split()):
+                        print(i,j,len(temp_sent_filt)-1,len(temp_src[j].split()), temp_s,temp[j+1], temp_src[j].split())
+            #assert len(tags[i])==len([val for val in subtoken if val.startswith("Ġ") and val !='<pad>']),(i, len(tags[i]),len([val for val in subtoken if val.startswith("Ġ") and val !='<pad>']))
             for j, each_str in enumerate(subtoken):
                 #print(i, each_str, head, count)
                 if each_str != "<pad>":
-                    if "Ġ" in each_str:
+                    if j==0 or "Ġ" in each_str:
                         aligned_labels[head] = tags[i][count]
                         count += 1
                         head += 1
@@ -788,8 +787,8 @@ class PicoBertAdapterData():
             temp = temp.split("[CLS]")
             for j, temp_sent in enumerate(temp):
                 if 0 < j:
-                    temp = temp_sent.split()
-                    temp_sent_filt = [filt for filt in temp if not filt.startswith("##")]
+                    temp_s = temp_sent.split()
+                    temp_sent_filt = [filt for filt in temp_s if not filt.startswith("##")]
                     if len(temp_sent_filt)!=len(temp_src[j-1].split()):
                         print(len(temp_sent_filt),len(temp_src[j-1].split()))
                         print("sub:", temp_sent_filt)
@@ -917,8 +916,8 @@ class PicoPubmedBertAdapterData():
             temp = temp.split("[CLS]")
             for j, temp_sent in enumerate(temp):
                 if 0 < j:
-                    temp = temp_sent.split()
-                    temp_sent_filt = [filt for filt in temp if not filt.startswith("##")]
+                    temp_s = temp_sent.split()
+                    temp_sent_filt = [filt for filt in temp_s if not filt.startswith("##")]
                     if len(temp_sent_filt) != len(temp_src[j - 1].split()):
                         print(len(temp_sent_filt), len(temp_src[j - 1].split()))
                         print("sub:", temp_sent_filt)
@@ -1053,14 +1052,14 @@ def format_to_pico_adapter_robert(args):
         data = []
         source = []
         tag = []
-        #json_file = [json_file[0]]
+        json_file = [json_file[0]]
         for j in json_file:
             jobs = json.load(open(j))
             for d in jobs:
                 source.append(d['src'])
                 tag.append(d['tag'])
-        #source = source[:100]
-        #tag = tag[:100]
+        source = source[:100]
+        tag = tag[:100]
         data = pico_adapter.preprocess(source, tag, is_test=is_test)
         logger.info('Processed instances %d' % len(data))
         logger.info('Saving to %s' % save_path)
@@ -1089,14 +1088,14 @@ def format_to_pico_adapter_bert(args):
         data = []
         source = []
         tag = []
-        json_file = [json_file[0]]
+        #json_file = [json_file[0]]
         for j in json_file:
             jobs = json.load(open(j))
             for d in jobs:
                 source.append(d['src'])
                 tag.append(d['tag'])
-        source = source[:100]
-        tag = tag[:100]
+        #source = source[:100]
+        #tag = tag[:100]
         data = pico_adapter.preprocess(source, tag, is_test=is_test)
         logger.info('Processed instances %d' % len(data))
         logger.info('Saving to %s' % save_path)

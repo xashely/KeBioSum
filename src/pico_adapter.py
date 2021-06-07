@@ -152,28 +152,29 @@ def main():
         train_src, train_labels, train_mask = load_dataset('train', args.model, shuffle=True)
         val_src, val_labels, val_mask = load_dataset('valid', args.model, shuffle=False)
         test_src, test_labels, test_mask = load_dataset('test', args.model, shuffle=False)
+        #print(train_src[0])
+        #print(train_labels[0])
+        #print(train_mask[0])
         train_dataset = PicoDataset(train_src, train_labels, train_mask)
         val_dataset = PicoDataset(val_src, val_labels, val_mask)
         test_dataset = PicoDataset(test_src, test_labels, test_mask)
-        tokenizer = AutoTokenizer.from_pretrained('roberta-base')
-        tokenizer.save_pretrained('./save_pretrained/')
+        tokenizer = AutoTokenizer.from_pretrained('./pre-auto-roberta/')
+        #tokenizer.save_pretrained('./save_pretrained/')
     else:
         train_src, train_labels, train_mask, train_type_id = load_dataset('train', args.model, shuffle=True)
         val_src, val_labels, val_mask, val_type_id = load_dataset('valid', args.model, shuffle=False)
         test_src, test_labels, test_mask, test_type_id = load_dataset('test', args.model, shuffle=False)
-        print(len(train_src), len(val_src), len(test_src))
+        #print(len(train_src), len(val_src), len(test_src))
         train_dataset = PicoBertDataset(train_src, train_labels, train_mask, train_type_id)
         val_dataset = PicoBertDataset(val_src, val_labels, val_mask, val_type_id)
         test_dataset = PicoBertDataset(test_src, test_labels, test_mask, test_type_id)
-        tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
-        tokenizer.save_pretrained('./save_pretrained/')
+        tokenizer = AutoTokenizer.from_pretrained('./pre/')
+        #tokenizer.save_pretrained('./save_pretrained/')
 
     if args.model=="robert":
         model = AutoModelForTokenClassification.from_pretrained('roberta-base', num_labels=len(label_list))
-        model.save_pretrained('./save_pretrained/')
     else:
         model = AutoModelForTokenClassification.from_pretrained('bert-base-uncased', num_labels=len(label_list))
-        model.save_pretrained('./save_pretrained/')
     #tokenizer.save_pretrained('./save_pretrained/')
     #model.save_pretrained('./save_pretrained/')
     model.add_adapter(task)
@@ -184,10 +185,10 @@ def main():
         output_dir='./results/',
         evaluation_strategy="epoch",
         warmup_steps=1000,  
-        learning_rate=5e-5,
+        learning_rate=1e-4,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
-        num_train_epochs=13,
+        num_train_epochs=15,
         save_strategy= "no",
         save_total_limit=1,
         load_best_model_at_end=True,
