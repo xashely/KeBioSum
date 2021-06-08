@@ -249,8 +249,11 @@ def main():
             for key, value in metrics.items():
                 logger.info(f"  {key} = {value}")
                 writer.write(f"{key} = {value}\n")
-
-    model.save_adapter("./final_adapter", "ner")
-
+    if args.model == "robert":
+        model.save_adapter("./final_adapter", "ner")
+    if args.model == "bert":
+        model.save_adapter("./final_bert_adapter", "ner")
+    if args.model == "pubmed"
+        model.save_adapter("./final_pubmed_adapter", "ner")
 if __name__ == "__main__":
     main()
