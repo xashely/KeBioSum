@@ -194,7 +194,7 @@ def main():
         learning_rate=5e-5,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
-        num_train_epochs=13,
+        num_train_epochs=12,
         save_strategy= "no",
         save_total_limit=1,
         load_best_model_at_end=True,
@@ -253,7 +253,7 @@ def main():
         model.save_adapter("./final_adapter", "ner")
     if args.model == "bert":
         model.save_adapter("./final_bert_adapter", "ner")
-    if args.model == "pubmed"
+    if args.model == "pubmed":
         model.save_adapter("./final_pubmed_adapter", "ner")
 if __name__ == "__main__":
     main()

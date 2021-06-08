@@ -916,7 +916,7 @@ class PicoPubmedBertAdapterData():
             tags.append(temp)
             #assert len(text[i].split()) == len(temp), (i, text[i].split(), len(text[i].split()), len(temp))
 
-        src_encoding = self.tokenizer(text, truncation=True, padding=True)
+        src_encoding = self.tokenizer(text, truncation=True, padding=True, max_length=512)
         src_subtoken_idxs = src_encoding['input_ids']
         src_token_type_id = src_encoding['token_type_ids']
         # print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
