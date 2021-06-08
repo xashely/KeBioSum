@@ -539,7 +539,7 @@ class PubmedData():
 class PicoAdapterData():
     def __init__(self, args):
         self.args = args
-        self.tokenizer = RobertaTokenizer.from_pretrained("./pre-roberta/")
+        self.tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
 
         #BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 
@@ -638,7 +638,7 @@ class PicoAdapterData():
             temp_src = text[i].split("</s>")
             temp = " ".join([val for val in subtoken if val != '<pad>'])
             temp = temp.split("</s>")
-            print("last temp:", temp[-1])
+            #print("last temp:", temp[-1])
             for j, temp_sent in enumerate(temp):
                 if j < len(temp)-1:
                     temp_s = temp_sent.split()
@@ -677,7 +677,7 @@ class PicoAdapterData():
                 else:
                     src_subtoken_idxs[i][j] = self.mask_vid
                     temp.append(1.0)
-            print(len(temp))
+            #print(len(temp))
             mask_label.append(temp)
         data = []
         for i in range(len(mask_label)):
@@ -1052,14 +1052,14 @@ def format_to_pico_adapter_robert(args):
         data = []
         source = []
         tag = []
-        json_file = [json_file[0]]
+        #json_file = [json_file[0]]
         for j in json_file:
             jobs = json.load(open(j))
             for d in jobs:
                 source.append(d['src'])
                 tag.append(d['tag'])
-        source = source[:100]
-        tag = tag[:100]
+        #source = source[:100]
+        #tag = tag[:100]
         data = pico_adapter.preprocess(source, tag, is_test=is_test)
         logger.info('Processed instances %d' % len(data))
         logger.info('Saving to %s' % save_path)

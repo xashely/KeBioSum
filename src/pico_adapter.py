@@ -158,7 +158,7 @@ def main():
         train_dataset = PicoDataset(train_src, train_labels, train_mask)
         val_dataset = PicoDataset(val_src, val_labels, val_mask)
         test_dataset = PicoDataset(test_src, test_labels, test_mask)
-        tokenizer = AutoTokenizer.from_pretrained('./pre-auto-roberta/')
+        tokenizer = AutoTokenizer.from_pretrained('roberta-base')
         #tokenizer.save_pretrained('./save_pretrained/')
     else:
         train_src, train_labels, train_mask, train_type_id = load_dataset('train', args.model, shuffle=True)
@@ -184,8 +184,8 @@ def main():
         #f"test-{task}",
         output_dir='./results/',
         evaluation_strategy="epoch",
-        warmup_steps=1000,  
-        learning_rate=1e-4,
+        warmup_steps=500,  
+        learning_rate=5e-4,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
         num_train_epochs=15,
