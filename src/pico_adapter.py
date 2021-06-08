@@ -129,7 +129,7 @@ class PicoBertDataset(torch.utils.data.Dataset):
         self.token_type_ids = type_ids
         self.labels = labels
         #print(len(mask))
-        self.attention_mask = np.ones((len(mask), len(mask[0])))#mask
+        self.attention_mask = mask
     def __getitem__(self, idx):
         #item = {key: torch.tensor(val[idx]) for key, val in self.input_ids.items()}
         item = {}
@@ -152,9 +152,9 @@ def main():
         train_src, train_labels, train_mask = load_dataset('train', args.model, shuffle=True)
         val_src, val_labels, val_mask = load_dataset('valid', args.model, shuffle=False)
         test_src, test_labels, test_mask = load_dataset('test', args.model, shuffle=False)
-        #print(train_src[0])
-        #print(train_labels[0])
-        #print(train_mask[0])
+        print(train_src[0], train_src[1])
+        print(train_labels[0], train_labels[1])
+        print(train_mask[0], train_mask[1])
         train_dataset = PicoDataset(train_src, train_labels, train_mask)
         val_dataset = PicoDataset(val_src, val_labels, val_mask)
         test_dataset = PicoDataset(test_src, test_labels, test_mask)
@@ -184,11 +184,11 @@ def main():
         #f"test-{task}",
         output_dir='./results/',
         evaluation_strategy="epoch",
-        warmup_steps=500,  
-        learning_rate=5e-4,
+        warmup_steps=1000,  
+        learning_rate=5e-5,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
-        num_train_epochs=15,
+        num_train_epochs=13,
         save_strategy= "no",
         save_total_limit=1,
         load_best_model_at_end=True,
