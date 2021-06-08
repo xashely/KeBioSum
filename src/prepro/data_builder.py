@@ -871,10 +871,28 @@ class PicoPubmedBertAdapterData():
         tag_filt = [d_tag[:self.args.max_src_nsents][:] for d_tag in new_tag if self.args.min_src_nsents < len(d_tag)]
         print(len(src_filt), len(src_filt[0]), src_filt[0][0])
         src_txt = []
+        trans = str.maketrans("", "", string.punctuation + "‘" + "’" + "‐" + '‑' + '”')
+        chin_trans = str.maketrans("", "", punctuation)
+        zhPattern = re.compile(u'[\u4e00-\u9fa5]+')
+        # anotrans = str.maketrans("", "", "’")
         for d in src_filt:
             temp = []
             for sent in d:
-                temp.append(' '.join(sent))
+                temp_s = sent
+                for index, each_token in enumerate(sent):
+                    if each_token.startswith("http"):
+                        temp_s[index] = "http"
+                    elif len(each_token) > 1:
+                        temp_s[index] = each_token.translate(trans)
+                        temp_s[index] = temp_s[index].translate(chin_trans)
+                    if temp_s[index] == "":
+                        temp_s[index] = "[UNK]"
+                    if each_token.startswith("www"):
+                        temp_s[index] = "www"
+                    if zhPattern.search(each_token):
+                        temp_s[index] = "[UNK]"
+                        # temp_s[index] = temp_s[index].translate(anotrans)
+                temp.append(' '.join(temp_s))
             src_txt.append(temp)
 
         # src_txt = [' '.join(sent) for d in src for sent in d]
