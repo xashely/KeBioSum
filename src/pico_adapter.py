@@ -168,13 +168,19 @@ def main():
         train_dataset = PicoBertDataset(train_src, train_labels, train_mask, train_type_id)
         val_dataset = PicoBertDataset(val_src, val_labels, val_mask, val_type_id)
         test_dataset = PicoBertDataset(test_src, test_labels, test_mask, test_type_id)
-        tokenizer = AutoTokenizer.from_pretrained('./pre/')
+        if args.model=='bert':
+            tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
+        else:
+            model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         #tokenizer.save_pretrained('./save_pretrained/')
 
     if args.model=="robert":
         model = AutoModelForTokenClassification.from_pretrained('roberta-base', num_labels=len(label_list))
-    else:
+    if args.model=='bert':
         model = AutoModelForTokenClassification.from_pretrained('bert-base-uncased', num_labels=len(label_list))
+    if args.model=='pubmed':
+        model = AutoModelForTokenClassification.from_pretrained('microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract', num_labels=len(label_list))
     #tokenizer.save_pretrained('./save_pretrained/')
     #model.save_pretrained('./save_pretrained/')
     model.add_adapter(task)
