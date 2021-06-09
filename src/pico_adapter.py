@@ -2,7 +2,7 @@ import logging
 import os
 import sys
 import torch
-from transformers import AutoModelForTokenClassification, TrainingArguments, Trainer
+from transformers import AutoModelForTokenClassification, TrainingArguments, Trainer, RobertaConfig, RobertaModelWithHeads
 from transformers import DataCollatorForTokenClassification
 from transformers import AutoTokenizer
 from transformers import AdapterType
@@ -176,14 +176,29 @@ def main():
         #tokenizer.save_pretrained('./save_pretrained/')
 
     if args.model=="robert":
-        model = AutoModelForTokenClassification.from_pretrained('roberta-base', num_labels=len(label_list))
+        config = RobertaConfig.from_pretrained(
+            "roberta-base",
+            num_labels=len(label_list),
+        )
+        model = RobertaModelWithHeads.from_pretrained(
+            "roberta-base",
+            config=config,
+        )
+        model.add_adapter(task)
+        model.add_tagging_head(
+            task,
+            num_labels=len(label_list),
+            id2label={0:'O', 1:"I-INT", 2:"I-PAR", 3:"I-OUT"}
+        )
     if args.model=='bert':
         model = AutoModelForTokenClassification.from_pretrained('bert-base-uncased', num_labels=len(label_list))
+        model.add_adapter(task)
     if args.model=='pubmed':
-        model = AutoModelForTokenClassification.from_pretrained('microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract', num_labels=len(label_list))
+        model = AutoModelWithHeads.from_pretrained('microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract')
+        model.add_adapter(task)
+        model.add_tagging_head(task, num_labels=len(label_list), id2label={0:'O', 1:"I-INT", 2:"I-PAR", 3:"I-OUT"})
     #tokenizer.save_pretrained('./save_pretrained/')
     #model.save_pretrained('./save_pretrained/')
-    model.add_adapter(task)
     model.train_adapter(task)
     model.set_active_adapters(task)
     args = TrainingArguments(
