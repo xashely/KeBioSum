@@ -201,15 +201,15 @@ def main():
     #model.save_pretrained('./save_pretrained/')
     model.train_adapter(task)
     model.set_active_adapters(task)
-    args = TrainingArguments(
+    arg = TrainingArguments(
         #f"test-{task}",
-        output_dir='./results/',
+        output_dir='/data/xieqianqian/covid-bert/results/',
         evaluation_strategy="epoch",
         warmup_steps=1000,  
-        learning_rate=5e-5,
+        learning_rate=1e-4,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
-        num_train_epochs=12,
+        num_train_epochs=14,
         save_strategy= "no",
         save_total_limit=1,
         load_best_model_at_end=True,
@@ -220,7 +220,7 @@ def main():
     #metric = load_metric("seqeval")
     trainer = Trainer(
         model=model,
-        args=args,
+        args=arg,
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
         tokenizer=tokenizer,
@@ -236,7 +236,7 @@ def main():
 
     results = trainer.evaluate()
 
-    output_eval_file = os.path.join('./results/', "eval_results_ner.txt")
+    output_eval_file = os.path.join('/data/xieqianqian/covid-bert/results/', "eval_results_ner.txt")
     if trainer.is_world_process_zero():
         with open(output_eval_file, "w") as writer:
             logger.info("***** Eval results *****")
@@ -258,17 +258,17 @@ def main():
         for prediction, label in zip(predictions, labels)
     ]
     #print(true_predictions)
-    output_test_results_file = os.path.join('./results/', "test_results.txt")
+    output_test_results_file = os.path.join('/data/xieqianqian/covid-bert/results/', "test_results.txt")
     if trainer.is_world_process_zero():
         with open(output_test_results_file, "w") as writer:
             for key, value in metrics.items():
                 logger.info(f"  {key} = {value}")
                 writer.write(f"{key} = {value}\n")
     if args.model == "robert":
-        model.save_adapter("./final_adapter", "ner")
+        model.save_adapter("/data/xieqianqian/covid-bert/adapter/final_adapter", "ner")
     if args.model == "bert":
-        model.save_adapter("./final_bert_adapter", "ner")
+        model.save_adapter("/data/xieqianqian/covid-bert/adapter/final_bert_adapter", "ner")
     if args.model == "pubmed":
-        model.save_adapter("./final_pubmed_adapter", "ner")
+        model.save_adapter("/data/xieqianqian/covid-bert/adapter/final_pubmed_adapter", "ner")
 if __name__ == "__main__":
     main()
