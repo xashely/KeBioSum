@@ -146,7 +146,7 @@ class RoBerta(nn.Module):
             self.model.add_adapter("finetune")
             #self.model.train_adapter("finetune")
             #self.model.set_active_adapters("finetune")
-            self.model.load_adapter("./final_adapter", load_as="ner", with_head=False)
+            self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_adapter", load_as="ner", with_head=False)
             self.model.add_fusion(Fuse("finetune", "ner"))
             self.model.set_active_adapters(Fuse("finetune", "ner"))
             adapter_setup = Fuse("finetune", "ner")
