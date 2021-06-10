@@ -2,7 +2,7 @@ import logging
 import os
 import sys
 import torch
-from transformers import AutoModelForTokenClassification, TrainingArguments, Trainer, RobertaConfig, RobertaModelWithHeads
+from transformers import AutoModelForTokenClassification, TrainingArguments, Trainer, RobertaConfig, RobertaModelWithHeads, AutoModelWithHeads
 from transformers import DataCollatorForTokenClassification
 from transformers import AutoTokenizer
 from transformers import AdapterType
@@ -97,9 +97,9 @@ def load_dataset(corpus_type, model, shuffle):
             src.append(data['src'])
             label.append(data['tag'])
             mask.append(data['mask'])
-            if model == "bert":
+            if model == "bert" or model=='pubmed':
                 type_id.append(data['token_type_ids'])
-        if model=="bert":
+        if model=="bert" or model=='pubmed':
             return src, label, mask, type_id
         else:
             return src, label, mask
@@ -109,7 +109,7 @@ class PicoDataset(torch.utils.data.Dataset):
         self.input_ids = src_idx
         self.token_type_ids = [0] * len(self.input_ids)
         self.labels = labels
-        self.attention_mask = mask #[1]* len(self.input_ids)
+        self.attention_mask = np.ones((len(mask), len(mask[0]))) #[1]* len(self.input_ids)
     def __getitem__(self, idx):
         #item = {key: torch.tensor(val[idx]) for key, val in self.input_ids.items()}
         item = {}
@@ -129,7 +129,7 @@ class PicoBertDataset(torch.utils.data.Dataset):
         self.token_type_ids = type_ids
         self.labels = labels
         #print(len(mask))
-        self.attention_mask = mask
+        self.attention_mask = np.ones((len(mask), len(mask[0])))#mask
     def __getitem__(self, idx):
         #item = {key: torch.tensor(val[idx]) for key, val in self.input_ids.items()}
         item = {}
@@ -164,7 +164,7 @@ def main():
         train_src, train_labels, train_mask, train_type_id = load_dataset('train', args.model, shuffle=True)
         val_src, val_labels, val_mask, val_type_id = load_dataset('valid', args.model, shuffle=False)
         test_src, test_labels, test_mask, test_type_id = load_dataset('test', args.model, shuffle=False)
-        #print(len(train_src), len(val_src), len(test_src))
+        print(len(train_type_id))
         train_dataset = PicoBertDataset(train_src, train_labels, train_mask, train_type_id)
         val_dataset = PicoBertDataset(val_src, val_labels, val_mask, val_type_id)
         test_dataset = PicoBertDataset(test_src, test_labels, test_mask, test_type_id)
@@ -172,7 +172,7 @@ def main():
             tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
         else:
             model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
-            self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+            tokenizer = AutoTokenizer.from_pretrained(model_name)
         #tokenizer.save_pretrained('./save_pretrained/')
 
     if args.model=="robert":
@@ -203,18 +203,18 @@ def main():
     model.set_active_adapters(task)
     arg = TrainingArguments(
         #f"test-{task}",
-        output_dir='/data/xieqianqian/covid-bert/results/',
+        output_dir='/data/xieqianqian/covid-bert/results_2/',
         evaluation_strategy="epoch",
-        warmup_steps=1000,  
-        learning_rate=1e-4,
+        warmup_steps=500,  
+        learning_rate=5e-5,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
-        num_train_epochs=14,
+        num_train_epochs=12,
         save_strategy= "no",
         save_total_limit=1,
         load_best_model_at_end=True,
         weight_decay=0.001,
-        logging_dir= './logs/',
+        logging_dir= '/data/xieqianqian/covid-bert/logs/',
     )
     data_collator = DataCollatorForTokenClassification(tokenizer)
     #metric = load_metric("seqeval")
