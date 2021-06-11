@@ -110,23 +110,26 @@ python src/preprocess.py -mode format_to_pico_adapter -raw_path ./json_data/ -sa
 ```
 
 ## Pico Adapter
-
+```
+python src/pico_adapter.py -model robert -path /data/xieqianqian/covid-bert/data/pico_roberta_data
+```
+* -model can be [bert, robert, pubmed]
 
 ## Model Training
 
 **First run: For the first time, you should use single-GPU, so the code can download the BERT model. Use ``-visible_gpus -1``, after downloading, you could kill the process and rerun the code with multi-GPUs.**
 
 ```
-python src/train.py -task ext -mode train -bert_data_path ./bert_data/ -ext_dropout 0.1 -model_path ./models/ -lr 2e-3 -visible_gpus 0 -report_every 50 -save_checkpoint_steps 1000 -batch_size 3000 -train_steps 50000 -accum_count 2 -log_file ./logs/ext_bert_covid -use_interval true -warmup_steps 10000 -max_pos 512
+python src/train.py -task ext -mode train -bert_data_path /data/xieqianqian/covid-bert/data/pubmed_data/ -ext_dropout 0.4 -model_path /data/xieqianqian/covid-bert/models_2/ -lr 2e-3 -visible_gpus 2 -report_every 50 -save_checkpoint_steps 1000 -batch_size 12000 -train_steps 20000 -accum_count 2 -log_file /data/xieqianqian/covid-bert/logs/ext_bert_covid -use_interval true -warmup_steps 5000 -model pubmed
 ```
 
 
 ## Model Evaluation
 ```
-python src/train.py -task ext -mode validate -batch_size 3000 -test_batch_size 500 -bert_data_path ./bert_data/ -log_file ./logs/val_ext_bert_covid -model_path ./models/ -sep_optim true -use_interval true -visible_gpus 1 -max_pos 512 -result_path ./results/ext_bert_covid -test_all True
+python src/train.py -task ext -mode validate -batch_size 12000 -test_batch_size 12000 -bert_data_path ./bert_data/ -log_file ./logs/val_ext_bert_covid -model_path ./models/ -sep_optim true -use_interval true -visible_gpus 1 -max_pos 512 -result_path ./results/ext_bert_covid -test_all True -model bert
 ```
 ```
-python src/train.py -task ext -mode test -batch_size 3000 -test_batch_size 500 -bert_data_path ./bert_data/ -log_file ./logs/test_ext_bert_covid -test_from ./models/model_step_9000.pt -sep_optim true -use_interval true -visible_gpus 1 -max_pos 512 -result_path ./results/ext_bert_covid 
+python src/train.py -task ext -mode test -batch_size 3000 -test_batch_size 500 -bert_data_path ./bert_data/ -log_file ./logs/test_ext_bert_covid -test_from ./models/model_step_9000.pt -sep_optim true -use_interval true -visible_gpus 1 -max_pos 512 -result_path ./results/ext_bert_covid -model bert
 ```
 * `-mode` can be {`validate, test`}, where `validate` will inspect the model directory and evaluate the model for each saved checkpoint, `test` need to be used with `-test_from`, indicating the checkpoint you want to use (choose the top checkpoint on the validation dataset)
 * `MODEL_PATH` is the directory of saved checkpoints
