@@ -1175,7 +1175,7 @@ def _format_to_robert(params):
     datasets = []
     for d in jobs:
         source, tgt = d['src'], d['tgt']
-        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 10)
+        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
@@ -1209,7 +1209,7 @@ def _format_to_bert(params):
     datasets = []
     for d in jobs:
         source, tgt = d['src'], d['tgt']
-        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 10)
+        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
@@ -1243,7 +1243,7 @@ def _format_to_pubmed_bert(params):
     datasets = []
     for d in jobs:
         source, tgt = d['src'], d['tgt']
-        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 10)
+        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]

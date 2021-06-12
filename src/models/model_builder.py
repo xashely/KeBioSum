@@ -2,7 +2,7 @@ import copy
 
 import torch
 import torch.nn as nn
-from transformers import RobertaConfig, RobertaModel, BertModel, AutoTokenizer, AutoModelForMaskedLM
+from transformers import RobertaConfig, RobertaModel, BertModel, AutoTokenizer, AutoModel
 from torch.nn.init import xavier_uniform_
 
 from models.decoder import TransformerDecoder
@@ -125,41 +125,34 @@ class RoBerta(nn.Module):
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
                 self.model = AutoModelForMaskedLM.from_pretrained(model_name).to(device)
             self.model.add_adapter("finetune")
-            #self.model.train_adapter("finetune")
-            #self.model.set_active_adapters("finetune")
+            
             self.model.load_adapter("./final_adapter", load_as="ner", with_head=False)
             self.model.add_fusion(Fuse("finetune", "ner"))
             self.model.set_active_adapters(Fuse("finetune", "ner"))
             adapter_setup = Fuse("finetune", "ner")
             self.model.train_fusion(adapter_setup)
             self.model.encoder.enable_adapters(adapter_setup, True, True)
-            #self.model.encoder.enable_adapters("ner", True, True)
         else:
             if model == "robert":
                 self.model = RobertaModel.from_pretrained('roberta-base', cache_dir=temp_dir)
                 self.model.add_adapter("finetune")
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_adapter", load_as="ner",
-                                        with_head=False)
+                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_adapter", load_as="ner",with_head=False)
             if model == "bert":
-                # self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
+                #self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
                 self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
                 self.model.add_adapter("finetune")
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_bert_adapter", load_as="ner",
-                                        with_head=False)
+                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_bert_adapter", load_as="ner",with_head=False)
             if model == "pubmed":
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
-                self.model = AutoModelForMaskedLM.from_pretrained(model_name).to(device)
+                self.model = AutoModel.from_pretrained(model_name).to(device)
                 self.model.add_adapter("finetune")
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_pubmed_adapter", load_as="ner",
-                                        with_head=False)
-            #self.model.train_adapter("finetune")
-            #self.model.set_active_adapters("finetune")
+                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_pubmed_adapter", load_as="ner",with_head=False)
+            
             self.model.add_fusion(Fuse("finetune", "ner"))
             self.model.set_active_adapters(Fuse("finetune", "ner"))
             adapter_setup = Fuse("finetune", "ner")
             self.model.train_fusion(adapter_setup)
             self.model.encoder.enable_adapters(adapter_setup, True, True)
-            #self.model.encoder.enable_adapters("ner", True, True)
         self.finetune = finetune
 
     def forward(self, x, segs, mask):

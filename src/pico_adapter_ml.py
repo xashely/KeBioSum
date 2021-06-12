@@ -4,7 +4,7 @@ import sys
 import torch
 from transformers import AutoModelForTokenClassification, TrainingArguments, Trainer, RobertaConfig, \
     RobertaModelWithHeads, AutoModelWithHeads, AutoModelForMaskedLM
-from transformers import DataCollatorForTokenClassification
+from transformers import DataCollatorForLanguageModeling,DataCollatorForTokenClassification
 from transformers import AutoTokenizer
 from transformers import AdapterType
 from datasets import ClassLabel, load_dataset, load_metric
@@ -195,8 +195,9 @@ def main():
     if args.model == 'pubmed':
         model = AutoModelForMaskedLM.from_pretrained('microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract')
     model.resize_token_embeddings(len(tokenizer))
-    model.train_adapter(task)
-    model.set_active_adapters(task)
+    model.add_adapter('mlm')
+    model.train_adapter('mlm')
+    model.set_active_adapters('mlm')
     arg = TrainingArguments(
         # f"test-{task}",
         output_dir='/data/xieqianqian/covid-bert/results/',
@@ -233,7 +234,7 @@ def main():
 
     logger.info("*** Evaluate ***")
     metrics = trainer.evaluate()
-    metrics["eval_samples"] = len(eval_dataset)
+    metrics["eval_samples"] = len(val_dataset)
     perplexity = math.exp(metrics["eval_loss"])
     metrics["perplexity"] = perplexity
     trainer.log_metrics("eval", metrics)
