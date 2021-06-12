@@ -624,7 +624,9 @@ class PicoAdapterData():
             #assert len(text[i].split())==len(temp), (i, len(text[i].split()),len(temp))
 
         src_encoding = self.tokenizer(text,truncation=True,padding=True)
+
         src_subtoken_idxs = src_encoding['input_ids']
+        src_subtoken_origin_idxs = src_subtoken_idxs
         #print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
         src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
         #print(text[3].split()[:10])
@@ -682,7 +684,7 @@ class PicoAdapterData():
             mask_label.append(temp)
         data = []
         for i in range(len(mask_label)):
-            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i]})
+            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "src_orig":src_subtoken_origin_idxs[i]})
         return data
 
 
@@ -772,6 +774,7 @@ class PicoBertAdapterData():
         #print("equal:", len(tags[0]), len(text[0].split()))
         src_encoding = self.tokenizer(text, truncation=True, padding=True)
         src_subtoken_idxs = src_encoding['input_ids']
+        src_subtoken_origin_idxs = src_subtoken_idxs
         src_token_type_id = src_encoding['token_type_ids']
         #print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
         #print (len(tags[0]), len(src_subtoken_idxs[0]), len(src_token_type_id[0]))
@@ -834,7 +837,8 @@ class PicoBertAdapterData():
         print(len(mask_label))
         data = []
         for i in range(len(mask_label)):
-            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "token_type_ids":src_token_type_id[i]})
+            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "token_type_ids":src_token_type_id[i],
+                         "src_orig":src_subtoken_origin_idxs[i]})
         return data
 
 class PicoPubmedBertAdapterData():
@@ -920,6 +924,7 @@ class PicoPubmedBertAdapterData():
         src_encoding = self.tokenizer(text, truncation=True, padding=True, max_length=512)
         src_subtoken_idxs = src_encoding['input_ids']
         src_token_type_id = src_encoding['token_type_ids']
+        src_subtoken_origin_idxs = src_subtoken_idxs
         # print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
         # print (len(tags[0]), len(src_subtoken_idxs[0]), len(src_token_type_id[0]))
         src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
@@ -981,7 +986,7 @@ class PicoPubmedBertAdapterData():
         data = []
         for i in range(len(mask_label)):
             data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i],
-                         "token_type_ids": src_token_type_id[i]})
+                         "token_type_ids": src_token_type_id[i],"src_orig":src_subtoken_origin_idxs[i]})
         return data
 
 def format_to_robert(args):
