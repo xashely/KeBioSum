@@ -2,13 +2,14 @@ import copy
 
 import torch
 import torch.nn as nn
-from transformers import RobertaConfig, RobertaModel, BertModel, AutoTokenizer, AutoModelForMaskedLM
+from transformers import RobertaConfig, RobertaModel, BertModel, AutoTokenizer, AutoModel
 from torch.nn.init import xavier_uniform_
 
 from models.decoder import TransformerDecoder
 from models.encoder import Classifier, ExtTransformerEncoder
 from models.optimizers import Optimizer
 from transformers.adapters.composition import Fuse
+
 
 def build_optim(args, model, checkpoint):
     """ Build optimizer """
@@ -37,8 +38,8 @@ def build_optim(args, model, checkpoint):
 
     optim.set_parameters(list(model.named_parameters()))
 
-
     return optim
+
 
 def build_optim_bert(args, model, checkpoint):
     """ Build optimizer """
@@ -68,8 +69,8 @@ def build_optim_bert(args, model, checkpoint):
     params = [(n, p) for n, p in list(model.named_parameters()) if n.startswith('bert.model')]
     optim.set_parameters(params)
 
-
     return optim
+
 
 def build_optim_dec(args, model, checkpoint):
     """ Build optimizer """
@@ -99,7 +100,6 @@ def build_optim_dec(args, model, checkpoint):
     params = [(n, p) for n, p in list(model.named_parameters()) if not n.startswith('bert.model')]
     optim.set_parameters(params)
 
-
     return optim
 
 
@@ -113,11 +113,12 @@ def get_generator(vocab_size, dec_hidden_size, device):
 
     return generator
 
+
 class RoBerta(nn.Module):
     def __init__(self, large, temp_dir, finetune, model, device):
         super(RoBerta, self).__init__()
-        if(large):
-            if model=="robert":
+        if (large):
+            if model == "robert":
                 self.model = RobertaModel.from_pretrained('roberta-large', cache_dir=temp_dir)
             if model == "bert":
                 self.model = BertModel.from_pretrained('bert-large-uncased', cache_dir=temp_dir)
@@ -125,54 +126,47 @@ class RoBerta(nn.Module):
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
                 self.model = AutoModelForMaskedLM.from_pretrained(model_name).to(device)
             self.model.add_adapter("finetune")
-            #self.model.train_adapter("finetune")
-            #self.model.set_active_adapters("finetune")
+
             self.model.load_adapter("./final_adapter", load_as="ner", with_head=False)
             self.model.add_fusion(Fuse("finetune", "ner"))
             self.model.set_active_adapters(Fuse("finetune", "ner"))
             adapter_setup = Fuse("finetune", "ner")
             self.model.train_fusion(adapter_setup)
             self.model.encoder.enable_adapters(adapter_setup, True, True)
-            #self.model.encoder.enable_adapters("ner", True, True)
         else:
             if model == "robert":
                 self.model = RobertaModel.from_pretrained('roberta-base', cache_dir=temp_dir)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_adapter", load_as="mlm",
-                                        with_head=False)
+                self.model.add_adapter("finetune")
                 self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_adapter", load_as="ner",
                                         with_head=False)
             if model == "bert":
                 # self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
                 self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter", load_as="mlm",
-                                        with_head=False)
+                self.model.add_adapter("finetune")
                 self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_bert_adapter", load_as="ner",
                                         with_head=False)
             if model == "pubmed":
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
-                self.model = AutoModelForMaskedLM.from_pretrained(model_name).to(device)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_pubmed_adapter", load_as="mlm",
-                                        with_head=False)
+                self.model = AutoModel.from_pretrained(model_name).to(device)
+                self.model.add_adapter("finetune")
                 self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_pubmed_adapter", load_as="ner",
                                         with_head=False)
-            #self.model.train_adapter("finetune")
-            #self.model.set_active_adapters("finetune")
-            self.model.add_fusion(Fuse("mlm", "ner"))
-            self.model.set_active_adapters(Fuse("mlm", "ner"))
-            adapter_setup = Fuse("mlm", "ner")
+
+            self.model.add_fusion(Fuse("finetune", "ner"))
+            self.model.set_active_adapters(Fuse("finetune", "ner"))
+            adapter_setup = Fuse("finetune", "ner")
             self.model.train_fusion(adapter_setup)
             self.model.encoder.enable_adapters(adapter_setup, True, True)
-            #self.model.encoder.enable_adapters("ner", True, True)
         self.finetune = finetune
 
     def forward(self, x, segs, mask):
-        if(self.finetune):
+        if (self.finetune):
             output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
             top_vec = output.last_hidden_state
         else:
             self.eval()
             with torch.no_grad():
-                output  = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
+                output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
                 top_vec = output.last_hidden_state
         return top_vec
 
@@ -187,14 +181,16 @@ class ExtSummarizer(nn.Module):
                                                args.ext_dropout, args.ext_layers)
         if (args.encoder == 'baseline'):
             roberta_config = RobertaConfig(self.RoBerta.model.config.vocab_size, hidden_size=args.ext_hidden_size,
-                                     num_hidden_layers=args.ext_layers, num_attention_heads=args.ext_heads, intermediate_size=args.ext_ff_size)
+                                           num_hidden_layers=args.ext_layers, num_attention_heads=args.ext_heads,
+                                           intermediate_size=args.ext_ff_size)
             self.RoBerta.model = RobertaModel(roberta_config)
             self.ext_layer = Classifier(self.RoBerta.model.config.hidden_size)
 
-        if(args.max_pos>512):
+        if (args.max_pos > 512):
             my_pos_embeddings = nn.Embedding(args.max_pos, self.RoBerta.model.config.hidden_size)
             my_pos_embeddings.weight.data[:512] = self.RoBerta.model.embeddings.position_embeddings.weight.data
-            my_pos_embeddings.weight.data[512:] = self.RoBerta.model.embeddings.position_embeddings.weight.data[-1][None,:].repeat(args.max_pos-512,1)
+            my_pos_embeddings.weight.data[512:] = self.RoBerta.model.embeddings.position_embeddings.weight.data[-1][
+                                                  None, :].repeat(args.max_pos - 512, 1)
             self.RoBerta.model.embeddings.position_embeddings = my_pos_embeddings
 
         if checkpoint is not None:
@@ -237,10 +233,11 @@ class AbsSummarizer(nn.Module):
                                      attention_probs_dropout_prob=args.enc_dropout)
             self.bert.model = BertModel(bert_config)
 
-        if(args.max_pos>512):
+        if (args.max_pos > 512):
             my_pos_embeddings = nn.Embedding(args.max_pos, self.bert.model.config.hidden_size)
             my_pos_embeddings.weight.data[:512] = self.bert.model.embeddings.position_embeddings.weight.data
-            my_pos_embeddings.weight.data[512:] = self.bert.model.embeddings.position_embeddings.weight.data[-1][None,:].repeat(args.max_pos-512,1)
+            my_pos_embeddings.weight.data[512:] = self.bert.model.embeddings.position_embeddings.weight.data[-1][None,
+                                                  :].repeat(args.max_pos - 512, 1)
             self.bert.model.embeddings.position_embeddings = my_pos_embeddings
         self.vocab_size = self.bert.model.config.vocab_size
         tgt_embeddings = nn.Embedding(self.vocab_size, self.bert.model.config.hidden_size, padding_idx=0)
@@ -254,7 +251,6 @@ class AbsSummarizer(nn.Module):
 
         self.generator = get_generator(self.vocab_size, self.args.dec_hidden_size, device)
         self.generator[0].weight = self.decoder.embeddings.weight
-
 
         if checkpoint is not None:
             self.load_state_dict(checkpoint['model'], strict=True)
@@ -272,7 +268,7 @@ class AbsSummarizer(nn.Module):
                     xavier_uniform_(p)
                 else:
                     p.data.zero_()
-            if(args.use_bert_emb):
+            if (args.use_bert_emb):
                 tgt_embeddings = nn.Embedding(self.vocab_size, self.bert.model.config.hidden_size, padding_idx=0)
                 tgt_embeddings.weight = copy.deepcopy(self.bert.model.embeddings.word_embeddings.weight)
                 self.decoder.embeddings = tgt_embeddings
