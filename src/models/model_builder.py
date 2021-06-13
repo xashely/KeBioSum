@@ -137,26 +137,29 @@ class RoBerta(nn.Module):
         else:
             if model == "robert":
                 self.model = RobertaModel.from_pretrained('roberta-base', cache_dir=temp_dir)
-                self.model.add_adapter("finetune")
+                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_adapter", load_as="mlm",
+                                        with_head=False)
                 self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_adapter", load_as="ner",
                                         with_head=False)
             if model == "bert":
                 # self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
                 self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
-                self.model.add_adapter("finetune")
+                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter", load_as="mlm",
+                                        with_head=False)
                 self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_bert_adapter", load_as="ner",
                                         with_head=False)
             if model == "pubmed":
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
                 self.model = AutoModelForMaskedLM.from_pretrained(model_name).to(device)
-                self.model.add_adapter("finetune")
+                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_pubmed_adapter", load_as="mlm",
+                                        with_head=False)
                 self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_pubmed_adapter", load_as="ner",
                                         with_head=False)
             #self.model.train_adapter("finetune")
             #self.model.set_active_adapters("finetune")
-            self.model.add_fusion(Fuse("finetune", "ner"))
-            self.model.set_active_adapters(Fuse("finetune", "ner"))
-            adapter_setup = Fuse("finetune", "ner")
+            self.model.add_fusion(Fuse("mlm", "ner"))
+            self.model.set_active_adapters(Fuse("mlm", "ner"))
+            adapter_setup = Fuse("mlm", "ner")
             self.model.train_fusion(adapter_setup)
             self.model.encoder.enable_adapters(adapter_setup, True, True)
             #self.model.encoder.enable_adapters("ner", True, True)

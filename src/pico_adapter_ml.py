@@ -116,7 +116,7 @@ class PicoDataset(torch.utils.data.Dataset):
         self.input_ids = src_idx
         self.token_type_ids = [0] * len(self.input_ids)
         self.labels = labels
-        self.attention_mask = np.ones((len(mask), len(mask[0])))  # [1]* len(self.input_ids)
+        #self.attention_mask = np.ones((len(mask), len(mask[0])))  # [1]* len(self.input_ids)
 
     def __getitem__(self, idx):
         # item = {key: torch.tensor(val[idx]) for key, val in self.input_ids.items()}
@@ -139,7 +139,7 @@ class PicoBertDataset(torch.utils.data.Dataset):
         self.token_type_ids = type_ids
         self.labels = labels
         # print(len(mask))
-        self.attention_mask = np.ones((len(mask), len(mask[0])))  # mask
+        # self.attention_mask = np.ones((len(mask), len(mask[0])))  # mask
 
     def __getitem__(self, idx):
         # item = {key: torch.tensor(val[idx]) for key, val in self.input_ids.items()}
