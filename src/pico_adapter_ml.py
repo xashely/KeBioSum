@@ -116,7 +116,7 @@ class PicoDataset(torch.utils.data.Dataset):
         self.input_ids = src_idx
         self.token_type_ids = [0] * len(self.input_ids)
         self.labels = labels
-        #self.attention_mask = np.ones((len(mask), len(mask[0])))  # [1]* len(self.input_ids)
+        self.attention_mask = np.ones((len(mask), len(mask[0])))  # [1]* len(self.input_ids)
 
     def __getitem__(self, idx):
         # item = {key: torch.tensor(val[idx]) for key, val in self.input_ids.items()}
@@ -139,7 +139,7 @@ class PicoBertDataset(torch.utils.data.Dataset):
         self.token_type_ids = type_ids
         self.labels = labels
         # print(len(mask))
-        # self.attention_mask = np.ones((len(mask), len(mask[0])))  # mask
+        self.attention_mask = np.ones((len(mask), len(mask[0])))  # mask
 
     def __getitem__(self, idx):
         # item = {key: torch.tensor(val[idx]) for key, val in self.input_ids.items()}
@@ -203,7 +203,7 @@ def main():
         output_dir='/data/xieqianqian/covid-bert/results/',
         evaluation_strategy="epoch",
         warmup_steps=500,
-        learning_rate=5e-5,
+        learning_rate=1e-4,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
         num_train_epochs=12,

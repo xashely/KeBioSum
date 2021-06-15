@@ -136,28 +136,23 @@ class RoBerta(nn.Module):
         else:
             if model == "robert":
                 self.model = RobertaModel.from_pretrained('roberta-base', cache_dir=temp_dir)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter", load_as="mlm",
-                                        with_head=False)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_adapter", load_as="ner",
-                                        with_head=False)
+                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter", load_as="mlm",with_head=False)
+                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_adapter", load_as="ner",with_head=False)
             if model == "bert":
                 # self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
                 self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter", load_as="mlm",
-                                        with_head=False)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_bert_adapter", load_as="ner",
-                                        with_head=False)
+                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter", load_as="mlm",with_head=False)
+                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_bert_adapter", load_as="ner",with_head=False)
             if model == "pubmed":
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
                 self.model = AutoModel.from_pretrained(model_name).to(device)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_pubmed_adapter", load_as="mlm",
-                                        with_head=False)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_pubmed_adapter", load_as="ner",
-                                        with_head=False)
+                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_pubmed_adapter", load_as="mlm",with_head=False)
+                self.model.add_adapter("finetune")
+                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_pubmed_adapter", load_as="ner",with_head=False)
 
-            self.model.add_fusion(Fuse("mlm", "ner"))
-            self.model.set_active_adapters(Fuse("mlm", "ner"))
-            adapter_setup = Fuse("mlm", "ner")
+            self.model.add_fusion(Fuse("mlm", "ner", "finetune"))
+            self.model.set_active_adapters(Fuse("mlm", 'ner', "finetune"))
+            adapter_setup = Fuse("mlm", 'ner', "finetune")
             self.model.train_fusion(adapter_setup)
             self.model.encoder.enable_adapters(adapter_setup, True, True)
         self.finetune = finetune
