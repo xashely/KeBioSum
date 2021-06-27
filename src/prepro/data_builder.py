@@ -11,6 +11,7 @@ import re
 import math
 import subprocess
 import csv
+import shutil
 from collections import Counter
 from os.path import join as pjoin
 from zhon.hanzi import punctuation
@@ -43,7 +44,10 @@ def clean_json(json_dict):
     #
     # how about bib? they also indicate what the paper is about in general
     #
-    title = json_dict['metadata']['title']
+    try:
+        title = json_dict['metadata']['title']
+    except KeyError:
+        title = 'NA'
     text = ''
     for p in json_dict['body_text']:
         p_text = p['text']
@@ -183,7 +187,7 @@ def load_xml(p):
         return None, None
 
 
-def tokenize(args):
+def tokenize_allenai_datasets(args):
     root_data_dir = os.path.abspath(args.raw_path)
     tokenized_data_dir = os.path.abspath(args.save_path)
     meta_path = os.path.join(root_data_dir, 'metadata.csv')
@@ -228,7 +232,10 @@ def tokenize(args):
                 
             # read in pubmed file if available
             pid = row['pmcid']
-            pubtime = row['publish_time']
+            try:
+                pubtime = row['publish_time']
+            except KeyError: 
+                pubtime = row['year']
             # pubtime = datetime.strptime(row['publish_time'], '%Y-%m-%d').timestamp()
             ppath = os.path.join(pmc_dir, '{}.xml.json'.format(pid))
             if not os.path.isfile(ppath):
@@ -251,6 +258,8 @@ def tokenize(args):
             
             # write csv row
             cleaned_dict['abstract'] = row['abstract']
+            if cleaned_dict['title'] == 'NA':
+                cleaned_dict['title'] = row['title']
             if not write_head:
                 w.writerow(cleaned_dict.keys())
                 write_head = True       
@@ -278,6 +287,7 @@ def tokenize(args):
     subprocess.call(command)
     print("Stanford CoreNLP Tokenizer has finished.")
     os.remove("mapping_for_corenlp.txt")
+    
 
     # Check that the tokenized data directory contains the same number of files as the original directory
     num_orig = len(os.listdir(txt_dir))
@@ -287,6 +297,124 @@ def tokenize(args):
             "The tokenized data directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
                 tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
     print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
+    shutil.rmtree(txt_dir)
+
+def clean_abstract(text_array):
+    abstract = ''
+    for sentence in text_array:
+        sentence = sentence.replace("<S>","")
+        sentence = sentence.replace("</S>","")
+        abstract += sentence
+    return abstract
+
+
+def clean_text(doc):
+    text = ''
+    for paragraph in doc:
+        for sentence in paragraph:
+            # do other cleaning of text 
+            sentence = sentence.strip()
+            sentence = re.sub('\[[\d\s\,]+?\]', '', sentence) # matches references e.g. [12]
+            sentence = re.sub('\(table \d+?\)', '', sentence) # matches table references e.g. (Table 1)
+            sentence = re.sub('\(fig. \d+?\)', '', sentence) # matches fig references e.g. (Fig. 1)
+            sentence = re.sub('[^\x00-\x7f]+',r'', sentence) # strips non ascii
+            sentence = re.sub('[\<\>]',r' ', sentence) # strips  <> tokens which are not compatable StanfordNLPtokenizer
+            sentence = re.sub('(\([0-9]+\))(?= [0-9]+)',' ',sentence) # removes numbers in brackets followed by another number are not compatable StanfordNLPtokenizer
+            sentence = re.sub('\n',' ',sentence) # replaces line break with full stop
+            sentence = re.sub('\r',' ',sentence) # replaces line break with full stop
+            sentence = re.sub(' +',' ',sentence) # removes multipe blank spaces. 
+            sentence = re.sub('(?<=[0-9])( +)(?=[0-9])', '', sentence) # matches numbers seperated by space and combines
+            sentence = re.sub('(?<=\.)( +)(?=\.)', '', sentence) # matches several full stops with one or more spaces in between and removes spaces
+            text += '{:s}\n'.format(sentence)
+
+    return text
+
+
+
+def tokenize_pubmed_dataset(args):
+   
+    root_data_dir = os.path.abspath(args.raw_path)
+    
+    dirs = ['test']
+    
+    
+    for dir in dirs:
+        files_count_real = 0
+        tokenized_data_dir = os.path.join(os.path.abspath(args.save_path),dir)
+        source_txt_file = os.path.join(root_data_dir, '{}.txt'.format(dir))
+        txt_dir = os.path.join(root_data_dir, 'txt_json', dir)
+
+        # make directories for saving data if they don't already exist
+        if not os.path.exists(txt_dir):
+            os.makedirs(txt_dir)
+        if not os.path.exists(tokenized_data_dir):
+            os.makedirs(tokenized_data_dir)
+        
+        print('... Loading PMC data from {}'.format(root_data_dir))
+
+        # read in txt file with raw data
+        df = pd.read_json(path_or_buf=source_txt_file, lines=True)
+        len_before = df.shape[0]
+        
+        start = time.time()
+        print('... (1) Processing pubmed files into readable .txt format for tokenizer into path: {}...'.format(txt_dir))
+        
+        # write out new csv containing files we use in our dataset
+
+        for i,row in tqdm(df.iterrows(),total=df.shape[0]):
+                
+            # read in pubmed file if available
+            pid = row['article_id']
+        
+            # preprocess / clean file
+            cleaned_text = clean_text(row['sections'])
+            tpath = os.path.join(txt_dir, '{}.txt'.format(pid))
+            tpath_abs = os.path.join(txt_dir, '{}.abs.txt'.format(pid))
+
+            # preprocess/ clean abstract
+            abstract = clean_abstract(row['abstract_text'])
+            
+            # write out main text and abstract 
+            with open(tpath, 'w') as fil:
+                fil.write(cleaned_text)
+            with open(tpath_abs, 'w') as fil:
+                fil.write(abstract)
+            files_count_real += 1
+            
+
+        end = time.time()
+        print('Real count for files with abstract: {} ({}%)'.format(files_count_real,files_count_real / len_before * 100))
+        print('... Ending (1), time elapsed {}'.format(end - start))
+
+        print("Preparing to tokenize %s to %s..." % (root_data_dir, tokenized_data_dir))
+        num_files_to_tokenize = 0
+        # make IO list file
+        print("Making list of files to tokenize...")
+        with open('mapping_for_corenlp.txt', 'w') as fi:
+            for fname in os.listdir(txt_dir):
+                fpath = os.path.join(txt_dir, fname)
+                fi.write('{}\n'.format(fpath))
+                num_files_to_tokenize+=1
+
+        command = ['java', 'edu.stanford.nlp.pipeline.StanfordCoreNLP', '-annotators', 'tokenize,ssplit',
+                '-ssplit.newlineIsSentenceBreak', 'always', '-filelist', 'mapping_for_corenlp.txt', '-outputFormat',
+                'json', '-outputDirectory', tokenized_data_dir]
+
+        print("Tokenizing %i files in %s and saving in %s..." % (num_files_to_tokenize, txt_dir, tokenized_data_dir))
+        subprocess.call(command)
+        print("Stanford CoreNLP Tokenizer has finished.")
+        os.remove("mapping_for_corenlp.txt")
+        
+
+        # Check that the tokenized data directory contains the same number of files as the original directory
+        num_orig = len(os.listdir(txt_dir))
+        num_tokenized = len(os.listdir(tokenized_data_dir))
+        if num_orig != num_tokenized:
+            raise Exception(
+                "The tokenized data directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
+                    tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
+        print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
+        # shutil.rmtree(txt_dir)
 
 def cal_rouge(evaluated_ngrams, reference_ngrams):
     reference_count = len(reference_ngrams)
@@ -307,6 +435,7 @@ def cal_rouge(evaluated_ngrams, reference_ngrams):
 
     f1_score = 2.0 * ((precision * recall) / (precision + recall + 1e-8))
     return {"f": f1_score, "p": precision, "r": recall}
+
 
 
 def greedy_selection(doc_sent_list, abstract_sent_list, summary_size):
@@ -546,7 +675,7 @@ class PubmedData():
         sent_labels = sent_labels[:len(cls_ids)]
 
         tgt_subtokens_str = '[unused0] ' + ' [unused2] '.join(
-            [' '.join(self.tokenizer.tokenize(' '.join(tt), use_bert_basic_tokenizer=use_bert_basic_tokenizer)) for tt
+            [' '.join(self.tokenizer.tokenize(' '.join(tt))) for tt
              in tgt]) + ' [unused1]'
         tgt_subtoken = tgt_subtokens_str.split()[:self.args.max_tgt_ntokens]
         if ((not is_test) and len(tgt_subtoken) < self.args.min_tgt_ntokens):
@@ -598,7 +727,7 @@ class PicoAdapterData():
     
         src_filt = [d[:self.args.max_src_nsents][:] for d in new_src if self.args.min_src_nsents < len(d)]
         tag_filt = [d_tag[:self.args.max_src_nsents][:] for d_tag in new_tag if self.args.min_src_nsents < len(d_tag)]
-        print(len(src_filt), len(src_filt[0]), src_filt[0][0])
+        print(len(src_filt), len(src_filt[0]))
 
         src_txt = []
         trans = str.maketrans("", "", string.punctuation + "‘" + "’" + "‐" + '‑' + '”')
@@ -643,37 +772,38 @@ class PicoAdapterData():
             temp = temp[:-2]
             temp.append('O')
             tags.append(temp)
-            assert len(text[i].split())==len(temp), (i, text[i].split(), len(text[i].split()),len(temp))
+            #assert len(text[i].split())==len(temp), (i, len(text[i].split()),len(temp))
 
         src_encoding = self.tokenizer(text,truncation=True,padding=True)
-        src_subtoken_idxs = src_encoding['input_ids']
-        print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
-        src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
 
+        src_subtoken_idxs = src_encoding['input_ids']
+        src_subtoken_origin_idxs = src_subtoken_idxs
+        #print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
+        src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
+        #print(text[3].split()[:10])
+        #print(src_subtokens[3][:50])
         tag_align = []
         for i, subtoken in enumerate(src_subtokens):
+            print(len(subtoken))
             aligned_labels = ["O"] * len(subtoken)
             head = 0
             count = 0
-            #print(len(subtoken))
+            subtoken[1] = "Ġ" + subtoken[1] 
             temp_src = text[i].split("</s>")
             temp = " ".join([val for val in subtoken if val != '<pad>'])
             temp = temp.split("</s>")
+            #print("last temp:", temp[-1])
             for j, temp_sent in enumerate(temp):
-                if 0 < j:
-                    temp = temp_sent.split()
-                    temp_sent_filt = [filt for filt in temp if not filt.startswith("Ġ")]
-                    if len(temp_sent_filt)!=len(temp_src[j-1].split()):
-                        print(len(temp_sent_filt),len(temp_src[j-1].split()))
-                        print("sub:", temp_sent_filt)
-                        print("src:", temp_src[j-1].split())
-                        print("\n")
-            print(i, len(tags[i]),len([val for val in subtoken if not val.startswith("Ġ") and val !='<pad>']))
-
+                if j < len(temp)-1:
+                    temp_s = temp_sent.split()
+                    temp_sent_filt = [filt for filt in temp_s if filt.startswith("Ġ")]
+                    if len(temp_sent_filt)-1!=len(temp_src[j].split()):
+                        print(i,j,len(temp_sent_filt)-1,len(temp_src[j].split()), temp_s,temp[j+1], temp_src[j].split())
+            #assert len(tags[i])==len([val for val in subtoken if val.startswith("Ġ") and val !='<pad>']),(i, len(tags[i]),len([val for val in subtoken if val.startswith("Ġ") and val !='<pad>']))
             for j, each_str in enumerate(subtoken):
                 #print(i, each_str, head, count)
                 if each_str != "<pad>":
-                    if "Ġ" in each_str:
+                    if j==0 or "Ġ" in each_str:
                         aligned_labels[head] = tags[i][count]
                         count += 1
                         head += 1
@@ -701,11 +831,11 @@ class PicoAdapterData():
                 else:
                     src_subtoken_idxs[i][j] = self.mask_vid
                     temp.append(1.0)
-            print(len(temp))
+            #print(len(temp))
             mask_label.append(temp)
         data = []
         for i in range(len(mask_label)):
-            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i]})
+            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "src_orig":src_subtoken_origin_idxs[i]})
         return data
 
 
@@ -795,6 +925,7 @@ class PicoBertAdapterData():
         #print("equal:", len(tags[0]), len(text[0].split()))
         src_encoding = self.tokenizer(text, truncation=True, padding=True)
         src_subtoken_idxs = src_encoding['input_ids']
+        src_subtoken_origin_idxs = src_subtoken_idxs
         src_token_type_id = src_encoding['token_type_ids']
         #print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
         #print (len(tags[0]), len(src_subtoken_idxs[0]), len(src_token_type_id[0]))
@@ -811,8 +942,8 @@ class PicoBertAdapterData():
             temp = temp.split("[CLS]")
             for j, temp_sent in enumerate(temp):
                 if 0 < j:
-                    temp = temp_sent.split()
-                    temp_sent_filt = [filt for filt in temp if not filt.startswith("##")]
+                    temp_s = temp_sent.split()
+                    temp_sent_filt = [filt for filt in temp_s if not filt.startswith("##")]
                     if len(temp_sent_filt)!=len(temp_src[j-1].split()):
                         print(len(temp_sent_filt),len(temp_src[j-1].split()))
                         print("sub:", temp_sent_filt)
@@ -854,9 +985,11 @@ class PicoBertAdapterData():
                     temp.append(1.0)
             #print(len(temp))
             mask_label.append(temp)
+        print(len(mask_label))
         data = []
         for i in range(len(mask_label)):
-            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "token_type_ids":src_token_type_id[i]})
+            data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i], "token_type_ids":src_token_type_id[i],
+                         "src_orig":src_subtoken_origin_idxs[i]})
         return data
 
 class PicoPubmedBertAdapterData():
@@ -894,10 +1027,28 @@ class PicoPubmedBertAdapterData():
         tag_filt = [d_tag[:self.args.max_src_nsents][:] for d_tag in new_tag if self.args.min_src_nsents < len(d_tag)]
         print(len(src_filt), len(src_filt[0]), src_filt[0][0])
         src_txt = []
+        trans = str.maketrans("", "", string.punctuation + "‘" + "’" + "‐" + '‑' + '”')
+        chin_trans = str.maketrans("", "", punctuation)
+        zhPattern = re.compile(u'[\u4e00-\u9fa5]+')
+        # anotrans = str.maketrans("", "", "’")
         for d in src_filt:
             temp = []
             for sent in d:
-                temp.append(' '.join(sent))
+                temp_s = sent
+                for index, each_token in enumerate(sent):
+                    if each_token.startswith("http"):
+                        temp_s[index] = "http"
+                    elif len(each_token) > 1:
+                        temp_s[index] = each_token.translate(trans)
+                        temp_s[index] = temp_s[index].translate(chin_trans)
+                    if temp_s[index] == "":
+                        temp_s[index] = "[UNK]"
+                    if each_token.startswith("www"):
+                        temp_s[index] = "www"
+                    if zhPattern.search(each_token):
+                        temp_s[index] = "[UNK]"
+                        # temp_s[index] = temp_s[index].translate(anotrans)
+                temp.append(' '.join(temp_s))
             src_txt.append(temp)
 
         # src_txt = [' '.join(sent) for d in src for sent in d]
@@ -919,11 +1070,12 @@ class PicoPubmedBertAdapterData():
             temp = temp[:-2]
             temp.append('O')
             tags.append(temp)
-            assert len(text[i].split()) == len(temp), (i, text[i].split(), len(text[i].split()), len(temp))
+            #assert len(text[i].split()) == len(temp), (i, text[i].split(), len(text[i].split()), len(temp))
 
-        src_encoding = self.tokenizer(text, truncation=True, padding=True)
+        src_encoding = self.tokenizer(text, truncation=True, padding=True, max_length=512)
         src_subtoken_idxs = src_encoding['input_ids']
         src_token_type_id = src_encoding['token_type_ids']
+        src_subtoken_origin_idxs = src_subtoken_idxs
         # print(len(src_subtoken_idxs), len(src_subtoken_idxs[0]))
         # print (len(tags[0]), len(src_subtoken_idxs[0]), len(src_token_type_id[0]))
         src_subtokens = [self.tokenizer.convert_ids_to_tokens(idx) for idx in src_subtoken_idxs]
@@ -939,8 +1091,8 @@ class PicoPubmedBertAdapterData():
             temp = temp.split("[CLS]")
             for j, temp_sent in enumerate(temp):
                 if 0 < j:
-                    temp = temp_sent.split()
-                    temp_sent_filt = [filt for filt in temp if not filt.startswith("##")]
+                    temp_s = temp_sent.split()
+                    temp_sent_filt = [filt for filt in temp_s if not filt.startswith("##")]
                     if len(temp_sent_filt) != len(temp_src[j - 1].split()):
                         print(len(temp_sent_filt), len(temp_src[j - 1].split()))
                         print("sub:", temp_sent_filt)
@@ -985,7 +1137,7 @@ class PicoPubmedBertAdapterData():
         data = []
         for i in range(len(mask_label)):
             data.append({"src": src_subtoken_idxs[i], "tag": tag_id[i], "mask": mask_label[i],
-                         "token_type_ids": src_token_type_id[i]})
+                         "token_type_ids": src_token_type_id[i],"src_orig":src_subtoken_origin_idxs[i]})
         return data
 
 def format_to_robert(args):

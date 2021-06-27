@@ -61,7 +61,7 @@ if __name__ == '__main__':
     parser.add_argument("-lower", type=str2bool, nargs='?',const=True,default=True)
     parser.add_argument("-use_bert_basic_tokenizer", type=str2bool, nargs='?',const=True,default=False)
 
-    parser.add_argument('-log_file', default='./logs/covid.log')
+    parser.add_argument('-log_file', default='/data/xieqianqian/covid-bert/logs/covid.log')
 
     parser.add_argument('-dataset', default='')
 
