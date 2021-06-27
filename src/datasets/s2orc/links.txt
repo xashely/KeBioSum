@@ -1,0 +1,400 @@
+wget -O 20200705v1/full/metadata/metadata_0.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_0.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=%2ByUE5S4tFn8MoPsSeoGNqAQPQVQ%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_1.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_1.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=lfBYUjhsoCb%2BuXSTiBy7OOOTOtA%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_10.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_10.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=%2FNPafKF2zp2w367U3eBpu5p%2FzxQ%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_11.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_11.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=HhnXibjWvbSHF7y0uzOAsmY8Q9Y%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_12.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_12.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=4IlFucKefVsa0Mx36H7282gNRsw%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_13.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_13.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=Ol7QuEoWKBOYXpzgBWv4vXSqewo%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_14.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_14.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=c7sZnYOlfYok0LE2ApNYlHiU9jo%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_15.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_15.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=mh%2FwdSO8fvH5TQTwIw1m9PCN0aA%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_16.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_16.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=hIjPaHOJMNg%2B%2F2CbHSW3erfVmhc%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_17.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_17.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=%2FFjvW552aWrLus85yU9mqF0h2%2F4%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_18.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_18.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=sYo3uwB%2B7U4m7ptUC6iV5lrZ1qY%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_19.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_19.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=fRW4r%2BIMj2ChlN1R5eKxgxv8IDo%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_2.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_2.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=QqWe%2BrCIo911uJRQ7oTSoihrDMs%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_20.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_20.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=wBx4huEUMEKVkgOQMrHy0%2FgrVB8%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_21.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_21.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=SqYTeUOBznX7WE1RLCtQTJllXDQ%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_22.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_22.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=eHrB7qqMHcJRVk7CIXLVinQ%2BnEE%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_23.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_23.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=AwgePKjrTj6gT3cFrwLvrVrZbaU%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_24.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_24.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=SJLOQ6UdLbMBnv7FmtupdelBnDE%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_25.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_25.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=XJicEMddgAFofdj2Nb%2FH8JWyJJQ%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_26.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_26.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=a6JejmDeawdP1rmt8TVOtaIWsGs%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_27.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_27.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=kp5A36CEgDnV4sQjpWL13YYDIdM%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_28.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_28.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=20dhyh3WjMzmdoZ5d%2BAlU1%2FANQQ%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_29.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_29.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=QWF2Go5IJOfTjTsooJyYHAUKtnM%3D&Expires=1623871159'
+
+wget -O 20200705v1/full/metadata/metadata_3.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_3.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=kuekOvLKeyeE9VY3HIDHQXWPBr4%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_30.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_30.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=PvMjC%2F%2FjQ0k6yIzkOcPdJzrdRgU%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_31.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_31.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=ZEYjcwDHTl1%2FBLqbYXr9pSMit6I%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_32.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_32.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=jlAVHOrtQ1yriN4Vxw9dO1QsltU%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_33.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_33.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=sAPQtaVIrjPLVo0uXAVWNaBScQI%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_34.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_34.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=xZZ%2BYk82PV3KmCj8GX3CyInuZEk%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_35.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_35.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=ZtFRUFglfPvWn8Jhe7lSxUn22%2FI%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_36.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_36.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=syEVwrGNy9UdbiZwvuMYIyBxOgk%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_37.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_37.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=BOc2869dTNjNMcPkpNdgOGGYgUg%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_38.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_38.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=OoNIEtSpYT1uQFksmxB7wZNJhlQ%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_39.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_39.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=N2ySZ64LBEetaRETtJB3kWolroU%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_4.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_4.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=U3NlVKOi7bji2dZdaVapxXvb6RQ%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_40.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_40.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=6d1rq7rLGJlVxATjVTrzF9HBTbM%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_41.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_41.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=CyDn4tjOIKJMifbSMNIp4vzQIrg%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_42.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_42.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=L3W49p%2FgZDT2wjDihg2H9HkSUYM%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_43.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_43.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=j5hVyNGdniRYYXkcNWGLaFWydjY%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_44.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_44.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=aG3BciH7X9hGNlCozBI88MnpUyc%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_45.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_45.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=FvyVcNreVZ5FzYbd1k5IAZm0GZc%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_46.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_46.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=ZCLqhTWhLWUSSi1uvw7UhQb4yvE%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_47.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_47.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=GpKpEZavOYhQcTXJa6kV5R%2FyvUk%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_48.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_48.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=a8HP7LJNajk5LYoFAIRl9A1GuCg%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_49.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_49.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=v9PH43Ufe3DbVS%2BnhhjDsejhzyQ%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_5.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_5.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=bdrGtn0zn2galv%2Bl3BI1aBl%2Fzfk%3D&Expires=1623871160'
+
+wget -O 20200705v1/full/metadata/metadata_50.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_50.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=BQGxdV11C%2B3mhHAGtY%2FUtEGxwCY%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_51.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_51.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=3qHe6LTBTz3%2FbVp3W1NIhXhuOQY%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_52.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_52.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=mxrafkiA8%2BH4rFrzq8yKD%2BpmhmM%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_53.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_53.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=t3ngZhMwthJklWu8pckvF1qaT6c%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_54.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_54.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=%2BHQsLEkl0IV7DEK1CF7jg460UoQ%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_55.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_55.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=9nG%2BwL%2Fqt9gzwJaVGoo5Wh8UXyM%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_56.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_56.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=WdB8VLWb2EXWRilbgaK0NO8BNKM%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_57.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_57.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=CpfxGjVOaUZyZ7ZUicMpvVnVCIw%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_58.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_58.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=6eX00uRfkBud016ujiBJwrhizQA%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_59.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_59.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=RYo%2BFV8obrlKWSmEQTqHDtv7xes%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_6.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_6.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=U4Y%2B9W0x1nXFCpoPTCIjHPaaOQA%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_60.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_60.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=cmtzHPTkdD2xQ8wR4f%2FL0CfkCJs%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_61.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_61.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=NeTX4kB8vZWcBCoi7ZSts2%2Blo8g%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_62.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_62.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=qXfbhPlHOv%2B3qicCv87vr3MFaJs%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_63.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_63.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=8tHs84JPRVC%2F%2BYH%2BIZ8P%2FsIiDJM%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_64.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_64.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=ofbAUOrRO0RBkj4TDtWU7%2FNUZmM%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_65.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_65.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=cklkrs0aJHkHDYj0TUnAzM6nrrc%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_66.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_66.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=j082WUqRUBlcMfVA6fDmokoQNb4%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_67.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_67.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=34R0NjY2Rxzz6VlUCG%2B8e%2F5G6C8%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_68.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_68.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=ksCK4dAB7f90AaG5DNrTUlCOq3I%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_69.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_69.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=5884q9%2F7CseUMhuHh2J4weeB4o0%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_7.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_7.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=7QR2Oaa%2FoP%2FU75dAySilth%2BOOtY%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_70.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_70.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=4M9B%2BpRlwf3NUU4s%2FCs4c%2FqAuyE%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_71.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_71.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=hT3auvDog15o%2BNfyV32NFRaJ0Io%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_72.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_72.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=PVpwioftzAqLCGaKDKmzZsCcHAI%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_73.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_73.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=g2358%2BlcNaLhNliSmz6BCYgPKBk%3D&Expires=1623871161'
+
+wget -O 20200705v1/full/metadata/metadata_74.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_74.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=O%2FAEqIHLMpiLFFPkuh%2F%2FB0S%2BHx0%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_75.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_75.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=EOZ0SfUy3%2BoOwf41EZm7QoPnpZI%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_76.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_76.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=MqnLqmaZQxaxswL6OxngbU00kUI%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_77.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_77.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=NklXFTaW0YR5PbOFDul4R2vq%2Bro%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_78.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_78.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=DtNKvVQMU6ehDm%2BW40DL1KnKKh8%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_79.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_79.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=0vg1JxnuBJi%2FBvyCHp%2BCUsi2xoU%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_8.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_8.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=mwhVD86BN9YO0eXjkq9R6f%2Bvnbw%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_80.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_80.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=0z1vQyRE%2Fy7facycOJqxfGnsmT0%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_81.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_81.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=svIwDptAntrDxdPt7iY9neWsCtw%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_82.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_82.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=DPCPT4GMmuMCAcViWkppz9cXGUQ%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_83.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_83.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=qfzXkRyL0WJ9cDBdAIqiVGhYrBA%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_84.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_84.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=8P%2FQQQ2Cv3v0P%2B6KW%2Bl5svCgY3w%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_85.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_85.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=XKLyw1RlOYtpyEt1zL9zntl0Png%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_86.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_86.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=alrURRIFSyXuOcyHvPtdasOSsMA%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_87.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_87.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=jklKcXpZZokdJnODndDdssHxrEU%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_88.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_88.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=0HrqN%2B6lCVFnpgg1FOR1CVU2VGg%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_89.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_89.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=H6Qs2nk4xOnAhdC5CXc5Dh%2Fiayg%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_9.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_9.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=E1tJV7TR9lJAKZR%2B6obgp%2BYm6aQ%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_90.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_90.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=38sRv4NhVNWIprmUEUL3%2FJG7vds%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_91.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_91.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=5gwYNab8wP6hWzbMHqEElITuGy8%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_92.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_92.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=NCvI2Ggnc57yFrpN%2FrGoH%2FAfK5E%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_93.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_93.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=xh1YJuUPE%2B98W0oG27JU%2F0%2BcA38%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_94.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_94.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=aoNQSX6%2B2PU7LghRKkpX6MZtllU%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_95.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_95.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=Fsz%2BsEJvLtjALQBuTLp7PUj%2FEvY%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_96.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_96.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=ilY4RtzrRBQZncCZJR%2FImAXDcdY%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_97.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_97.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=EPeu8tywtavxRQ%2BaDR5MIhfFwr8%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_98.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_98.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=t%2BqGbKLskNfxcmej%2BkbrBbQ9l0o%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/metadata/metadata_99.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/metadata/metadata_99.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=kxqXPBjNftlg8xMa1hXjkhWkWCM%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_0.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_0.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=cHn3rH1YxZmtB5AalmhEyocYY%2FE%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_1.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_1.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=CofyvyvWMMuL1BGmTawh51p1D9k%3D&Expires=1623871162'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_10.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_10.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=vv%2FXcqJL0vHU%2BRYzBY6ohbc2q7k%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_11.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_11.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=LbB84JNTmTHWC44o515C5110DN8%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_12.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_12.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=aN8b731Vb%2FJJnlkAoK6fHpN8lPc%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_13.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_13.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=6HZNHfrFOzbvjOgA2Xu6OciVcFU%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_14.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_14.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=xJiQvIsG1jWYSQIlvFlTikTUKe0%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_15.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_15.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=dulmJ1xIahIYBFRNMWY7tl47ff0%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_16.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_16.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=dIMBmuVLzFbJ09vyDJXEcWw9TSo%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_17.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_17.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=IxAKN7zakNp6DIQBx%2B3c2ExwPfU%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_18.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_18.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=WyMO5d1FAfHSVPHB8T922tq9dZA%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_19.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_19.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=4IzaOw1y4w7v8xCCz%2F7wezxLm3o%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_2.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_2.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=1yL%2FTTLyfbUj3GXa33Ti%2BzWx5%2Fc%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_20.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_20.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=mKTtuHTKR4wfbmv73yX2JowmzvE%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_21.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_21.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=MFMDwTrz8uVbV9p3851qMKn56rc%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_22.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_22.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=rdLYCDOBlSO%2B81A8zR0jVnM%2BKPE%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_23.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_23.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=fE1mkgAtOvrwdpqK80G51gGEPOw%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_24.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_24.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=zH2Sku8JOFC5X%2BolrnyB3QgdMiA%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_25.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_25.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=yiPYc7pTyUKP%2F7xyy%2BvH6OAshiE%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_26.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_26.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=E7Oj8kiJxuH3Y5jJliA%2BEfF45IY%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_27.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_27.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=24fSZa38LxKMq82cIhcamu7m6uM%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_28.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_28.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=T%2FgiLoJqQWRVLZZaR55o2FjGFTs%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_29.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_29.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=Z3x3x1y8%2B1C9o7d0YJPZEa8ZiWo%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_3.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_3.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=gwqj7PopJGnUNa2c9qJaSmM3wqE%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_30.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_30.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=%2B3xIF2pZkZK1h8iwjJYCw1Q25Ac%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_31.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_31.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=i1DaVe4F%2FCcgqMzWgX6w%2FiSqwqI%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_32.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_32.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=Zuc%2B%2B3iOR2I4SXmi6OhyMDBTshk%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_33.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_33.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=EKZ1gUOyifPzX3fwI%2BJKn5JP7EE%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_34.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_34.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=fXGXLFXehtePjC3%2BJxe3bE54JU0%3D&Expires=1623871163'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_35.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_35.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=WPTqgjrGa46kTMUo1yy9RqZpwJ8%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_36.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_36.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=Si%2FsE3Xm3X0GfvClTXZ82kiBmJ0%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_37.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_37.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=CHXsKQF1iys9gDfoZFPf1hXcxxQ%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_38.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_38.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=p%2FUreYXdvo41Ivkp8p2dTeEd%2B8I%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_39.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_39.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=Ywzc9%2F%2BtawTtp2OTNLV%2BJRIQAL4%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_4.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_4.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=wdfYJ%2FDU5%2BxIZlwdzsjGEDYCvHQ%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_40.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_40.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=LHjVjNsTo7DEokqdGwYF%2Fqlw6yY%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_41.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_41.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=gy8GujH7%2Fermquuo6%2FCb%2B4IYz3w%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_42.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_42.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=E2YOb9fHiTVFm2oHEVn3K9fO1KE%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_43.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_43.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=wDa0V%2FqUyldDKaLtVLvOaJCpSXU%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_44.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_44.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=EYpn5ceX4wj4f7LdYF%2FhAoniicc%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_45.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_45.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=CdXCozX%2F6ukYKlz%2F6d897c%2BdjuA%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_46.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_46.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=dniVLK7hPzrojen%2FJZ4Kfh3zp20%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_47.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_47.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=UZsaJO8fcc47IlH7jqmCXUp8e%2F4%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_48.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_48.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=4efp%2FLqTpYLEJnS0xhfqvH9RRmM%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_49.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_49.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=mMq3wDWOS9iN0xUNtFvq5dCOusY%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_5.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_5.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=LS1UExjKNKIEa%2FXaEKLWgD7xQDY%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_50.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_50.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=Yt%2BSWKuVWVLNFxZSkK8OxHgPThE%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_51.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_51.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=ms8RDlDcDzgT6XIh3kNKbhpuKds%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_52.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_52.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=57y6tJzPDz62l6y9s5RTtJD%2B0sc%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_53.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_53.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=2Zt81%2BEgK9FycRp3IizGgxogJgA%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_54.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_54.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=NbYKNOmB8yLDta5naysDq8Z9UUk%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_55.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_55.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=V6D4CbHXTp9xrAO2d6fb2pwMu2Y%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_56.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_56.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=1%2FzUz5W9kEtluha3s%2FUg%2FY7k%2FKE%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_57.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_57.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=QmraJ706hMOMBFxH1ZnwtxM%2Fhc8%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_58.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_58.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=%2B1eGE0ZQU0AtYCIr5BrJe8t0EGY%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_59.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_59.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=apeCK2FvKg1VZeC3tjJS4hGqUuI%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_6.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_6.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=H1YoxHK5uvybhDVMlOMAqG895lQ%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_60.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_60.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=6AqF4m5aoIyKRgjwoMz7ubCNn6g%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_61.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_61.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=zxhQV6QYVB7kUFWxI5GRBfFvTWc%3D&Expires=1623871164'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_62.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_62.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=D25Q1s%2BLPQvQ9kloz2vCl2V5NXc%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_63.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_63.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=ZBbcL6xAQvoKkZT2cddCbPomoeM%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_64.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_64.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=P5EYLKUZcovOA%2FU89Y1HKxbHfMk%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_65.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_65.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=H4trIgZbmuTnxXp1VKKOVeO9LRM%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_66.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_66.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=MQNYctAKJrB%2BhPnNSI5yE2%2FYcKA%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_67.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_67.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=45P8yQ93BDEHC07OcsJbszm2pCs%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_68.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_68.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=bZoZCJA8o8koGnYdso5gP%2BXJRJo%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_69.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_69.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=5pTuH58nPFVdPeNgGtYXFuiJHLU%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_7.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_7.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=SgcGvOzKciYR54FPpn5A9KIhUqU%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_70.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_70.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=WDGRq2%2BawmdJsH%2FHpwOY1XIHkt0%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_71.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_71.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=bXN5R85GTB6wrGvJLP4bv7cUcH0%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_72.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_72.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=BjP7VmkwY2zM6nZSrPr3YiY3twE%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_73.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_73.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=97ObOJocW6iOGMXen4tpv1KfPZk%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_74.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_74.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=6oRrJ0Zsl0fHiLGLUKcEW6grpis%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_75.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_75.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=HVzigGVsC2aCVL3uqsz9zvvs8wo%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_76.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_76.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=FWbj0dORVPP8rS%2BbmQ7VO3iOUBo%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_77.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_77.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=CAjsDVS4%2BWm1UuMGolaw6wBDoDM%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_78.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_78.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=7ejX5csSzOtQDMkRL0IbLU0q%2B2U%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_79.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_79.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=ZFkyWIp03j2hHXN%2F3VJqIN3XT0w%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_8.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_8.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=SMa%2F4twVWgWVnSR0CRMk0MqbIro%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_80.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_80.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=XWxkznhqeOotVnVwzu2EPrUQ130%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_81.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_81.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=0dMewLiV389yaBKxB5kvHNyKYQQ%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_82.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_82.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=bzMeoc9aTcuOQZStTsM3An6L5Lw%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_83.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_83.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=jhv5u4X50M6%2FUOFPnUvWyoVbL78%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_84.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_84.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=OuRTFhL5tqL2To4E0k5GAMVPMFs%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_85.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_85.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=xB2ARP2kcfM%2BaUIc64J4d%2BnpYKI%3D&Expires=1623871165'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_86.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_86.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=Te1U28wUywmnfQVGIJ5OkTXEIUg%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_87.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_87.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=0oEVkqivcPDtpAZXVqC1u3zWReU%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_88.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_88.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=QqQ4VZVd7f2%2FTcJ0pCm88B30Yyk%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_89.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_89.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=CxGks4knjaWDOSULcQVGIsBnNoQ%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_9.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_9.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=TxTevYOgmS%2Fw%2ByJIoJLOhVWJOm0%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_90.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_90.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=%2Fygq%2FabA18TSnYk%2FaLR3UYp0UMY%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_91.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_91.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=fsG2666Iwyeuvln1MaYwyI00wFc%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_92.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_92.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=NCvdmvoQX9s%2FZJwGmyaNsaEZC%2BM%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_93.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_93.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=Mn3RsoUR5YTEoleViF4MI4TiKQ8%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_94.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_94.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=4Hf5FzB%2Fuo4D5xWTohT%2Bi15Ates%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_95.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_95.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=LWegujy3zHmOZXg33Bjxs09FV5Y%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_96.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_96.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=dZxBGplzC3lgOjV5QyrjdTlZmE0%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_97.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_97.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=UU5RdDwiALW0oQyHDjplESaDPzY%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_98.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_98.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=MnI80%2BW%2B%2F%2BwaA2VrZeRTpV97j70%3D&Expires=1623871166'
+
+wget -O 20200705v1/full/pdf_parses/pdf_parses_99.jsonl.gz 'https://ai2-s2-s2orc.s3.amazonaws.com/20200705v1/full/pdf_parses/pdf_parses_99.jsonl.gz?AWSAccessKeyId=AKIA5BJLZJPW4OD5EQ2P&Signature=KbyeXZjXcI1z1N1c8OstEhQ1kPc%3D&Expires=1623871166'
+

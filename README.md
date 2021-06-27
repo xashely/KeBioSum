@@ -28,13 +28,12 @@ Results on the CORD-19 dataset (June 27, 2020):
 Some codes are borrowed from PreSumm (https://github.com/nlpyang/PreSumm)
 
 ### Step 1. Download datasets 
-##### CORD-19 dataset
+#### CORD-19 dataset
 Download and unzip the `CORD-19` directories from [here](https://allenai.org/data/cord-19). Put all files in the directory `./raw_data`
-
 #### PubMed dataset
 Download zip file from [here] (https://drive.google.com/file/d/1lvsqvsFi3W-pE1SqNZI0s8NR9rC1tsja/view). Put all files in directory `./raw`
 ####  S2ORC dataset
-Details can be found [here] (https://github.com/allenai/s2orc). You must contact owners to get access to this dataset.
+Details of the dataset can be found [here] (https://github.com/allenai/s2orc). To prepare, follow instructions [here] (src/datasets/s2orc/README.md))
 
 ###  Step 2. Download Stanford CoreNLP
 We will need Stanford CoreNLP to tokenize the data. Download it [here](https://stanfordnlp.github.io/CoreNLP/) and unzip it. Then add the following command to your bash_profile (`/.bashrc` file):
