@@ -335,7 +335,7 @@ def tokenize_pubmed_dataset(args):
    
     root_data_dir = os.path.abspath(args.raw_path)
     
-    dirs = ['test']
+    dirs = ['test','train','val']
     
     
     for dir in dirs:
