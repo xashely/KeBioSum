@@ -119,12 +119,13 @@ python src/preprocess.py -mode format_to_bert -raw_path ./json_data/ -save_path 
 ```
 
 * `JSON_PATH` is the directory containing json files, `BERT_DATA_PATH` is the target directory to save the generated binary files
+* Note depending on model type you want to use, you can change `format_to_bert` to `format_to_pubmed_bert` or `format_to_robert`
 
 ### Step 7. Format pico json to input files
 ```
 python src/preprocess.py -mode format_to_pico_adapter -raw_path ./json_data/ -save_path ./pico_adapter_data/ -log_file ./pico_adapter_robert.log
 ```
-Note depending on model type you want to use, you can change `format_to_bert` to `format_to_pubmed_bert` or `format_to_robert`
+Note depending on model type you want to use, you can change `format_to_bert` to `format_to_pico_adapter_pubmed_bert` or `format_to_pico_adapter_robert`
 
 ### Step 8. Pico Adapter - train PICO adapter model which will be included as an adapter in model training in the next step
 ```
