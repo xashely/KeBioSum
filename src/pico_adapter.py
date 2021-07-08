@@ -83,12 +83,11 @@ def load_dataset(corpus_type, model, shuffle):
         dataset = torch.load(pt_file)
         logger.info('Loading %s dataset from %s, number of examples: %d' %
                     (corpus_type, pt_file, len(dataset)))
-        print(len(dataset))
+        #print(len(dataset))
         return dataset
 
     # Sort the glob output by file name (by increasing indexes).
-    print(pico_adapter_data_path)
-    pts = glob.glob(pico_adapter_data_path + '/' + corpus_type + '.bert.pt')
+    pts = glob.glob(pico_adapter_data_path + '/' + corpus_type + '.padpter.pt')
     print(pts)
     #print(pico_adapter_data_path)
     #print(pico_adapter_data_path + '/' + corpus_type + '.[0-9]*.padapter.pt')
