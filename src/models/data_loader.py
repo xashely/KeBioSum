@@ -85,6 +85,7 @@ def load_dataset(args, corpus_type, shuffle):
         return dataset
 
     # Sort the glob output by file name (by increasing indexes).
+    print(args.bert_data_path)
     pts = sorted(glob.glob(args.bert_data_path + '/' + corpus_type + '.[0-9]*.bert.pt'))
     if pts:
         if (shuffle):
