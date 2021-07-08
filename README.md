@@ -102,7 +102,7 @@ python -m allennlp.run predict --output-file=/mnt/disk/jenny/pubmed-dataset/pico
 
 4. Format the predicted pico to Json Files
 ```
-python src/pico_predict_read.py -raw_path out.txt -save_path .=/token_data/ -predict_path  ./data/pico/ebmnlp/cord.txt
+python src/pico_predict_read.py -raw_path ./data/pico/ebmnlp/cord.txt -save_path .=/token_data/ -predict_path out.txt
 ```
 
 ###  Step 5. Format to Simpler Json Files
