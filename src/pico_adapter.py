@@ -163,6 +163,7 @@ def main():
         tokenizer = AutoTokenizer.from_pretrained('roberta-base')
         #tokenizer.save_pretrained('./save_pretrained/')
     else:
+        print(args.model)
         train_src, train_labels, train_mask, train_type_id = load_dataset('train', args.model, shuffle=True)
         val_src, val_labels, val_mask, val_type_id = load_dataset('valid', args.model, shuffle=False)
         test_src, test_labels, test_mask, test_type_id = load_dataset('test', args.model, shuffle=False)
