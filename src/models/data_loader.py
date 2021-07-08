@@ -2,7 +2,7 @@ import bisect
 import gc
 import glob
 import random
-import numpy as np
+
 import torch
 
 from others.logging import logger
@@ -80,12 +80,9 @@ def load_dataset(args, corpus_type, shuffle):
         dataset = torch.load(pt_file)
         logger.info('Loading %s dataset from %s, number of examples: %d' %
                     (corpus_type, pt_file, len(dataset)))
-
-        print(f"shape: {np.shape(dataset)}")
         return dataset
 
     # Sort the glob output by file name (by increasing indexes).
-    print(args.bert_data_path)
     pts = sorted(glob.glob(args.bert_data_path + '/' + corpus_type + '.[0-9]*.bert.pt'))
     if pts:
         if (shuffle):
