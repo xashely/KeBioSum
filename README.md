@@ -121,19 +121,26 @@ python src/preprocess.py -mode format_to_bert -raw_path ./json_data/ -save_path 
 * `JSON_PATH` is the directory containing json files, `BERT_DATA_PATH` is the target directory to save the generated binary files
 * Note depending on model type you want to use, you can change `format_to_bert` to `format_to_pubmed_bert` or `format_to_robert`
 
-### Step 7. Format pico json to input files
+### Step 7. Pico Adapter - train PICO adapter model which will be included as an adapter in model training in the next step
+
+#### Format data for input
 ```
 python src/preprocess.py -mode format_to_pico_adapter -raw_path ./json_data/ -save_path ./pico_adapter_data/ -log_file ./pico_adapter_robert.log
 ```
 Note depending on model type you want to use, you can change `format_to_bert` to `format_to_pico_adapter_pubmed_bert` or `format_to_pico_adapter_robert`
 
-### Step 8. Pico Adapter - train PICO adapter model which will be included as an adapter in model training in the next step
+#### Train discriminative
 ```
 CUDA_VISIBLE_DEVICES=0 python src/pico_adapter.py -model robert -path /data/xieqianqian/covid-bert/data/pico_roberta_data -output ./pico_adapter_output 
 ```
 * -model can be [bert, robert, pubmed]
 
-### Step 9. Model Training
+#### Train generative adapter
+```
+CUDA_VISIBLE_DEVICES=0 python src/pico_adapter_ml.py -model robert -path /data/xieqianqian/covid-bert/data/pico_roberta_data -output ./pico_adapter_output 
+```
+* -model can be [bert, robert, pubmed]
+### Step 8. Model Training
 
 **First run: For the first time, you should use single-GPU, so the code can download the BERT model. Use ``-visible_gpus -1``, after downloading, you could kill the process and rerun the code with multi-GPUs.**
 
@@ -142,8 +149,7 @@ python src/train.py -task ext -mode train -bert_data_path /data/xieqianqian/covi
 ```
 
 
-
-### Step 10. Model Evaluation
+### Step 9. Model Evaluation
 ```
 python src/train.py -task ext -mode validate -batch_size 12000 -test_batch_size 12000 -bert_data_path ./bert_data/ -log_file ./logs/val_ext_bert_covid -model_path ./models/ -sep_optim true -use_interval true -visible_gpus 1 -max_pos 512 -result_path ./results/ext_bert_covid -test_all True -model bert
 ```
