@@ -147,8 +147,8 @@ CUDA_VISIBLE_DEVICES=0 python src/pico_adapter_ml.py -model robert -path /data/x
 ```
 python src/train.py -task ext -mode train -bert_data_path /data/xieqianqian/covid-bert/data/pubmed_data/ -ext_dropout 0.4 -model_path /data/xieqianqian/covid-bert/models_2/ -lr 2e-3 -visible_gpus 2 -report_every 50 -save_checkpoint_steps 1000 -batch_size 12000 -train_steps 20000 -accum_count 2 -log_file /data/xieqianqian/covid-bert/logs/ext_bert_covid -use_interval true -warmup_steps 5000 -model pubmed -adapter_training_strategy discriminative -adapter_path_pubmed_discriminative /home/jenny/data/covid/pico_adapter_model_outputs_pubmed/adapter/final_pubmed_adapter
 ```
-
-
+* -training strategy can be [generative, discriminative, both]
+* depending on training strategy and model type you can set adapter_path_pubmed_discriminative/adapter_path_bert_discriminative/adapter_path_robert_discriminative and adapter_path_pubmed_generative/adapter_path_bert_generative/adapter_path_robert_generative variables to trained adapter models
 ### Step 9. Model Evaluation
 ```
 python src/train.py -task ext -mode validate -batch_size 12000 -test_batch_size 12000 -bert_data_path ./bert_data/ -log_file ./logs/val_ext_bert_covid -model_path ./models/ -sep_optim true -use_interval true -visible_gpus 1 -max_pos 512 -result_path ./results/ext_bert_covid -test_all True -model bert

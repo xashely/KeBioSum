@@ -34,7 +34,7 @@ if __name__ == '__main__':
     parser.add_argument("-temp_dir", default='../temp')
     
     # adapter details
-    parser.add_argument("-adapter_training_strategy",default='discriminative',choices=['discriminative', 'both'])
+    parser.add_argument("-adapter_training_strategy",default='discriminative',choices=['discriminative', 'both', 'generative'])
     parser.add_argument("-adapter_path_pubmed_generative",default="/data/xieqianqian/covid-bert/adapter/mlm_pubmed_adapter")
     parser.add_argument("-adapter_path_robert_generative",default="/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter")
     parser.add_argument("-adapter_path_bert_generative",default="/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter")
