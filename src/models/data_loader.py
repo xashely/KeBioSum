@@ -2,7 +2,7 @@ import bisect
 import gc
 import glob
 import random
-import numpy as np
+
 import torch
 
 from others.logging import logger
@@ -193,7 +193,6 @@ class DataIterator(object):
         tgt = ex['tgt'][:self.args.max_tgt_len][:-1]+[2]
         src_sent_labels = ex['src_sent_labels']
         segs = ex['segs']
-        print("shape of src and seg:", np.array(src).shape, np.array(segs).shape)
         if(not self.args.use_interval):
             segs=[0]*len(segs)
         clss = ex['clss']
@@ -218,8 +217,7 @@ class DataIterator(object):
     def batch_buffer(self, data, batch_size):
         minibatch, size_so_far = [], 0
         for ex in data:
-            print(len(ex['src']))
-            if ((len(ex['src'])==0) or (len(ex['src'])<512)):
+            if ((len(ex['src'])==0) or (len(ex['src'])<512) or (len(ex['segs'])<512)):
                 continue
             ex = self.preprocess(ex, self.is_test)
             #print(ex)
