@@ -2,7 +2,7 @@ import bisect
 import gc
 import glob
 import random
-
+import numpy as np
 import torch
 
 from others.logging import logger
@@ -193,6 +193,7 @@ class DataIterator(object):
         tgt = ex['tgt'][:self.args.max_tgt_len][:-1]+[2]
         src_sent_labels = ex['src_sent_labels']
         segs = ex['segs']
+        print("shape of src and seg:", np.array(src).shape, np.array(segs).shape)
         if(not self.args.use_interval):
             segs=[0]*len(segs)
         clss = ex['clss']
