@@ -175,6 +175,7 @@ class RoBerta(nn.Module):
             elif args.adapter_training_strategy == 'generative':
                 self.model.add_fusion(Fuse("mlm", "finetune"))
                 self.model.set_active_adapters(Fuse("mlm","finetune"))
+                adapter_setup = Fuse("mlm","finetune")
             self.model.train_fusion(adapter_setup)
             self.model.encoder.enable_adapters(adapter_setup, True, True)
         self.finetune = finetune
