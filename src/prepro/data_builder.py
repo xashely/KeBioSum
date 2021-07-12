@@ -11,6 +11,7 @@ import re
 import math
 import subprocess
 import csv
+import shutil
 from collections import Counter
 from os.path import join as pjoin
 from zhon.hanzi import punctuation
@@ -43,16 +44,36 @@ def clean_json(json_dict):
     #
     # how about bib? they also indicate what the paper is about in general
     #
-    title = json_dict['metadata']['title']
+    try:
+        title = json_dict['metadata']['title']
+    except KeyError:
+        title = 'NA'
     text = ''
-
     for p in json_dict['body_text']:
+        p_text = p['text']
         if p['section'] == 'Pre-publication history':
             continue
-        p_text = p['text'].strip()
-        p_text = re.sub('\[[\d\s,]+?\]', '', p_text)
-        p_text = re.sub('\(Table \d+?\)', '', p_text)
-        p_text = re.sub('\(Fig. \d+?\)', '', p_text)
+        # remove references and citations from text
+        citations = [*p['cite_spans'],*p['ref_spans']]
+        if len(citations):
+            for citation in citations:
+                cite_span_len = citation['end']-citation['start']
+                cite_span_replace = ' '*cite_span_len
+                p_text  = p_text[:citation['start']] + cite_span_replace  + p_text[citation['end']:]
+        # do other cleaning of text 
+        p_text = p_text.strip()
+        p_text = re.sub('\[[\d\s,]+?\]', '', p_text) # matches references e.g. [12]
+        p_text = re.sub('\(Table \d+?\)', '', p_text) # matches table references e.g. (Table 1)
+        p_text = re.sub('\(Fig. \d+?\)', '', p_text) # matches fig references e.g. (Fig. 1)
+        p_text = re.sub('(?<=[0-9]),(?=[0-9])', '', p_text) # matches numbers seperated by commas
+        p_text = re.sub('[^\x00-\x7f]+',r'', p_text) # strips non ascii
+        p_text = re.sub('[\<\>]',r' ', p_text) # strips  <> tokens which are not compatable StanfordNLPtokenizer
+        p_text = re.sub('(\([0-9]+\))(?= [0-9]+)',' ',p_text) # removes numbers in brackets followed by another number are not compatable StanfordNLPtokenizer
+        p_text = re.sub('\n',' ',p_text) # replaces line break with full stop
+        p_text = re.sub('\r',' ',p_text) # replaces line break with full stop
+        p_text = re.sub(' +',' ',p_text) # removes multipe blank spaces. 
+        p_text = re.sub('(?<=[0-9])( +)(?=[0-9])', '', p_text) # matches numbers seperated by space and combines
+        p_text = re.sub('(?<=\.)( +)(?=\.)', '', p_text) # matches several full stops with one or more spaces in between and removes spaces
         text += '{:s}\n'.format(p_text)
 
     return {'title': title, 'text': text}
@@ -166,7 +187,7 @@ def load_xml(p):
         return None, None
 
 
-def tokenize(args):
+def tokenize_allenai_datasets(args):
     root_data_dir = os.path.abspath(args.raw_path)
     tokenized_data_dir = os.path.abspath(args.save_path)
     meta_path = os.path.join(root_data_dir, 'metadata.csv')
@@ -176,6 +197,12 @@ def tokenize(args):
     
     files_count_real = 0
     no_path_counter = 0
+
+    # make directories for saving data if they don't already exist
+    if not os.path.exists(txt_dir):
+        os.makedirs(txt_dir)
+    if not os.path.exists(tokenized_data_dir):
+        os.makedirs(tokenized_data_dir)
     
     print('... Loading PMC data from {}'.format(pmc_dir))
 
@@ -205,7 +232,10 @@ def tokenize(args):
                 
             # read in pubmed file if available
             pid = row['pmcid']
-            pubtime = row['publish_time']
+            try:
+                pubtime = row['publish_time']
+            except KeyError: 
+                pubtime = row['year']
             # pubtime = datetime.strptime(row['publish_time'], '%Y-%m-%d').timestamp()
             ppath = os.path.join(pmc_dir, '{}.xml.json'.format(pid))
             if not os.path.isfile(ppath):
@@ -228,6 +258,8 @@ def tokenize(args):
             
             # write csv row
             cleaned_dict['abstract'] = row['abstract']
+            if cleaned_dict['title'] == 'NA':
+                cleaned_dict['title'] = row['title']
             if not write_head:
                 w.writerow(cleaned_dict.keys())
                 write_head = True       
@@ -255,6 +287,7 @@ def tokenize(args):
     subprocess.call(command)
     print("Stanford CoreNLP Tokenizer has finished.")
     os.remove("mapping_for_corenlp.txt")
+    
 
     # Check that the tokenized data directory contains the same number of files as the original directory
     num_orig = len(os.listdir(txt_dir))
@@ -264,6 +297,124 @@ def tokenize(args):
             "The tokenized data directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
                 tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
     print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
+    shutil.rmtree(txt_dir)
+
+def clean_abstract(text_array):
+    abstract = ''
+    for sentence in text_array:
+        sentence = sentence.replace("<S>","")
+        sentence = sentence.replace("</S>","")
+        abstract += sentence
+    return abstract
+
+
+def clean_text(doc):
+    text = ''
+    for paragraph in doc:
+        for sentence in paragraph:
+            # do other cleaning of text 
+            sentence = sentence.strip()
+            sentence = re.sub('\[[\d\s\,]+?\]', '', sentence) # matches references e.g. [12]
+            sentence = re.sub('\(table \d+?\)', '', sentence) # matches table references e.g. (Table 1)
+            sentence = re.sub('\(fig. \d+?\)', '', sentence) # matches fig references e.g. (Fig. 1)
+            sentence = re.sub('[^\x00-\x7f]+',r'', sentence) # strips non ascii
+            sentence = re.sub('[\<\>]',r' ', sentence) # strips  <> tokens which are not compatable StanfordNLPtokenizer
+            sentence = re.sub('(\([0-9]+\))(?= [0-9]+)',' ',sentence) # removes numbers in brackets followed by another number are not compatable StanfordNLPtokenizer
+            sentence = re.sub('\n',' ',sentence) # replaces line break with full stop
+            sentence = re.sub('\r',' ',sentence) # replaces line break with full stop
+            sentence = re.sub(' +',' ',sentence) # removes multipe blank spaces. 
+            sentence = re.sub('(?<=[0-9])( +)(?=[0-9])', '', sentence) # matches numbers seperated by space and combines
+            sentence = re.sub('(?<=\.)( +)(?=\.)', '', sentence) # matches several full stops with one or more spaces in between and removes spaces
+            text += '{:s}\n'.format(sentence)
+
+    return text
+
+
+
+def tokenize_pubmed_dataset(args):
+   
+    root_data_dir = os.path.abspath(args.raw_path)
+    
+    dirs = ['test','train','val']
+    
+    
+    for dir in dirs:
+        files_count_real = 0
+        tokenized_data_dir = os.path.join(os.path.abspath(args.save_path),dir)
+        source_txt_file = os.path.join(root_data_dir, '{}.txt'.format(dir))
+        txt_dir = os.path.join(root_data_dir, 'txt_json', dir)
+
+        # make directories for saving data if they don't already exist
+        if not os.path.exists(txt_dir):
+            os.makedirs(txt_dir)
+        if not os.path.exists(tokenized_data_dir):
+            os.makedirs(tokenized_data_dir)
+        
+        print('... Loading PMC data from {}'.format(root_data_dir))
+
+        # read in txt file with raw data
+        df = pd.read_json(path_or_buf=source_txt_file, lines=True)
+        len_before = df.shape[0]
+        
+        start = time.time()
+        print('... (1) Processing pubmed files into readable .txt format for tokenizer into path: {}...'.format(txt_dir))
+        
+        # write out new csv containing files we use in our dataset
+
+        for i,row in tqdm(df.iterrows(),total=df.shape[0]):
+                
+            # read in pubmed file if available
+            pid = row['article_id']
+        
+            # preprocess / clean file
+            cleaned_text = clean_text(row['sections'])
+            tpath = os.path.join(txt_dir, '{}.txt'.format(pid))
+            tpath_abs = os.path.join(txt_dir, '{}.abs.txt'.format(pid))
+
+            # preprocess/ clean abstract
+            abstract = clean_abstract(row['abstract_text'])
+            
+            # write out main text and abstract 
+            with open(tpath, 'w') as fil:
+                fil.write(cleaned_text)
+            with open(tpath_abs, 'w') as fil:
+                fil.write(abstract)
+            files_count_real += 1
+            
+
+        end = time.time()
+        print('Real count for files with abstract: {} ({}%)'.format(files_count_real,files_count_real / len_before * 100))
+        print('... Ending (1), time elapsed {}'.format(end - start))
+
+        print("Preparing to tokenize %s to %s..." % (root_data_dir, tokenized_data_dir))
+        num_files_to_tokenize = 0
+        # make IO list file
+        print("Making list of files to tokenize...")
+        with open('mapping_for_corenlp.txt', 'w') as fi:
+            for fname in os.listdir(txt_dir):
+                fpath = os.path.join(txt_dir, fname)
+                fi.write('{}\n'.format(fpath))
+                num_files_to_tokenize+=1
+
+        command = ['java', 'edu.stanford.nlp.pipeline.StanfordCoreNLP', '-annotators', 'tokenize,ssplit',
+                '-ssplit.newlineIsSentenceBreak', 'always', '-filelist', 'mapping_for_corenlp.txt', '-outputFormat',
+                'json', '-outputDirectory', tokenized_data_dir]
+
+        print("Tokenizing %i files in %s and saving in %s..." % (num_files_to_tokenize, txt_dir, tokenized_data_dir))
+        subprocess.call(command)
+        print("Stanford CoreNLP Tokenizer has finished.")
+        os.remove("mapping_for_corenlp.txt")
+        
+
+        # Check that the tokenized data directory contains the same number of files as the original directory
+        num_orig = len(os.listdir(txt_dir))
+        num_tokenized = len(os.listdir(tokenized_data_dir))
+        if num_orig != num_tokenized:
+            raise Exception(
+                "The tokenized data directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
+                    tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
+        print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
+        shutil.rmtree(txt_dir)
 
 def cal_rouge(evaluated_ngrams, reference_ngrams):
     reference_count = len(reference_ngrams)

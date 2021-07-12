@@ -3,6 +3,13 @@ raw_data/
 json_data/
 token_data/
 bert_data/
-models/
 logs/
 .idea/
+*/wotune_model/*
+**/__pycache__/*
+data/
+*.egg-info/
+.installed.cfg
+*.egg
+**.pyc
+/pycache/*

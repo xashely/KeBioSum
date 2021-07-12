@@ -21,6 +21,10 @@ args = parser.parse_args()
 raw_path = os.path.abspath(args.raw_path)
 save_path = os.path.abspath(args.save_path)
 
+# make directories for saving data if they don't already exist
+if not os.path.exists(save_path):
+    os.makedirs(save_path)
+
 corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(raw_path)
                       if not f.startswith('.') and not f.endswith('.abs.txt.json')])
 print('... Packing tokenized data into pico txt...')

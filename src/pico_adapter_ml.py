@@ -19,6 +19,7 @@ import math
 parser = argparse.ArgumentParser()
 parser.add_argument("-model", default='robert', type=str)
 parser.add_argument("-path", default='~/covid-bert/pico_adapter_data', type=str)
+parser.add_argument("-output", default='/data/xieqianqian/covid-bert', type=str)
 args = parser.parse_args()
 
 from transformers import (
@@ -41,7 +42,7 @@ from transformers.trainer_utils import is_main_process
 logger = logging.getLogger(__name__)
 pico_adapter_data_path = args.path
 label_list = ['O', "I-INT", "I-PAR", "I-OUT"]
-batch_size = 24
+batch_size = 12
 task = 'ner'
 
 metric = load_metric("seqeval")
@@ -165,9 +166,6 @@ def main():
         train_src, train_labels, train_mask = load_dataset('train', args.model, shuffle=True)
         val_src, val_labels, val_mask = load_dataset('valid', args.model, shuffle=False)
         #test_src, test_labels, test_mask = load_dataset('test', args.model, shuffle=False)
-        print(train_src[0], train_src[1])
-        print(train_labels[0], train_labels[1])
-        print(train_mask[0], train_mask[1])
         train_dataset = PicoDataset(train_src, train_labels, train_mask)
         val_dataset = PicoDataset(val_src, val_labels, val_mask)
         #test_dataset = PicoDataset(test_src, test_labels, test_mask)
@@ -188,6 +186,20 @@ def main():
             tokenizer = AutoTokenizer.from_pretrained(model_name)
         # tokenizer.save_pretrained('./save_pretrained/')
 
+    output_dir = args.output
+    output_data_dir = os.path.join(output_dir,'data')
+    logging_data_dir = os.path.join(output_dir,'logs')
+    results_data_dir = os.path.join(output_dir,'results_2')
+    adapter_data_dir = os.path.join(output_dir,'adapter')
+    if not os.path.exists(output_data_dir):
+        os.makedirs(output_data_dir)
+    if not os.path.exists(logging_data_dir):
+        os.makedirs(logging_data_dir)
+    if not os.path.exists(results_data_dir):
+        os.makedirs(results_data_dir)
+    if not os.path.exists(adapter_data_dir):
+        os.makedirs(adapter_data_dir)
+
     if args.model == "robert":
         model = AutoModelForMaskedLM.from_pretrained("roberta-base")
     if args.model == 'bert':
@@ -200,7 +212,7 @@ def main():
     model.set_active_adapters('mlm')
     arg = TrainingArguments(
         # f"test-{task}",
-        output_dir='/data/xieqianqian/covid-bert/results/',
+        output_dir=output_data_dir,
         evaluation_strategy="epoch",
         warmup_steps=500,
         learning_rate=1e-4,
@@ -211,7 +223,7 @@ def main():
         save_total_limit=1,
         load_best_model_at_end=True,
         weight_decay=0.001,
-        logging_dir='/data/xieqianqian/covid-bert/logs/',
+        logging_dir=logging_data_dir,
     )
     data_collator =  DataCollatorForLanguageModeling(tokenizer=tokenizer)
     # metric = load_metric("seqeval")
@@ -241,11 +253,11 @@ def main():
     trainer.save_metrics("eval", metrics)
 
     if args.model == "robert":
-        model.save_adapter("/data/xieqianqian/covid-bert/adapter/mlm_adapter", "mlm")
+        model.save_adapter(os.path.join(adapter_data_dir,"final_roberta_adapter_generative"), "mlm")
     if args.model == "bert":
-        model.save_adapter("/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter", "mlm")
+        model.save_adapter(os.path.join(adapter_data_dir,"final_bert_adapter_generative"), "mlm")
     if args.model == "pubmed":
-        model.save_adapter("/data/xieqianqian/covid-bert/adapter/mlm_pubmed_adapter", "mlm")
+        model.save_adapter(os.path.join(adapter_data_dir,"final_pubmed_adapter_generative"), "mlm")
 
 if __name__ == "__main__":
     main()

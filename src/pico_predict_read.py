@@ -11,10 +11,21 @@ import pandas as pd
 import time
 from datetime import datetime
 from tqdm import tqdm
+import argparse
 
-raw_path = "/home/qianqian/scibert/data/pico/ebmnlp/cord.txt"
-predict_path = "/home/qianqian/scibert/out.txt"
-save_path = "/home/qianqian/covid-bert/token_data/"
+parser = argparse.ArgumentParser()
+parser.add_argument("-raw_path", default="/home/qianqian/scibert/data/pico/ebmnlp/cord.txt", type=str)
+parser.add_argument("-save_path", default="/home/qianqian/covid-bert/token_data/", type=str)
+parser.add_argument("-predict_path", default="/home/qianqian/scibert/out.txt", type=str)
+
+args = parser.parse_args()
+raw_path = os.path.abspath(args.raw_path)
+save_path = os.path.abspath(args.save_path)
+predict_path = os.path.abspath(args.predict_path)
+
+# make directories for saving data if they don't already exist
+if not os.path.exists(save_path):
+    os.makedirs(save_path)
 
 predict_json = []
 with open(predict_path, "r") as f:

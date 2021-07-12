@@ -16,7 +16,9 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("-model", default='robert', type=str)
 parser.add_argument("-path", default='~/covid-bert/pico_adapter_data', type=str)
+parser.add_argument("-output", default='/data/xieqianqian/covid-bert', type=str)
 args = parser.parse_args()
+output_dir = args.output
 
 from transformers import (
     AdapterConfig,
@@ -201,9 +203,23 @@ def main():
     #model.save_pretrained('./save_pretrained/')
     model.train_adapter(task)
     model.set_active_adapters(task)
+    
+    output_data_dir = os.path.join(output_dir,'data')
+    logging_data_dir = os.path.join(output_dir,'logs')
+    results_data_dir = os.path.join(output_dir,'results_2')
+    adapter_data_dir = os.path.join(output_dir,'adapter')
+    if not os.path.exists(output_data_dir):
+        os.makedirs(output_data_dir)
+    if not os.path.exists(logging_data_dir):
+        os.makedirs(logging_data_dir)
+    if not os.path.exists(results_data_dir):
+        os.makedirs(results_data_dir)
+    if not os.path.exists(adapter_data_dir):
+        os.makedirs(adapter_data_dir)
+    
     arg = TrainingArguments(
         #f"test-{task}",
-        output_dir='/data/xieqianqian/covid-bert/results_2/',
+        output_dir=output_data_dir,
         evaluation_strategy="epoch",
         warmup_steps=500,  
         learning_rate=5e-5,
@@ -214,7 +230,7 @@ def main():
         save_total_limit=1,
         load_best_model_at_end=True,
         weight_decay=0.001,
-        logging_dir= '/data/xieqianqian/covid-bert/logs/',
+        logging_dir= logging_data_dir,
     )
     data_collator = DataCollatorForTokenClassification(tokenizer)
     #metric = load_metric("seqeval")
@@ -236,7 +252,7 @@ def main():
 
     results = trainer.evaluate()
 
-    output_eval_file = os.path.join('/data/xieqianqian/covid-bert/results/', "eval_results_ner.txt")
+    output_eval_file = os.path.join(results_data_dir, "eval_results_ner.txt")
     if trainer.is_world_process_zero():
         with open(output_eval_file, "w") as writer:
             logger.info("***** Eval results *****")
@@ -258,17 +274,17 @@ def main():
         for prediction, label in zip(predictions, labels)
     ]
     #print(true_predictions)
-    output_test_results_file = os.path.join('/data/xieqianqian/covid-bert/results/', "test_results.txt")
+    output_test_results_file = os.path.join(results_data_dir, "test_results.txt")
     if trainer.is_world_process_zero():
         with open(output_test_results_file, "w") as writer:
             for key, value in metrics.items():
                 logger.info(f"  {key} = {value}")
                 writer.write(f"{key} = {value}\n")
     if args.model == "robert":
-        model.save_adapter("/data/xieqianqian/covid-bert/adapter/final_adapter", "ner")
+        model.save_adapter(os.path.join(adapter_data_dir,"final_roberta_adapter"), "ner")
     if args.model == "bert":
-        model.save_adapter("/data/xieqianqian/covid-bert/adapter/final_bert_adapter", "ner")
+        model.save_adapter(os.path.join(adapter_data_dir,"final_bert_adapter"), "ner")
     if args.model == "pubmed":
-        model.save_adapter("/data/xieqianqian/covid-bert/adapter/final_pubmed_adapter", "ner")
+        model.save_adapter(os.path.join(adapter_data_dir,"final_pubmed_adapter"), "ner")
 if __name__ == "__main__":
     main()

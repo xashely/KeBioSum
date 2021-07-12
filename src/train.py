@@ -32,6 +32,15 @@ if __name__ == '__main__':
     parser.add_argument("-model_path", default='../models/')
     parser.add_argument("-result_path", default='../results/')
     parser.add_argument("-temp_dir", default='../temp')
+    
+    # adapter details
+    parser.add_argument("-adapter_training_strategy",default='discriminative',choices=['discriminative', 'both', 'generative'])
+    parser.add_argument("-adapter_path_pubmed_generative",default="/data/xieqianqian/covid-bert/adapter/mlm_pubmed_adapter")
+    parser.add_argument("-adapter_path_robert_generative",default="/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter")
+    parser.add_argument("-adapter_path_bert_generative",default="/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter")
+    parser.add_argument("-adapter_path_pubmed_discriminative",default="/data/xieqianqian/covid-bert/adapter/final_pubmed_adapter")
+    parser.add_argument("-adapter_path_robert_discriminative",default="/data/xieqianqian/covid-bert/adapter/final_adapter")
+    parser.add_argument("-adapter_path_bert_discriminative",default="/data/xieqianqian/covid-bert/adapter/final_bert_adapter")
 
     parser.add_argument("-batch_size", default=140, type=int)
     parser.add_argument("-test_batch_size", default=200, type=int)
@@ -106,6 +115,8 @@ if __name__ == '__main__':
     parser.add_argument("-report_rouge", type=str2bool, nargs='?',const=True,default=True)
     parser.add_argument("-block_trigram", type=str2bool, nargs='?', const=True, default=True)
 
+
+    
     args = parser.parse_args()
     args.gpu_ranks = [int(i) for i in range(len(args.visible_gpus.split(',')))]
     args.world_size = len(args.gpu_ranks)

@@ -115,7 +115,7 @@ def get_generator(vocab_size, dec_hidden_size, device):
 
 
 class RoBerta(nn.Module):
-    def __init__(self, large, temp_dir, finetune, model, device):
+    def __init__(self, large, temp_dir, finetune, model, device,args):
         super(RoBerta, self).__init__()
         if (large):
             if model == "robert":
@@ -136,23 +136,46 @@ class RoBerta(nn.Module):
         else:
             if model == "robert":
                 self.model = RobertaModel.from_pretrained('roberta-base', cache_dir=temp_dir)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter", load_as="mlm",with_head=False)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_adapter", load_as="ner",with_head=False)
+                if args.adapter_training_strategy == 'both':
+                    self.model.load_adapter(args.adapter_path_robert_generative, load_as="mlm",with_head=False)
+                    self.model.load_adapter(args.adapter_path_robert_discriminative, load_as="ner",with_head=False)
+                if args.adapter_training_strategy == 'discriminative':
+                    self.model.load_adapter(args.adapter_path_robert_discriminative, load_as="ner",with_head=False)
+                if args.adapter_training_strategy == 'generative':
+                    self.model.load_adapter(args.adapter_path_robert_generative, load_as="mlm",with_head=False)
             if model == "bert":
                 # self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
                 self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_bert_adapter", load_as="mlm",with_head=False)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_bert_adapter", load_as="ner",with_head=False)
+                if args.adapter_training_strategy == 'both':
+                    self.model.load_adapter(args.adapter_path_bert_generative, load_as="mlm",with_head=False)
+                    self.model.load_adapter(args.adapter_path_bert_discriminative, load_as="ner",with_head=False)
+                if args.adapter_training_strategy == 'discriminative':
+                    self.model.load_adapter(args.adapter_path_bert_discriminative, load_as="ner",with_head=False)
+                if args.adapter_training_strategy == 'generative':
+                    self.model.load_adapter(args.adapter_path_bert_generative, load_as="mlm",with_head=False)
             if model == "pubmed":
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
                 self.model = AutoModel.from_pretrained(model_name).to(device)
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/mlm_pubmed_adapter", load_as="mlm",with_head=False)
-                self.model.add_adapter("finetune")
-                self.model.load_adapter("/data/xieqianqian/covid-bert/adapter/final_pubmed_adapter", load_as="ner",with_head=False)
-
-            self.model.add_fusion(Fuse("mlm", "ner", "finetune"))
-            self.model.set_active_adapters(Fuse("mlm", 'ner', "finetune"))
-            adapter_setup = Fuse("mlm", 'ner', "finetune")
+                if args.adapter_training_strategy == 'both':
+                    self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
+                    self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
+                if args.adapter_training_strategy == 'discriminative':
+                    self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
+                if args.adapter_training_strategy == 'generative':
+                    self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
+            self.model.add_adapter("finetune")
+            if args.adapter_training_strategy == 'both':
+                self.model.add_fusion(Fuse("mlm", "ner", "finetune"))
+                self.model.set_active_adapters(Fuse("mlm", 'ner', "finetune"))
+                adapter_setup = Fuse("mlm", 'ner', "finetune")
+            elif args.adapter_training_strategy == 'discriminative':
+                self.model.add_fusion(Fuse("finetune", "ner"))
+                self.model.set_active_adapters(Fuse("finetune", "ner"))
+                adapter_setup = Fuse("finetune", "ner")
+            elif args.adapter_training_strategy == 'generative':
+                self.model.add_fusion(Fuse("mlm", "finetune"))
+                self.model.set_active_adapters(Fuse("mlm","finetune"))
+                adapter_setup = Fuse("mlm","finetune")
             self.model.train_fusion(adapter_setup)
             self.model.encoder.enable_adapters(adapter_setup, True, True)
         self.finetune = finetune
@@ -174,7 +197,7 @@ class ExtSummarizer(nn.Module):
         super(ExtSummarizer, self).__init__()
         self.args = args
         self.device = device
-        self.RoBerta = RoBerta(args.large, args.temp_dir, args.finetune_bert, args.model, device)
+        self.RoBerta = RoBerta(args.large, args.temp_dir, args.finetune_bert, args.model, device, args)
         self.ext_layer = ExtTransformerEncoder(self.RoBerta.model.config.hidden_size, args.ext_ff_size, args.ext_heads,
                                                args.ext_dropout, args.ext_layers)
         if (args.encoder == 'baseline'):
