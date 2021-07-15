@@ -125,6 +125,9 @@ class RoBerta(nn.Module):
             if model == "pubmed":
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
                 self.model = AutoModelForMaskedLM.from_pretrained(model_name).to(device)
+            if model == "biobert":
+                model_name = 'dmis-lab/biobert-v1.1'
+                self.model = AutoModelForMaskedLM.from_pretrained(model_name).to(device)
             self.model.add_adapter("finetune")
 
             self.model.load_adapter("./final_adapter", load_as="ner", with_head=False)
@@ -144,7 +147,6 @@ class RoBerta(nn.Module):
                 if args.adapter_training_strategy == 'generative':
                     self.model.load_adapter(args.adapter_path_robert_generative, load_as="mlm",with_head=False)
             if model == "bert":
-                # self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
                 self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
                 if args.adapter_training_strategy == 'both':
                     self.model.load_adapter(args.adapter_path_bert_generative, load_as="mlm",with_head=False)
@@ -155,6 +157,16 @@ class RoBerta(nn.Module):
                     self.model.load_adapter(args.adapter_path_bert_generative, load_as="mlm",with_head=False)
             if model == "pubmed":
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
+                self.model = AutoModel.from_pretrained(model_name).to(device)
+                if args.adapter_training_strategy == 'both':
+                    self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
+                    self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
+                if args.adapter_training_strategy == 'discriminative':
+                    self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
+                if args.adapter_training_strategy == 'generative':
+                    self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
+            if model == "biobert":
+                model_name = 'dmis-lab/biobert-v1.1'
                 self.model = AutoModel.from_pretrained(model_name).to(device)
                 if args.adapter_training_strategy == 'both':
                     self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
