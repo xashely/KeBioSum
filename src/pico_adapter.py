@@ -172,8 +172,11 @@ def main():
         test_dataset = PicoBertDataset(test_src, test_labels, test_mask, test_type_id)
         if args.model=='bert':
             tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
-        else:
+        elif args.model == 'pubmed':
             model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
+            tokenizer = AutoTokenizer.from_pretrained(model_name)
+        elif args.model == 'biobert':
+            model_name = 'dmis-lab/biobert-v1.1'
             tokenizer = AutoTokenizer.from_pretrained(model_name)
         #tokenizer.save_pretrained('./save_pretrained/')
 
@@ -197,6 +200,10 @@ def main():
         model.add_adapter(task)
     if args.model=='pubmed':
         model = AutoModelWithHeads.from_pretrained('microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract')
+        model.add_adapter(task)
+        model.add_tagging_head(task, num_labels=len(label_list), id2label={0:'O', 1:"I-INT", 2:"I-PAR", 3:"I-OUT"})
+    if args.model=='biobert':
+        model = AutoModelWithHeads.from_pretrained('dmis-lab/biobert-v1.1')
         model.add_adapter(task)
         model.add_tagging_head(task, num_labels=len(label_list), id2label={0:'O', 1:"I-INT", 2:"I-PAR", 3:"I-OUT"})
     #tokenizer.save_pretrained('./save_pretrained/')
@@ -286,5 +293,8 @@ def main():
         model.save_adapter(os.path.join(adapter_data_dir,"final_bert_adapter"), "ner")
     if args.model == "pubmed":
         model.save_adapter(os.path.join(adapter_data_dir,"final_pubmed_adapter"), "ner")
+    if args.model == "biobert":
+        model.save_adapter(os.path.join(adapter_data_dir,"final_biobert_adapter"), "ner")
+
 if __name__ == "__main__":
     main()

@@ -181,8 +181,11 @@ def main():
         #test_dataset = PicoBertDataset(test_src, test_labels, test_mask, test_type_id)
         if args.model == 'bert':
             tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
-        else:
+        elif args.model == 'pubmed':
             model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
+            tokenizer = AutoTokenizer.from_pretrained(model_name)
+        elif args.model == 'biobert':
+            model_name = 'dmis-lab/biobert-v1.1'
             tokenizer = AutoTokenizer.from_pretrained(model_name)
         # tokenizer.save_pretrained('./save_pretrained/')
 
@@ -206,6 +209,8 @@ def main():
         model = AutoModelForMaskedLM.from_pretrained('bert-base-uncased')
     if args.model == 'pubmed':
         model = AutoModelForMaskedLM.from_pretrained('microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract')
+    if args.model == 'biobert':
+        model = AutoModelForMaskedLM.from_pretrained('dmis-lab/biobert-v1.1')
     model.resize_token_embeddings(len(tokenizer))
     model.add_adapter('mlm')
     model.train_adapter('mlm')
@@ -258,6 +263,8 @@ def main():
         model.save_adapter(os.path.join(adapter_data_dir,"final_bert_adapter_generative"), "mlm")
     if args.model == "pubmed":
         model.save_adapter(os.path.join(adapter_data_dir,"final_pubmed_adapter_generative"), "mlm")
+    if args.model == "biobert":
+        model.save_adapter(os.path.join(adapter_data_dir,"final_biobert_adapter_generative"), "mlm")
 
 if __name__ == "__main__":
     main()
