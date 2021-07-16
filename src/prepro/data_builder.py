@@ -1566,7 +1566,7 @@ def format_to_pico_adapter_bio_bert(args):
         if (os.path.exists(save_path)):
             logger.info('Ignore %s' % save_path)
             return
-        pico_adapter = PicoPubmedBertAdapterData(args)
+        pico_adapter = PicoBioBertAdapterData(args)
         logger.info('Processing %s' % json_file)
         data = []
         source = []
