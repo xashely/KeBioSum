@@ -42,7 +42,7 @@ from transformers.trainer_utils import is_main_process
 logger = logging.getLogger(__name__)
 pico_adapter_data_path = args.path
 label_list = ['O', "I-INT", "I-PAR", "I-OUT"]
-batch_size = 12
+batch_size = 24
 task = 'ner'
 
 metric = load_metric("seqeval")
