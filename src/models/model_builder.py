@@ -139,57 +139,62 @@ class RoBerta(nn.Module):
         else:
             if model == "robert":
                 self.model = RobertaModel.from_pretrained('roberta-base', cache_dir=temp_dir)
-                if args.adapter_training_strategy == 'both':
-                    self.model.load_adapter(args.adapter_path_robert_generative, load_as="mlm",with_head=False)
-                    self.model.load_adapter(args.adapter_path_robert_discriminative, load_as="ner",with_head=False)
-                if args.adapter_training_strategy == 'discriminative':
-                    self.model.load_adapter(args.adapter_path_robert_discriminative, load_as="ner",with_head=False)
-                if args.adapter_training_strategy == 'generative':
-                    self.model.load_adapter(args.adapter_path_robert_generative, load_as="mlm",with_head=False)
+                if args.adapter_training_strategy != 'basic':
+                    if args.adapter_training_strategy == 'both':
+                        self.model.load_adapter(args.adapter_path_robert_generative, load_as="mlm",with_head=False)
+                        self.model.load_adapter(args.adapter_path_robert_discriminative, load_as="ner",with_head=False)
+                    if args.adapter_training_strategy == 'discriminative':
+                        self.model.load_adapter(args.adapter_path_robert_discriminative, load_as="ner",with_head=False)
+                    if args.adapter_training_strategy == 'generative':
+                        self.model.load_adapter(args.adapter_path_robert_generative, load_as="mlm",with_head=False)
             if model == "bert":
                 self.model = BertModel.from_pretrained('bert-base-uncased', cache_dir=temp_dir)
-                if args.adapter_training_strategy == 'both':
-                    self.model.load_adapter(args.adapter_path_bert_generative, load_as="mlm",with_head=False)
-                    self.model.load_adapter(args.adapter_path_bert_discriminative, load_as="ner",with_head=False)
-                if args.adapter_training_strategy == 'discriminative':
-                    self.model.load_adapter(args.adapter_path_bert_discriminative, load_as="ner",with_head=False)
-                if args.adapter_training_strategy == 'generative':
-                    self.model.load_adapter(args.adapter_path_bert_generative, load_as="mlm",with_head=False)
+                if args.adapter_training_strategy != 'basic':
+                    if args.adapter_training_strategy == 'both':
+                        self.model.load_adapter(args.adapter_path_bert_generative, load_as="mlm",with_head=False)
+                        self.model.load_adapter(args.adapter_path_bert_discriminative, load_as="ner",with_head=False)
+                    if args.adapter_training_strategy == 'discriminative':
+                        self.model.load_adapter(args.adapter_path_bert_discriminative, load_as="ner",with_head=False)
+                    if args.adapter_training_strategy == 'generative':
+                        self.model.load_adapter(args.adapter_path_bert_generative, load_as="mlm",with_head=False)
             if model == "pubmed":
                 model_name = 'microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract'
                 self.model = AutoModel.from_pretrained(model_name).to(device)
-                if args.adapter_training_strategy == 'both':
-                    self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
-                    self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
-                if args.adapter_training_strategy == 'discriminative':
-                    self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
-                if args.adapter_training_strategy == 'generative':
-                    self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
+                if args.adapter_training_strategy != 'basic':
+                    if args.adapter_training_strategy == 'both':
+                        self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
+                        self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
+                    if args.adapter_training_strategy == 'discriminative':
+                        self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
+                    if args.adapter_training_strategy == 'generative':
+                        self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
             if model == "biobert":
                 model_name = 'dmis-lab/biobert-v1.1'
                 self.model = AutoModel.from_pretrained(model_name).to(device)
-                if args.adapter_training_strategy == 'both':
-                    self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
-                    self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
-                if args.adapter_training_strategy == 'discriminative':
-                    self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
-                if args.adapter_training_strategy == 'generative':
-                    self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
+                if args.adapter_training_strategy != 'basic':
+                    if args.adapter_training_strategy == 'both':
+                        self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
+                        self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
+                    if args.adapter_training_strategy == 'discriminative':
+                        self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
+                    if args.adapter_training_strategy == 'generative':
+                        self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
             self.model.add_adapter("finetune")
-            if args.adapter_training_strategy == 'both':
-                self.model.add_fusion(Fuse("mlm", "ner", "finetune"))
-                self.model.set_active_adapters(Fuse("mlm", 'ner', "finetune"))
-                adapter_setup = Fuse("mlm", 'ner', "finetune")
-            elif args.adapter_training_strategy == 'discriminative':
-                self.model.add_fusion(Fuse("finetune", "ner"))
-                self.model.set_active_adapters(Fuse("finetune", "ner"))
-                adapter_setup = Fuse("finetune", "ner")
-            elif args.adapter_training_strategy == 'generative':
-                self.model.add_fusion(Fuse("mlm", "finetune"))
-                self.model.set_active_adapters(Fuse("mlm","finetune"))
-                adapter_setup = Fuse("mlm","finetune")
-            self.model.train_fusion(adapter_setup)
-            self.model.encoder.enable_adapters(adapter_setup, True, True)
+            if args.adapter_training_strategy != 'basic':
+                if args.adapter_training_strategy == 'both':
+                    self.model.add_fusion(Fuse("mlm", "ner", "finetune"))
+                    self.model.set_active_adapters(Fuse("mlm", 'ner', "finetune"))
+                    adapter_setup = Fuse("mlm", 'ner', "finetune")
+                elif args.adapter_training_strategy == 'discriminative':
+                    self.model.add_fusion(Fuse("finetune", "ner"))
+                    self.model.set_active_adapters(Fuse("finetune", "ner"))
+                    adapter_setup = Fuse("finetune", "ner")
+                elif args.adapter_training_strategy == 'generative':
+                    self.model.add_fusion(Fuse("mlm", "finetune"))
+                    self.model.set_active_adapters(Fuse("mlm","finetune"))
+                    adapter_setup = Fuse("mlm","finetune")
+                self.model.train_fusion(adapter_setup)
+                self.model.encoder.enable_adapters(adapter_setup, True, True)
         self.finetune = finetune
 
     def forward(self, x, segs, mask):
