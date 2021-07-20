@@ -99,9 +99,9 @@ def load_dataset(corpus_type, model, shuffle):
             src.append(data['src'])
             label.append(data['tag'])
             mask.append(data['mask'])
-            if model == "bert" or model=='pubmed':
+            if model == "bert" or model=='pubmed'or model=="biobert":
                 type_id.append(data['token_type_ids'])
-        if model=="bert" or model=='pubmed':
+        if model=="bert" or model=='pubmed' or model=="biobert":
             return src, label, mask, type_id
         else:
             return src, label, mask
