@@ -179,8 +179,8 @@ class RoBerta(nn.Module):
                         self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
                     if args.adapter_training_strategy == 'generative':
                         self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
-            self.model.add_adapter("finetune")
             if args.adapter_training_strategy != 'basic':
+                self.model.add_adapter("finetune")
                 if args.adapter_training_strategy == 'both':
                     self.model.add_fusion(Fuse("mlm", "ner", "finetune"))
                     self.model.set_active_adapters(Fuse("mlm", 'ner', "finetune"))
