@@ -1,24 +1,6 @@
-# covid-bert
+# BioSum with domain knowledge
 
-**This code is for the extractive summarization for the covid-19 dataset based on pretrained language model and domain knowledge including pico and terms**
-
-Results on the CORD-19 dataset (June 27, 2020):
-
-
-<table class="tg">
-  <tr>
-    <th class="tg-0pky">Models</th>
-    <th class="tg-0pky">ROUGE-1</th>
-    <th class="tg-0pky">ROUGE-2</th>
-    <th class="tg-0pky">ROUGE-L</th>
-  </tr>
-  <tr>
-    <td class="tg-0pky">covid-bert</td>
-    <td class="tg-0pky">30.11</td>
-    <td class="tg-0pky">9.96</td>
-    <td class="tg-0pky">26.96</td>
-  </tr>
-</table>
+**This code is for the biomedical extractive summarization based on pretrained language model and domain knowledge from pico representations**
 
 **Python version**: This code is in Python3.6
 
