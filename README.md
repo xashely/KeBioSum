@@ -13,7 +13,12 @@ Some codes are borrowed from PreSumm (https://github.com/nlpyang/PreSumm)
 #### CORD-19 dataset
 Download and unzip the `CORD-19` directories from [here](https://allenai.org/data/cord-19). Put all files in the directory `./raw_data`
 #### PubMed dataset
-Download zip file from [here] (https://drive.google.com/file/d/1lvsqvsFi3W-pE1SqNZI0s8NR9rC1tsja/view). Put all files in directory `./raw`
+Download zip file from [here] (https://drive.google.com/file/d/1lvsqvsFi3W-pE1SqNZI0s8NR9rC1tsja/view). You can also use the command below to download the files via the cli using linux. Put all files in directory `./raw`.
+
+```
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1lvsqvsFi3W-pE1SqNZI0s8NR9rC1tsja' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1lvsqvsFi3W-pE1SqNZI0s8NR9rC1tsja" -O pubmed.zip && rm -rf /tmp/cookies.txt
+```
+
 ####  S2ORC dataset
 Details of the dataset can be found [here] (https://github.com/allenai/s2orc). To prepare, follow instructions [here] (src/datasets/s2orc/README.md))
 
