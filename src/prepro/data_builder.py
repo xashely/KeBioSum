@@ -337,11 +337,10 @@ def tokenize_pubmed_dataset(args):
     
     dirs = ['test','train','val']
     
-    
     for dir in dirs:
         files_count_real = 0
         tokenized_data_dir = os.path.join(os.path.abspath(args.save_path),dir)
-        source_txt_file = os.path.join(root_data_dir, '{}.txt'.format(dir))
+        source_txt_file = os.path.join(root_data_dir, '{}.jsonl'.format(dir))
         txt_dir = os.path.join(root_data_dir, 'txt_json', dir)
 
         # make directories for saving data if they don't already exist
@@ -360,19 +359,18 @@ def tokenize_pubmed_dataset(args):
         print('... (1) Processing pubmed files into readable .txt format for tokenizer into path: {}...'.format(txt_dir))
         
         # write out new csv containing files we use in our dataset
-
+        pid = 0
         for i,row in tqdm(df.iterrows(),total=df.shape[0]):
                 
             # read in pubmed file if available
-            pid = row['article_id']
         
             # preprocess / clean file
-            cleaned_text = clean_text(row['sections'])
+            cleaned_text = clean_text(row['text'])
             tpath = os.path.join(txt_dir, '{}.txt'.format(pid))
             tpath_abs = os.path.join(txt_dir, '{}.abs.txt'.format(pid))
 
             # preprocess/ clean abstract
-            abstract = clean_abstract(row['abstract_text'])
+            abstract = clean_abstract(row['summary'])
             
             # write out main text and abstract 
             with open(tpath, 'w') as fil:
@@ -380,6 +378,7 @@ def tokenize_pubmed_dataset(args):
             with open(tpath_abs, 'w') as fil:
                 fil.write(abstract)
             files_count_real += 1
+            pid += 1
             
 
         end = time.time()
@@ -435,8 +434,6 @@ def cal_rouge(evaluated_ngrams, reference_ngrams):
 
     f1_score = 2.0 * ((precision * recall) / (precision + recall + 1e-8))
     return {"f": f1_score, "p": precision, "r": recall}
-
-
 
 def greedy_selection(doc_sent_list, abstract_sent_list, summary_size):
     def _rouge_clean(s):
@@ -1629,6 +1626,7 @@ def _format_to_bert(params):
     datasets = []
     for d in jobs:
         source, tgt = d['src'], d['tgt']
+
         sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
