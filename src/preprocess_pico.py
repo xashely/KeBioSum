@@ -25,18 +25,18 @@ save_path = os.path.abspath(args.save_path)
 # make directories for saving data if they don't already exist
 if not os.path.exists(save_path):
     os.makedirs(save_path)
-if corpus!=pubmed:
+if args.corpus!="pubmed":
     corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(raw_path)
                       if not f.startswith('.') and not f.endswith('.abs.txt.json')])
 else:
     test_path = os.path.join(raw_path, 'test_pubmed')
     val_path = os.path.join(raw_path, 'val_pubmed')
     train_path = os.path.join(raw_path, 'train_pubmed')
-    test_corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(test_path)
+    test_corpora = sorted([os.path.join(test_path, f) for f in os.listdir(test_path)
                       if not f.startswith('.') and not f.endswith('.abs.txt.json')])
-    val_corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(val_path)
+    val_corpora = sorted([os.path.join(val_path, f) for f in os.listdir(val_path)
                            if not f.startswith('.') and not f.endswith('.abs.txt.json')])
-    train_corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(train_path)
+    train_corpora = sorted([os.path.join(train_path, f) for f in os.listdir(train_path)
                            if not f.startswith('.') and not f.endswith('.abs.txt.json')])
     test_len= len(test_corpora)
     val_len = len(val_corpora)
