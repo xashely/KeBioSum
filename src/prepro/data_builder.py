@@ -1716,7 +1716,7 @@ def _format_to_bio_bert(params):
     gc.collect()
 
 def format_to_lines(args):
-    if args.corpus != pubmed:
+    if args.corpus != 'pubmed':
         corpora = sorted([os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
                       if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
         #train_files, valid_files, test_files = [], [], []:

@@ -16,6 +16,7 @@ from tqdm import tqdm
 parser = argparse.ArgumentParser()
 parser.add_argument("-raw_path", default="./token_data/", type=str)
 parser.add_argument("-save_path", default="/home/qianqian/scibert/data/pico/ebmnlp/", type=str)
+parser.add_argument("-corpus", default="cord-19", type=str)
 
 args = parser.parse_args()
 raw_path = os.path.abspath(args.raw_path)
@@ -24,17 +25,34 @@ save_path = os.path.abspath(args.save_path)
 # make directories for saving data if they don't already exist
 if not os.path.exists(save_path):
     os.makedirs(save_path)
-
-corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(raw_path)
+if corpus!=pubmed:
+    corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(raw_path)
                       if not f.startswith('.') and not f.endswith('.abs.txt.json')])
+else:
+    test_path = os.path.join(raw_path, 'test_pubmed')
+    val_path = os.path.join(raw_path, 'val_pubmed')
+    train_path = os.path.join(raw_path, 'train_pubmed')
+    test_corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(test_path)
+                      if not f.startswith('.') and not f.endswith('.abs.txt.json')])
+    val_corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(val_path)
+                           if not f.startswith('.') and not f.endswith('.abs.txt.json')])
+    train_corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(train_path)
+                           if not f.startswith('.') and not f.endswith('.abs.txt.json')])
+    test_len= len(test_corpora)
+    val_len = len(val_corpora)
+    train_len = len(train_corpora)
+    corpora = train_corpora+val_corpora+test_corpora
+
 print('... Packing tokenized data into pico txt...')
 print('Converting files count: {}'.format(len(corpora)))
 with tqdm(total=len(corpora)) as pbar:
     with open(os.path.join(save_path, 'cord.txt'), 'w') as f_new:
-        i=0
-        for f_main in corpora:
-            paper_id = os.path.basename(f_main).split('.')[0]
-            if i==0:
+        for idx, f_main in enumerate(corpora):
+            if args.corpus != 'pubmed':
+                paper_id = os.path.basename(f_main).split('.')[0]
+            else:
+                paper_id = idx
+            if idx==0:
                 print(f_main, paper_id)
             count = 0
             f_new.write(f'-DOCSTART- ({paper_id})')
@@ -65,8 +83,7 @@ with tqdm(total=len(corpora)) as pbar:
               
             f_new.write('\n\n')
             if count != 0:
-                print("id, count:", i, count)
-            i += 1
+                print("id, count:", idx, count)
             #if i == 60:
             #    break
             pbar.update()

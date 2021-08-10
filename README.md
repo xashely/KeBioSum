@@ -42,7 +42,7 @@ For the PubMed dataset.
 python src/preprocess.py -mode tokenize_pubmed_dataset -raw_path ./raw/ -save_path ./token_data/ -log ./tokenize_pubmed.log
 ```
 
-* `RAW_PATH` is the directory containing story files, `JSON_PATH` is the target directory to save the generated json files
+* `RAW_PATH` is the directory containing story files, `save_path` is the target directory to save the generated tokenized files
 
 ###  Step 4. PICO Prediction
 
