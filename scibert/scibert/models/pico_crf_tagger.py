@@ -83,7 +83,8 @@ class PicoCrfTagger(Model):
         # Just get the tags and ignore the score.
         predicted_tags = [x for x, y in best_paths]
 
-        output = {"tags": predicted_tags}
+        output = {"logits": logits, "mask": mask, "tags": predicted_tags}
+        # output = {"tags": predicted_tags}
 
         if tags is not None:
             # Add negative log-likelihood as loss
