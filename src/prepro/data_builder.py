@@ -1716,25 +1716,55 @@ def _format_to_bio_bert(params):
     gc.collect()
 
 def format_to_lines(args):
-    corpora = sorted([os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
+    if args.corpus != pubmed:
+        corpora = sorted([os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
                       if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
-    #train_files, valid_files, test_files = [], [], []:
-
-    args_list = []
-    for f_main in corpora:
-        f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
-        f_abs = os.path.join(args.raw_path, f_abs_name)
-        f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
-        f_tag = os.path.join(args.raw_path, f_tag_name)
-        args_list.append((f_main, f_abs, f_tag, args))
-    index_list = list(range(len(args_list)))
-    random.shuffle(index_list) 
-    train_list_id = index_list[:int(len(args_list)*0.75)] 
-    eval_list_id = index_list[int(len(args_list)*0.75)+1:int(len(args_list)*0.9)]
-    test_list_id = index_list[int(len(args_list)*0.9)+1:]
-    train_files = [args_list[i] for i in train_list_id]
-    valid_files = [args_list[i] for i in eval_list_id]
-    test_files = [args_list[i] for i in test_list_id]
+        #train_files, valid_files, test_files = [], [], []:
+        args_list = []
+        for f_main in corpora:
+            f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
+            f_abs = os.path.join(args.raw_path, f_abs_name)
+            f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
+            f_tag = os.path.join(args.raw_path, f_tag_name)
+            args_list.append((f_main, f_abs, f_tag, args))
+        index_list = list(range(len(args_list)))
+        random.shuffle(index_list)
+        train_list_id = index_list[:int(len(args_list)*0.75)]
+        eval_list_id = index_list[int(len(args_list)*0.75)+1:int(len(args_list)*0.9)]
+        test_list_id = index_list[int(len(args_list)*0.9)+1:]
+        train_files = [args_list[i] for i in train_list_id]
+        valid_files = [args_list[i] for i in eval_list_id]
+        test_files = [args_list[i] for i in test_list_id]
+    else:
+        root_data_dir = os.path.abspath(args.raw_path)
+        train_files, valid_files, test_files = [], [], []
+        test_txt_path = os.path.join(root_data_dir, 'test_pubmed')
+        val_txt_path = os.path.join(root_data_dir, 'val_pubmed')
+        train_txt_path = os.path.join(root_data_dir, 'train_pubmed')
+        test_corpora = sorted([os.path.join(args.raw_path, f) for f in os.listdir(test_txt_path)
+                              if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
+        val_corpora = sorted([os.path.join(args.raw_path, f) for f in os.listdir(val_txt_path)
+                               if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
+        train_corpora = sorted([os.path.join(args.raw_path, f) for f in os.listdir(train_txt_path)
+                              if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
+        for f_main in test_corpora:
+            f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
+            f_abs = os.path.join(args.raw_path, f_abs_name)
+            f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
+            f_tag = os.path.join(args.raw_path, f_tag_name)
+            test_files.append((f_main, f_abs, f_tag, args))
+        for f_main in val_corpora:
+            f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
+            f_abs = os.path.join(args.raw_path, f_abs_name)
+            f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
+            f_tag = os.path.join(args.raw_path, f_tag_name)
+            val_files.append((f_main, f_abs, f_tag, args))
+        for f_main in train_corpora:
+            f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
+            f_abs = os.path.join(args.raw_path, f_abs_name)
+            f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
+            f_tag = os.path.join(args.raw_path, f_tag_name)
+            train_files.append((f_main, f_abs, f_tag, args))
 
     start = time.time()
     print('... (4) Packing tokenized data into shards...')

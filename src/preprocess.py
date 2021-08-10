@@ -50,6 +50,7 @@ if __name__ == '__main__':
     parser.add_argument("-raw_path", default='./raw_data')
     parser.add_argument("-save_path", default='./token_data/')
 
+    parser.add_argument("-corpus", default='cord-19',type=str)
     parser.add_argument("-shard_size", default=2000, type=int)
     parser.add_argument('-min_src_nsents', default=3, type=int)
     parser.add_argument('-max_src_nsents', default=100, type=int)
