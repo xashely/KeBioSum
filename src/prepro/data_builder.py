@@ -112,7 +112,11 @@ def load_json(f_main, f_abs, f_tag):
                 print('tag:', [val.lower() for _, val in sent_tokens])
         #assert [val.lower() for _, val in sent_tokens] == src_sent_tokens[count]
             offset += present_sent_len
-            assert offset <= temp_doc_len
+            try:
+                assert offset <= temp_doc_len
+            except AssertionError as e:
+                print('not match')
+                return None, None, None
         #tag_tokens.append([val.lower() for _, val in sent_tokens])
             temp=[]
             for val, t in sent_tokens:
@@ -1777,7 +1781,7 @@ def format_to_lines(args):
     # imap executes in sync multiprocess manner
     # use array and shard_size to save the flow of ordered data
     corporas = {'train': train_files, 'valid': valid_files, 'test': test_files}
-    for corpus_type in ['train', 'valid', 'test']:
+    for corpus_type in ['test']:#['train', 'valid', 'test']:
         a_lst = corporas[corpus_type]
         pool = Pool(args.n_cpus)
         dataset = []

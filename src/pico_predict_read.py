@@ -73,12 +73,12 @@ with open(raw_path, "r") as data_file:
                         doc_id = int(doc_id)
                         if doc_id <= train_len-1:
                             s_path=os.path.join(save_path,'train_pubmed')
-                        elif doc_id <=train_len+val_len-1:
+                        if train_len -1 < doc_id and doc_id <=train_len+val_len-1:
                             s_path = os.path.join(save_path, 'val_pubmed')
-                            doc_id = doc_id - train_len+1
-                        elif doc_id <= train_len + val_len+test_len - 1:
+                            doc_id = doc_id - train_len
+                        if train_len+val_len-1 < doc_id and doc_id <= train_len + val_len+test_len - 1:
                             s_path = os.path.join(save_path, 'test_pubmed')
-                            doc_id = doc_id - train_len - test_len + 1
+                            doc_id = doc_id - train_len - val_len
                         tpath = os.path.join(s_path, '{}.tag.json'.format(doc_id))
                     else:
                         tpath = os.path.join(save_path, '{}.tag.json'.format(doc_id))
@@ -104,7 +104,7 @@ with open(raw_path, "r") as data_file:
     doc_id = int(doc_id)
     if args.corpus == 'pubmed':
         s_path = os.path.join(save_path, 'test_pubmed')
-        doc_id = doc_id - train_len - test_len + 1
+        doc_id = doc_id - train_len - val_len
     tpath = os.path.join(s_path, '{}.tag.json'.format(doc_id))
     with open(tpath, 'w') as f:
         f.write(json.dumps(temp_tags))

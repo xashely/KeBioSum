@@ -52,9 +52,11 @@ with tqdm(total=len(corpora)) as pbar:
             paper_id = os.path.basename(f_main).split('.')[0]
             if args.corpus=='pubmed':
                 if train_len - 1 < idx and idx <= train_len+val_len-1:
-                    paper_id = paper_id + train_len
+                    r_paper_id = int(paper_id) + train_len
+                    paper_id = str(r_paper_id)
                 if train_len + val_len - 1 < idx:
-                    paper_id = paper_id + train_len+val_len
+                    r_paper_id = int(paper_id) + train_len + val_len
+                    paper_id = str(r_paper_id)
             if idx==0:
                 print(f_main, paper_id)
             count = 0
