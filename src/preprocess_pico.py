@@ -32,12 +32,13 @@ else:
     test_path = os.path.join(raw_path, 'test_pubmed')
     val_path = os.path.join(raw_path, 'val_pubmed')
     train_path = os.path.join(raw_path, 'train_pubmed')
-    test_corpora = sorted([os.path.join(test_path, f) for f in os.listdir(test_path)
-                      if not f.startswith('.') and not f.endswith('.abs.txt.json')])
-    val_corpora = sorted([os.path.join(val_path, f) for f in os.listdir(val_path)
-                           if not f.startswith('.') and not f.endswith('.abs.txt.json')])
-    train_corpora = sorted([os.path.join(train_path, f) for f in os.listdir(train_path)
-                           if not f.startswith('.') and not f.endswith('.abs.txt.json')])
+    test_corpora = [os.path.join(test_path, f) for f in os.listdir(test_path)
+                      if not f.startswith('.') and not f.endswith('.abs.txt.json')]
+    val_corpora = [os.path.join(val_path, f) for f in os.listdir(val_path)
+                           if not f.startswith('.') and not f.endswith('.abs.txt.json')]
+    train_corpora = [os.path.join(train_path, f) for f in os.listdir(train_path)
+                           if not f.startswith('.') and not f.endswith('.abs.txt.json')]
+    #print(train_corpora[:10])
     test_len= len(test_corpora)
     val_len = len(val_corpora)
     train_len = len(train_corpora)
@@ -48,10 +49,9 @@ print('Converting files count: {}'.format(len(corpora)))
 with tqdm(total=len(corpora)) as pbar:
     with open(os.path.join(save_path, 'cord.txt'), 'w') as f_new:
         for idx, f_main in enumerate(corpora):
-            if args.corpus != 'pubmed':
-                paper_id = os.path.basename(f_main).split('.')[0]
-            else:
-                paper_id = idx
+            #if args.corpus != 'pubmed':
+            paper_id = os.path.basename(f_main).split('.')[0]
+        
             if idx==0:
                 print(f_main, paper_id)
             count = 0
