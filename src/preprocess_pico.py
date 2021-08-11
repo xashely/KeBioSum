@@ -82,8 +82,7 @@ with tqdm(total=len(corpora)) as pbar:
                             f_new.write('\n')
                             j = 0
                     if not newline:
-                        f_new.write('\n')
-              
+                        f_new.write('\n')  
             f_new.write('\n\n')
             if count != 0:
                 print("id, count:", idx, count)

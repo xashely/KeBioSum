@@ -29,14 +29,14 @@ if not os.path.exists(save_path):
     os.makedirs(save_path)
 
 if args.corpus =='pubmed':
-    test_path = os.path.join(raw_path, 'test_pubmed')
-    val_path = os.path.join(raw_path, 'val_pubmed')
-    train_path = os.path.join(raw_path, 'train_pubmed')
-    test_corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(test_path)
+    test_path = os.path.join(save_path, 'test_pubmed')
+    val_path = os.path.join(save_path, 'val_pubmed')
+    train_path = os.path.join(save_path, 'train_pubmed')
+    test_corpora = sorted([os.path.join(test_path, f) for f in os.listdir(test_path)
                            if not f.startswith('.') and not f.endswith('.abs.txt.json')])
-    val_corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(val_path)
+    val_corpora = sorted([os.path.join(val_path, f) for f in os.listdir(val_path)
                           if not f.startswith('.') and not f.endswith('.abs.txt.json')])
-    train_corpora = sorted([os.path.join(raw_path, f) for f in os.listdir(train_path)
+    train_corpora = sorted([os.path.join(train_path, f) for f in os.listdir(train_path)
                             if not f.startswith('.') and not f.endswith('.abs.txt.json')])
     test_len = len(test_corpora)
     val_len = len(val_corpora)
@@ -70,15 +70,18 @@ with open(raw_path, "r") as data_file:
             if first_token == "-DOCSTART-":
                 if temp_tags:
                     if args.corpus == 'pubmed':
+                        doc_id = int(doc_id)
                         if doc_id <= train_len-1:
-                            save_path=os.path.join(save_path,'train_pubmed')
+                            s_path=os.path.join(save_path,'train_pubmed')
                         elif doc_id <=train_len+val_len-1:
-                            save_path = os.path.join(save_path, 'val_pubmed')
+                            s_path = os.path.join(save_path, 'val_pubmed')
                             doc_id = doc_id - train_len+1
                         elif doc_id <= train_len + val_len+test_len - 1:
-                            save_path = os.path.join(save_path, 'test_pubmed')
+                            s_path = os.path.join(save_path, 'test_pubmed')
                             doc_id = doc_id - train_len - test_len + 1
-                    tpath = os.path.join(save_path, '{}.tag.json'.format(doc_id))
+                        tpath = os.path.join(s_path, '{}.tag.json'.format(doc_id))
+                    else:
+                        tpath = os.path.join(save_path, '{}.tag.json'.format(doc_id))
                     with open(tpath, 'w') as f:
                         f.write(json.dumps(temp_tags))
                     # Save tags to json
@@ -98,6 +101,7 @@ with open(raw_path, "r") as data_file:
                     print (word, pred_word)
                 temp_tags.append((tags[count],pred_word))
                 count += 1
+    doc_id = int(doc_id)
     if args.corpus == 'pubmed':
         save_path = os.path.join(save_path, 'test_pubmed')
         doc_id = doc_id - train_len - test_len + 1

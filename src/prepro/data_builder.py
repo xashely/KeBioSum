@@ -108,8 +108,8 @@ def load_json(f_main, f_abs, f_tag):
             try:
                 assert [val.lower() for _, val in sent_tokens] == src_sent_tokens[count]
             except AssertionError as e:
-                print(src_sent_tokens[count])
-                print([val.lower() for _, val in sent_tokens])
+                print('src:', src_sent_tokens[count])
+                print('tag:', [val.lower() for _, val in sent_tokens])
         #assert [val.lower() for _, val in sent_tokens] == src_sent_tokens[count]
             offset += present_sent_len
             assert offset <= temp_doc_len
@@ -1745,34 +1745,34 @@ def format_to_lines(args):
         test_txt_path = os.path.join(root_data_dir, 'test_pubmed')
         val_txt_path = os.path.join(root_data_dir, 'val_pubmed')
         train_txt_path = os.path.join(root_data_dir, 'train_pubmed')
-        test_corpora = sorted([os.path.join(args.raw_path, f) for f in os.listdir(test_txt_path)
+        test_corpora = sorted([os.path.join(test_txt_path, f) for f in os.listdir(test_txt_path)
                               if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
-        val_corpora = sorted([os.path.join(args.raw_path, f) for f in os.listdir(val_txt_path)
+        val_corpora = sorted([os.path.join(val_txt_path, f) for f in os.listdir(val_txt_path)
                                if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
-        train_corpora = sorted([os.path.join(args.raw_path, f) for f in os.listdir(train_txt_path)
+        train_corpora = sorted([os.path.join(train_txt_path, f) for f in os.listdir(train_txt_path)
                               if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
         for f_main in test_corpora:
             f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
-            f_abs = os.path.join(args.raw_path, f_abs_name)
+            f_abs = os.path.join(test_txt_path, f_abs_name)
             f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
-            f_tag = os.path.join(args.raw_path, f_tag_name)
+            f_tag = os.path.join(test_txt_path, f_tag_name)
             test_files.append((f_main, f_abs, f_tag, args))
         for f_main in val_corpora:
             f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
-            f_abs = os.path.join(args.raw_path, f_abs_name)
+            f_abs = os.path.join(val_txt_path, f_abs_name)
             f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
-            f_tag = os.path.join(args.raw_path, f_tag_name)
-            val_files.append((f_main, f_abs, f_tag, args))
+            f_tag = os.path.join(val_txt_path, f_tag_name)
+            valid_files.append((f_main, f_abs, f_tag, args))
         for f_main in train_corpora:
             f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
-            f_abs = os.path.join(args.raw_path, f_abs_name)
+            f_abs = os.path.join(train_txt_path, f_abs_name)
             f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
-            f_tag = os.path.join(args.raw_path, f_tag_name)
+            f_tag = os.path.join(train_txt_path, f_tag_name)
             train_files.append((f_main, f_abs, f_tag, args))
 
     start = time.time()
     print('... (4) Packing tokenized data into shards...')
-    print('Converting files count: {}'.format(len(corpora)))
+    #print('Converting files count: {}'.format(len(corpora)))
 
     # imap executes in sync multiprocess manner
     # use array and shard_size to save the flow of ordered data
