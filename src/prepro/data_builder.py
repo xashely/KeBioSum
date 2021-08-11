@@ -335,7 +335,7 @@ def tokenize_pubmed_dataset(args):
    
     root_data_dir = os.path.abspath(args.raw_path)
     
-    dirs = ['test','train','val']
+    dirs = ['test_pubmed','train_pubmed','val_pubmed']
     
     for dir in dirs:
         files_count_real = 0
@@ -365,13 +365,16 @@ def tokenize_pubmed_dataset(args):
             # read in pubmed file if available
         
             # preprocess / clean file
-            cleaned_text = clean_text(row['text'])
+            cleaned_text = clean_abstract(row['text'])
             tpath = os.path.join(txt_dir, '{}.txt'.format(pid))
             tpath_abs = os.path.join(txt_dir, '{}.abs.txt'.format(pid))
 
             # preprocess/ clean abstract
             abstract = clean_abstract(row['summary'])
             
+            #print('text:', cleaned_text)
+            #print('summary:', abstract)
+        
             # write out main text and abstract 
             with open(tpath, 'w') as fil:
                 fil.write(cleaned_text)
@@ -382,6 +385,7 @@ def tokenize_pubmed_dataset(args):
             
 
         end = time.time()
+    
         print('Real count for files with abstract: {} ({}%)'.format(files_count_real,files_count_real / len_before * 100))
         print('... Ending (1), time elapsed {}'.format(end - start))
 

@@ -59,8 +59,11 @@ with tqdm(total=len(corpora)) as pbar:
             f_new.write('\n\n')
             with open(f_main, 'r') as f:
                 json_main = json.load(f)
+                #print("doc:", json_main['sentences'])
                 for sent in json_main['sentences']:
                     j = 0
+                    #if paper_id == 0:
+                    #    print(sent)
                     newline = False
                     for token in sent['tokens']:
                         newline = False
