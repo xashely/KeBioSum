@@ -2,7 +2,8 @@ import copy
 
 import torch
 import torch.nn as nn
-from transformers import RobertaConfig, RobertaModel, BertModel, AutoTokenizer, AutoModel
+from pytorch_transformers import BertModel, BertConfig
+from transformers import RobertaConfig, RobertaModel, AutoTokenizer, AutoModel
 from torch.nn.init import xavier_uniform_
 
 from models.decoder import TransformerDecoder
@@ -202,15 +203,19 @@ class RoBerta(nn.Module):
 
     def forward(self, x, segs, mask):
         if (self.finetune):
-            top_vec, _ = self.model(x, segs, attention_mask=mask)
-            #output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
-            #top_vec = output.last_hidden_state
+            if args.model=='bert':
+                top_vec, _ = self.model(x, segs, attention_mask=mask)
+            else:
+                output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
+                top_vec = output.last_hidden_state
         else:
             self.eval()
             with torch.no_grad():
-                top_vec, _ = self.model(x, segs, attention_mask=mask)
-                #output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
-                #top_vec = output.last_hidden_state
+                if args.model=="bert":
+                    top_vec, _ = self.model(x, segs, attention_mask=mask)
+                else:
+                    output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
+                    top_vec = output.last_hidden_state
         return top_vec
 
 
