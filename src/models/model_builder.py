@@ -202,13 +202,15 @@ class RoBerta(nn.Module):
 
     def forward(self, x, segs, mask):
         if (self.finetune):
-            output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
-            top_vec = output.last_hidden_state
+            top_vec, _ = self.model(x, segs, attention_mask=mask)
+            #output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
+            #top_vec = output.last_hidden_state
         else:
             self.eval()
             with torch.no_grad():
-                output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
-                top_vec = output.last_hidden_state
+                top_vec, _ = self.model(x, segs, attention_mask=mask)
+                #output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
+                #top_vec = output.last_hidden_state
         return top_vec
 
 
