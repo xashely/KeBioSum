@@ -7,6 +7,7 @@ import zhon
 import json
 import os
 import random
+import pickle
 import re
 import math
 import subprocess
@@ -340,8 +341,9 @@ def tokenize_pubmed_dataset(args):
     root_data_dir = os.path.abspath(args.raw_path)
     
     dirs = ['test_pubmed','train_pubmed','val_pubmed']
-    
-    for dir in dirs:
+    dirs_rename = ['test', 'train', 'val']
+    labels = []
+    for idx, dir in enumerate(dirs):
         files_count_real = 0
         tokenized_data_dir = os.path.join(os.path.abspath(args.save_path),dir)
         source_txt_file = os.path.join(root_data_dir, '{}.jsonl'.format(dir))
@@ -372,10 +374,9 @@ def tokenize_pubmed_dataset(args):
             cleaned_text = clean_abstract(row['text'])
             tpath = os.path.join(txt_dir, '{}.txt'.format(pid))
             tpath_abs = os.path.join(txt_dir, '{}.abs.txt'.format(pid))
-
             # preprocess/ clean abstract
             abstract = clean_abstract(row['summary'])
-            
+            labels.append(row['label'])
             #print('text:', cleaned_text)
             #print('summary:', abstract)
         
@@ -386,7 +387,10 @@ def tokenize_pubmed_dataset(args):
                 fil.write(abstract)
             files_count_real += 1
             pid += 1
-            
+
+        pic_path = os.path.join(args.save_path, '{}.pkl'.format(dirs_rename[idx]))
+        with open(pic_path, 'wb') as f:
+            pickle.dump(labels, f)
 
         end = time.time()
     
@@ -1621,7 +1625,7 @@ def _format_to_robert(params):
     gc.collect()
 
 def _format_to_bert(params):
-    corpus_type, json_file, args, save_file = params
+    corpus_type, json_file, args, save_file, label = params
     is_test = corpus_type == 'test'
     if (os.path.exists(save_file)):
         logger.info('Ignore %s' % save_file)
@@ -1633,9 +1637,11 @@ def _format_to_bert(params):
     jobs = json.load(open(json_file))
     datasets = []
     for d in jobs:
-        source, tgt = d['src'], d['tgt']
-
-        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
+        source, tgt, label = d['src'], d['tgt'], d['label']
+        if args.corpus != "pubmed":
+            sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
+        else:
+            sent_labels = label
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
@@ -1755,24 +1761,36 @@ def format_to_lines(args):
                                if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
         train_corpora = sorted([os.path.join(train_txt_path, f) for f in os.listdir(train_txt_path)
                               if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
+        with open(os.path.join(test_txt_path, 'test.pkl'), 'rb') as f:
+            test_label = pickle.load(f)
+        with open(os.path.join(val_txt_path, 'val.pkl'), 'rb') as f:
+            val_label = pickle.load(f)
+        with open(os.path.join(train_txt_path, 'train.pkl'), 'rb') as f:
+            train_label = pickle.load(f)
         for f_main in test_corpora:
             f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
             f_abs = os.path.join(test_txt_path, f_abs_name)
             f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
             f_tag = os.path.join(test_txt_path, f_tag_name)
-            test_files.append((f_main, f_abs, f_tag, args))
+            paper_id = os.path.basename(f_main).split('.')[0]
+            label = test_label[paper_id]
+            test_files.append((f_main, f_abs, f_tag, args, label))
         for f_main in val_corpora:
             f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
             f_abs = os.path.join(val_txt_path, f_abs_name)
             f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
             f_tag = os.path.join(val_txt_path, f_tag_name)
-            valid_files.append((f_main, f_abs, f_tag, args))
+            paper_id = os.path.basename(f_main).split('.')[0]
+            label = val_label[paper_id]
+            valid_files.append((f_main, f_abs, f_tag, args, label))
         for f_main in train_corpora:
             f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
             f_abs = os.path.join(train_txt_path, f_abs_name)
             f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
             f_tag = os.path.join(train_txt_path, f_tag_name)
-            train_files.append((f_main, f_abs, f_tag, args))
+            paper_id = os.path.basename(f_main).split('.')[0]
+            label = train_label[paper_id]
+            train_files.append((f_main, f_abs, f_tag, args, label))
 
     start = time.time()
     print('... (4) Packing tokenized data into shards...')
@@ -1781,7 +1799,7 @@ def format_to_lines(args):
     # imap executes in sync multiprocess manner
     # use array and shard_size to save the flow of ordered data
     corporas = {'train': train_files, 'valid': valid_files, 'test': test_files}
-    for corpus_type in ['test']:#['train', 'valid', 'test']:
+    for corpus_type in ['train', 'valid', 'test']:
         a_lst = corporas[corpus_type]
         pool = Pool(args.n_cpus)
         dataset = []
@@ -1816,12 +1834,12 @@ def format_to_lines(args):
     print('... Ending (4), time elapsed {}'.format(end - start))
 
 def _format_to_lines(params):
-    f_main, f_abs, f_tags, args = params
-    source, tgt, tag = load_json(f_main, f_abs, f_tags)
+    f_main, f_abs, f_tags, args, label = params
+    source, tgt, tag= load_json(f_main, f_abs, f_tags)
     if not source:
         return None
     else:
-        return {'src': source, 'tgt': tgt, "tag":tag}
+        return {'src': source, 'tgt': tgt, "tag":tag, "label":label}
 
 def format_xsum_to_lines(args):
     if (args.dataset != ''):
