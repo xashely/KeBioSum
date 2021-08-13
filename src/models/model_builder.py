@@ -179,6 +179,17 @@ class RoBerta(nn.Module):
                         self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
                     if args.adapter_training_strategy == 'generative':
                         self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
+            if model == "longformer":
+                model_name = 'allenai/longformer-base-4096'
+                self.model = AutoModel.from_pretrained(model_name,do_lower_case=True).to(device)
+                if args.adapter_training_strategy != 'basic':
+                    if args.adapter_training_strategy == 'both':
+                        self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
+                        self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
+                    if args.adapter_training_strategy == 'discriminative':
+                        self.model.load_adapter(args.adapter_path_pubmed_discriminative, load_as="ner",with_head=False)
+                    if args.adapter_training_strategy == 'generative':
+                        self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)           
             if args.adapter_training_strategy != 'basic':
                 self.model.add_adapter("finetune")
                 if args.adapter_training_strategy == 'both':
@@ -213,6 +224,7 @@ class RoBerta(nn.Module):
                 #if args.model=="bert":
                 #    top_vec, _ = self.model(x, segs, attention_mask=mask)
                 #else:
+                print(f"\n\nshape:{np.shape(x)}")
                 output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
                 top_vec = output.last_hidden_state
         return top_vec
