@@ -217,6 +217,9 @@ class RoBerta(nn.Module):
             #if args.model=='bert':
             #    top_vec, _ = self.model(x, segs, attention_mask=mask)
             #else:
+            print(f"\n\nshape x:{np.shape(x)}")
+            print(f"\n\nshape segs:{np.shape(segs)}")
+            print(f"\n\nshape mask:{np.shape(mask)}")
             output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
             top_vec = output.last_hidden_state
         else:
