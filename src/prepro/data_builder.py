@@ -606,7 +606,6 @@ class BertData():
         src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
         _segs = [-1] + [i for i, t in enumerate(src_subtoken_idxs) if t == self.sep_vid]
         segs = [_segs[i] - _segs[i - 1] for i in range(1, len(_segs))]
-        print(f"value of segs: {segs}\n")
         segments_ids = []
         for i, s in enumerate(segs):
             if (i % 2 == 0):
