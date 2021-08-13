@@ -9,7 +9,7 @@
     'src': tokenized src text (not truncated), 
     'tgt': tokenized abstractive original target (i.e. abstract of article), 
     'src_sent_labels': an array of labels to indicated whether a sentence should be included in the target extractive summary. This is generated using greedy selection., 
-    'segs': attention mask?,
+    'segs': indicates which section a token is associated with (not relevant for Roberta type models),
     'clss': starting index of token in each sentence , '
     'src_txt': raw source text, 
     'tgt_txt': raw target abstract
