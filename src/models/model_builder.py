@@ -217,9 +217,10 @@ class RoBerta(nn.Module):
             #if args.model=='bert':
             #    top_vec, _ = self.model(x, segs, attention_mask=mask)
             #else:
-            print(f"\n\nshape:{np.shape(x)}")
-            print(f"\n\nshape:{np.shape(segs)}")
-            print(f"\n\nshape:{np.shape(mask)}")
+            print(f"\n\nshape x:{np.shape(x)}")
+            print(f"\n\nshape segs:{np.shape(segs)}")
+            print(f"\n\nshape mask:{np.shape(mask)}")
+            print(segs)
             [print(np.all(seg==0)) for seg in segs]
             # print(f"All segs==0?: {np.all([np.all(seg_array==0) for seg_array in segs]}")
             output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
