@@ -181,7 +181,7 @@ class RoBerta(nn.Module):
                         self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
             if model == "longformer":
                 model_name = 'allenai/longformer-base-4096'
-                self.model = AutoModel.from_pretrained(model_name,do_lower_case=True).to(device)
+                self.model = AutoModel.from_pretrained(model_name).to(device)
                 if args.adapter_training_strategy != 'basic':
                     if args.adapter_training_strategy == 'both':
                         self.model.load_adapter(args.adapter_path_pubmed_generative, load_as="mlm",with_head=False)
