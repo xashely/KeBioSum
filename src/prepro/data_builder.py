@@ -342,7 +342,6 @@ def tokenize_pubmed_dataset(args):
     
     dirs = ['test_pubmed','train_pubmed','val_pubmed']
     dirs_rename = ['test', 'train', 'val']
-    labels = []
     for idx, dir in enumerate(dirs):
         files_count_real = 0
         tokenized_data_dir = os.path.join(os.path.abspath(args.save_path),dir)
@@ -366,17 +365,23 @@ def tokenize_pubmed_dataset(args):
         
         # write out new csv containing files we use in our dataset
         pid = 0
+        labels = []
         for i,row in tqdm(df.iterrows(),total=df.shape[0]):
                 
             # read in pubmed file if available
         
             # preprocess / clean file
+            try:
+               label =  row['label']
+            except KeyError:
+                label = []
             cleaned_text = clean_abstract(row['text'])
             tpath = os.path.join(txt_dir, '{}.txt'.format(pid))
             tpath_abs = os.path.join(txt_dir, '{}.abs.txt'.format(pid))
             # preprocess/ clean abstract
             abstract = clean_abstract(row['summary'])
-            labels.append(row['label'])
+            #print(row)
+            labels.append(label)
             #print('text:', cleaned_text)
             #print('summary:', abstract)
         
@@ -420,11 +425,11 @@ def tokenize_pubmed_dataset(args):
         # Check that the tokenized data directory contains the same number of files as the original directory
         num_orig = len(os.listdir(txt_dir))
         num_tokenized = len(os.listdir(tokenized_data_dir))
-        if num_orig != num_tokenized:
-            raise Exception(
-                "The tokenized data directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
-                    tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
-        print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
+        #if num_orig != num_tokenized:
+        #    raise Exception(
+        #        "The tokenized data directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
+        #            tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
+        #print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
         shutil.rmtree(txt_dir)
 
 def cal_rouge(evaluated_ngrams, reference_ngrams):
@@ -1625,7 +1630,7 @@ def _format_to_robert(params):
     gc.collect()
 
 def _format_to_bert(params):
-    corpus_type, json_file, args, save_file, label = params
+    corpus_type, json_file, args, save_file= params
     is_test = corpus_type == 'test'
     if (os.path.exists(save_file)):
         logger.info('Ignore %s' % save_file)
@@ -1642,6 +1647,8 @@ def _format_to_bert(params):
             sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
         else:
             sent_labels = label
+            if sent_labels == []:
+                sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 6)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
@@ -1761,11 +1768,11 @@ def format_to_lines(args):
                                if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
         train_corpora = sorted([os.path.join(train_txt_path, f) for f in os.listdir(train_txt_path)
                               if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
-        with open(os.path.join(test_txt_path, 'test.pkl'), 'rb') as f:
+        with open(os.path.join(root_data_dir, 'test.pkl'), 'rb') as f:
             test_label = pickle.load(f)
-        with open(os.path.join(val_txt_path, 'val.pkl'), 'rb') as f:
+        with open(os.path.join(root_data_dir, 'val.pkl'), 'rb') as f:
             val_label = pickle.load(f)
-        with open(os.path.join(train_txt_path, 'train.pkl'), 'rb') as f:
+        with open(os.path.join(root_data_dir, 'train.pkl'), 'rb') as f:
             train_label = pickle.load(f)
         for f_main in test_corpora:
             f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
@@ -1773,7 +1780,7 @@ def format_to_lines(args):
             f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
             f_tag = os.path.join(test_txt_path, f_tag_name)
             paper_id = os.path.basename(f_main).split('.')[0]
-            label = test_label[paper_id]
+            label = test_label[int(paper_id)]
             test_files.append((f_main, f_abs, f_tag, args, label))
         for f_main in val_corpora:
             f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
@@ -1781,7 +1788,7 @@ def format_to_lines(args):
             f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
             f_tag = os.path.join(val_txt_path, f_tag_name)
             paper_id = os.path.basename(f_main).split('.')[0]
-            label = val_label[paper_id]
+            label = val_label[int(paper_id)]
             valid_files.append((f_main, f_abs, f_tag, args, label))
         for f_main in train_corpora:
             f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
@@ -1789,7 +1796,7 @@ def format_to_lines(args):
             f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
             f_tag = os.path.join(train_txt_path, f_tag_name)
             paper_id = os.path.basename(f_main).split('.')[0]
-            label = train_label[paper_id]
+            label = train_label[int(paper_id)]
             train_files.append((f_main, f_abs, f_tag, args, label))
 
     start = time.time()
