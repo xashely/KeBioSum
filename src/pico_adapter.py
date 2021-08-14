@@ -162,6 +162,17 @@ def main():
         test_dataset = PicoDataset(test_src, test_labels, test_mask)
         tokenizer = AutoTokenizer.from_pretrained('roberta-base')
         #tokenizer.save_pretrained('./save_pretrained/')
+    elif args.model == "longformer":
+        train_src, train_labels, train_mask = load_dataset('train', args.model, shuffle=True)
+        val_src, val_labels, val_mask = load_dataset('valid', args.model, shuffle=False)
+        test_src, test_labels, test_mask = load_dataset('test', args.model, shuffle=False)
+        print(train_src[0], train_src[1])
+        print(train_labels[0], train_labels[1])
+        print(train_mask[0], train_mask[1])
+        train_dataset = PicoDataset(train_src, train_labels, train_mask)
+        val_dataset = PicoDataset(val_src, val_labels, val_mask)
+        test_dataset = PicoDataset(test_src, test_labels, test_mask)
+        tokenizer = AutoTokenizer.from_pretrained('allenai/longformer-base-4096')
     else:
         train_src, train_labels, train_mask, train_type_id = load_dataset('train', args.model, shuffle=True)
         val_src, val_labels, val_mask, val_type_id = load_dataset('valid', args.model, shuffle=False)
