@@ -214,6 +214,8 @@ def main():
 
     if args.model == "robert":
         model = AutoModelForMaskedLM.from_pretrained("roberta-base")
+    if args.model == "longformer":
+        model = AutoModelForMaskedLM.from_pretrained('allenai/longformer-base-4096')
     if args.model == 'bert':
         model = AutoModelForMaskedLM.from_pretrained('bert-base-uncased')
     if args.model == 'pubmed':

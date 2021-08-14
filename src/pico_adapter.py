@@ -206,6 +206,21 @@ def main():
             num_labels=len(label_list),
             id2label={0:'O', 1:"I-INT", 2:"I-PAR", 3:"I-OUT"}
         )
+    if args.model=="longformer":
+        config = RobertaConfig.from_pretrained(
+            'allenai/longformer-base-4096',
+            num_labels=len(label_list),
+        )
+        model = RobertaModelWithHeads.from_pretrained(
+            'allenai/longformer-base-4096',
+            config=config,
+        )
+        model.add_adapter(task)
+        model.add_tagging_head(
+            task,
+            num_labels=len(label_list),
+            id2label={0:'O', 1:"I-INT", 2:"I-PAR", 3:"I-OUT"}
+        )
     if args.model=='bert':
         model = AutoModelForTokenClassification.from_pretrained('bert-base-uncased', num_labels=len(label_list))
         model.add_adapter(task)
