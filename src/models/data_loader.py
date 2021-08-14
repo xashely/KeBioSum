@@ -116,15 +116,12 @@ def ext_batch_size_fn(new, count):
         pass
     src, labels = new[0], new[4]
     global max_n_sents, max_n_tokens, max_size
-    print(f"Count: {count}")
     if count == 1:
         max_size = 0
         max_n_sents = 0
         max_n_tokens = 0
-    print(f"Batch size function 1: {max_n_sents,max_n_tokens,max_size}")
     max_n_sents = max(max_n_sents, len(src))
     max_size = max(max_size, max_n_sents)
-    print(f"Batch size function 2: {max_n_sents,max_n_tokens,max_size}")
     src_elements = count * max_size
     return src_elements
 
@@ -253,8 +250,6 @@ class DataIterator(object):
     def create_batches(self):
         """ Create batches """
         data = self.data()
-
-        print(f"\n\n\n\nBatch size: {self.batch_size}\n\n\n\n")
         for buffer in self.batch_buffer(data, self.batch_size * 300):
 
             if (self.args.task == 'abs'):
