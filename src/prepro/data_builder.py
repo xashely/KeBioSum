@@ -1646,9 +1646,9 @@ def _format_to_bert(params):
         if args.corpus != "pubmed":
             sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
         else:
-            sent_labels = label
-            if sent_labels == []:
-                sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 6)
+            #sent_labels = label
+            #if sent_labels == []:
+            sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 6)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
