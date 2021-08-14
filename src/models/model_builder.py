@@ -184,7 +184,7 @@ class RoBerta(nn.Module):
                 model_name = 'allenai/longformer-base-4096'
                 # self.model = AutoModel.from_pretrained(model_name).to(device)
                 config = RobertaConfig.from_pretrained(model_name )
-                self.model = RobertaModelWithHeads.from_pretrained(
+                self.model = RobertaModel.from_pretrained(
                     model_name,
                     config=config,
                 ).to(device)
