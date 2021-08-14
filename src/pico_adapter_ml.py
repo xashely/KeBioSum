@@ -217,7 +217,9 @@ def main():
     if args.model == "longformer":
         model = AutoModelForMaskedLM.from_pretrained('allenai/longformer-base-4096')
         config = RobertaConfig.from_pretrained(
-            'allenai/longformer-base-4096'
+            'allenai/longformer-base-4096',
+            num_labels=len(label_list),
+            id2label={0:'O', 1:"I-INT", 2:"I-PAR", 3:"I-OUT"}
         )
         model = RobertaModelWithHeads.from_pretrained(
             'allenai/longformer-base-4096',
