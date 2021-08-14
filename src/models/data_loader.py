@@ -226,7 +226,6 @@ class DataIterator(object):
                 continue
             minibatch.append(ex)
             size_so_far = self.batch_size_fn(ex, len(minibatch))
-            print(f"Batch size:{batch_size}")
             if size_so_far == batch_size:
                 yield minibatch
                 minibatch, size_so_far = [], 0
@@ -254,6 +253,8 @@ class DataIterator(object):
     def create_batches(self):
         """ Create batches """
         data = self.data()
+
+        print(f"\n\n\n\nBatch size: {self.batch_size}\n\n\n\n")
         for buffer in self.batch_buffer(data, self.batch_size * 300):
 
             if (self.args.task == 'abs'):
