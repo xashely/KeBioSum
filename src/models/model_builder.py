@@ -183,6 +183,14 @@ class RoBerta(nn.Module):
             if model == "longformer":
                 model_name = 'allenai/longformer-base-4096'
                 self.model = AutoModel.from_pretrained(model_name).to(device)
+                config = RobertaConfig.from_pretrained(
+                    model_name,
+                    num_labels=len(label_list),
+                )
+                self.model = RobertaModelWithHeads.from_pretrained(
+                    model_name,
+                    config=config,
+                )
                 if args.adapter_training_strategy != 'basic':
                     if args.adapter_training_strategy == 'both':
                         self.model.load_adapter(args.adapter_path_robert_generative, load_as="mlm",with_head=False)
