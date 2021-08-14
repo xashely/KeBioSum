@@ -217,9 +217,6 @@ class RoBerta(nn.Module):
             #if args.model=='bert':
             #    top_vec, _ = self.model(x, segs, attention_mask=mask)
             #else:
-            print(f"\n\nshape x:{np.shape(x)}")
-            print(f"\n\nshape segs:{np.shape(segs)}")
-            print(f"\n\nshape mask:{np.shape(mask)}")
             output = self.model(input_ids=x, token_type_ids=segs, attention_mask=mask)
             top_vec = output.last_hidden_state
         else:
@@ -269,7 +266,6 @@ class ExtSummarizer(nn.Module):
         self.to(device)
 
     def forward(self, src, segs, clss, mask_src, mask_cls):
-        print(f"ExtSum: {np.shape(src)}")
         top_vec = self.RoBerta(src, segs, mask_src)
         sents_vec = top_vec[torch.arange(top_vec.size(0)).unsqueeze(1), clss]
         sents_vec = sents_vec * mask_cls[:, :, None].float()
