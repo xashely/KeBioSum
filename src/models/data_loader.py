@@ -116,6 +116,8 @@ def ext_batch_size_fn(new, count):
         pass
     src, labels = new[0], new[4]
     global max_n_sents, max_n_tokens, max_size
+    print(f"Count: {count}")
+    print(f"Batch size function: {max_n_sents,max_n_tokens,max_size}")
     if count == 1:
         max_size = 0
         max_n_sents = 0
