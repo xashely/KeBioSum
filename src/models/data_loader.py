@@ -226,7 +226,7 @@ class DataIterator(object):
                 continue
             minibatch.append(ex)
             size_so_far = self.batch_size_fn(ex, len(minibatch))
-            print(batch_size)
+            print(f"Batch size:{batch_size}")
             if size_so_far == batch_size:
                 yield minibatch
                 minibatch, size_so_far = [], 0
