@@ -216,6 +216,14 @@ def main():
         model = AutoModelForMaskedLM.from_pretrained("roberta-base")
     if args.model == "longformer":
         model = AutoModelForMaskedLM.from_pretrained('allenai/longformer-base-4096')
+        config = RobertaConfig.from_pretrained(
+            'allenai/longformer-base-4096'
+        )
+        model = RobertaModelWithHeads.from_pretrained(
+            'allenai/longformer-base-4096',
+            config=config,
+        )
+        model.add_adapter(task)
     if args.model == 'bert':
         model = AutoModelForMaskedLM.from_pretrained('bert-base-uncased')
     if args.model == 'pubmed':
