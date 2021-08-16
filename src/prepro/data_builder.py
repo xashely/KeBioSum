@@ -1448,7 +1448,7 @@ def format_to_bio_bert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
 
         pool = Pool(args.n_cpus)
-        for d in pool.imap(_format_to_bio_bert, ,num_sents_summary):
+        for d in pool.imap(_format_to_bio_bert, a_lst,num_sents_summary):
             pass
         pool.close()
         pool.join()
