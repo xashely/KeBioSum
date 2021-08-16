@@ -195,10 +195,11 @@ class RoBerta(nn.Module):
                     adapter_setup = Fuse("mlm","finetune")
                 self.model.train_fusion(adapter_setup)
                 self.model.encoder.enable_adapters(adapter_setup, True, True)
-                self.model.freeze_model(freeze=False)
-            #else:
-            #    self.model.train_adapter("finetune")
-            #    self.model.set_active_adapters("finetune")
+                #self.model.freeze_model(freeze=False)
+            else:
+                self.model.add_adapter("finetune")
+                self.model.train_adapter("finetune")
+                self.model.set_active_adapters("finetune")
         self.finetune = finetune
 
     def forward(self, x, segs, mask):
