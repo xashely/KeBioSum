@@ -1377,11 +1377,11 @@ def format_to_robert(args):
         a_lst = []
         for json_f in glob.glob(pjoin(args.raw_path, '*' + corpus_type + '.*.json')):
             real_name = json_f.split('/')[-1]
-            #print("json_f:", json_f, real_name)
+            print("json_f:", json_f, real_name)
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
         
         pool = Pool(args.n_cpus)
-        for d in pool.imap(_format_to_robert, a_lst),num_sents_summary:
+        for d in pool.imap(_format_to_robert, a_lst,num_sents_summary):
             pass
         pool.close()
         pool.join()
