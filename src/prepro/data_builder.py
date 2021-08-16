@@ -1381,7 +1381,8 @@ def format_to_robert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
         
         pool = Pool(args.n_cpus)
-        for d in pool.imap(_format_to_robert, a_lst,num_sents_summary):
+
+        for d in pool.starmap(_format_to_robert,zip(a_lst, itertools.repeat(num_sents_summary))):
             pass
         pool.close()
         pool.join()
@@ -1404,7 +1405,7 @@ def format_to_bert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
 
         pool = Pool(args.n_cpus)
-        for d in pool.imap(_format_to_bert, a_lst,num_sents_summary):
+        for d in pool.starmap(_format_to_bert, zip(a_lst, itertools.repeat(num_sents_summary))):
             pass
         pool.close()
         pool.join()
@@ -1426,7 +1427,7 @@ def format_to_pubmed_bert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
 
         pool = Pool(args.n_cpus)
-        for d in pool.imap(_format_to_pubmed_bert, a_lst,num_sents_summary):
+        for d in pool.starmap(_format_to_pubmed_bert,zip(a_lst, itertools.repeat(num_sents_summary))):
             pass
         pool.close()
         pool.join()
@@ -1448,7 +1449,7 @@ def format_to_bio_bert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
 
         pool = Pool(args.n_cpus)
-        for d in pool.imap(_format_to_bio_bert, a_lst,num_sents_summary):
+        for d in pool.starmap(_format_to_bio_bert, zip(a_lst, itertools.repeat(num_sents_summary))):
             pass
         pool.close()
         pool.join()
