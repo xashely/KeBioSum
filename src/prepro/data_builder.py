@@ -1368,6 +1368,7 @@ def format_to_robert(args):
     print('... (5) Converting data to roBERT data... this will take a while')
 
     datasets = ['train', 'valid', 'test']
+    num_sents_summary = args.n_sentences_tgt
 
     #corpora = [os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
     #           if not f.startswith('.') and f.endswith('.json')]
@@ -1380,7 +1381,7 @@ def format_to_robert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
         
         pool = Pool(args.n_cpus)
-        for d in pool.imap(_format_to_robert, a_lst):
+        for d in pool.imap(_format_to_robert, a_lst),num_sents_summary:
             pass
         pool.close()
         pool.join()
@@ -1390,6 +1391,7 @@ def format_to_bert(args):
     print('... (5) Converting data to BERT data... this will take a while')
 
     datasets = ['train', 'valid', 'test']
+    num_sents_summary = args.n_sentences_tgt
 
     # corpora = [os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
     #           if not f.startswith('.') and f.endswith('.json')]
@@ -1402,7 +1404,7 @@ def format_to_bert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
 
         pool = Pool(args.n_cpus)
-        for d in pool.imap(_format_to_bert, a_lst):
+        for d in pool.imap(_format_to_bert, a_lst,num_sents_summary):
             pass
         pool.close()
         pool.join()
@@ -1411,6 +1413,7 @@ def format_to_pubmed_bert(args):
     print('... (5) Converting data to pubmed BERT data... this will take a while')
 
     datasets = ['train', 'valid', 'test']
+    num_sents_summary = args.n_sentences_tgt
 
     # corpora = [os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
     #           if not f.startswith('.') and f.endswith('.json')]
@@ -1423,7 +1426,7 @@ def format_to_pubmed_bert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
 
         pool = Pool(args.n_cpus)
-        for d in pool.imap(_format_to_pubmed_bert, a_lst):
+        for d in pool.imap(_format_to_pubmed_bert, a_lst,num_sents_summary):
             pass
         pool.close()
         pool.join()
@@ -1432,6 +1435,7 @@ def format_to_bio_bert(args):
     print('... (5) Converting data to BioBERT data... this will take a while')
 
     datasets = ['train', 'valid', 'test']
+    num_sents_summary = args.n_sentences_tgt
 
     # corpora = [os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
     #           if not f.startswith('.') and f.endswith('.json')]
@@ -1444,7 +1448,7 @@ def format_to_bio_bert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
 
         pool = Pool(args.n_cpus)
-        for d in pool.imap(_format_to_bio_bert, a_lst):
+        for d in pool.imap(_format_to_bio_bert, ,num_sents_summary):
             pass
         pool.close()
         pool.join()
@@ -1591,7 +1595,7 @@ def format_to_pico_adapter_bio_bert(args):
         logger.info('Saving to %s' % save_path)
         torch.save(data, save_path)
 
-def _format_to_robert(params):
+def _format_to_robert(params,num_sents_summary):
     corpus_type, json_file, args, save_file = params
     is_test = corpus_type == 'test'
     if (os.path.exists(save_file)):
@@ -1605,7 +1609,7 @@ def _format_to_robert(params):
     datasets = []
     for d in jobs:
         source, tgt = d['src'], d['tgt']
-        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
+        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, num_sents_summary)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
@@ -1624,7 +1628,7 @@ def _format_to_robert(params):
     torch.save(datasets, save_file)
     gc.collect()
 
-def _format_to_bert(params):
+def _format_to_bert(params,num_sents_summary):
     corpus_type, json_file, args, save_file, label = params
     is_test = corpus_type == 'test'
     if (os.path.exists(save_file)):
@@ -1639,7 +1643,7 @@ def _format_to_bert(params):
     for d in jobs:
         source, tgt, label = d['src'], d['tgt'], d['label']
         if args.corpus != "pubmed":
-            sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
+            sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, num_sents_summary)
         else:
             sent_labels = label
         if (args.lower):
@@ -1661,7 +1665,7 @@ def _format_to_bert(params):
     torch.save(datasets, save_file)
     gc.collect()
 
-def _format_to_pubmed_bert(params):
+def _format_to_pubmed_bert(params,num_sents_summary):
     corpus_type, json_file, args, save_file = params
     is_test = corpus_type == 'test'
     if (os.path.exists(save_file)):
@@ -1675,7 +1679,7 @@ def _format_to_pubmed_bert(params):
     datasets = []
     for d in jobs:
         source, tgt = d['src'], d['tgt']
-        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
+        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, num_sents_summary)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
@@ -1695,7 +1699,7 @@ def _format_to_pubmed_bert(params):
     torch.save(datasets, save_file)
     gc.collect()
 
-def _format_to_bio_bert(params):
+def _format_to_bio_bert(params,num_sents_summary):
     corpus_type, json_file, args, save_file = params
     is_test = corpus_type == 'test'
     if (os.path.exists(save_file)):
@@ -1709,7 +1713,7 @@ def _format_to_bio_bert(params):
     datasets = []
     for d in jobs:
         source, tgt = d['src'], d['tgt']
-        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
+        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, num_sents_summary)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
