@@ -215,8 +215,7 @@ class DataIterator(object):
     def batch_buffer(self, data, batch_size):
         minibatch, size_so_far = [], 0
         for ex in data:
-            if len(ex['src'])==0:
-                    # or (len(ex['src'])<512) or (len(ex['segs'])<512)):
+            if (len(ex['src'])==0): #or (len(ex['src'])<512) or (len(ex['segs'])<512):
                 continue
             ex = self.preprocess(ex, self.is_test)
             #print(ex)

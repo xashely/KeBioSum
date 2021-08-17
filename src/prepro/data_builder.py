@@ -674,7 +674,7 @@ class PubmedData():
         src_txt = [' '.join(sent) for sent in src]
         text = ' {} {} '.format(self.sep_token, self.cls_token).join(src_txt)
         src_subtokens = self.tokenizer.tokenize(text)
-        #src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
+        src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
         _segs = [-1] + [i for i, t in enumerate(src_subtoken_idxs) if t == self.sep_vid]
         segs = [_segs[i] - _segs[i - 1] for i in range(1, len(_segs))]
@@ -684,6 +684,9 @@ class PubmedData():
                 segments_ids += s * [0]
             else:
                 segments_ids += s * [1]
+        #print(src_subtokens)
+        #print(len(segments_ids),len(src_subtoken_idxs))
+        assert len(segments_ids)==len(src_subtoken_idxs)
         #segments_ids = [0]*len(src_subtoken_idxs)
         cls_ids = [i for i, t in enumerate(src_subtoken_idxs) if t == self.cls_vid]
         sent_labels = sent_labels[:len(cls_ids)]
@@ -741,7 +744,7 @@ class BioBertData():
         src_txt = [' '.join(sent) for sent in src]
         text = ' {} {} '.format(self.sep_token, self.cls_token).join(src_txt)
         src_subtokens = self.tokenizer.tokenize(text)
-        #src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
+        src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
         _segs = [-1] + [i for i, t in enumerate(src_subtoken_idxs) if t == self.sep_vid]
         segs = [_segs[i] - _segs[i - 1] for i in range(1, len(_segs))]
@@ -752,6 +755,7 @@ class BioBertData():
             else:
                 segments_ids += s * [1]
         #segments_ids = [0]*len(src_subtoken_idxs)
+        assert len(segments_ids)==len(src_subtoken_idxs)
         cls_ids = [i for i, t in enumerate(src_subtoken_idxs) if t == self.cls_vid]
         sent_labels = sent_labels[:len(cls_ids)]
 
@@ -1648,7 +1652,7 @@ def _format_to_bert(params):
         else:
             #sent_labels = label
             #if sent_labels == []:
-            sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 6)
+            sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 7)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
