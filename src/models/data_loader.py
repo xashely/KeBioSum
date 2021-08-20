@@ -237,7 +237,7 @@ class DataIterator(object):
                 yield minibatch[:-1]
                 minibatch, (size_so_far,total_tokens)  = minibatch[-1:], self.batch_size_fn(ex, 1)
                 # print("case 3")
-            print(f"BATCH BUFFER: Size so far, total tokens: {size_so_far},{total_tokens}")
+            # print(f"BATCH BUFFER: Size so far, total tokens: {size_so_far},{total_tokens}")
         if minibatch:
             yield minibatch
 
