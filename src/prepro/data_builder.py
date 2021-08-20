@@ -342,7 +342,6 @@ def tokenize_pubmed_dataset(args):
     
     dirs = ['test_pubmed','train_pubmed','val_pubmed']
     dirs_rename = ['test', 'train', 'val']
-    labels = []
     for idx, dir in enumerate(dirs):
         files_count_real = 0
         tokenized_data_dir = os.path.join(os.path.abspath(args.save_path),dir)
@@ -366,17 +365,23 @@ def tokenize_pubmed_dataset(args):
         
         # write out new csv containing files we use in our dataset
         pid = 0
+        labels = []
         for i,row in tqdm(df.iterrows(),total=df.shape[0]):
                 
             # read in pubmed file if available
         
             # preprocess / clean file
+            try:
+               label =  row['label']
+            except KeyError:
+                label = []
             cleaned_text = clean_abstract(row['text'])
             tpath = os.path.join(txt_dir, '{}.txt'.format(pid))
             tpath_abs = os.path.join(txt_dir, '{}.abs.txt'.format(pid))
             # preprocess/ clean abstract
             abstract = clean_abstract(row['summary'])
-            labels.append(row['label'])
+            #print(row)
+            labels.append(label)
             #print('text:', cleaned_text)
             #print('summary:', abstract)
         
@@ -420,11 +425,11 @@ def tokenize_pubmed_dataset(args):
         # Check that the tokenized data directory contains the same number of files as the original directory
         num_orig = len(os.listdir(txt_dir))
         num_tokenized = len(os.listdir(tokenized_data_dir))
-        if num_orig != num_tokenized:
-            raise Exception(
-                "The tokenized data directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
-                    tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
-        print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
+        #if num_orig != num_tokenized:
+        #    raise Exception(
+        #        "The tokenized data directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
+        #            tokenized_data_dir, num_tokenized, root_data_dir, num_orig))
+        #print("Successfully finished tokenizing %s to %s.\n" % (root_data_dir, tokenized_data_dir))
         shutil.rmtree(txt_dir)
 
 def cal_rouge(evaluated_ngrams, reference_ngrams):
@@ -669,7 +674,7 @@ class PubmedData():
         src_txt = [' '.join(sent) for sent in src]
         text = ' {} {} '.format(self.sep_token, self.cls_token).join(src_txt)
         src_subtokens = self.tokenizer.tokenize(text)
-        #src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
+        src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
         _segs = [-1] + [i for i, t in enumerate(src_subtoken_idxs) if t == self.sep_vid]
         segs = [_segs[i] - _segs[i - 1] for i in range(1, len(_segs))]
@@ -679,6 +684,9 @@ class PubmedData():
                 segments_ids += s * [0]
             else:
                 segments_ids += s * [1]
+        #print(src_subtokens)
+        #print(len(segments_ids),len(src_subtoken_idxs))
+        assert len(segments_ids)==len(src_subtoken_idxs)
         #segments_ids = [0]*len(src_subtoken_idxs)
         cls_ids = [i for i, t in enumerate(src_subtoken_idxs) if t == self.cls_vid]
         sent_labels = sent_labels[:len(cls_ids)]
@@ -736,7 +744,7 @@ class BioBertData():
         src_txt = [' '.join(sent) for sent in src]
         text = ' {} {} '.format(self.sep_token, self.cls_token).join(src_txt)
         src_subtokens = self.tokenizer.tokenize(text)
-        #src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
+        src_subtokens = [self.cls_token] + src_subtokens + [self.sep_token]
         src_subtoken_idxs = self.tokenizer.convert_tokens_to_ids(src_subtokens)
         _segs = [-1] + [i for i, t in enumerate(src_subtoken_idxs) if t == self.sep_vid]
         segs = [_segs[i] - _segs[i - 1] for i in range(1, len(_segs))]
@@ -747,6 +755,7 @@ class BioBertData():
             else:
                 segments_ids += s * [1]
         #segments_ids = [0]*len(src_subtoken_idxs)
+        assert len(segments_ids)==len(src_subtoken_idxs)
         cls_ids = [i for i, t in enumerate(src_subtoken_idxs) if t == self.cls_vid]
         sent_labels = sent_labels[:len(cls_ids)]
 
@@ -1368,7 +1377,6 @@ def format_to_robert(args):
     print('... (5) Converting data to roBERT data... this will take a while')
 
     datasets = ['train', 'valid', 'test']
-    num_sents_summary = args.n_sentences_tgt
 
     #corpora = [os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
     #           if not f.startswith('.') and f.endswith('.json')]
@@ -1377,12 +1385,11 @@ def format_to_robert(args):
         a_lst = []
         for json_f in glob.glob(pjoin(args.raw_path, '*' + corpus_type + '.*.json')):
             real_name = json_f.split('/')[-1]
-            print("json_f:", json_f, real_name)
+            #print("json_f:", json_f, real_name)
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
         
         pool = Pool(args.n_cpus)
-
-        for d in pool.starmap(_format_to_robert,zip(a_lst, itertools.repeat(num_sents_summary))):
+        for d in pool.imap(_format_to_robert, a_lst):
             pass
         pool.close()
         pool.join()
@@ -1392,7 +1399,6 @@ def format_to_bert(args):
     print('... (5) Converting data to BERT data... this will take a while')
 
     datasets = ['train', 'valid', 'test']
-    num_sents_summary = args.n_sentences_tgt
 
     # corpora = [os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
     #           if not f.startswith('.') and f.endswith('.json')]
@@ -1405,7 +1411,7 @@ def format_to_bert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
 
         pool = Pool(args.n_cpus)
-        for d in pool.starmap(_format_to_bert, zip(a_lst, itertools.repeat(num_sents_summary))):
+        for d in pool.imap(_format_to_bert, a_lst):
             pass
         pool.close()
         pool.join()
@@ -1414,7 +1420,6 @@ def format_to_pubmed_bert(args):
     print('... (5) Converting data to pubmed BERT data... this will take a while')
 
     datasets = ['train', 'valid', 'test']
-    num_sents_summary = args.n_sentences_tgt
 
     # corpora = [os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
     #           if not f.startswith('.') and f.endswith('.json')]
@@ -1427,7 +1432,7 @@ def format_to_pubmed_bert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
 
         pool = Pool(args.n_cpus)
-        for d in pool.starmap(_format_to_pubmed_bert,zip(a_lst, itertools.repeat(num_sents_summary))):
+        for d in pool.imap(_format_to_pubmed_bert, a_lst):
             pass
         pool.close()
         pool.join()
@@ -1436,7 +1441,6 @@ def format_to_bio_bert(args):
     print('... (5) Converting data to BioBERT data... this will take a while')
 
     datasets = ['train', 'valid', 'test']
-    num_sents_summary = args.n_sentences_tgt
 
     # corpora = [os.path.join(args.raw_path, f) for f in os.listdir(args.raw_path)
     #           if not f.startswith('.') and f.endswith('.json')]
@@ -1449,7 +1453,7 @@ def format_to_bio_bert(args):
             a_lst.append((corpus_type, json_f, args, pjoin(args.save_path, real_name.replace('json', 'bert.pt'))))
 
         pool = Pool(args.n_cpus)
-        for d in pool.starmap(_format_to_bio_bert, zip(a_lst, itertools.repeat(num_sents_summary))):
+        for d in pool.imap(_format_to_bio_bert, a_lst):
             pass
         pool.close()
         pool.join()
@@ -1596,7 +1600,7 @@ def format_to_pico_adapter_bio_bert(args):
         logger.info('Saving to %s' % save_path)
         torch.save(data, save_path)
 
-def _format_to_robert(params,num_sents_summary):
+def _format_to_robert(params):
     corpus_type, json_file, args, save_file = params
     is_test = corpus_type == 'test'
     if (os.path.exists(save_file)):
@@ -1610,7 +1614,7 @@ def _format_to_robert(params,num_sents_summary):
     datasets = []
     for d in jobs:
         source, tgt = d['src'], d['tgt']
-        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, num_sents_summary)
+        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
@@ -1629,8 +1633,8 @@ def _format_to_robert(params,num_sents_summary):
     torch.save(datasets, save_file)
     gc.collect()
 
-def _format_to_bert(params,num_sents_summary):
-    corpus_type, json_file, args, save_file, label = params
+def _format_to_bert(params):
+    corpus_type, json_file, args, save_file= params
     is_test = corpus_type == 'test'
     if (os.path.exists(save_file)):
         logger.info('Ignore %s' % save_file)
@@ -1644,9 +1648,11 @@ def _format_to_bert(params,num_sents_summary):
     for d in jobs:
         source, tgt, label = d['src'], d['tgt'], d['label']
         if args.corpus != "pubmed":
-            sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, num_sents_summary)
+            sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
         else:
-            sent_labels = label
+            #sent_labels = label
+            #if sent_labels == []:
+            sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 7)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
@@ -1666,7 +1672,7 @@ def _format_to_bert(params,num_sents_summary):
     torch.save(datasets, save_file)
     gc.collect()
 
-def _format_to_pubmed_bert(params,num_sents_summary):
+def _format_to_pubmed_bert(params):
     corpus_type, json_file, args, save_file = params
     is_test = corpus_type == 'test'
     if (os.path.exists(save_file)):
@@ -1680,7 +1686,7 @@ def _format_to_pubmed_bert(params,num_sents_summary):
     datasets = []
     for d in jobs:
         source, tgt = d['src'], d['tgt']
-        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, num_sents_summary)
+        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
@@ -1700,7 +1706,7 @@ def _format_to_pubmed_bert(params,num_sents_summary):
     torch.save(datasets, save_file)
     gc.collect()
 
-def _format_to_bio_bert(params,num_sents_summary):
+def _format_to_bio_bert(params):
     corpus_type, json_file, args, save_file = params
     is_test = corpus_type == 'test'
     if (os.path.exists(save_file)):
@@ -1714,7 +1720,7 @@ def _format_to_bio_bert(params,num_sents_summary):
     datasets = []
     for d in jobs:
         source, tgt = d['src'], d['tgt']
-        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, num_sents_summary)
+        sent_labels = greedy_selection(source[:args.max_src_nsents], tgt, 3)
         if (args.lower):
             source = [' '.join(s).lower().split() for s in source]
             tgt = [' '.join(s).lower().split() for s in tgt]
@@ -1766,11 +1772,11 @@ def format_to_lines(args):
                                if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
         train_corpora = sorted([os.path.join(train_txt_path, f) for f in os.listdir(train_txt_path)
                               if not f.startswith('.') and not f.endswith('.abs.txt.json') and not f.endswith('.tag.json')])
-        with open(os.path.join(test_txt_path, 'test.pkl'), 'rb') as f:
+        with open(os.path.join(root_data_dir, 'test.pkl'), 'rb') as f:
             test_label = pickle.load(f)
-        with open(os.path.join(val_txt_path, 'val.pkl'), 'rb') as f:
+        with open(os.path.join(root_data_dir, 'val.pkl'), 'rb') as f:
             val_label = pickle.load(f)
-        with open(os.path.join(train_txt_path, 'train.pkl'), 'rb') as f:
+        with open(os.path.join(root_data_dir, 'train.pkl'), 'rb') as f:
             train_label = pickle.load(f)
         for f_main in test_corpora:
             f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
@@ -1778,7 +1784,7 @@ def format_to_lines(args):
             f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
             f_tag = os.path.join(test_txt_path, f_tag_name)
             paper_id = os.path.basename(f_main).split('.')[0]
-            label = test_label[paper_id]
+            label = test_label[int(paper_id)]
             test_files.append((f_main, f_abs, f_tag, args, label))
         for f_main in val_corpora:
             f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
@@ -1786,7 +1792,7 @@ def format_to_lines(args):
             f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
             f_tag = os.path.join(val_txt_path, f_tag_name)
             paper_id = os.path.basename(f_main).split('.')[0]
-            label = val_label[paper_id]
+            label = val_label[int(paper_id)]
             valid_files.append((f_main, f_abs, f_tag, args, label))
         for f_main in train_corpora:
             f_abs_name = '{}.abs.txt.json'.format(os.path.basename(f_main).split('.')[0])
@@ -1794,7 +1800,7 @@ def format_to_lines(args):
             f_tag_name = '{}.tag.json'.format(os.path.basename(f_main).split('.')[0])
             f_tag = os.path.join(train_txt_path, f_tag_name)
             paper_id = os.path.basename(f_main).split('.')[0]
-            label = train_label[paper_id]
+            label = train_label[int(paper_id)]
             train_files.append((f_main, f_abs, f_tag, args, label))
 
     start = time.time()
