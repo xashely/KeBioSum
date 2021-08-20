@@ -223,13 +223,16 @@ class DataIterator(object):
             if(ex is None or any([not val for val in ex])):
                 continue
             minibatch.append(ex)
-            size_so_far = self.batch_size_fn(ex, len(minibatch))
+            size_so_far, total_tokens = self.batch_size_fn(ex, len(minibatch))
+            if total_tokens > self.args.max_pos:
+                yield minibatch[:-1]
+                minibatch,  (size_so_far,total_tokens) = minibatch[-1:], self.batch_size_fn(ex, 1)
             if size_so_far == batch_size:
                 yield minibatch
-                minibatch, size_so_far = [], 0
+                minibatch, size_so_far, total_tokens = [], 0, 0
             elif size_so_far > batch_size:
                 yield minibatch[:-1]
-                minibatch, size_so_far = minibatch[-1:], self.batch_size_fn(ex, 1)
+                minibatch, (size_so_far,total_tokens)  = minibatch[-1:], self.batch_size_fn(ex, 1)
         if minibatch:
             yield minibatch
 
@@ -241,13 +244,13 @@ class DataIterator(object):
             size_so_far, total_tokens = self.batch_size_fn(ex, len(minibatch))
             if total_tokens > self.args.max_pos:
                 yield minibatch[:-1]
-                minibatch, size_so_far = minibatch[-1:], self.batch_size_fn(ex, 1)
+                minibatch,  (size_so_far,total_tokens) = minibatch[-1:], self.batch_size_fn(ex, 1)
             if size_so_far == batch_size:
                 yield minibatch
-                minibatch, size_so_far = [], 0
+                minibatch, size_so_far, total_tokens = [], 0, 0
             elif size_so_far > batch_size:
                 yield minibatch[:-1]
-                minibatch, size_so_far = minibatch[-1:], self.batch_size_fn(ex, 1)
+                minibatch, (size_so_far,total_tokens)  = minibatch[-1:], self.batch_size_fn(ex, 1)
                 
         if minibatch:
             yield minibatch
