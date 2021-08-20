@@ -122,7 +122,8 @@ def ext_batch_size_fn(new, count):
         max_n_tokens = 0
     max_n_sents = max(max_n_sents, len(src))
     max_size = max(max_size, max_n_sents)
-    src_elements = count * max_size
+    # src_elements = count * max_size # <--- to set batch size by number of tokens
+    src_elements = count # <---- to set batch size by number of documents
     return src_elements
 
 
