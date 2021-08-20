@@ -122,9 +122,9 @@ def ext_batch_size_fn(new, count):
         max_n_tokens = 0
     max_n_sents = max(max_n_sents, len(src))
     max_size = max(max_size, max_n_sents)
-    # src_elements = count * max_size # <--- to set batch size by number of tokens
-    src_elements = count # <---- to set batch size by number of documents
-    return src_elements
+    total_token_len = count * max_size # <--- to set batch size by number of tokens
+    batch_size = count # <---- to set batch size by number of documents
+    return batch_size,total_token_len
 
 
 class Dataloader(object):
@@ -238,13 +238,17 @@ class DataIterator(object):
         minibatch, size_so_far = [], 0
         for ex in data:
             minibatch.append(ex)
-            size_so_far = self.batch_size_fn(ex, len(minibatch))
+            size_so_far, total_tokens = self.batch_size_fn(ex, len(minibatch))
+            if total_tokens > self.args.max_pos:
+                yield minibatch[:-1]
+                minibatch, size_so_far = minibatch[-1:], self.batch_size_fn(ex, 1)
             if size_so_far == batch_size:
                 yield minibatch
                 minibatch, size_so_far = [], 0
             elif size_so_far > batch_size:
                 yield minibatch[:-1]
                 minibatch, size_so_far = minibatch[-1:], self.batch_size_fn(ex, 1)
+                
         if minibatch:
             yield minibatch
 
