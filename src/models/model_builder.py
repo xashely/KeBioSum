@@ -9,7 +9,6 @@ from models.decoder import TransformerDecoder
 from models.encoder import Classifier, ExtTransformerEncoder
 from models.optimizers import Optimizer
 from transformers.adapters.composition import Fuse
-import numpy as np
 
 
 def build_optim(args, model, checkpoint):
@@ -252,12 +251,13 @@ class ExtSummarizer(nn.Module):
             self.RoBerta.model = RobertaModel(roberta_config)
             self.ext_layer = Classifier(self.RoBerta.model.config.hidden_size)
 
-        # if (args.max_pos > 512):
-        #     my_pos_embeddings = nn.Embedding(args.max_pos, self.RoBerta.model.config.hidden_size)
-        #     my_pos_embeddings.weight.data[:512] = self.RoBerta.model.embeddings.position_embeddings.weight.data
-        #     my_pos_embeddings.weight.data[512:] = self.RoBerta.model.embeddings.position_embeddings.weight.data[-1][
-        #                                           None, :].repeat(args.max_pos - 512, 1)
-        #     self.RoBerta.model.embeddings.position_embeddings = my_pos_embeddings
+        if args.model != "longformer":
+            if (args.max_pos > 512):
+                my_pos_embeddings = nn.Embedding(args.max_pos, self.RoBerta.model.config.hidden_size)
+                my_pos_embeddings.weight.data[:512] = self.RoBerta.model.embeddings.position_embeddings.weight.data
+                my_pos_embeddings.weight.data[512:] = self.RoBerta.model.embeddings.position_embeddings.weight.data[-1][
+                                                    None, :].repeat(args.max_pos - 512, 1)
+                self.RoBerta.model.embeddings.position_embeddings = my_pos_embeddings
 
         if checkpoint is not None:
             self.load_state_dict(checkpoint['model'], strict=True)
