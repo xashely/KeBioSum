@@ -312,10 +312,10 @@ class Trainer(object):
             clss = batch.clss
             mask = batch.mask_src
             mask_cls = batch.mask_cls
-            print(f"src shape: {np.shape(src)}")
-            print(f"segs shape: {np.shape(segs)}")
-            print(f"src: {src}")
-            print(f"segs: {segs}")
+            # print(f"src shape: {np.shape(src)}")
+            # print(f"segs shape: {np.shape(segs)}")
+            # print(f"src: {src}")
+            # print(f"segs: {segs}")
 
             sent_scores, mask= self.model(src, segs, clss, mask, mask_cls)
 

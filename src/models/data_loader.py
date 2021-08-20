@@ -122,7 +122,7 @@ def ext_batch_size_fn(new, count):
         max_n_tokens = 0
     max_n_sents = max(max_n_sents, len(src))
     max_size = max(max_size, max_n_sents)
-    print(f"Max size: {max_size}")
+    # print(f"Max size: {max_size}")
     total_token_len = count * max_size # <--- to set batch size by number of tokens
     batch_size = count # <---- to set batch size by number of documents
     return batch_size,total_token_len
@@ -228,15 +228,15 @@ class DataIterator(object):
             if total_tokens > self.args.max_pos:
                 yield minibatch[:-1]
                 minibatch,  (size_so_far,total_tokens) = minibatch[-1:], self.batch_size_fn(ex, 1)
-                print("case 1")
+                # print("case 1")
             if size_so_far == batch_size:
                 yield minibatch
                 minibatch, size_so_far, total_tokens = [], 0, 0
-                print("case 2")
+                # print("case 2")
             elif size_so_far > batch_size:
                 yield minibatch[:-1]
                 minibatch, (size_so_far,total_tokens)  = minibatch[-1:], self.batch_size_fn(ex, 1)
-                print("case 3")
+                # print("case 3")
             print(f"BATCH BUFFER: Size so far, total tokens: {size_so_far},{total_tokens}")
         if minibatch:
             yield minibatch
@@ -256,7 +256,7 @@ class DataIterator(object):
             elif size_so_far > batch_size:
                 yield minibatch[:-1]
                 minibatch, (size_so_far,total_tokens)  = minibatch[-1:], self.batch_size_fn(ex, 1)
-            print(f"BATCH: Size so far, total tokens: {size_so_far},{total_tokens}")
+            # print(f"BATCH: Size so far, total tokens: {size_so_far},{total_tokens}")
                 
         if minibatch:
             yield minibatch
