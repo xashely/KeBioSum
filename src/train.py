@@ -42,7 +42,9 @@ if __name__ == '__main__':
     parser.add_argument("-adapter_path_robert_discriminative",default="/data/xieqianqian/covid-bert/adapter/final_adapter")
     parser.add_argument("-adapter_path_bert_discriminative",default="/data/xieqianqian/covid-bert/adapter/final_bert_adapter")
 
-    parser.add_argument("-batch_size", default=140, type=int) #number of tokens allowed per batch - i.e. if batch size is 12000, and a document is 512 - batch size will be 23. 
+    # number of documents per batch. If total tokens in all documents exceed max_pos, this will only include the
+    # number of documents up to the amount that adds up to max_pos
+    parser.add_argument("-batch_size", default=1, type=int)
     parser.add_argument("-test_batch_size", default=200, type=int)
 
     parser.add_argument("-max_pos", default=512, type=int)
