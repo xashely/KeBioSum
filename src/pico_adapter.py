@@ -2,7 +2,7 @@ import logging
 import os
 import sys
 import torch
-from transformers import AutoModelForTokenClassification, TrainingArguments, Trainer, RobertaConfig, RobertaModelWithHeads, AutoModelWithHeads
+from transformers import RobertaTokenizer,AutoModelForTokenClassification, TrainingArguments, Trainer, RobertaConfig, RobertaModelWithHeads, AutoModelWithHeads
 from transformers import DataCollatorForTokenClassification
 from transformers import AutoTokenizer
 from transformers import AdapterType
@@ -138,7 +138,14 @@ class PicoBertDataset(torch.utils.data.Dataset):
         #print(self.labels[idx],type(self.labels[idx]))
         item['labels'] = self.labels[idx]
         item['input_ids'] = self.input_ids[idx]
+        #idxs_par = torch.nonzero(torch.tensor(self.input_ids[idx]) == 2) 
+        #idxs_out = torch.nonzero(torch.tensor(self.input_ids[idx]) == 3)
+        #index_par = (self.input_ids[idx] == 2).nonzero(as_tuple=False)
+        #index_out = (self.input_ids[idx] == 3).nonzero(as_tuple=False)
         item['attention_mask'] = self.attention_mask[idx]
+        #print(item['attention_mask'])
+        item['attention_mask'][torch.where(torch.tensor(self.input_ids[idx]) == 1)] = 0
+        item['attention_mask'][torch.where(torch.tensor(self.input_ids[idx]) == 2)] = 0
         item['token_type_ids'] = self.token_type_ids[idx]
         
         #print(item['input_ids'])
@@ -154,6 +161,12 @@ def main():
         train_src, train_labels, train_mask = load_dataset('train', args.model, shuffle=True)
         val_src, val_labels, val_mask = load_dataset('valid', args.model, shuffle=False)
         test_src, test_labels, test_mask = load_dataset('test', args.model, shuffle=False)
+        tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
+        #print(test_src[129])
+        #subtokens  = [tokenizer.convert_ids_to_tokens(idx) for idx in test_src[129]]
+        #print(subtokens)
+        #print(test_labels[129])
+        #return
         print(train_src[0], train_src[1])
         print(train_labels[0], train_labels[1])
         print(train_mask[0], train_mask[1])
