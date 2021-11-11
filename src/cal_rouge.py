@@ -72,6 +72,7 @@ def test_rouge(cand, ref,num_processes):
         arg_lst.append((candidates_chunks[i],references_chunks[i],i))
     pool = Pool(n_pool)
     results = pool.map(process,arg_lst)
+    print("results:",results)
     final_results = {}
     for i,r in enumerate(results):
         for k in r:
@@ -118,6 +119,7 @@ if __name__ == "__main__":
 
     results_dict = test_rouge(candidates, references,args.p)
     # return 0
+    #print('dict:', results_dict)
     print(time.strftime('%H:%M:%S', time.localtime())
 )
     print(rouge_results_to_str(results_dict))
