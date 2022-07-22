@@ -1,6 +1,6 @@
 # BioSum with domain knowledge
 
-**This code is for the biomedical extractive summarization based on pretrained language model and domain knowledge from pico representations**
+**This code is for our paper: *Pre-trained language models with domain knowledge for biomedical extractive summarization*
 
 **Python version**: This code is in Python3.6
 
